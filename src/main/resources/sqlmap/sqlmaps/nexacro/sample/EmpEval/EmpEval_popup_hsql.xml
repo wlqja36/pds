@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EmpEval_Popup">
+	
+	
+	<typeAlias alias="empNoVO" type="nexacro.sample.vo.emp_eval.EmpNoVO"/>
+    <typeAlias alias="empEvalHeadVO" type="nexacro.sample.vo.emp_eval.EmpEvalHeadVO"/>
+    <typeAlias alias="empEvalStdVO" type="nexacro.sample.vo.emp_eval.EmpEvalStdVO"/>
+    <typeAlias alias="empEvalVO" type="nexacro.sample.vo.emp_eval.EmpEvalVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+	
+	
+	<!-- 조인 베이스 -->
+	<resultMap id="empNo" class="empNoVO">
+        <result  property="EMP_NO"	column="EMP_NO"/>
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_YN"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EVAL_STD_SCORE_SUM"	column="EVAL_HEAD_CODE"/>
+        <result  property="EVAL_HEAD_SCORE_SUM"	column="EVAL_HEAD_SCORE"/> 
+        <result property="empEvalHeadVO" resultMap="empEvalHead" />
+        <result property="empEvalStdVO" resultMap="empEvalStd" />
+        <result property="empEvalVO" resultMap="empEval" />
+	</resultMap>
+
+	<!-- 조인1 -->
+	<resultMap id="empEvalHead" class="empEvalHeadVO">
+        <result  property="EMP_NO"	column="EMP_NO"/>
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EVAL_HEAD_CODE"	column="EVAL_HEAD_CODE"/>
+        <result  property="EVAL_HEAD_SCORE"	column="EVAL_HEAD_SCORE"/>    
+    </resultMap>
+    
+	<!-- 조인2 -->
+    <resultMap id="empEvalStd" class="empEvalStdVO">
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_NO"	column="EVAL_STD_CODE"/>
+        <result  property="EVAL_STD_CODE"	column="EVAL_STD_CODE"/>
+        <result  property="EVAL_STD_SCORE"	column="EVAL_STD_SCORE"/>    
+    </resultMap>
+    
+    <!-- 조인3 -->
+    <resultMap id="empEval" class="empEvalVO">
+ 		<result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_BOOK_NM"	column="EMP_EVAL_BOOK_NM"/>
+        <result  property="EVAL_TERM_CODE"	column="EVAL_TERM_CODE"/>
+        <result  property="EMP_EVAL_STA_DATE"	column="EMP_EVAL_STA_DATE"/>
+        <result  property="EMP_EVAL_END_DATE"	column="EMP_EVAL_END_DATE"/>
+        <result  property="EMP_EVAL_REG_DATE"	column="EMP_EVAL_REG_DATE"/>
+        <result  property="EMP_EVAL_REG_USER_NO"	column="EMP_EVAL_REG_USER_NO"/>
+        <result  property="EMP_EVAL_MOD_DATE"	column="EMP_EVAL_MOD_DATE"/>
+        <result  property="EMP_EVAL_MOD_USER_NO"	column="EMP_EVAL_MOD_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_DATE"	column="EMP_EVAL_ACC_DATE"/>
+        <result  property="EMP_EVAL_ACC_USER_NO"	column="EMP_EVAL_ACC_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_YN"	column="EMP_EVAL_ACC_YN"/>
+        <result  property="EMP_EVAL_SUM"	column="EMP_EVAL_SUM"/>      
+        <result  property="EMP_NAME"	column="EMP_NAME"/>   
+    </resultMap>
+    
+    <select id="empEval_popup.selectEmpEval_PopupVOList" parameterClass="String" resultClass="java.util.HashMap" remapResults="true">
+		<![CDATA[
+			 SELECT 
+			 *
+		 	 FROM $preferredOrder$
+		 ]]>
+    </select>
+    
+    <select id="empEval_popup.selectEmpEval_PopupVOList2" parameterClass="String" resultClass="java.util.HashMap">
+		<![CDATA[
+			 SELECT 
+			 	*
+		 	 FROM EMP_EVAL_HEAD eh,
+		 		  EMP_EVAL_STD es,
+		 	      EMP_NO en,
+		 	      EMP_EVAL_BOOK eb
+		 	 WHERE en.EMP_EVAL_BOOK_NO = es.EMP_EVAL_BOOK_NO (+)
+		 	 	   AND
+		 	 	   en.EMP_EVAL_BOOK_NO = eh.EMP_EVAL_BOOK_NO (+)
+		 	 	   AND
+		 	 	   en.EMP_EVAL_BOOK_NO = eb.EMP_EVAL_BOOK_NO (+)
+                   AND
+                   eh.EMP_EVAL_BOOK_NO = #values#
+		 ]]>
+    </select>
+    
+    <select id="empEval_popup.selectEmpEvalBookNo" resultClass="java.lang.Integer">
+		<![CDATA[
+			 SELECT 
+				EMP_EVAl_BOOK_SEQ.nextval
+			 FROM DUAL
+		]]>
+    </select>
+    
+    <!-- 문자열 조합 실험 -->
+    <select id="empEval_popup.selectEmpEval_PopupTest" resultClass="String" >
+		<![CDATA[
+			 SELECT 
+			 	ep.EMP_NO || '(' || ep.EMP_NAME || ')'
+		 	 FROM EMP ep, EMP_EVAL_BOOK eeb
+		 	 WHERE ep.EMP_NO = eeb.emp_eval_reg_user_no
+		 ]]>
+    </select>
+    
+ 	<!-- 다중인서트 -->
+    <insert id="empEval_popup.insertEmpEval" parameterClass="empNoVO">
+		<![CDATA[
+		INSERT ALL
+		
+		 INTO EMP_NO
+			(EMP_NO,
+			 EMP_EVAL_BOOK_NO,
+			 EMP_EVAL_YN,
+			 EVAL_STD_SCORE_SUM,
+			 EVAL_HEAD_SCORE_SUM)
+		VALUES (
+			#EMP_NO#,
+			#EMP_EVAL_BOOK_NO#,
+			#EMP_EVAL_YN#,
+			#EVAL_STD_SCORE_SUM#,
+			#EVAL_HEAD_SCORE_SUM#
+   	  	 )
+   	  	 INTO EMP_EVAL_HEAD
+			(EMP_NO,
+			 EMP_EVAL_BOOK_NO,
+			 EVAL_HEAD_CODE,
+			 EVAL_HEAD_SCORE)
+		 VALUES (
+			#empEvalHeadVO.EMP_NO#,
+			#EMP_EVAL_BOOK_NO#,
+			#empEvalHeadVO.EVAL_HEAD_CODE#,
+			#empEvalHeadVO.EVAL_HEAD_SCORE#
+   	  	 )
+   	  	 
+   	  	INTO EMP_EVAL_STD
+			(EMP_NO,
+			EMP_EVAL_BOOK_NO,
+			EVAL_STD_CODE,
+			EVAL_STD_SCORE)
+		VALUES (
+			#empEvalStdVO.EMP_NO#,
+			#EMP_EVAL_BOOK_NO#,
+			#empEvalStdVO.EVAL_STD_CODE#,
+			#empEvalStdVO.EVAL_STD_SCORE#
+   	  	 )
+   	  	   	 
+   	  	  SELECT * 
+   	  	 FROM DUAL
+   	  	
+  
+	 ]]>
+    </insert>
+  
+    <update id="empEval_popup.updateEmpNo" parameterClass="empNoVO">
+		<![CDATA[
+		UPDATE EMP_NO
+        SET  EMP_NO = #EMP_NO#,
+       	     EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#,
+             EMP_EVAL_YN = #EMP_EVAL_YN#,
+             EVAL_STD_SCORE_SUM = #EVAL_STD_SCORE_SUM#,
+			 EVAL_HEAD_SCORE_SUM = #EVAL_HEAD_SCORE_SUM#
+		WHERE
+			EMP_NO = #EMP_NO#
+	 	]]>
+    </update>
+    
+    <update id="empEval_popup.updateEmpEvalHead" parameterClass="empNoVO">
+		<![CDATA[
+		UPDATE EMP_EVAL_HEAD
+        SET  EMP_NO = #empEvalHeadVO.EMP_NO#,
+       	     EMP_EVAL_BOOK_NO = #empEvalHeadVO.EMP_EVAL_BOOK_NO#,
+             EVAL_HEAD_CODE = #empEvalHeadVO.EVAL_HEAD_CODE#,
+			 EVAL_HEAD_SCORE = #empEvalHeadVO.EVAL_HEAD_SCORE#
+		WHERE
+			EMP_NO = #empEvalHeadVO.EMP_NO#
+	 	]]>
+    </update>
+    
+    <update id="empEval_popup.updateEmpEvalStd" parameterClass="empNoVO">
+		<![CDATA[
+		UPDATE EMP_EVAL_STD
+        SET  EMP_NO = #empEvalStdVO.EMP_NO#,
+       	     EMP_EVAL_BOOK_NO = #empEvalStdVO.EMP_EVAL_BOOK_NO#,
+             EVAL_STD_CODE = #empEvalStdVO.EVAL_STD_CODE#,
+			 EVAL_STD_SCORE = #empEvalStdVO.EVAL_STD_SCORE#
+		WHERE
+			EMP_NO = #empEvalStdVO.EMP_NO#
+	 	]]>
+    </update>
+  
+    <update id="empEval_popup.updateEmpEval" parameterClass="empNoVO">
+		<![CDATA[
+		UPDATE EMP_EVAL_BOOK
+        SET  EMP_EVAL_SUM = #empEvalVO.EMP_EVAL_SUM#
+		WHERE
+			EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#
+	 	]]>
+    </update>
+    
+	<delete id="empEval_popup.deleteEmpNo" parameterClass="empNoVO">
+		<![CDATA[
+			DELETE
+			FROM
+				EMP_NO
+			WHERE
+				EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#  	  	
+	 	]]>
+    </delete>
+ 
+ 	<delete id="empEval_popup.deleteEmpEvalHead" parameterClass="empNoVO">
+		<![CDATA[
+			DELETE
+			FROM
+				EMP_EVAL_HEAD
+			WHERE
+				EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#  	  	
+	 	]]>
+    </delete>
+    
+   	<delete id="empEval_popup.deleteEmpEvalStd" parameterClass="empNoVO">
+		<![CDATA[
+			DELETE
+			FROM
+				EMP_EVAL_STD
+			WHERE
+				EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#  	  	
+	 	]]>
+    </delete>
+    
+	
+  
+
+</sqlMap>

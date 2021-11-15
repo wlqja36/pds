@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_ATTENDANCE_INFO" left="0" top="0" width="791" height="577" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <Div id="div_title" taborder="0" text="div_title" left="1.08%" top="9" right="1.43%" height="73">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="img_titlebg" taborder="0" left="0.26%" top="7" height="50" style="background:#3366ffff;color:#ffffffff;" right="0.13%"/>
+              <Static id="sta_title" taborder="1" text="근태정보" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_search" taborder="1" left="0.25%" top="78" right="0%" height="137">
+          <Layouts>
+            <Layout>
+              <ImageViewer id="img_05" taborder="0" left="1.14%" top="8" height="87" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" onclick="div_search_img_05_onclick" right="1.39%"/>
+              <Static id="sta_00" taborder="1" text="사원검색" onclick="sta_15_onclick" left="51.84%" top="20" height="31" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" right="33.71%"/>
+              <Button id="btn_z_emp" taborder="2" onclick="btn_z_emp_onclick" cssclass="btn_WF_SearchSmall" left="93.66%" top="20" height="31" right="3.3%"/>
+              <Edit id="edt_att_book_name02" taborder="3" left="66.16%" top="20" height="31" right="6.21%"/>
+              <Static id="sta_15" taborder="4" text="대장검색" onclick="sta_15_onclick" left="2.53%" top="20" height="31" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" right="82.89%"/>
+              <Edit id="edt_attt_book" taborder="5" oneditclick="edt_btr_no2_oneditclick" left="16.98%" top="20" height="31" enable="true" right="55.39%"/>
+              <Button id="btn_z_attiBook" taborder="12" onclick="btn_z_attiBook_onclick" cssclass="btn_WF_SearchSmall" left="44.49%" top="20" height="31" right="52.47%"/>
+              <Button id="btn_search" taborder="13" text="조회" onclick="btn_search_onclick" left="88.09%" top="61" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" right="3.17%"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Grid id="Grid00" taborder="3" useinputpanel="false" left="1.39%" top="213" right="1.64%" height="194" binddataset="ds_atti_info" autofittype="col" nodatatext="데이터가 없습니다." enable="true" autoenter="select" autosizingtype="col" cellsizingtype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원정보"/>
+                <Cell col="1" text="관리일자"/>
+                <Cell col="2" text="대장번호"/>
+                <Cell col="3" text="출근시간"/>
+                <Cell col="4" text="퇴근시간"/>
+                <Cell col="5" text="휴일여부"/>
+                <Cell col="6" text="출결상태코드"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_NO" expandshow="hide" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+                <Cell col="1" displaytype="date" edittype="none" text="bind:ATTEND_DATE" mask="yyyy-MM-dd ddd" calendardisplaynulltext="bind:ATTEND_DATE"/>
+                <Cell col="2" edittype="none" text="bind:ATTITUDE_BOOK_ID" expandshow="hide" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+                <Cell col="3" displaytype="normal" edittype="none" text="bind:START_TIME" mask="HH:mm:ss"/>
+                <Cell col="4" displaytype="normal" edittype="none" text="bind:END_TIME" mask="HH:mm:ss"/>
+                <Cell col="5" text="bind:HOLIDAYYN"/>
+                <Cell col="6" text="bind:ATTEND_CODE" expandshow="hide" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Grid id="Grid01" taborder="4" useinputpanel="false" left="1.39%" top="449" right="2.28%" height="112" binddataset="ds_atti_summury" autofittype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="기본근무시간"/>
+                <Cell col="1" text="야간근무시간"/>
+                <Cell col="2" text="연장근무시간"/>
+                <Cell col="3" text="휴일근무시간"/>
+                <Cell col="4" text="정근수"/>
+                <Cell col="5" text="지각수"/>
+                <Cell col="6" text="결근수"/>
+                <Cell col="7" text="조퇴수"/>
+                <Cell col="8" text="휴일수"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:NOMAL_WORK_HOURS"/>
+                <Cell col="1" text="bind:NIGHT_WORK_HOURS"/>
+                <Cell col="2" text="bind:OVERTIME_HOURS"/>
+                <Cell col="3" text="bind:HOLIDAY_WORK_HOURS"/>
+                <Cell col="4" text="bind:WORK_DAY_CNT"/>
+                <Cell col="5" text="bind:LATE_CNT"/>
+                <Cell col="6" text="bind:ABSENT_CNT"/>
+                <Cell col="7" text="bind:EARLY_LEAVE_CNT"/>
+                <Cell col="8" text="bind:HOLIDAY_CNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_33" taborder="5" text="일자별 근태정보" left="17" top="195" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Static id="sta_00" taborder="6" text="월별 근태정보" left="17" top="427" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item1" compid="Div01.edt_att_book_no00" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item2" compid="Div01.edt_att_book_no01" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item3" compid="Div01.edt_att_book_no02" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item6" compid="Div01.edt_att_book_no03" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item7" compid="Div01.edt_att_book_no04" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item9" compid="Div01.edt_att_book_no05" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item5" compid="Div01.edt_att_book_no06" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item10" compid="Div01.edt_att_book_no07" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item11" compid="Div01.edt_att_book_no08" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_atti_info">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="ATTEND_DATE" type="TIME" size="256"/>
+          <Column id="ATTITUDE_BOOK_ID" type="STRING" size="12"/>
+          <Column id="START_TIME" type="STRING" size="256"/>
+          <Column id="END_TIME" type="STRING" size="256"/>
+          <Column id="HOLIDAYYN" type="STRING" size="1"/>
+          <Column id="ATTEND_CODE" type="STRING" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_atti_summury">
+        <ColumnInfo>
+          <Column id="NOMAL_WORK_HOURS" type="INT" size="3"/>
+          <Column id="NIGHT_WORK_HOURS" type="INT" size="3"/>
+          <Column id="OVERTIME_HOURS" type="INT" size="3"/>
+          <Column id="HOLIDAY_WORK_HOURS" type="INT" size="3"/>
+          <Column id="WORK_DAY_CNT" type="INT" size="2"/>
+          <Column id="LATE_CNT" type="INT" size="2"/>
+          <Column id="ABSENT_CNT" type="INT" size="2"/>
+          <Column id="EARLY_LEAVE_CNT" type="INT" size="2"/>
+          <Column id="HOLIDAY_CNT" type="INT" size="2"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="WORK_DAY_CNT"/>
+            <Col id="LATE_CNT"/>
+            <Col id="ABSENT_CNT"/>
+            <Col id="EARLY_LEAVE_CNT"/>
+            <Col id="HOLIDAY_CNT"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search_info">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="12"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchDateFrom" type="DATE" size="256"/>
+          <Column id="searchDateTo" type="DATE" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_attitude_book">
+        <ColumnInfo>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="attitudeBookName" type="STRING" size="256"/>
+          <Column id="startDate" type="DATE" size="256"/>
+          <Column id="endDate" type="DATE" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_EmpList">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+          <Column id="Column0" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+/**
+ * form onload 함수
+ * @return 
+ * @example
+ *
+ * @memberOf this
+ */
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+	trace("폼 로딩됨!"); 
+
+	this.loadAttiBook();
+	this.load_wholeEmpList();
+	
+}
+
+//대장번호 로딩
+this.loadAttiBook = function(){
+	trace("로드함수 읽음: 대장번호 로딩");	
+	
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadAttendBookNo.do",
+		inds :[""], 
+		outds :["ds_attitude_book=ds_attitude_book"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0){
+			Iject.alert(this.errorMsg);			
+		    return;
+		} 
+		
+		var pThis = this.fobj;      
+		trace("ds_attitude_book : " + pThis.ds_attitude_book.saveXML());
+		trace("==여기까지 로딩완료 : 근태대장번호==");
+	});
+}
+
+
+//출결정보 로딩
+this.loadAttendInfo= function(){
+	trace("로드함수 읽음: 출결정보");
+		
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadAttendInfo.do",
+		inds :["ds_search_info=ds_search_info"], 
+		outds :["ds_atti_info=ds_atti_info"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace("ds_atti_info : " + pThis.ds_atti_info.saveXML());
+		trace("==여기까지 로딩완료 : 출결정보==");
+	});
+	
+	
+	trace("로드함수 읽음-2번째: 근태정보생성");
+		
+	var oDatas1 =  {
+		svcid : "search",
+		sController : "loadAttitudeInfo.do",
+		inds :["ds_search_info=ds_search_info"], 
+		outds :["ds_atti_summury=ds_atti_summury"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas1,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace("ds_atti_info : " + pThis.ds_atti_info.saveXML());
+		trace("==여기까지 로딩완료 : 출결정보==");
+	});
+	
+	
+}
+
+
+//근태정보 로딩 
+
+
+//로드 전체 사원리스트  
+this.load_wholeEmpList = function(){
+	trace("로드함수 읽음: 전체 사원 리스트");
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadWholeEmpList.do",
+		inds :[], 
+		outds :["ds_EmpList=ds_EmpList"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace("ds_EmpList : " + pThis.ds_EmpList.saveXML());
+		trace("==여기까지 로딩완료 : 로드 전체 사원리스트==");
+	});
+}
+
+//조건검색 
+this.btn_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo){
+	
+// 	var searchDateFrom = this.cal_start_date.value;
+// 	var searchDateTo = this.cal_end_date.value;
+	
+	var searchCondition = this.div_search.edt_attt_book.value;
+	var searchKeyword = this.div_search.edt_att_book_name02.value;
+	this.ds_search_info.setColumn(0, "searchKeyword", searchKeyword); //조회할 사원번호 <----- 로그인한 사원번호!!! 
+	this.ds_search_info.setColumn(0, "searchCondition", searchCondition); //조회할 근태대장번호  
+	
+// 	if (searchDateFrom != null && searchDateTo != null){
+// 		trace("searchDateFrom: ", searchDateFrom);
+// 		trace("searchDateTo: ", searchDateTo);
+// 		this.ds_search_info.setColumn(0, "searchDateFrom", searchDateFrom);
+// 		this.ds_search_info.setColumn(0, "searchDateTo", searchDateTo);
+// 	}
+// 	
+	if (searchKeyword == null || searchCondition == null) 
+		{
+			Iject.alert("조건을 입력하세요.");
+			return ;
+		}
+	else {
+		this.loadAttendInfo();
+	}
+}
+
+
+//근태대장 검색 -  모달창 
+this.btn_z_attiBook_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//모달창 생성 
+	var objChildFrame = new ChildFrame();  
+	objChildFrame.init("AttitudeBook", "absolute", 30, 30, 424, 340, null, null, "Attitude::Search_AttiBook.xfdl");
+	objChildFrame.set_dragmovetype("all");
+	
+	var objParam = {param1: this.ds_attitude_book}
+	trace("==메인 : ds_attitude_book 데이터 넘기는중! ");
+	
+	objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_attitude_book_popupCallback");
+}
+
+
+//모달 콜백함수 
+this.fn_attitude_book_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        trace("return 값 - undefined");
+        return;
+    }
+
+    if(strPopupID == "AttitudeBook"){
+		//this.alert("Return Value: " + strReturn);
+		trace("값 가져옴: ", strReturn);
+		this.div_search.edt_attt_book.set_value(strReturn);
+    }
+};
+
+
+
+//사원검색 - 모달창
+this.btn_z_emp_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//모달창 생성 
+	var objChildFrame = new ChildFrame();  
+	objChildFrame.init("EmpList", "absolute", 30, 30, 424, 340, null, null, "Attitude::Search_Emp_Book.xfdl");
+	objChildFrame.set_dragmovetype("all");
+	
+	var objParam = {param1: this.ds_EmpList}
+	trace("==메인 : ds_emp_info 데이터 넘기는중! ");
+	
+	objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_empList_popupCallback");
+}
+
+
+//전체 사원리스트 모달창 콜백함수 
+this.fn_empList_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        trace("return 값 - undefined");
+        return;
+    }
+
+    if(strPopupID == "EmpList"){
+		trace("값 가져옴: ", strReturn);
+		this.div_search.edt_att_book_name02.set_value(strReturn);
+    }
+    
+};
+
+
+//추가
+this.btn_add_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var yn =Iject.confirm("근태정보를 추가 하시겠습니까?");
+	if (yn) {
+ 		//현재시간		
+ 		var today = new Date();
+ 		var nToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+""+(""+today.getDate()).padLeft(2,'0');
+		
+		var nRow = this.ds_atti_info.addRow();
+		trace("nRow", nRow);
+		this.ds_atti_info.setColumn(nRow, "ATTEND_DATE", today);
+		
+	}
+}
+
+
+//수정 
+this.btn_modify_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.Grid00.set_enable(true);
+}
+]]></Script>
+  </Form>
+</FDL>

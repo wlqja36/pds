@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="attitude_book">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="attitudeBookVO"
+		type="nexacro.sample.vo.attitudeVO.AttitudeBookVO" />
+
+	<!-- Sample resultObject -->
+	<resultMap id="attitudeBook" class="attitudeBookVO">
+		<result property="attitudeBookId" column="ATTITUDE_BOOK_ID" />
+		<result property="attitudeBookName" column="ATTITUDE_BOOK_NM" />
+		<result property="startDate" column="START_DATE" />
+		<result property="endDate" column="END_DATE" />
+		<result property="regDate" column="REG_DATE" />
+		<result property="regEmpId" column="REG_EMP_ID"/>
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="modifyEmpId" column="MODIFY_EMP_ID" />
+		<result property="fixDate" column="FIX_DATE" />
+		<result property="fixEmpId" column="FIX_EMP_ID" />
+		<result property="fixYn" column="FIXYN" />
+		
+	   <result property="REG_EMP_REAL" column="REG_EMP_REAL" />
+  
+        	   <result property="MODIFY_EMP_REAL" column="MODIFY_EMP_REAL" />
+        	   	   <result property="FIX_EMP_REAL" column="FIX_EMP_REAL" />
+			
+	</resultMap>
+
+
+
+
+     <select id="attitude_book.selectAttitudeBookVOList" parameterClass="attitudeBookVO" resultMap="attitudeBook">
+      		<![CDATA[
+      		  
+            SELECT 
+      		    ATTITUDE_BOOK_ID,
+                ATTITUDE_BOOK_NM,
+                START_DATE,
+                END_DATE,
+                REG_DATE,
+                r.emp_name||'('||r.emp_no||')' as REG_EMP_ID,
+                MODIFY_DATE,
+                m.emp_name||'('||m.emp_no||')' as MODIFY_EMP_ID,
+                FIX_DATE,
+                f.emp_name||'('||f.emp_no||')' as FIX_EMP_ID,
+                FIXYN,
+                r.emp_no as REG_EMP_REAL,
+                m.emp_no as MODIFY_EMP_REAL,
+                f.emp_no as FIX_EMP_REAL  
+           
+          FROM ATTITUDE_BOOK ,
+        
+            (select distinct k.emp_name, k.emp_no     
+                 from (select distinct e.emp_name, e.emp_no
+                      from emp e, 
+                        ( select distinct i.emp_no, a.reg_emp_id
+                          from attitude_book a, attend_info i
+                           where a.attitude_book_id=i.attitude_book_id ) d
+                      where d.emp_no=e.emp_no) k,
+                             attitude_book a
+             where k.emp_no=a.reg_emp_id) r,
+        
+         (select distinct k.emp_name, k.emp_no     
+             from (select distinct e.emp_name, e.emp_no
+                      from emp e, 
+                        ( select distinct i.emp_no, a.modify_emp_id
+                          from attitude_book a, attend_info i
+                           where a.attitude_book_id=i.attitude_book_id ) d
+                      where d.emp_no=e.emp_no) k,
+                             attitude_book a
+            where k.emp_no=a.modify_emp_id) m,
+       
+          (select distinct k.emp_name, k.emp_no     
+               from (select distinct e.emp_name, e.emp_no
+                      from emp e, 
+                        ( select distinct i.emp_no, a.fix_emp_id
+                          from attitude_book a, attend_info i
+                           where a.attitude_book_id=i.attitude_book_id ) d
+                      where d.emp_no=e.emp_no) k,
+                             attitude_book a
+             where k.emp_no=a.fix_emp_id) f
+        
+        
+       
+            
+            WHERE attitude_book.reg_emp_id=r.emp_no(+)
+               and attitude_book.modify_emp_id=m.emp_no(+)
+               and  attitude_book.fix_emp_id=f.emp_no(+)  		
+      		
+      		
+      		
+            and 1=1
+            ]]>
+			<dynamic>
+				<isEqual prepend=" AND " property="searchCondition" compareValue="bookId">
+						 ATTITUDE_BOOK_ID LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="searchCondition" compareValue="bookName">
+						ATTITUDE_BOOK_NM LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="searchCondition" compareValue="mngDate">
+						<![CDATA[ 
+						          START_DATE  >=#searchStartDate#
+						            AND  END_DATE  <= #searchEndDate#
+						  ]]>
+				</isEqual>
+
+			</dynamic>
+			<!-- <dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="total">
+						GRADE LIKE '%' || #keyword# || '%' 
+						OR DEPT LIKE '%' || #keyword# || '%'
+						OR EMP_NAME LIKE '%' || #keyword# || '%'
+				</isEqual> 
+			</dynamic>-->
+            </select>
+            
+            
+            
+            
+            
+            
+            
+          <!--   ATTITUDE_BOOK_ID=#searchKeyword#--> 
+            
+    
+
+
+  
+
+
+
+
+
+
+
+
+
+	<!-- <select id="btrip_management.confirmVOList" parameterClass="btrVO" 
+		resultMap="btr"> SELECT COUNT( BTRIP_NO ,B2.BTRIP_DNO ,BTRIP_NAME ,COUNTRY 
+		,AREA ,PURPOSE ,S_DATE ,F_DATE ,EX_EXPENSES ,RE_EMP_NO ,OK_DATE ,OK_EMP_NO 
+		,OK_ASCERTAIN ,EMP_NO) from BTRIP_MANAGEMENT B1, BUSINESS_TRIP B2 WHERE B2.BTRIP_DNO 
+		= BTRIP_NO AND EMP_NO = #searchKeyword# </select> -->
+
+
+	<insert id="attitude_book.insertAttitudeBookVOList" parameterClass="attitudeBookVO">
+        <![CDATA[
+            INSERT INTO ATTITUDE_BOOK(
+                ATTITUDE_BOOK_ID,
+                ATTITUDE_BOOK_NM,
+                START_DATE,
+                END_DATE,
+                REG_DATE,
+                REG_EMP_ID,
+                MODIFY_DATE,
+                MODIFY_EMP_ID,
+                FIX_DATE,
+                FIX_EMP_ID,
+                FIXYN
+            )VALUES(
+            
+                #attitudeBookId#,
+                #attitudeBookName#,
+                #startDate#,
+                #endDate#,
+                #regDate#,
+                #regEmpId#,
+                #modifyDate#,
+                #modifyEmpId#,
+                #fixDate#,
+                #fixEmpId#,
+                #fixYn#     
+            )
+        ]]>
+	</insert>
+
+	  <update id="attitude_book.updateAttitudeBookVOList" parameterClass="attitudeBookVO"> 
+		 <![CDATA[
+            UPDATE ATTITUDE_BOOK 
+            SET 
+				ATTITUDE_BOOK_NM =#attitudeBookName#,	
+				START_DATE =#startDate#,
+				END_DATE =#endDate#,
+				REG_DATE =#regDate#,	
+				REG_EMP_ID =#regEmpId#,
+				MODIFY_DATE =#modifyDate#,       
+				MODIFY_EMP_ID =#modifyEmpId#,  
+				FIX_DATE =#fixDate#,    
+				FIX_EMP_ID =#fixEmpId#,      
+				FIXYN =#fixYn#    
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#
+        ]]>
+		</update> 
+		
+		
+		<delete id="attitude_book.deleteAttitudeBookVOList" parameterClass="attitudeBookVO"> 
+		   <![CDATA[ 
+		    DELETE FROM ATTITUDE_BOOK 
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#   
+		   ]]>
+	    </delete> 
+
+
+</sqlMap>

@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="administrator">
+
+	<typeAlias alias="admVO" type="nexacro.sample.vo.administrator.AdmVO" />
+	
+	<resultMap id="login" class="admVO">
+		<result property="emp_no" column="EMP_NO" />
+		<result property="emp_id" column="EMP_ID" />
+		<result property="emp_pw" column="EMP_PW" />
+
+	</resultMap>
+		<resultMap id="emp" class="admVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="emp_no" column="EMP_NO" />
+		<result property="emp_name" column="EMP_NAME" />
+		<result property="grade" column="GRADE" />
+		<result property="dept" column="DEPT" />
+		<result property="birth" column="BIRTH" />
+	</resultMap>
+	
+	<resultMap id="info" class="admVO">
+		<result property="emp_no" column="EMP_NO" />
+		<result property="emp_name" column="EMP_NAME" />
+		<result property="birth" column="BIRTH" />
+		<result property="emp_id" column="EMP_ID" />
+		<result property="emp_pw" column="EMP_PW" />
+		<result property="emp_pw_check" column="EMP_PW_CHECK" />
+		<result property="back_birth" column="BACK_BIRTH" />
+		<result property="eng_name" column="ENG_NAME" />
+		<result property="email" column="EMAIL" />
+		<result property="cell_phone" column="CELL_PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="registration_address" column="REGISTRATION_ADDRESS" />
+		<result property="marriage" column="MARRIAGE" />
+		<result property="marriage_date" column="MARRIAGE_DATE" />
+		<result property="disability" column="DISABILITY" />
+		<result property="religion" column="RELIGION" />
+		<result property="dept_code" column="DEPT_CODE" />
+		<result property="grade_code" column="GRADE_CODE" />
+		<result property="join_code" column="JOIN_CODE" />
+		<result property="householder" column="HOUSEHOLDER" />
+		<result property="householder_name" column="HOUSEHOLDER_NAME" />
+		<result property="householder_relation" column="HOUSEHOLDER_RELATION" />
+	</resultMap>
+	
+	<resultMap id="id" class="admVO">
+		<result property="emp_id" column="EMP_ID" />
+	</resultMap>
+	
+	<resultMap id="pw" class="admVO">
+		<result property="emp_no" column="EMP_NO" />
+	</resultMap>
+	
+	
+	<!-- 로그인 조회 -->
+	<select id="administrator.admlogin" resultMap="login"
+		parameterClass="java.util.HashMap">
+			SELECT
+				EMP_NO,
+				EMP_ID,
+				EMP_PW
+			FROM
+				EMP
+			WHERE
+				EMP_ID = #emp_id#
+	</select>
+	
+
+	
+
+ 	
+ 	<!-- 존재하는 아이디인지 조회 [id가 없어 select 결과 row가 없으면 error! -> INSA_ID 컬럼을 그룹함수로 묶어 결과 하나는 무조건 나오게 함]-->
+	<select id="administrator.selectid" resultMap="id"
+	parameterClass="java.lang.String">
+	SELECT
+		NVL(MAX(EMP_ID), 'NONE') AS EMP_ID 
+	FROM
+		EMP
+	WHERE
+		EMP_ID = #emp_id#
+	</select>
+
+ 	<insert id="administrator.admInsert" parameterClass="admVO">
+	
+		<![CDATA[
+	
+		INSERT INTO EMP
+		(
+		EMP_NO,
+		EMP_NAME,
+		MGR_NO,
+		CURRENT_CLASS_CODE,
+		CURRENT_CODE,
+		GRADE_CLASS_CODE,
+		GRADE_CODE,
+		DEPT_CLASS_CODE,
+		DEPT_CODE,
+		EMP_ID,
+		EMP_PW,
+		ENG_NAME,
+		RESIDENT_NO,
+		HOUSEHOLDER,
+		JOIN_DATE,
+		PHONE,
+		CELL_PHONE,
+		EMAIL,
+		ADDRESS,
+		RELIGION,
+		JOIN_CLASS_CODE,
+		JOIN_CODE,
+		HOUSEHOLDER_NAME,
+		HOUSEHOLDER_RELATION,
+		REGISTRATION_ADDRESS,
+		BIRTH,
+		MARRIAGE,
+		MARRIAGE_DATE,
+		DISABILITY
+		) VALUES
+		(
+		CONCAT(TO_CHAR(SYSDATE,'YYYYMMDD'),LPAD(EMP_SEQUENCE.NEXTVAL,4,0)),
+		#emp_name#,
+		(select emp_no from emp where grade_code='1160'),
+		'A01',
+		'1010',
+		'A02',
+		#grade_code#,
+		'A03',
+		#dept_code#,
+		#emp_id#,
+		#emp_pw#,
+		#eng_name#,
+		CONCAT(CONCAT(#birth#,'-'),#back_birth#),
+        #householder#,
+		SYSDATE,
+		#phone#,
+		#cell_phone#,
+		#email#,
+		CONCAT(CONCAT(#address#,' '),#address_detail#),
+		#religion#,
+		'A04',
+		#join_code#,
+		#householder_name#,
+		#householder_relation#,
+		CONCAT(CONCAT(#registration_address#,' '),#registration_address_detail#),
+		TO_DATE(#birth#,'YY/MM/DD'),
+		#marriage#,
+		#marriage_date#,
+		#disability#
+		
+		)
+	
+		]]>
+	</insert>
+	
+	<select id="administrator.selectEmpList" resultMap="emp" parameterClass="admVO">
+		<![CDATA[
+		SELECT ROWNUM, EMP_NO, EMP_NAME, GRADE, DEPT, BIRTH FROM
+		(SELECT EMP_NO, EMP_NAME, 
+		TO_CHAR(BIRTH,'YY-MM-DD') BIRTH,
+		(SELECT CODE_NAME FROM COMMON_CODE_DETAIL WHERE GRADE_CODE=CODE_NO) GRADE,
+		(SELECT CODE_NAME FROM COMMON_CODE_DETAIL WHERE DEPT_CODE=CODE_NO) DEPT
+		FROM EMP ORDER BY EMP_NO DESC) WHERE 1=1
+		]]>
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="name">
+						EMP_NAME LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="dept">
+						DEPT LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="grade">
+						GRADE LIKE '%' || #keyword# || '%'
+				</isEqual>
+
+			</dynamic>
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="total">
+						GRADE LIKE '%' || #keyword# || '%' 
+						OR DEPT LIKE '%' || #keyword# || '%'
+						OR EMP_NAME LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+		<![CDATA[
+		ORDER BY
+			EMP_NAME
+			
+		]]>
+	</select>
+	
+	<select id="administrator.selectEmp" resultMap="info" parameterClass="String">
+		<![CDATA[
+		SELECT
+		EMP_NO,
+        EMP_NAME,    
+        EMP_ID,  
+        EMP_PW,
+        EMP_PW EMP_PW_CHECK,
+        TO_CHAR(BIRTH,'YYMMDD') BIRTH,
+        SUBSTR(resident_no,-7) BACK_BIRTH,
+        ENG_NAME,
+        EMAIL,
+        CELL_PHONE,
+        ADDRESS,
+        REGISTRATION_ADDRESS,
+        MARRIAGE,
+        MARRIAGE_DATE,
+        DISABILITY,
+        RELIGION,
+        DEPT_CODE,
+        GRADE_CODE,
+        JOIN_CODE,
+        HOUSEHOLDER,
+        HOUSEHOLDER_NAME,
+        HOUSEHOLDER_RELATION
+        FROM EMP WHERE EMP_NO=#emp_no#
+		]]>
+	</select>
+	
+	<update id="administrator.admUpdate" parameterClass="AdmVO">
+		UPDATE
+			EMP
+		SET
+			EMP_NAME = #emp_name#,
+			EMP_PW = #emp_pw#,
+			ENG_NAME = #eng_name#,
+			EMAIL = #email#,
+			RELIGION = #religion#,
+			PHONE = #phone#,
+			CELL_PHONE = #cell_phone#,
+			ADDRESS = #address#,
+			REGISTRATION_ADDRESS = #registration_address#,
+			DEPT_CODE = #dept_code#,
+			GRADE_CODE = #grade_code#,
+			JOIN_CODE = #join_code#,
+			HOUSEHOLDER = #householder#,
+			HOUSEHOLDER_NAME = #householder_name#,
+			HOUSEHOLDER_RELATION = #householder_relation#,
+			DISABILITY = #disability#,
+			MARRIAGE = #marriage#,
+			MARRIAGE_DATE = #marriage_date#
+		WHERE
+			EMP_NO = #emp_no#
+	</update>
+	
+	<select id="administrator.searchEmpId" resultMap="id"
+	parameterClass="AdmVO">
+	SELECT
+		NVL(MAX(EMP_ID), 'NONE') AS EMP_ID
+	FROM
+		EMP
+	WHERE
+		EMP_NAME = #emp_name# and
+		CELL_PHONE = #cell_phone# and
+		EMAIL = #email#
+	</select>
+	
+	<select id="administrator.searchEmpPw" resultMap="pw"
+	parameterClass="AdmVO">
+	SELECT
+		NVL(MAX(EMP_NO), 'NONE') AS EMP_NO
+	FROM
+		EMP
+	WHERE
+		EMP_NAME = #emp_name# and
+		EMP_ID = #emp_id# and
+		RESIDENT_NO = CONCAT(CONCAT(#birth#,'-'),#back_birth#)
+	</select>
+	
+	<update id="administrator.loginUpdate" parameterClass="String">
+		UPDATE
+			EMP
+		SET
+			LAST_LOGIN = SYSDATE
+		WHERE
+			EMP_NO=#emp_no#
+	</update>
+	
+	<update id="administrator.pwUpdate" parameterClass="AdmVO">
+		UPDATE
+			EMP
+		SET
+			EMP_PW = #emp_pw#
+		WHERE
+			EMP_NO=#emp_no#
+	</update>
+	
+</sqlMap>

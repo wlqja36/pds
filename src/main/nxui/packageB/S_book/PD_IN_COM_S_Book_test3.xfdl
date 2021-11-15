@@ -1,0 +1,950 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Salary_book" classname="Temp01_SingleDetail" left="0" top="0" width="1030" height="876" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img_titlebg" taborder="4" left="14" top="7" width="996" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="5" text="급여대장" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Tab id="Tab00" taborder="83" left="1.36%" top="108" right="-0.29%" height="543" onchanged="Tab00_onchanged" tabindex="0" scrollbars="autoboth">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="급여대장">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" binddataset="ds_confirm" useinputpanel="false" left="0%" top="0" right="0.49%" height="205" style="color:#333333ff;" oncellclick="gr_oncellclick" oncelldblclick="gr_oncelldblclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="126"/>
+                          <Column size="40"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell style="font:9 Arial,굴림;" text="급여대장번호"/>
+                          <Cell col="1" style="font:9 Arial,굴림;" text="급여코드"/>
+                          <Cell col="2" style="font:9 Arial,굴림;" text="대장명"/>
+                          <Cell col="3" style="font:9 Arial,굴림;" text="급여지급일"/>
+                          <Cell col="4" style="font:9 Arial,굴림;" text="등록자"/>
+                          <Cell col="5" style="font:9 Arial,굴림;" text="확정일"/>
+                          <Cell col="6" style="font:9 Arial,굴림;" text="확정자"/>
+                          <Cell col="7" style="font:9 Arial,굴림;" text="지급총액"/>
+                          <Cell col="8"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:salary_book_no"/>
+                          <Cell col="1" displaytype="combo" edittype="combo" text="bind:salary_book_code" combodataset="ds_combo_01" combocodecol="cd" combodatacol="text"/>
+                          <Cell col="2" text="bind:salary_book_nm"/>
+                          <Cell col="3" displaytype="date" edittype="date" text="bind:salary_send_date"/>
+                          <Cell col="4" text="bind:salary_reg_user_no"/>
+                          <Cell col="5" displaytype="date" edittype="date" text="bind:salary_acc_date"/>
+                          <Cell col="6" text="bind:salary_acc_user_no"/>
+                          <Cell col="7" text="bind:salary_total"/>
+                          <Cell col="8" displaytype="button" edittype="button" text=" 조회" combodisplay="display"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <ImageViewer id="img02" taborder="1" left="5" top="318" width="999" height="139" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" onclick="Tab00_tabpage1_img02_onclick"/>
+                  <ImageViewer id="img_02" taborder="2" left="47" top="327" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_33" taborder="3" text="급여대장" left="9" top="298" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+                  <Static id="Static02" taborder="4" text="*" left="31" top="334" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="sta_15" taborder="5" text="급여대장번호" onclick="sta_15_onclick" left="12" top="327" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="Static00" taborder="6" text="*" left="18" top="330" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <ImageViewer id="img_08" taborder="7" left="45" top="385" width="952" height="39" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <ImageViewer id="img_04" taborder="8" left="37" top="375" width="960" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_03" taborder="9" text="수정일시" onclick="sta_15_onclick" left="12" top="375" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_04" taborder="10" text="확정일시" onclick="sta_15_onclick" left="524" top="375" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <ImageViewer id="img_03" taborder="11" left="15" top="423" width="982" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_07" taborder="12" text="확정여부" onclick="sta_15_onclick" left="524" top="399" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_09" taborder="13" text="수정자" onclick="sta_15_onclick" left="269" top="375" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Button id="reset" taborder="14" text="취소" onclick="fn_reset" left="957" top="222" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="Button01" taborder="16" text="추가" onclick="Button01_onclick" left="783" top="222" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="insert00" taborder="17" text="등록" onclick="div_Detail_insert_onclick" left="841" top="222" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="Button02" taborder="18" text="삭제" onclick="Button03_onclick" left="899" top="222" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <ImageViewer id="img_00" taborder="19" left="47" top="350" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_02" taborder="20" text="대장명" onclick="sta_15_onclick" left="12" top="350" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_11" taborder="21" text="등록일시" onclick="sta_15_onclick" left="524" top="350" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_12" taborder="22" text="등록자" onclick="sta_15_onclick" left="761" top="350" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_13" taborder="24" onclick="sta_15_onclick" left="524" top="327" width="473" height="24" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <MaskEdit id="emp_no" taborder="25" readonly="true" cssclass="essential" left="876" top="352" width="114" height="20"/>
+                  <Calendar id="s_date" taborder="26" displaynulltext="2021-00-00" locale="ko_KR" left="132" top="378" width="130" height="20"/>
+                  <Calendar id="f_date" taborder="27" displaynulltext="2021-00-00" locale="ko_KR" cssclass="essential" left="640" top="378" width="119" height="20"/>
+                  <Static id="sta_16" taborder="28" text="급여코드" onclick="sta_15_onclick" left="524" top="327" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <ImageViewer id="img_05" taborder="29" position="fixed" left="640" top="328" width="354" height="21" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;font:9 Dotum;accessibility:enable all '' '' '' ;"/>
+                  <Edit id="area00" taborder="31" cssclass="essential" left="876" top="352" width="118" height="20"/>
+                  <Edit id="nation00" taborder="32" cssclass="essential" left="388" top="378" width="127" height="20"/>
+                  <MaskEdit id="re_emp_no00" taborder="33" readonly="true" cssclass="essential" left="392" top="379" width="116" height="18"/>
+                  <Button id="fn_search00" taborder="34" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="493" top="379" width="22" height="20"/>
+                  <Static id="sta_00" taborder="35" text="확정자" onclick="sta_15_onclick" left="761" top="375" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="area01" taborder="36" cssclass="essential" left="876" top="377" width="119" height="20"/>
+                  <MaskEdit id="re_emp_no02" taborder="37" readonly="true" cssclass="essential" left="876" top="379" width="116" height="18"/>
+                  <Button id="fn_search01" taborder="38" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="972" top="378" width="22" height="20"/>
+                  <MaskEdit id="re_emp_no03" taborder="39" readonly="true" cssclass="essential" left="877" top="353" width="116" height="18"/>
+                  <Button id="fn_search02" taborder="40" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="971" top="353" width="22" height="20"/>
+                  <Edit id="area02" taborder="41" cssclass="essential" left="132" top="352" width="383" height="20"/>
+                  <Static id="sta_08" taborder="42" text="급여계산시작일" onclick="sta_15_onclick" left="12" top="399" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Calendar id="s_date00" taborder="43" displaynulltext="2021-00-00" locale="ko_KR" left="132" top="401" width="129" height="20"/>
+                  <Static id="sta_17" taborder="44" text="급여계산종료일" onclick="sta_15_onclick" left="269" top="399" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Calendar id="s_date01" taborder="45" displaynulltext="2021-00-00" locale="ko_KR" left="388" top="401" width="129" height="20"/>
+                  <Calendar id="f_date00" taborder="47" displaynulltext="2021-00-00" locale="ko_KR" cssclass="essential" left="640" top="352" width="119" height="20"/>
+                  <Static id="sta_05" taborder="48" text="근태대장번호" onclick="sta_15_onclick" left="12" top="423" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="edt_btr_no03" taborder="49" readonly="true" cssclass="edt_WF_Search" left="132" top="425" width="361" height="20"/>
+                  <Button id="fn_search04" taborder="50" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="493" top="425" width="22" height="20"/>
+                  <Static id="sta_06" taborder="51" text="지급총액" onclick="sta_15_onclick" left="524" top="423" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="area03" taborder="52" cssclass="essential" left="640" top="425" width="356" height="20"/>
+                  <Radio id="Radio00" taborder="53" innerdataset="@ds_radio" codecolumn="Y" datacolumn="N" direction="vertical" left="63.19%" top="401" right="11.61%" height="20"/>
+                  <Static id="sta_01" taborder="54" text="급여지급일" onclick="sta_15_onclick" left="760" top="327" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Calendar id="f_date01" taborder="55" displaynulltext="2021-00-00" locale="ko_KR" cssclass="essential" left="876" top="327" width="119" height="20" oneditclick="Tab00_tabpage1_f_date01_oneditclick"/>
+                  <Edit id="area04" taborder="56" cssclass="essential" left="132" top="330" width="383" height="20" oneditclick="Tab00_tabpage1_area04_oneditclick"/>
+                  <Combo id="Combo00" taborder="57" left="62.99%" top="329" right="25%" height="19" innerdataset="@ds_combo_01" codecolumn="cd" datacolumn="text"/>
+                  <Edit id="area05" taborder="58" oneditclick="Tab00_tabpage1_area04_oneditclick" cssclass="essential" left="122" top="-57" width="151" height="20"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="지출결의서" onclick="Tab00_onclick">
+              <Layouts>
+                <Layout width="1016" height="519">
+                  <Grid id="Grid01" taborder="0" binddataset="ds_resolution" useinputpanel="false" left="-0.1%" top="0" right="0.69%" height="219">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="170"/>
+                          <Column size="170"/>
+                          <Column size="170"/>
+                          <Column size="170"/>
+                          <Column size="170"/>
+                          <Column size="170"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell style="font:9 Arial,굴림;" text="사원번호"/>
+                          <Cell col="1" style="font:9 Arial,굴림;" text="급여대장번호"/>
+                          <Cell col="2" style="font:9 Arial,굴림;" text="지출유형코드"/>
+                          <Cell col="3" style="font:9 Arial,굴림;" text="승인자"/>
+                          <Cell col="4" style="font:9 Arial,굴림;" text="승인일시"/>
+                          <Cell col="5" style="font:9 Arial,굴림;" text="총지출경비"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:emp_no"/>
+                          <Cell col="1" text="bind:salary_book_no"/>
+                          <Cell col="2" displaytype="combo" edittype="combo" text="bind:spend_code" combodataset="ds_combo_02" combocodecol="cd" combodatacol="txt"/>
+                          <Cell col="3" text="bind:ok_emp_no"/>
+                          <Cell col="4" displaytype="date" edittype="date" text="bind:ok_date"/>
+                          <Cell col="5" text="bind:to_expenses"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <ImageViewer id="img02" taborder="1" left="9" top="339" width="997" height="138" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+                  <ImageViewer id="img_02" taborder="2" left="51" top="347" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_33" taborder="3" text="지출결의서" left="13" top="318" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;" onclick="Tab00_tabpage2_sta_33_onclick"/>
+                  <Static id="Static02" taborder="4" text="*" left="35" top="354" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="sta_15" taborder="5" text="사원번호" onclick="sta_15_onclick" left="16" top="347" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <ImageViewer id="img_08" taborder="7" left="49" top="405" width="952" height="39" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <ImageViewer id="img_04" taborder="8" left="41" top="395" width="960" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_03" taborder="9" text="지출유형코드" onclick="sta_15_onclick" left="16" top="395" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_04" taborder="10" text="총지출경비" onclick="sta_15_onclick" left="528" top="395" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Button id="reset" taborder="14" text="취소" onclick="fn_reset" left="950" top="227" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="fn_search" taborder="15" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="497" top="349" width="22" height="20"/>
+                  <Button id="Button01" taborder="16" text="추가" onclick="Button01_onclick" left="776" top="227" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="insert00" taborder="17" text="등록" onclick="div_Detail_insert_onclick" left="834" top="227" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="Button02" taborder="18" text="삭제" onclick="Button03_onclick" left="892" top="227" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <ImageViewer id="img_00" taborder="19" left="51" top="370" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_02" taborder="20" text="급여대장번호" onclick="sta_15_onclick" left="16" top="370" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_11" taborder="21" onclick="sta_15_onclick" left="528" top="372" width="472" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="edt_btr_no2" taborder="23" readonly="true" cssclass="edt_WF_Search" left="136" top="349" width="361" height="20"/>
+                  <Static id="sta_13" taborder="24" onclick="sta_15_onclick" left="528" top="347" width="473" height="24" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_16" taborder="28" text="등록일시" onclick="sta_15_onclick" left="528" top="347" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="area02" taborder="41" cssclass="essential" left="135" top="373" width="383" height="20"/>
+                  <Calendar id="f_date00" taborder="47" displaynulltext="2021-00-00" locale="ko_KR" cssclass="essential" left="644" top="349" width="353" height="20"/>
+                  <Button id="fn_search03" taborder="55" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="496" top="373" width="22" height="20"/>
+                  <Edit id="edt_btr_no00" taborder="56" readonly="true" cssclass="edt_WF_Search" left="136" top="373" width="361" height="20"/>
+                  <Edit id="area00" taborder="59" cssclass="essential" left="645" top="397" width="356" height="20"/>
+                  <Static id="sta_00" taborder="60" text="수정일자" onclick="sta_15_onclick" left="528" top="419" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Calendar id="s_date02" taborder="61" displaynulltext="2021-00-00" locale="ko_KR" left="645" top="421" width="116" height="20"/>
+                  <ImageViewer id="img_03" taborder="62" left="18" top="444" width="983" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_01" taborder="63" text="승인일시" onclick="sta_15_onclick" left="16" top="444" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Calendar id="s_date00" taborder="64" displaynulltext="2021-00-00" locale="ko_KR" left="133" top="448" width="386" height="20"/>
+                  <Static id="sta_05" taborder="65" text="확정여부" onclick="sta_15_onclick" left="528" top="443" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Radio id="Radio01" taborder="66" innerdataset="@ds_radio" codecolumn="Y" datacolumn="N" direction="vertical" onitemclick="Radio00_onitemclick" left="66.14%" top="445" right="2.26%" height="24" index="-1"/>
+                  <Static id="sta_06" taborder="67" text="등록자" onclick="sta_15_onclick" left="16" top="419" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="edt_btr_no03" taborder="68" readonly="true" cssclass="edt_WF_Search" left="136" top="421" width="118" height="21"/>
+                  <Button id="fn_search01" taborder="69" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="251" top="421" width="22" height="20"/>
+                  <Static id="sta_08" taborder="70" text="수정자" onclick="sta_15_onclick" left="280" top="419" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="edt_btr_no04" taborder="72" readonly="true" cssclass="edt_WF_Search" left="398" top="421" width="118" height="21"/>
+                  <Button id="fn_search02" taborder="73" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="496" top="422" width="22" height="20"/>
+                  <Edit id="edt_btr_no05" taborder="75" readonly="true" cssclass="edt_WF_Search" left="879" top="420" width="118" height="21"/>
+                  <Static id="sta_07" taborder="76" text="승인자" onclick="sta_15_onclick" left="766" top="419" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Button id="fn_search04" taborder="77" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="978" top="421" width="22" height="20"/>
+                  <Combo id="Combo00" taborder="78" left="13.39%" top="397" right="49.02%" height="20" innerdataset="@ds_combo_02" codecolumn="cd" datacolumn="txt"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="성과평가">
+              <Layouts>
+                <Layout width="1013" height="171">
+                  <Grid id="Grid00" taborder="0" binddataset="ds_R_standard" useinputpanel="false" left="0%" top="-2" right="0.2%" height="206">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="260"/>
+                          <Column size="260"/>
+                          <Column size="260"/>
+                          <Column size="260"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell style="font:9 Arial,굴림;" text="급여대장번호"/>
+                          <Cell col="1" style="font:9 Arial,굴림;" text="성과코드"/>
+                          <Cell col="2" style="font:9 Arial,굴림;" text="성과점수"/>
+                          <Cell col="3" style="font:9 Arial,굴림;" text="성과금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:salary_book_no"/>
+                          <Cell col="1" displaytype="combo" edittype="combo" text="bind:record_code" combodataset="ds_combo_03" combocodecol="cd" combodatacol="txt"/>
+                          <Cell col="2" text="bind:record_score"/>
+                          <Cell col="3" text="bind:record_money"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <ImageViewer id="img02" taborder="1" left="8" top="329" width="996" height="108" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+                  <ImageViewer id="img_02" taborder="2" left="49" top="342" width="950" height="41" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_33" taborder="3" text="성과평가기준" left="11" top="304" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+                  <Static id="Static02" taborder="4" text="*" left="33" top="349" width="18" height="38" style="color:red;font:arial,18;"/>
+                  <Static id="sta_15" taborder="5" onclick="sta_15_onclick" left="14" top="342" width="115" height="41" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" text="급여대장번호"/>
+                  <Static id="Static00" taborder="6" text="*" left="20" top="345" width="18" height="38" style="color:red;font:arial,18;"/>
+                  <Button id="reset" taborder="14" text="취소" onclick="fn_reset" left="939" top="213" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="Button01" taborder="16" text="추가" onclick="Button01_onclick" left="765" top="213" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="insert00" taborder="17" text="등록" onclick="div_Detail_insert_onclick" left="823" top="213" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <Button id="Button02" taborder="18" text="삭제" onclick="Button03_onclick" left="881" top="213" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+                  <ImageViewer id="img_00" taborder="19" left="47" top="381" width="950" height="41" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+                  <Static id="sta_02" taborder="20" text="성과점수" onclick="sta_15_onclick" left="14" top="381" width="115" height="41" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_13" taborder="24" onclick="sta_15_onclick" left="526" top="342" width="473" height="40" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Static id="sta_16" taborder="28" text="성과코드" onclick="sta_15_onclick" left="526" top="342" width="115" height="41" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <ImageViewer id="img_05" taborder="29" position="fixed" left="642" top="343" width="354" height="37" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;font:9 Dotum;accessibility:enable all '' '' '' ;"/>
+                  <Edit id="area02" taborder="41" cssclass="essential" left="134" top="384" width="383" height="36"/>
+                  <Static id="sta_06" taborder="51" text="성과금액" onclick="sta_15_onclick" left="526" top="381" width="115" height="41" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+                  <Edit id="area03" taborder="52" cssclass="essential" left="642" top="383" width="353" height="36"/>
+                  <Edit id="area00" taborder="53" cssclass="essential" left="134" top="345" width="383" height="36" oneditclick="Tab00_tabpage3_area00_oneditclick"/>
+                  <Combo id="Combo00" taborder="54" left="63.19%" top="343" right="2.36%" height="36" innerdataset="@ds_combo_03" codecolumn="cd" datacolumn="txt"/>
+                </Layout>
+              </Layouts>
+              <InitValue>
+                <Edit id="area03" tooltiptext="123,123,123,123,123"/>
+              </InitValue>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Edit id="_searchKeyword" taborder="84" value="0001" left="13.2%" top="72" right="72.14%" height="22"/>
+        <Button id="Button00" taborder="85" text="검색" onclick="Button00_onclick" left="289" top="71" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Static id="sta_no" taborder="86" text="급여대장번호" onclick="sta_no_onclick" left="20" top="70" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_confirm" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="salary_book_class_code" type="STRING" size="256"/>
+          <Column id="salary_book_code" type="STRING" size="256"/>
+          <Column id="salary_book_nm" type="STRING" size="256"/>
+          <Column id="salary_book_reg_date" type="DATE" size="256"/>
+          <Column id="salary_send_date" type="DATE" size="256"/>
+          <Column id="salary_reg_user_no" type="STRING" size="256"/>
+          <Column id="salary_mod_date" type="DATE" size="256"/>
+          <Column id="salary_mod_user_no" type="STRING" size="256"/>
+          <Column id="salary_acc_date" type="DATE" size="256"/>
+          <Column id="salary_acc_user_no" type="STRING" size="256"/>
+          <Column id="salary_acc_yn" type="STRING" size="256"/>
+          <Column id="salary_cal_sta_date" type="DATE" size="256"/>
+          <Column id="salary_cal_end_date" type="DATE" size="256"/>
+          <Column id="salary_total" type="STRING" size="256"/>
+          <Column id="attitude_book_id" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="salary_book_code"/>
+          </Row>
+          <Row>
+            <Col id="salary_book_code"/>
+          </Row>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_resolution">
+        <ColumnInfo>
+          <Column id="emp_no" type="STRING" size="256"/>
+          <Column id="reg_date" type="DATE" size="256"/>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="spend_class_code" type="STRING" size="256"/>
+          <Column id="spend_code" type="STRING" size="256"/>
+          <Column id="to_expenses" type="STRING" size="256"/>
+          <Column id="en_emp_no" type="STRING" size="256"/>
+          <Column id="mo_emp_no" type="STRING" size="256"/>
+          <Column id="mo_date" type="DATE" size="256"/>
+          <Column id="ok_emp_no" type="STRING" size="256"/>
+          <Column id="ok_date" type="DATE" size="256"/>
+          <Column id="ok_yn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_radio">
+        <ColumnInfo>
+          <Column id="Y" type="STRING" size="256"/>
+          <Column id="N" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="Y">1</Col>
+            <Col id="N">Y</Col>
+          </Row>
+          <Row>
+            <Col id="Y">0</Col>
+            <Col id="N">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_R_standard">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="record_class_code" type="STRING" size="256"/>
+          <Column id="record_code" type="STRING" size="256"/>
+          <Column id="record_score" type="STRING" size="256"/>
+          <Column id="record_money" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_combo_01">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="text" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">3010</Col>
+            <Col id="text">정기급여</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3020</Col>
+            <Col id="text">특별성과금</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_combo_02">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">5310</Col>
+            <Col id="txt">승진</Col>
+          </Row>
+          <Row>
+            <Col id="cd">5320</Col>
+            <Col id="txt">이동</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_combo_03">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">3600</Col>
+            <Col id="txt">0%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3610</Col>
+            <Col id="txt">10%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3620</Col>
+            <Col id="txt">20%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3630</Col>
+            <Col id="txt">30%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3640</Col>
+            <Col id="txt">40%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3650</Col>
+            <Col id="txt">50%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3660</Col>
+            <Col id="txt">60%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3670</Col>
+            <Col id="txt">70%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3680</Col>
+            <Col id="txt">80%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3690</Col>
+            <Col id="txt">90%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3699</Col>
+            <Col id="txt">100%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <!--
+<Parameters>
+      <Parameter id="test_data" type="string" value="edt_btr_no2"/>
+    </Parameters>
+-->
+    <Bind>
+      <BindItem id="item7" compid="Tab00.tabpage1.area05" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item9" compid="Tab00.tabpage1.area05" propid="" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item3" compid="_searchKeyword" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item15" compid="Tab00.tabpage2.edt_btr_no2" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item20" compid="Tab00.tabpage2.area02" propid="value" datasetid="ds_confirm" columnid="salary_book_nm"/>
+      <BindItem id="item21" compid="Tab00.tabpage2.f_date00" propid="value" datasetid="ds_confirm" columnid="salary_book_reg_date"/>
+      <BindItem id="item27" compid="Tab00.tabpage3.area02" propid="value" datasetid="ds_R_standard" columnid="record_score"/>
+      <BindItem id="item0" compid="Tab00.tabpage2.edt_btr_no00" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item2" compid="Tab00.tabpage2.edt_btr_no03" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item5" compid="Tab00.tabpage3.area02" propid="" datasetid="ds_R_standard" columnid="record_score"/>
+      <BindItem id="item6" compid="Tab00.tabpage3.area03" propid="value" datasetid="ds_R_standard" columnid="record_money"/>
+      <BindItem id="item16" compid="Tab00.tabpage2.edt_btr_no2" propid="" datasetid="ds_resolution" columnid="emp_no"/>
+      <BindItem id="item17" compid="Tab00.tabpage2.f_date00" propid="" datasetid="ds_resolution" columnid="reg_date"/>
+      <BindItem id="item18" compid="Tab00.tabpage2.edt_btr_no00" propid="" datasetid="ds_resolution" columnid="salary_book_no"/>
+      <BindItem id="item23" compid="Tab00.tabpage2.area00" propid="value" datasetid="ds_resolution" columnid="to_expenses"/>
+      <BindItem id="item25" compid="Tab00.tabpage2.edt_btr_no04" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item26" compid="Tab00.tabpage2.edt_btr_no03" propid="" datasetid="ds_resolution" columnid="en_emp_no"/>
+      <BindItem id="item28" compid="Tab00.tabpage2.edt_btr_no04" propid="" datasetid="ds_resolution" columnid="mo_emp_no"/>
+      <BindItem id="item29" compid="Tab00.tabpage2.s_date02" propid="value" datasetid="ds_resolution" columnid="mo_date"/>
+      <BindItem id="item30" compid="Tab00.tabpage2.edt_btr_no05" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item31" compid="Tab00.tabpage2.edt_btr_no05" propid="" datasetid="ds_resolution" columnid="mo_emp_no"/>
+      <BindItem id="item32" compid="Tab00.tabpage2.edt_btr_no05" propid="" datasetid="ds_resolution" columnid="ok_emp_no"/>
+      <BindItem id="item33" compid="Tab00.tabpage2.s_date00" propid="value" datasetid="ds_resolution" columnid="ok_date"/>
+      <BindItem id="item34" compid="Tab00.tabpage2.Radio01" propid="value" datasetid="ds_resolution" columnid="ok_yn"/>
+      <BindItem id="item8" compid="Tab00.tabpage1.area02" propid="value" datasetid="ds_confirm" columnid="salary_book_nm"/>
+      <BindItem id="item10" compid="Tab00.tabpage1.f_date00" propid="value" datasetid="ds_confirm" columnid="salary_book_reg_date"/>
+      <BindItem id="item11" compid="Tab00.tabpage1.f_date01" propid="value" datasetid="ds_confirm" columnid="salary_send_date"/>
+      <BindItem id="item12" compid="Tab00.tabpage1.re_emp_no03" propid="value" datasetid="ds_confirm" columnid="salary_reg_user_no"/>
+      <BindItem id="item14" compid="Tab00.tabpage1.s_date" propid="value" datasetid="ds_confirm" columnid="salary_mod_date"/>
+      <BindItem id="item35" compid="Tab00.tabpage1.re_emp_no00" propid="value" datasetid="ds_confirm" columnid="salary_mod_user_no"/>
+      <BindItem id="item36" compid="Tab00.tabpage1.f_date" propid="value" datasetid="ds_confirm" columnid="salary_acc_date"/>
+      <BindItem id="item37" compid="Tab00.tabpage1.re_emp_no02" propid="value" datasetid="ds_confirm" columnid="salary_acc_user_no"/>
+      <BindItem id="item38" compid="Tab00.tabpage1.Radio00" propid="value" datasetid="ds_confirm" columnid="salary_acc_yn"/>
+      <BindItem id="item39" compid="Tab00.tabpage1.s_date00" propid="value" datasetid="ds_confirm" columnid="salary_cal_sta_date"/>
+      <BindItem id="item40" compid="Tab00.tabpage1.s_date01" propid="value" datasetid="ds_confirm" columnid="salary_cal_end_date"/>
+      <BindItem id="item41" compid="Tab00.tabpage1.edt_btr_no03" propid="value" datasetid="ds_confirm" columnid="attitude_book_id"/>
+      <BindItem id="item42" compid="Tab00.tabpage1.area03" propid="value" datasetid="ds_confirm" columnid="salary_total"/>
+      <BindItem id="item13" compid="Tab00.tabpage1.area04" propid="value" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item43" compid="Tab00.tabpage1.area04" propid="" datasetid="ds_confirm" columnid="salary_book_no"/>
+      <BindItem id="item1" compid="Tab00.tabpage3.area00" propid="value" datasetid="ds_R_standard" columnid="salary_book_no"/>
+      <BindItem id="item19" compid="Tab00.tabpage3.area00" propid="" datasetid="ds_R_standard" columnid="salary_book_no"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+var imsisave = "";
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+    //this.fn_search();
+//     
+// var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_no");	
+//  		application.gds_btripno.addRow();
+//  		application.gds_btripno.setColumn(application.gds_btripno.rowposition, "btrip_no", btrip_no);
+// 	
+//  	var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_No");	
+//   		application.gds_btripno.addRow();
+//   		application.gds_btripno.setColumn(0, "btrip_no", btrip_no);
+
+} 
+
+//조회
+// this.fn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+// {
+//   
+//    var searchCondition =  "NAME";
+//    var searchKeyword = this.edt_searchKeyword.value;       
+//  	this.ds_search.setColumn(0, "searchCondition", "NAME");
+// 	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+// 	
+//  /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+//    
+//    var oDatas =  {
+// 			  svcid : "search",
+// 			  sController : "btrSelectVO.do",			 
+// 			  inds :["ds_search=ds_search"],
+// 			  outds :[
+// 				 "ds_user=output1"
+// 				 
+// 			     ],			     
+// 			  args  : [				
+// 			  ],
+// 			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+// 			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+// 			  bCompress :false,	 //			  
+// 			}; 
+// 			
+// 	 trace(" this.ds_search : " + this.ds_search.saveXML());
+// 	  
+//     //공통 transaction 함수 호츨   //function callback 
+// 	Iject.transaction(this,oDatas,function(){   
+// 		
+// 	
+// 		if(this.errorcode < 0)
+// 		{
+// 		   Iject.alert(this.errorMsg);			
+// 		   return;
+// 		} 
+// 	      
+// 	       var pThis = this.fobj;   //form object	      
+// 	       trace(" ds_user : " + pThis.ds_user.saveXML());
+// 	});
+// 	
+// 		var imsi = this.edt_searchKeyword.value;
+// 	   this.edt_btrip_dno.set_value(imsi);
+// 	
+// 	
+// 	
+// 	 
+// }
+
+
+
+
+
+
+//추가
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	var nRow = this.ds_user.addRow();
+	this.div_search.edt_searchKeyword.set_value("");
+// 	var imsi1 = this.edt_searchKeyword.value;
+// 	var nRow = this.ds_user.addRow();
+// 	this.emp_no.set_value(imsi1);
+// 	this.ok_date.readonly("false");
+// 	this.ok_emp_no.readonly(true);
+/*	this.ok_date.visible(false);*/
+	/*this.ok_Ascertain.readonly(true);*/
+	
+	
+}
+
+
+
+
+
+//삭제
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+//  	var searchCondition =  "NAME";
+//     var searchKeyword = this.edt_searchKeyword.value;       
+//   	this.ds_search.setColumn(0, "searchCondition", "NAME");
+//  	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+//  	
+//  	var oDatas =  {
+//  			  svcid : "confirm",
+//  			  sController : "btrDetailconfirmVO.do",			 
+//  			  inds :["ds_search=ds_search"],
+//  			  outds :[
+//  				 "ds_confirm=output1"
+//  			     ],			     
+//  			  args  : [				
+//  			  ],
+//  			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+//  			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+//  			  bCompress :false,	 //			  
+//  			}; 
+//  	 trace(" this.ds_search : " + this.ds_search.saveXML());
+//  	 
+//  	 
+//      //공통 transaction 함수 호츨   //function callback 
+//      
+//     // this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+//  	Iject.transaction(this,oDatas,function(){   
+//  		if(this.errorcode < 0)
+//  		{
+//  		   Iject.alert(this.errorMsg);			
+//  		   return;
+//  		} 
+//  	      
+//  	       var pThis = this.fobj;   //form object	      
+//  	       trace("ds_confirm : " + this.ds_confirm.saveXML());
+//  	});
+//  	
+ 	
+	var nRow = this.ds_user.rowposition;
+	this.ds_user.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+// 	
+//  	
+//  	var confirm = this.ds_confirm.getColumn();
+//  	
+//  	if(this.confirm != null){
+//  		this.alert("출장일정내용을 확인하세요");
+//  	}else 
+	if(rtnValue){  
+		this.fn_save("delete");
+	}else{
+		this.fn_search();
+	}
+}
+
+
+
+
+//리셋
+this.fn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_user.reset();
+}
+
+
+//저장
+this.fn_save = function(strid)
+{
+	this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+	this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.re_emp_no.value);
+
+	
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "btrModifyVO.do",			 
+			  inds :["input1=ds_user:U"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+	});
+/*	this.fn_search();*/
+	var imsi3 = this.edt_searchKeyword.value;
+	this.edt_searchKeyword.set_value(imsi3);
+	
+}
+
+
+//저장버튼 클릭시 
+this.div_Detail_insert_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+var imsi4 = this.edt_searchKeyword.value;
+
+	this.fn_save("save");
+		this.edt_searchKeyword.set_value(imsi4);
+}
+
+
+// //검색  Enter키
+// this.div_search_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+// {
+// 	if ( e.keycode == 13 )
+// 	{
+// 		this.fn_search();
+// 	}
+// }
+
+
+
+
+//급여대장번호 조회
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+    var searchKeyword = this._serachKeyword.value; 
+    
+
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "",		//자바 주소넣기	 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_user : " + pThis.ds_user.saveXML());
+	});
+// 	var nLeft = system.clientToScreenX(this, 10);
+// 	var nTop = system.clientToScreenY(this, 10);
+// 	 
+// 	var empSearch = new ChildFrame;
+// 	empSearch.init("emp"
+// 					, "absolute", nLeft, nTop, 300, 250, null, null
+// 					, "member::empSearch.xfdl");
+// 					
+// 	empSearch.set_openalign("center middle");
+// 	empSearch.set_dragmovetype("all");
+// 	
+// 	system.showModalWindow(empSearch, 
+// 							"empModal",
+// 							this.getOwnerFrame(),
+// 							"",
+// 							this);
+	
+}
+
+
+//승인자사번찾기
+this.button09_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::ok_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	
+}
+
+
+///////////////////////////////////////출장관리내역 처리////////////////////////////////////////////
+this.gr_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	
+ 	
+ 	//var btrip_no= this.edt_btr_no2.value;
+// 		
+ 	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var Salary_book = new ChildFrame();
+ 	
+ 	Salary_book.init("Business_Trip"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "S_book::PD_IN_COM_S_Book_test3.xfdl");
+ 	
+ 	
+ 	
+ 	Salary_book.set_openalign("center middle");
+ 	Salary_book.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_btr_no2.value
+						,param2:this.btr_name.value
+  					 	};
+						
+  	
+    //ChildFrame.showModal(strID, objParentFrame, [{objArgumentList}[, objOpener[,  callbackFunc]]]);
+          
+    	  Business_Trip.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+   			  
+//     	system.showModalWindow(Business_Trip, 
+//    							"btripModal",
+//     							this.getOwnerFrame(),
+//     							"mode:'showModalWindow', this.objParam",
+//    							this);
+//   							
+  							
+   
+/*	  trace("param value" + this.objParam);*/
+			  
+// 					
+//  	var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_No");	
+//  	application.gds_btripno.addRow();
+//  	application.gds_btripno.setColumn(application.gds_btripno.rowposition, "btrip_no", btrip_No)	
+	//test
+// 	var btrip_no = this.edt_btr_no2.value;
+// 	 var oData ={
+//          sId  : "btrip",             //callback id
+//          sUrl : "Btrip::PD_IN_COM_BTRDETAIL.xfdl",   //url
+//          bshowtitlebar : true,     //title bar
+//          bAutoSize  : true,       //autosize
+//          bResize    : false,       //resize
+//          bShowtatusbar : false,     //statusbar
+//          sOpenalign    : "center middle",  //align
+//         oArgs :  {arg1: this.btrip_no,
+//                   arg2:'2222222222222222222222222'         
+//                }    
+//      };
+//      
+//      
+//       Iject.showModal(this,oData,function(){
+//    
+//               /* 
+//               * popup calllback
+//               *@param {object}this.fobj
+//               *@param {string} this.svcid 
+//               *@param {string} this.variant
+//               */             
+//              var pThis= this.fobj;             
+//              trace(" pThis.name : " + pThis.name);
+//              trace(" pThis.svcid : " + this.svcid);
+//              trace(" pThis.variant : " + this.variant);
+//              
+//              var sPerson = JSON.stringify(this.variant);
+          //  var oPerson = JSON.parse(sPerson);
+
+      
+      //});
+		
+}
+
+// 
+ //출장내역관리 콜백함수
+  this.fn_popupCallback = function(strPopupID, strReturn)
+  {
+      if(strReturn == undefined){
+          return;
+      }
+  
+      if(strPopupID == "Salary_book"){
+          this.alert("Return Value: " + strReturn);
+      }
+ };
+
+ //object 인자 생성함수
+ this.fn_parent = function(pObj)
+ {
+     this.ds_parent.copyData(pObj);
+};
+
+// //조회시 승인자사번 노출
+// this.btrgrid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+// {
+// 	this.ok_emp_no.value(this.btrgrid.se);
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//대체업무사원
+this.button05_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::re_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+}
+
+
+
+
+
+
+this.Tab00_tabpage3_area00_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

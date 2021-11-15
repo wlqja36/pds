@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_ATTITUDE_BOOK_JSH" left="0" top="0" width="1280" height="1024" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_title" taborder="0" left="7" top="8" height="45" width="1265" style="background:#165fa6ff;border:1 solid #e5e5e5ff ;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="1" text="근태정보" left="19" top="15" height="30" width="170" style="color:white;font:bold 16 Dotum;"/>
+        <ImageViewer id="img_05" taborder="2" left="7" top="65" height="44" width="1265" style="background:#d8dcedff;border:1 solid #969696ff ;font:bold 9 굴림;" position="fixed"/>
+        <Static id="sta_33" taborder="11" text="일자별 근태정보" left="28" top="122" height="13" width="120" style="font:bold 9 굴림;"/>
+        <Grid id="attitude_grid" taborder="12" useinputpanel="false" left="15" top="144" height="305" autofittype="col" width="1248" scrollbars="autoboth" binddataset="ds_attitude_book" useselcolor="false" style="font:bold 9 굴림;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원정보"/>
+                <Cell col="1" text="관리일자"/>
+                <Cell col="2" text="대장번호"/>
+                <Cell col="3" text="출근시간"/>
+                <Cell col="4" text="퇴근시간"/>
+                <Cell col="5" text="휴일여부"/>
+                <Cell col="6" text="출결상태코드"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_NO" expandshow="hide" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+                <Cell col="1" displaytype="date" edittype="none" text="bind:ATTEND_DATE" mask="yyyy-MM-dd ddd" calendardisplaynulltext="bind:ATTEND_DATE"/>
+                <Cell col="2" edittype="none" text="bind:ATTITUDE_BOOK_ID" expandshow="hide" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+                <Cell col="3" displaytype="normal" edittype="none" text="bind:START_TIME" mask="HH:mm:ss"/>
+                <Cell col="4" displaytype="normal" edittype="none" text="bind:END_TIME" mask="HH:mm:ss"/>
+                <Cell col="5" text="bind:HOLIDAYYN"/>
+                <Cell col="6" text="bind:ATTEND_CODE" expandshow="hide" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_03" taborder="71" text="월별 근태정보" left="2.03%" top="460" width="120" height="13" style="font:bold 9 굴림;"/>
+        <Grid id="attitude_grid00" taborder="72" binddataset="ds_attitude_book" useinputpanel="false" autofittype="col" useselcolor="false" left="15" top="481" width="1248" height="305" style="font:bold 9 굴림;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="기본근무시간"/>
+                <Cell col="1" text="야간근무시간"/>
+                <Cell col="2" text="연장근무시간"/>
+                <Cell col="3" text="휴일근무시간"/>
+                <Cell col="4" text="정근수"/>
+                <Cell col="5" text="지각수"/>
+                <Cell col="6" text="결근수"/>
+                <Cell col="7" text="조퇴수"/>
+                <Cell col="8" text="휴일수"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:NOMAL_WORK_HOURS"/>
+                <Cell col="1" text="bind:NIGHT_WORK_HOURS"/>
+                <Cell col="2" text="bind:OVERTIME_HOURS"/>
+                <Cell col="3" text="bind:HOLIDAY_WORK_HOURS"/>
+                <Cell col="4" text="bind:WORK_DAY_CNT"/>
+                <Cell col="5" text="bind:LATE_CNT"/>
+                <Cell col="6" text="bind:ABSENT_CNT"/>
+                <Cell col="7" text="bind:EARLY_LEAVE_CNT"/>
+                <Cell col="8" text="bind:HOLIDAY_CNT"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img_01" taborder="73" left="12" top="69" width="1255" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <Static id="sta_15" taborder="74" text="대장검색" left="12" top="69" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_attt_book" taborder="75" left="223" top="76" width="315" height="22" style="font:bold 9 굴림;"/>
+        <Button id="btn_z_attiBook" taborder="76" cssclass="btn_WF_SearchSmall" left="537" top="76" width="35" height="22" style="image:URL('img::btn_WF_SearchSmall.png');bordertype:normal 0 0 ;font:bold 9 굴림;cursor:hand;"/>
+        <Static id="sta_00" taborder="77" text="사원검색" left="578" top="69" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_name02" taborder="78" left="789" top="76" width="320" height="22" style="font:bold 9 굴림;"/>
+        <Button id="btn_z_emp" taborder="79" cssclass="btn_WF_SearchSmall" left="1108" top="76" width="35" height="22" style="image:URL('img::btn_WF_SearchSmall.png');bordertype:normal 0 0 ;font:bold 9 굴림;cursor:hand;"/>
+        <Button id="btn_search" taborder="80" text="조회" left="1184" top="74" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchStartDate" type="DATE" size="256"/>
+          <Column id="searchEndDate" type="DATE" size="256"/>
+          <Column id="searchBookId" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_attitude_general" keystring="S:attitudeMngDate">
+        <ColumnInfo>
+          <Column id="attitudeMngDate" type="DATE" size="256"/>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="attitudeId" type="STRING" size="4"/>
+          <Column id="attitudeReason" type="STRING" size="256"/>
+          <Column id="regDate" type="DATE" size="256"/>
+          <Column id="regEmpId" type="STRING" size="12"/>
+          <Column id="modifyDate" type="DATE" size="256"/>
+          <Column id="modifyEmpId" type="STRING" size="12"/>
+          <Column id="confirmYn" type="STRING" size="1"/>
+          <Column id="confirmDate" type="DATE" size="256"/>
+          <Column id="confirmEmpId" type="STRING" size="12"/>
+          <Column id="takeoverEmpId" type="STRING" size="12"/>
+          <Column id="emergencyContact" type="STRING" size="20"/>
+          <Column id="REG_EMP_REAL" type="STRING" size="256"/>
+          <Column id="MODIFY_EMP_REAL" type="STRING" size="256"/>
+          <Column id="FIX_EMP_REAL" type="STRING" size="256"/>
+          <Column id="TAKEOVER_EMP_REAL" type="STRING" size="256"/>
+          <Column id="EMP_REAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_attend_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2210</Col>
+            <Col id="data">연차휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2220</Col>
+            <Col id="data">경조휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2230</Col>
+            <Col id="data">병가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2240</Col>
+            <Col id="data">출산휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2250</Col>
+            <Col id="data">생리휴가</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_atti_code">
+        <ColumnInfo>
+          <Column id="ATTITUDE_ID" type="STRING" size="4"/>
+          <Column id="ATTITUDE_NM" type="STRING" size="256"/>
+          <Column id="HOL_USEYN" type="STRING" size="1"/>
+          <Column id="VACATION_CODE_ID" type="STRING" size="4"/>
+          <Column id="BRIFE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[]]></Script>
+  </Form>
+</FDL>

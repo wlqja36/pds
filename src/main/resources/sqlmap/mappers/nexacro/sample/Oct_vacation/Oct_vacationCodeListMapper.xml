@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Oct_VacationCodeListMapper">
+
+     
+    <resultMap id="Oct_vacationCodeList" type="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeListVO">
+        <result property="vacation_code_id"      	column="VACATION_CODE_ID" />	                         
+        <result property="vacation_nm"           	column="VACATION_NM"/>	              
+        <result property="vacation_standard_code"  	column="VACATION_STANDARD_CODE"/>	      
+           
+    </resultMap>
+    
+      <select id = "selectOctVacationCodeListVO" parameterType="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeListVO" resultMap="Oct_vacationCodeList">
+      	SELECT 
+      		VACATION_CODE_ID,
+      		VACATION_NM,
+      		VACATION_STANDARD_CODE
+
+       FROM VACATION_CODE    
+       <if test='searchCondition != null'>WHERE VACATION_CODE_ID = #{searchCondition, jdbcType = VARCHAR} </if> 
+      <!--  <isNotEmpty property="searchCondition" >	 
+      	 WHERE VACATION_CODE_ID = #searchCondition#    	
+       </isNotEmpty> -->
+
+
+		</select>
+
+
+   	  
+
+</mapper>
+

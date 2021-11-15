@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_ATTITUDE_BOOK_JSH" left="0" top="0" width="1280" height="1024" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="7" top="8" height="45" width="1265" style="background:#165fa6ff;border:1 solid #e5e5e5ff ;color:#ffffffff;" onclick="img_titlebg_onclick"/>
+        <Static id="sta_title" taborder="1" text="근태대장" left="19" top="15" height="30" width="170" style="color:white;font:bold 16 Dotum;"/>
+        <ImageViewer id="img_05" taborder="2" left="7" top="65" height="44" width="1265" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <Static id="sta_33" taborder="11" text="근태 대장관리" left="2%" top="122" height="13" width="120" style="font:bold 9 굴림;"/>
+        <Grid id="attitude_grid" taborder="12" useinputpanel="false" left="15" top="144" height="305" autofittype="col" width="1248" scrollbars="autoboth" binddataset="ds_attitude_book" useselcolor="false">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="75"/>
+                <Column size="71"/>
+                <Column size="67"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="대장번호"/>
+                <Cell col="1" text="대장명"/>
+                <Cell col="2" text="관리시작일"/>
+                <Cell col="3" text="관리종료일"/>
+                <Cell col="4" text="등록일시"/>
+                <Cell col="5" text="등록사원"/>
+                <Cell col="6" text="수정일시"/>
+                <Cell col="7" text="수정사원"/>
+                <Cell col="8" text="확정일시"/>
+                <Cell col="9" text="확정사원"/>
+                <Cell col="10" text="확정여부"/>
+                <Cell col="11" text="출결정보"/>
+                <Cell col="12" text="근태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:attitudeBookId"/>
+                <Cell col="1" text="bind:attitudeBookName"/>
+                <Cell col="2" text="bind:startDate"/>
+                <Cell col="3" text="bind:endDate"/>
+                <Cell col="4" text="bind:regDate"/>
+                <Cell col="5" text="bind:regEmpId"/>
+                <Cell col="6" text="bind:modifyDate"/>
+                <Cell col="7" text="bind:modifyEmpId"/>
+                <Cell col="8" text="bind:fixDate"/>
+                <Cell col="9" text="bind:fixEmpId"/>
+                <Cell col="10" displaytype="normal" edittype="combo" text="bind:fixYn" combodataset="ds_yn" combocodecol="code" combodatacol="data"/>
+                <Cell col="11" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="출결상세"/>
+                <Cell col="12" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="근태상세"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img_00" taborder="13" left="7" top="463" width="1265" height="227" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="img_01" taborder="47" left="12" top="69" width="1255" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;"/>
+        <Static id="sat_01" taborder="48" text="검색조건" left="12" top="69" width="160" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 10 맑은 고딕;"/>
+        <Combo id="Combo00" taborder="49" text="전체" innerdataset="innerdataset" codecolumn="codecolumn" datacolumn="datacolumn" left="179" top="76" width="160" height="22"/>
+        <Edit id="searchBook" taborder="50" left="345" top="76" width="160" height="22"/>
+        <Button id="Button05" taborder="51" text="검색" left="506" top="74" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;cursor:hand;"/>
+        <Static id="sta_08" taborder="52" text="관리시작일" onclick="sat_08_onclick" left="589" top="69" width="160" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 10 맑은 고딕;"/>
+        <Calendar id="searchStartDate" taborder="53" left="756" top="76" width="160" height="22"/>
+        <Static id="sta_00" taborder="54" text="관리종료일" left="924" top="69" width="165" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 10 맑은 고딕;"/>
+        <Calendar id="searchEndDate" taborder="55" left="1097" top="76" width="160" height="22"/>
+        <ImageViewer id="img_02" taborder="56" onclick="img_02_onclick" left="12" top="468" width="1255" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_03" taborder="86" onclick="img_02_onclick" left="12" top="503" width="1255" height="77" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_04" taborder="87" onclick="img_02_onclick" left="12" top="579" width="1255" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_06" taborder="88" onclick="img_02_onclick" left="12" top="614" width="1255" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_07" taborder="89" onclick="img_02_onclick" left="12" top="649" width="1255" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <Static id="sta_15" taborder="90" text="대장번호" left="12" top="468" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_02" taborder="91" text="대장명" left="12" top="503" width="205" height="77" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_11" taborder="92" text="관리시작일" left="12" top="579" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_03" taborder="93" text="등록일시" left="12" top="614" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_06" taborder="94" text="확정일시" left="12" top="649" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_12" taborder="95" text="관리종료일" left="429" top="579" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sat_09" taborder="96" text="등록사원" left="429" top="614" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sat_10" taborder="97" text="확정여부" left="429" top="649" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sat_11" taborder="98" text="수정일시" left="848" top="579" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sat_12" taborder="99" text="수정사원" left="848" top="614" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sat_13" taborder="100" text="확정사원" left="848" top="649" width="205" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no" taborder="101" left="223" top="475" width="200" height="22" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;font:bold 9 굴림;"/>
+        <TextArea id="attitudeBookName" taborder="102" left="223" top="508" width="1040" height="67" style="font:bold 9 굴림;"/>
+        <Calendar id="start_date" taborder="103" left="223" top="586" width="200" height="22" style="font:bold 9 굴림;"/>
+        <Calendar id="reg_date" taborder="104" left="223" top="621" width="200" height="22" style="font:bold 9 굴림;"/>
+        <Calendar id="fix_date" taborder="105" left="223" top="656" width="200" height="22" style="font:bold 9 굴림;"/>
+        <Calendar id="end_date" taborder="106" left="640" top="586" width="200" height="22" style="font:bold 9 굴림;"/>
+        <Edit id="reg_emp_id" taborder="107" left="640" top="621" width="165" height="22" style="font:bold 9 굴림;"/>
+        <Radio id="fixyn" taborder="108" innerdataset="@ds_yn" codecolumn="code" datacolumn="data" direction="vertical" onitemclick="fixyn_onitemclick" left="664" top="657" width="180" height="22" style="font:bold 9 굴림;align:left middle;"/>
+        <Button id="search_reg_emp" taborder="109" cssclass="btn_WF_SearchSmall" left="804" top="621" width="35" height="22" style="image:URL('img::btn_WF_SearchSmall.png');bordertype:normal 0 0 ;font:bold 9 굴림;cursor:hand;"/>
+        <Button id="Button01" taborder="110" text="추가" left="933" top="710" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;cursor:hand;"/>
+        <Button id="reset" taborder="111" text="취소" left="1195" top="710" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;cursor:hand;"/>
+        <Button id="Button03" taborder="112" text="삭제" left="1108" top="710" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;cursor:hand;"/>
+        <Button id="insert00" taborder="113" text="등록" left="1020" top="710" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;cursor:hand;"/>
+        <Calendar id="modify_date" taborder="114" left="1059" top="585" width="200" height="22" style="font:bold 9 굴림;"/>
+        <Edit id="modify_emp_id" taborder="115" left="1059" top="621" width="165" height="22" style="font:bold 9 굴림;"/>
+        <Button id="search_mod_emp" taborder="116" cssclass="btn_WF_SearchSmall" left="1223" top="621" width="35" height="22" style="image:URL('img::btn_WF_SearchSmall.png');bordertype:normal 0 0 ;font:bold 9 굴림;cursor:hand;"/>
+        <Edit id="fix_emp_id" taborder="117" left="1059" top="656" width="165" height="22" style="font:bold 9 굴림;"/>
+        <Button id="search_fix_emp" taborder="118" cssclass="btn_WF_SearchSmall" left="1223" top="656" width="35" height="22" style="image:URL('img::btn_WF_SearchSmall.png');bordertype:normal 0 0 ;font:bold 9 굴림;cursor:hand;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_attitude_book" useclientlayout="false" keystring="S:startDate">
+        <ColumnInfo>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="attitudeBookName" type="STRING" size="255"/>
+          <Column id="startDate" type="DATE" size="256"/>
+          <Column id="endDate" type="DATE" size="256"/>
+          <Column id="regDate" type="DATE" size="256"/>
+          <Column id="regEmpId" type="STRING" size="256"/>
+          <Column id="modifyDate" type="DATE" size="256"/>
+          <Column id="modifyEmpId" type="STRING" size="256"/>
+          <Column id="fixDate" type="DATE" size="256"/>
+          <Column id="fixEmpId" type="STRING" size="256"/>
+          <Column id="fixYn" type="STRING" size="1"/>
+          <Column id="regEmpStr" type="STRING" size="256"/>
+          <Column id="REG_EMP_REAL" type="STRING" size="256"/>
+          <Column id="MODIFY_EMP_REAL" type="STRING" size="256"/>
+          <Column id="FIX_EMP_REAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchStartDate" type="DATE" size="256"/>
+          <Column id="searchEndDate" type="DATE" size="256"/>
+          <Column id="searchBookId" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">확정</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">미확정</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.img_titlebg_onclick = function(obj:ImageViewer, e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

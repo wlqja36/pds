@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Search_OCT_SalaryBook" left="0" top="0" width="460" height="348" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img01" taborder="0" left="15" top="62" width="430" height="272" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_titlebg" taborder="1" left="14" top="7" width="432" height="50" style="background:#165fa6ff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="3" text="급여대장 검색" onclick="sta_title_onclick" left="170" top="18" width="114" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Grid id="Grid00" taborder="7" useinputpanel="false" left="5.22%" top="72" right="5%" height="214" oncellclick="oneCell_click" binddataset="ds_SalaryBookCode">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="116"/>
+                <Column size="85"/>
+                <Column size="213"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="급여대장번호"/>
+                <Cell col="1" text="급여코드"/>
+                <Cell col="2" text="대장명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:salary_book_no"/>
+                <Cell col="1" text="bind:salary_book_code"/>
+                <Cell col="2" text="bind:salary_book_nm"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_select" taborder="9" text="선택" onclick="select_onclick" left="360" top="296" width="77" height="28" style="pusheddrawoffset:0 0;background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 15 Stencil;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+      </Layout>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_SalaryBookCode">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="12"/>
+          <Column id="salary_book_code" type="STRING" size="4"/>
+          <Column id="salary_book_nm" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="salary_book_no"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search_info">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="12"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchDateFrom" type="STRING" size="256"/>
+          <Column id="searchDateTo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchCondition">check</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+
+	
+	var objParam = this.parent.param1;
+	objParam.saveXML();
+	
+	this.ds_SalaryBookCode.copyData(objParam);
+	this.ds_SalaryBookCode.saveXML();
+	
+} 
+
+this.select_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_SalaryBookCode.rowposition;
+	trace(" rowposition : " + nRow);
+	var sBookNo = this.ds_SalaryBookCode.getColumn(nRow , "salary_book_no");
+	var sBookName = this.ds_SalaryBookCode.getColumn(nRow , "salary_book_nm");
+	var strReturn = sBookName +'('+sBookNo+')';
+	
+	this.close(strReturn);
+}
+]]></Script>
+  </Form>
+</FDL>

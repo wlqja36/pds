@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Career">
+
+    <typeAlias  alias="careerVO" type="nexacro.sample.vo.emp.CareerVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+
+   
+    <resultMap id="career" class="careerVO">
+        <result property="EMP_NO"     		column="EMP_NO"/>	              
+        <result property="JOIN_DATE"    	column="JOIN_DATE"/>	              
+        <result property="RETIRE_DATE"      column="RETIRE_DATE"/>	              
+        <result property="COMPANY_NAME"	  	column="COMPANY_NAME"/>	 
+        <result property="POSITION"     	column="POSITION"/>	          
+        <result property="DEPT_NAME"    	column="DEPT_NAME"/>	      
+        <result property="RETIRE_REASON"    column="RETIRE_REASON"/>
+        <result property="CAREER_NO"    	column="CAREER_NO"/>
+        	          
+    </resultMap>
+    
+      <select id="selectCareerVOList" parameterClass="careerVO" resultMap="career">
+             SELECT
+            	e.EMP_NO,
+            	c.EMP_NO,
+            	c.JOIN_DATE,
+            	RETIRE_DATE,
+            	COMPANY_NAME,
+            	POSITION,
+            	DEPT_NAME,
+            	RETIRE_REASON,
+            	CAREER_NO            	
+               
+            FROM CAREER c, EMP e
+            WHERE 
+            e.EMP_NO=c.EMP_NO AND
+            e.EMP_NO=#searchKeyword#
+        
+    </select>
+    
+    <insert id="insertCareerVO" parameterClass="careerVO">
+        <![CDATA[
+            INSERT INTO CAREER (
+            	EMP_NO,
+            	JOIN_DATE,
+            	RETIRE_DATE,
+            	COMPANY_NAME,
+            	POSITION,
+            	DEPT_NAME,
+            	RETIRE_REASON,
+            	CAREER_NO      
+            	
+                
+            ) VALUES (
+          	        #EMP_NO#,
+          	        #JOIN_DATE#,
+          	        #RETIRE_DATE#,
+          	        #COMPANY_NAME#,
+          	        #POSITION#,
+          	        #DEPT_NAME#,
+          	        #RETIRE_REASON#,
+          	        CAREER_NO_SEQ.nextval
+              )
+            
+        ]]>
+    </insert>
+    
+     
+    
+   <!-- 업데이트문 테이블1개  -->
+      <update id="updateCareerVO" parameterClass="careerVO">
+        <![CDATA[
+            UPDATE CAREER
+            SET     
+            	JOIN_DATE=#JOIN_DATE#,
+            	RETIRE_DATE=#RETIRE_DATE#,
+            	COMPANY_NAME=#COMPANY_NAME#,
+            	POSITION=#POSITION#,
+            	DEPT_NAME=#DEPT_NAME#,
+            	RETIRE_REASON=#RETIRE_REASON#,         
+                CAREER_NO=#CAREER_NO#    
+                WHERE 
+                CAREER_NO=#CAREER_NO#
+        ]]>
+    </update> 
+   
+   <delete id="deleteCareerVO" parameterClass="careerVO">
+        <![CDATA[
+            DELETE CAREER
+            where
+            CAREER_NO=#CAREER_NO#
+        ]]>
+    </delete>
+    
+    
+   
+</sqlMap>

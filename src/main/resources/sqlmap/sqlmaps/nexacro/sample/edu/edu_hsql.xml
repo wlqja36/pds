@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="edu">
+
+   	<typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="eduVO" type="nexacro.sample.vo.edu.EduVO"/>
+	<typeAlias  alias="eduSearchVO" type="nexacro.sample.vo.edu.eduSearchVO"/>
+    
+
+    <!-- Sample resultObject -->
+    <resultMap id="edu" class="eduVO">
+        <result property="EMP_NO" column="EMP_NO" />
+        <result property="EDU_ID" column="EDU_ID" /> 
+        <result property="EDUCLASS_NAME" column="EDUCLASS_NAME" />
+        <result property="EDU_START_DATE" column="EDU_START_DATE" />
+        <result property="EDU_END_DATE" column="EDU_END_DATE" />
+        <result property="EDU_DETAIL" column="EDU_DETAIL" />
+        <result property="EDU_AGENCY" column="EDU_AGENCY" />
+        <result property="EDU_LOCATION" column="EDU_LOCATION" />
+        <result property="EXPECTED_CHARGE" column="EXPECTED_CHARGE" />
+        <result property="ACCEPT_EMP_NO" column="ACCEPT_EMP_NO" />
+        <result property="ACCEPT_DATE" column="ACCEPT_DATE" />
+        <result property="ACCEPTED_YN" column="ACCEPTED_YN" />
+        <result property="EMP_NAME" column="EMP_NAME"/>
+        <result property="OK_EMP_NAME" column="OK_EMP_NAME"/>
+    </resultMap>
+    
+    <resultMap id="edu2" class="eduSearchVO">
+        <result property="EMP_NO" column="EMP_NO" />
+        <result property="EMP_NAME" column="EMP_NAME" />
+        <result property="EDUCATION_NAME" column="EDUCATION_NAME" />
+    </resultMap>
+    
+    
+     <select id="selectEdu" parameterClass="eduVO" resultMap="edu">
+     	<![CDATA[
+			SELECT
+				EMP_NO,
+				EDU_ID,
+				EDUCLASS_NAME,
+				EDU_START_DATE,
+				EDU_END_DATE,
+				EDU_DETAIL,
+				EDU_AGENCY,
+				EDU_LOCATION,
+				EXPECTED_CHARGE,
+				ACCEPT_EMP_NO,
+				ACCEPT_DATE,
+				ACCEPTED_YN,
+				EMP_NAME,
+				OK_EMP_NAME
+			FROM EDU_MANAGEMENT
+			where 1=1
+		]]>
+          <dynamic>
+                <isNotNull property="searchKeyword" >
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="EDU_START_DATE">
+                     EDU_START_DATE LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="EMP_NO">
+                     EMP_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                    <isEqual prepend=" AND " property="searchCondition" compareValue="EDUCLASS_NAME">
+                     EDUCLASS_NAME LIKE '%' || #searchKeyword# || '%' 
+          </isEqual>
+           <!--          
+                     <![CDATA[
+        AND EDU_START_DATE >=#EDU_START_DATE# AND EDU_END_DATE < #EDU_END_DATE#
+    ]]> -->
+                    
+                </isNotNull>
+            
+            </dynamic> 
+           </select>
+             <!-- WHERE EDUCLASS_NAME LIKE '%' || #searchKeyword# || '%'  -->  
+<!--  WHERE EDUCLASS_NAME= #searchKeyword# -->
+
+
+ 
+    <insert id="insertEdu" parameterClass="eduVO">
+        <![CDATA[
+            INSERT INTO EDU_MANAGEMENT (
+                EMP_NO,
+				EDU_ID,
+				EDUCLASS_NAME,
+				EDU_START_DATE,
+				EDU_END_DATE,
+				EDU_DETAIL,
+				EDU_AGENCY,
+				EDU_LOCATION,
+				EXPECTED_CHARGE,
+				ACCEPT_EMP_NO,
+				ACCEPT_DATE,
+				ACCEPTED_YN,
+				EMP_NAME,
+				OK_EMP_NAME
+            ) VALUES (
+               	#EMP_NO#,
+				TO_CHAR(SYSDATE, 'YYYYMMDD') || LPAD(EDU_SEQ.NEXTVAL,4,0),
+				#EDUCLASS_NAME#,
+				#EDU_START_DATE#,
+				#EDU_END_DATE#,
+				#EDU_DETAIL#,
+				#EDU_AGENCY#,
+				#EDU_LOCATION#,
+				#EXPECTED_CHARGE#,
+				#ACCEPT_EMP_NO#,
+				#ACCEPT_DATE#,
+				#ACCEPTED_YN#,
+				#EMP_NAME#,
+				#OK_EMP_NAME#
+            )
+        ]]>
+    </insert>
+    
+      <update id="updateEdu" parameterClass="eduVO">
+        <![CDATA[
+            UPDATE EDU_MANAGEMENT 
+            SET
+				EDUCLASS_NAME =#EDUCLASS_NAME#,
+				EDU_START_DATE= #EDU_START_DATE#,
+				EDU_END_DATE = #EDU_END_DATE#,
+				EDU_DETAIL = #EDU_DETAIL#,
+				EDU_AGENCY = #EDU_AGENCY#,
+				EDU_LOCATION = #EDU_LOCATION#,
+				EXPECTED_CHARGE = #EXPECTED_CHARGE#,
+				ACCEPT_EMP_NO = #ACCEPT_EMP_NO#,
+				ACCEPTED_YN = #ACCEPTED_YN#,
+				EMP_NAME = #EMP_NAME#,
+				OK_EMP_NAME = #OK_EMP_NAME#
+            WHERE EDU_ID = #EDU_ID#
+        ]]>
+    </update>
+    
+    <delete id="deleteEdu" parameterClass="eduVO">
+        <![CDATA[
+            DELETE 
+            FROM EDU_MANAGEMENT 
+            WHERE EDU_ID=#EDU_ID#
+        ]]>
+    </delete> 
+    
+   <select id="selectEdu2" parameterClass="eduSearchVO" resultMap="edu2">
+         	<![CDATA[
+			SELECT
+				b1.EMP_NO,
+				b1.EMP_NAME,
+                c1.education_name        
+			FROM EDU_MANAGEMENT a1, emp b1, EDUCATION_LEVEL c1			
+			where a1.EMP_NO = b1.EMP_NO AND b1.EMP_NO = c1.EMP_NO
+			
+		]]>
+    </select> 
+   
+</sqlMap>

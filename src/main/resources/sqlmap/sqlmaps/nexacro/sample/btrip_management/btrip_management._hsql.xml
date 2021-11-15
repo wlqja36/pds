@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="btrip_management">
+
+   	<typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="btrVO" type="nexacro.sample.vo.btripVO.Btrip_ManagementVO"/>
+
+    <!-- Sample resultObject -->
+    <resultMap id="btr" class="btrVO">
+        <result property="btrip_No" column="BTRIP_NO" />
+        <result property="btrip_Name" column="BTRIP_NAME" />
+        <result property="country" column="COUNTRY" />
+        <result property="area" column="AREA" />
+        <result property="purpose" column="PURPOSE" />
+        <result property="s_Date" column="S_DATE" />
+        <result property="f_Date" column="F_DATE" />
+        <result property="ex_Expenses" column="EX_EXPENSES" />
+        <result property="re_Emp_No" column="RE_EMP_NO" />
+        <result property="ok_Date" column="OK_DATE" />
+        <result property="ok_Emp_No" column="OK_EMP_NO" />
+        <result property="ok_Ascertain" column="OK_ASCERTAIN" />
+        <result property="emp_No" column="EMP_NO" />
+    </resultMap>
+    
+     <select id="btrip_management.selectbtrVOList" parameterClass="btrVO" resultMap="btr">
+        <!-- SELECT
+                BTRIP_NO,	
+				BTRIP_NAME,	
+				COUNTRY,
+				AREA,	
+				PURPOSE,	
+				S_DATE,	
+				F_DATE,	
+				EX_EXPENSES,	
+				RE_EMP_NO,	
+				OK_DATE,	
+				OK_EMP_NO,	
+				OK_ASCERTAIN,	
+				EMP_NO	
+            FROM BTRIP_MANAGEMENT 
+            WHERE EMP_NO =#searchKeyword#
+      
+ -->
+  			SELECT
+                BTRIP_NO,	
+				BTRIP_NAME,	
+				COUNTRY,
+				AREA,	
+				PURPOSE,	
+				S_DATE,	
+				F_DATE,	
+				EX_EXPENSES,	
+				RE_EMP_NO,	
+				OK_DATE,	
+				OK_EMP_NO,	
+				OK_ASCERTAIN,	
+				EMP_NO	
+            FROM BTRIP_MANAGEMENT 
+            WHERE EMP_NO =#searchKeyword#
+            
+    </select>
+    <!-- 
+        <select id="btrip_management.confirmVOList" parameterClass="btrVO" resultMap="btr">
+        SELECT  
+        	COUNT(
+        		BTRIP_NO
+        		,B2.BTRIP_DNO	
+		        ,BTRIP_NAME	
+		        ,COUNTRY	
+		        ,AREA	
+		        ,PURPOSE	
+		        ,S_DATE	
+		        ,F_DATE	
+		        ,EX_EXPENSES	
+		        ,RE_EMP_NO	
+		        ,OK_DATE	
+		        ,OK_EMP_NO	
+		        ,OK_ASCERTAIN	
+		        ,EMP_NO)	
+		from BTRIP_MANAGEMENT B1,
+		     BUSINESS_TRIP	B2
+		WHERE B2.BTRIP_DNO = BTRIP_NO AND EMP_NO = #searchKeyword#       
+    </select> -->
+   
+    
+    <insert id="btrip_management.insertbtrVOList" parameterClass="btrVO">
+        <![CDATA[
+            INSERT INTO BTRIP_MANAGEMENT (
+                BTRIP_NO,	
+				BTRIP_NAME,	
+				COUNTRY,
+				AREA,	
+				PURPOSE,	
+				S_DATE,	
+				F_DATE,	
+				EX_EXPENSES,		
+				EMP_NO	
+            ) VALUES (
+                TO_CHAR(SYSDATE, 'yyyymmdd') || LPAD(BTRIP_MANAGEMENT_SEQ.NEXTVAL,4,0),
+                #btrip_Name#,
+                #country#,
+                #area#,
+                #purpose#,
+                #s_Date#,
+                #f_Date#,
+                #ex_Expenses#,
+                #emp_No#
+            )
+        ]]>
+    </insert>
+    
+      <update id="btrip_management.updatebtrVOList" parameterClass="btrVO">
+        <![CDATA[
+            UPDATE BTRIP_MANAGEMENT 
+            SET 
+				BTRIP_NAME =#btrip_Name#,	
+				COUNTRY =#country#,
+				AREA =#area#,
+				PURPOSE =#purpose#,	
+				S_DATE =#s_Date#,
+				F_DATE =#f_Date#,       
+				EX_EXPENSES	=#ex_Expenses#,  
+				RE_EMP_NO =#re_Emp_No#,    
+				OK_DATE	=#ok_Date#,      
+				OK_EMP_NO =#ok_Emp_No#,    
+				OK_ASCERTAIN =#ok_Ascertain#, 
+				EMP_NO =#emp_No#        
+            WHERE BTRIP_NO=#btrip_No#
+        ]]>
+    </update>
+    
+    <delete id="btrip_management.deletebtrVOList" parameterClass="btrVO">
+        <![CDATA[
+            DELETE FROM BTRIP_MANAGEMENT 
+            WHERE BTRIP_NO=#btrip_No#
+        ]]>
+    </delete>
+     
+</sqlMap>

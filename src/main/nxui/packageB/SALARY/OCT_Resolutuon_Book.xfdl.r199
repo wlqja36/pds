@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Oct_Resol_Book" left="0" top="0" width="1280" height="1024" titletext="New Form" onload="resolform_onload">
+    <Layouts>
+      <Layout>
+        <Div id="Div00" taborder="21" left="13" top="503" width="1233" height="180" style="background:#d8dcedff;border:0 none #808080ff ;">
+          <Layouts>
+            <Layout width="1239" height="263">
+              <Div id="Div01" taborder="3" left="6" top="43" width="1213" height="34" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none" dragscrolltype="none">
+                <Layouts>
+                  <Layout>
+                    <Static id="sta_exp_typecd" taborder="53" text="지출유형코드" left="50.95%" top="-1" right="32.78%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                    <Static id="sta_exp_payrollno" taborder="54" text="급여대장번호" left="0%" top="-1" right="83.73%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                    <Combo id="combo_exp_typecd" taborder="56" left="69.28%" top="8" right="0.99%" height="21" index="-1" innerdataset="@ds_resolCode" codecolumn="CODE_NAME" datacolumn="CODE_NAME"/>
+                    <Edit id="edt_exp_payrollno" taborder="58" left="17.26%" top="7" right="51.11%" height="21" readonly="true"/>
+                    <Button id="btn_exp_payrollno" taborder="57" left="46.49%" top="8" right="50.78%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;" onclick="Div00_Div01_btn_exp_payrollno_onclick"/>
+                  </Layout>
+                </Layouts>
+              </Div>
+              <Div id="Div00" taborder="4" left="0.49%" top="11" right="1.14%" height="34" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none">
+                <Layouts>
+                  <Layout>
+                    <Static id="sta_exp_reportdate" taborder="77" text="품의일자" left="50.95%" top="1" right="32.78%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                    <Static id="sta_exp_regno" taborder="78" text="품의자" onclick="Div00_Div00_Div00_Static00_onclick" left="0%" top="-1" right="83.73%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                    <Static id="Static05" taborder="79" text="*" onclick="Static05_onclick" left="29" top="458" width="11" height="22" style="color:red;font:arial,18;"/>
+                    <Edit id="edt_exp_regnm" taborder="80" left="17.26%" top="7" right="51.2%" height="21" readonly="false" enable="false"/>
+                    <Calendar id="cal_exp_reportdate" taborder="81" left="69.28%" top="5" right="0.99%" height="21" readonly="false"/>
+                    <Button id="btn_exp_reportnm" taborder="82" onclick="Div00_Div00_btn_exp_reportnm_onclick" left="46.49%" top="8" right="50.87%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;"/>
+                  </Layout>
+                </Layouts>
+                <InitValue/>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <ImageViewer id="ImageViewer04" taborder="19" left="17" top="69" width="1239" height="44" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <Static id="Static21" taborder="20" wordwrap="char" left="24" top="74" width="1228" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;" onclick="Static21_onclick"/>
+        <ImageViewer id="img_titlebg" taborder="0" left="14" top="7" width="1265" height="45" style="background:#165fa6ff;"/>
+        <Static id="Static00" taborder="1" text="지출결의서" onclick="Static00_onclick" left="1.56%" top="11" right="85.94%" height="36" style="color:#ffffffff;font:bold 16 Dotum;"/>
+        <Static id="sta_exp_empnm" taborder="3" text="등록자사번" left="30" top="75" width="134" height="32" style="background:#f4edfaff;color:#133678ff;align:middle;font:bold 9 굴림;"/>
+        <Button id="btn_exp_search" taborder="5" text="조회" left="1142" top="78" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_exp_search_onclick"/>
+        <Edit id="edt_exp_empnm" taborder="6" left="164" top="79" height="26" width="275"/>
+        <Static id="sta_exp_listcd" taborder="7" text="지출유형코드" left="493" top="75" width="134" height="32" style="background:#f4edfaff;color:#133678ff;align:middle;font:bold 9 굴림;"/>
+        <Combo id="combo_exp_listcd" taborder="8" left="641" top="79" height="26" width="477" index="-1" codecolumn="CODE_NAME" datacolumn="CODE_NAME" innerdataset="@ds_resolCode"/>
+        <Grid id="grd_exp_list" taborder="9" useinputpanel="false" left="1.17%" top="135" height="314" width="1228" binddataset="ds_spendingRes">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="128"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="110"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="128"/>
+                <Column size="117"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="등록일시"/>
+                <Cell col="1" text="급여대장번호"/>
+                <Cell col="2" text="지출유형코드"/>
+                <Cell col="3" text="총지출경비"/>
+                <Cell col="4" text="등록자사번"/>
+                <Cell col="5" text="수정자사번"/>
+                <Cell col="6" text="수정일시"/>
+                <Cell col="7" text="승인자사번"/>
+                <Cell col="8" text="승인일시"/>
+                <Cell col="9" text="승인여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:REG_DATE"/>
+                <Cell col="1" text="bind:ATTITUDE_BOOK_ID" expandshow="show" combodataset="bind:RESOLUTION_CODE"/>
+                <Cell col="2" text="bind:RESOLUTION_CODE" combodataset="ds_resolCode" combocodecol="CODE_NO" combodatacol="CODE_NO"/>
+                <Cell col="3" text="bind:TOTAL_COST"/>
+                <Cell col="4" text="bind:REG_EMP_NO"/>
+                <Cell col="5" text="bind:MODIFY_EMP_NO"/>
+                <Cell col="6" text="bind:MODIFY_DATE"/>
+                <Cell col="7" text="bind:CONFIRM_EMP_NO"/>
+                <Cell col="8" text="bind:CONFIRM_DATE"/>
+                <Cell col="9" text="bind:CONFIRM_YN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static04" taborder="10" text="지출결의서 상세" left="1.48%" top="470" right="83.44%" height="34" style="font:bold 14 Dotum;"/>
+        <Div id="Div01" taborder="12" left="19" top="578" height="34" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none" width="1213">
+          <Layouts>
+            <Layout>
+              <Static id="sta_exp_modifydate" taborder="76" text="수정일시" left="50.95%" top="-1" right="32.78%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+              <Static id="sta_exp_modifynm" taborder="77" text="수정자" onclick="Div00_Div00_Div00_Static00_onclick" left="0%" top="-1" right="83.73%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+              <Static id="Static05" taborder="78" text="*" onclick="Static05_onclick" left="29" top="458" width="11" height="22" style="color:red;font:arial,18;"/>
+              <Edit id="edt_exp_modifynm" taborder="79" left="17.26%" top="7" right="51.11%" height="21"/>
+              <Calendar id="cal_exp_modifydate" taborder="81" left="69.28%" top="5" right="0.99%" height="21"/>
+              <Button id="btn_exp_modifynm" taborder="80" left="46.49%" top="8" right="50.78%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;" onclick="Div01_btn_exp_modifynm_onclick"/>
+            </Layout>
+          </Layouts>
+          <InitValue/>
+        </Div>
+        <Div id="Div02" taborder="13" left="19" top="609" height="34" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none" dragscrolltype="none" width="1213">
+          <Layouts>
+            <Layout>
+              <Static id="sta_exp_appdate" taborder="50" text="승인일시" left="50.95%" top="-1" right="32.78%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+              <Static id="sta_exp_appnm" taborder="51" text="승인자" left="0%" top="-1" right="83.73%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+              <Edit id="edt_exp_appnm" taborder="52" left="17.26%" top="7" right="51.11%" height="21"/>
+              <Calendar id="cal_exp_appdate" taborder="53" left="69.28%" top="4" right="0.99%" height="21"/>
+              <Button id="btn_exp_appnm" taborder="54" left="46.49%" top="8" right="50.78%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;" onclick="Div02_btn_exp_appnm_onclick"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="Div03" taborder="14" left="19" top="642" height="34" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none" width="1213">
+          <Layouts>
+            <Layout>
+              <Static id="sta_exp_totalexp" taborder="82" text="총지출경비" onclick="Div00_Div00_Div00_Static00_onclick" left="0%" top="-1" right="83.73%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+              <Static id="Static05" taborder="83" text="*" onclick="Static05_onclick" left="29" top="458" width="11" height="22" style="color:red;font:arial,18;"/>
+              <Edit id="edt_exp_totalexp" taborder="84" left="212" top="5" height="21" width="383"/>
+              <Static id="sta_exp_totalexp00" taborder="85" text="승인여부" onclick="Div00_Div00_Div00_Static00_onclick" left="50.95%" top="-1" right="32.78%" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+              <Radio id="Radio00" taborder="86" left="69.53%" top="9" right="2.06%" height="16" innerdataset="@ds_confrimyn" codecolumn="txt" datacolumn="txt" direction="vertical"/>
+            </Layout>
+          </Layouts>
+          <InitValue/>
+        </Div>
+        <Button id="btn_exp_insert" taborder="15" text="추가" left="990" top="694" height="27" width="75" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_exp_insert_onclick"/>
+        <Button id="btn_exp_save" taborder="16" text="저장" left="1156" top="694" height="27" width="76" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_exp_save_onclick"/>
+        <Button id="btn_exp_delete" taborder="17" text="삭제" left="1073" top="694" height="27" width="75" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_exp_delete_onclick"/>
+        <Button id="emp_search" taborder="22" left="398" top="79" height="26" style="image:URL('img::btn_WF_SearchSmall.png');" onclick="emp_search_onclick" width="40"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_emp_info">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_SalaryBookCode">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="12"/>
+          <Column id="salary_book_code" type="STRING" size="4"/>
+          <Column id="salary_book_nm" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_spendingRes">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+          <Column id="REG_DATE" type="DATE" size="0"/>
+          <Column id="ATTITUDE_BOOK_ID" type="STRING" size="12"/>
+          <Column id="RESOLUTION_CODE" type="STRING" size="4"/>
+          <Column id="TOTAL_COST" type="INT" size="10"/>
+          <Column id="REG_EMP_NO" type="STRING" size="12"/>
+          <Column id="MODIFY_EMP_NO" type="STRING" size="12"/>
+          <Column id="MODIFY_DATE" type="DATE" size="256"/>
+          <Column id="CONFIRM_EMP_NO" type="STRING" size="12"/>
+          <Column id="CONFIRM_DATE" type="DATE" size="256"/>
+          <Column id="CONFIRM_YN" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_resolCode">
+        <ColumnInfo>
+          <Column id="CODE_NO" type="STRING" size="6"/>
+          <Column id="CODE_NAME" type="STRING" size="200"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE_NAME">출장경비(5100)</Col>
+            <Col id="CODE_NO">5100</Col>
+          </Row>
+          <Row>
+            <Col id="CODE_NAME">교육경비(5200)</Col>
+            <Col id="CODE_NO">5200</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchCondition"/>
+            <Col id="searchKeyword"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_confrimyn">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">0</Col>
+            <Col id="txt">N</Col>
+          </Row>
+          <Row>
+            <Col id="cd">1</Col>
+            <Col id="txt">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="Div00.Div01.edt_exp_payrollno" propid="value" datasetid="ds_spendingRes" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item0" compid="Div00.Div00.edt_exp_regnm" propid="value" datasetid="ds_spendingRes" columnid="REG_EMP_NO"/>
+      <BindItem id="item2" compid="Div01.edt_exp_modifynm" propid="value" datasetid="ds_spendingRes" columnid="MODIFY_EMP_NO"/>
+      <BindItem id="item3" compid="Div02.edt_exp_appnm" propid="value" datasetid="ds_spendingRes" columnid="CONFIRM_EMP_NO"/>
+      <BindItem id="item4" compid="Div03.edt_exp_totalexp" propid="value" datasetid="ds_spendingRes" columnid="TOTAL_COST"/>
+      <BindItem id="item5" compid="Div00.Div00.cal_exp_reportdate" propid="value" datasetid="ds_spendingRes" columnid="REG_DATE"/>
+      <BindItem id="item6" compid="Div01.cal_exp_modifydate" propid="value" datasetid="ds_spendingRes" columnid="MODIFY_DATE"/>
+      <BindItem id="item7" compid="Div02.cal_exp_appdate" propid="value" datasetid="ds_spendingRes" columnid="CONFIRM_DATE"/>
+      <BindItem id="item8" compid="Div00.Div01.combo_exp_typecd" propid="value" datasetid="ds_spendingRes" columnid="RESOLUTION_CODE"/>
+      <BindItem id="item9" compid="Div03.Radio00" propid="value" datasetid="ds_spendingRes" columnid="CONFIRM_YN"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+//폼로드
+this.resolform_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+
+	Iject.formOnload(obj);
+	var nRow = this.ds_spendingRes.addRow();
+	this.ds_search.setColumn(nRow,"searchKeyword","");
+	this.ds_search.setColumn(nRow,"searchCondition","");
+	
+	this.btn_exp_search_onclick();
+	this.SalaryBook_Search();
+}
+
+
+
+//조회버튼
+this.btn_exp_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{   
+	var searchKeyword = this.edt_exp_empnm.value;
+	var searchCondition = this.combo_exp_listcd.value;
+	this.ds_search.setColumn(0, "searchCondition", searchCondition);
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "Oct_selectResolutionList.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_spendingRes=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		//alert(" this.errorcode : " + this.errorcode);
+		
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid      : 서비스 ID
+		*   @param : {object}    this.fobj       : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_search : " + pThis.ds_spendingRes.saveXML());
+	});
+}
+
+
+
+
+
+//사원명 조회
+this.emp_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.edt_exp_empnm.set_value(emp_no);
+
+}
+
+
+
+//품의자 검색
+this.Div00_Div00_btn_exp_reportnm_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.Div00.Div00.edt_exp_regnm.set_value(emp_no);
+
+}
+
+//수정자 검색
+this.Div01_btn_exp_modifynm_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.Div01.edt_exp_modifynm.set_value(empPlus);
+	//this.Edit00.set_value(emp_name);
+
+	//this.Edit01.set_value(empPlus);
+}
+
+
+//승인자 검색
+this.Div02_btn_exp_appnm_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.Div02.edt_exp_appnm.set_value(empPlus);
+	//this.Edit00.set_value(emp_name);
+
+	//this.Edit01.set_value(empPlus);
+}
+
+
+
+
+
+//추가
+this.btn_exp_insert_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_spendingRes.addRow();
+}
+
+//저장
+this.btn_exp_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+
+this.fn_save = function(strid)
+{
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "Oct_ResolutionmodifyVO.do",			 
+			  inds :["input=ds_spendingRes:U"],
+			  outds :[
+				 "ds_spendingRes=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		
+		if(this.errorcode < 0)
+		{		
+		   Iject.alert("입력정보를 다시확인해 주세요","알림");			
+		   return;
+		}			
+	      
+	      var pThis = this.fobj;   //form object
+	      switch(strid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+			
+	      }
+	      
+	     
+	});
+}
+
+//급여대장번호 가져오기
+this.SalaryBook_Search = function(){
+	
+	var searchKeyword = "";
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	this.ds_search.setColumn(0, "searchCondition", "NAME");		
+	var oDatas =  {
+		svcid : "search",
+		sController : "Oct_selectSalarybookList.do",
+		inds :["ds_search1=ds_search"], 
+		outds :["ds_SalaryBookCode=output1"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+ 
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace("==메인: ds_S_BookCode : " + pThis.ds_S_BookCode.saveXML());
+		
+	});
+};
+
+//급여대장 검색
+this.Div00_Div01_btn_exp_payrollno_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	//모달창 생성 
+	var objChildFrame = new ChildFrame();  
+	objChildFrame.init("SALARY", "absolute", 30, 30, 424, 340, null, null, "SALARY::Oct_SalaryBook_Search.xfdl");
+	objChildFrame.set_dragmovetype("all");
+	
+	var objParam = {param1: this.ds_SalaryBookCode}
+	
+	objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_SalaryBook_popupCallback");
+
+}
+
+//콜백함수
+this.fn_SalaryBook_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "SALARY"){
+
+		this.Div00.Div01.edt_exp_payrollno.set_value(strReturn);
+    }
+};
+
+//삭제
+this.btn_exp_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_spendingRes.rowposition;
+	this.ds_spendingRes.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.btn_exp_search();
+	}
+}
+]]></Script>
+  </Form>
+</FDL>

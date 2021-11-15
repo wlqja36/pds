@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Emp">
+
+   	<typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="empVO" type="nexacro.sample.vo.emp.EmpVO"/>
+
+   
+    <resultMap id="emp" class="empVO">
+        <result property="EMP_NO"	              column="EMP_NO"/>	              
+        <result property="EMP_NAME"	              column="EMP_NAME"/>	              
+        <result property="MGR_NO"	              column="MGR_NO"/>	              
+        <result property="CURRENT_CLASS_CODE"	  column="CURRENT_CLASS_CODE"/>	 
+        <result property="CURRENT_CODE"	          column="CURRENT_CODE"/>	          
+        <result property="GRADE_CLASS_CODE"	      column="GRADE_CLASS_CODE"/>	      
+        <result property="GRADE_CODE"	          column="GRADE_CODE"/>	          
+        <result property="DEPT_CLASS_CODE"	      column="DEPT_CLASS_CODE"/>	      
+        <result property="DEPT_CODE"	          column="DEPT_CODE"/>	          
+        <result property="EMP_ID"	              column="EMP_ID"/>	              
+        <result property="EMP_PW"	              column="EMP_PW"/>	              
+        <result property="LAST_LOGIN"	          column="LAST_LOGIN"/>	          
+        <result property="ENG_NAME"               column="ENG_NAME"/>	              
+        <result property="RESIDENT_NO"	          column="RESIDENT_NO"/>	          
+        <result property="HOUSEHOLDER"	          column="HOUSEHOLDER"/>	          
+        <result property="JOIN_DATE"	          column="JOIN_DATE"/>	          
+        <result property="PHONE"	              column="PHONE"/>	              
+        <result property="CELL_PHONE"	          column="CELL_PHONE"/>	          
+        <result property="EMAIL"	              column="EMAIL"/>	              
+        <result property="ADDRESS"	              column="ADDRESS"/>	              
+        <result property="RELIGION"	              column="RELIGION"/>	              
+        <result property="IMAGE"	              column="IMAGE"/>	              
+        <result property="JOIN_CLASS_CODE"	      column="JOIN_CLASS_CODE"/>	      
+        <result property="JOIN_CODE"	          column="JOIN_CODE"/>	          
+        <result property="HOUSEHOLDER_NAME"	      column="HOUSEHOLDER_NAME"/>	      
+        <result property="HOUSEHOLDER_RELATION"	  column="HOUSEHOLDER_RELATION"/>	  
+        <result property="REGISTRATION_ADDRESS"	  column="REGISTRATION_ADDRESS"/>	  
+        <result property="BIRTH"	              column="BIRTH"/>	              
+        <result property="MARRIAGE"	              column="MARRIAGE"/>	              
+        <result property="MARRIAGE_DATE"	      column="MARRIAGE_DATE"/>	      
+        <result property="DISABILITY"	 	      column="DISABILITY"/>
+        <result property="REGISTRATION_ADDRESS_DETAIL"	 	      column="REGISTRATION_ADDRESS_DETAIL"/>
+        <result property="ADDRESS_DETAIL"	 	      column="ADDRESS_DETAIL"/>
+       
+      </resultMap>
+    
+      <select id="selectEmpVOList" parameterClass="empVO" resultMap="emp">
+            SELECT
+                EMP_NO,	              
+                EMP_NAME,	              
+                MGR_NO,	              
+                CURRENT_CLASS_CODE,	  
+                CURRENT_CODE,	          
+                GRADE_CLASS_CODE,	      
+                GRADE_CODE,	          
+                DEPT_CLASS_CODE,	      
+                DEPT_CODE,	          
+                EMP_ID,	              
+                EMP_PW,	              
+                LAST_LOGIN,	          
+                ENG_NAME,	              
+                RESIDENT_NO,	          
+                HOUSEHOLDER,	          
+                JOIN_DATE,	          
+                PHONE,	              
+                CELL_PHONE,	          
+                EMAIL,	              
+                ADDRESS,	              
+                RELIGION,	              
+                IMAGE,	              
+                JOIN_CLASS_CODE,	      
+                JOIN_CODE,	          
+                HOUSEHOLDER_NAME,	      
+                HOUSEHOLDER_RELATION,	  
+                REGISTRATION_ADDRESS,	  
+                BIRTH,	              
+                MARRIAGE,	              
+                MARRIAGE_DATE,	      
+                DISABILITY,
+                REGISTRATION_ADDRESS_DETAIL,
+                ADDRESS_DETAIL
+            FROM EMP
+            WHERE EMP_NO=#searchKeyword#
+           
+        <!--     <dynamic>
+                <isNotNull property="searchKeyword">
+                    <isEqual prepend=" OR " property="searchCondition" compareValue="NAME">
+                     EMP_NAME LIKE '%' || #searchKeyword# || '%'
+                    </isEqual>
+                    <isEqual prepend=" OR " property="searchCondition" compareValue="ID">
+                     EMP_NO LIKE '%' || #searchKeyword# || '%' 
+                    </isEqual>
+                </isNotNull>
+            </dynamic> -->
+            
+    </select> 
+    
+    <!-- 
+     <result property="RETIRE_DATE"	 	      column="RETIRE_DATE"/>
+        <result property="COMPANY_NAME"	 	      column="COMPANY_NAME"/>	          
+        <result property="POSITION"	 	   		  column="POSITION"/>	          
+        <result property="DEPT_NAME"	 	      column="DEPT_NAME"/>	          
+        <result property="RETIRE_REASON"	 	  column="RETIRE_REASON"/>	   
+        <result property="EDU_CATEGORY_CODE"	  column="EDU_CATEGORY_CODE"/>	          
+        <result property="EDUCATION_NAME"	 	  column="EDUCATION_NAME"/>	          
+        <result property="MAJOR_NAME"	 	  	  column="MAJOR_NAME"/>	          
+        <result property="GRADUATE_CATEGORY"	  column="GRADUATE_CATEGORY"/>	          
+        <result property="START_DATE"	 	      column="START_DATE"/>	          
+        <result property="GRADUATE_DATE"	 	  column="GRADUATE_DATE"/>	          
+        <result property="DAYYN"	 	  	 	  column="DAYYN"/>	          
+               -->
+  <!--   
+    <select id="selectEmpVOList" parameterClass="empVO" resultMap="emp">
+            SELECT *
+            FROM EMP e1, CAREER c1, EDUCATION_LEVEL edu1
+            WHERE e1.EMP_NAME=#searchKeyword# 
+            and e1.EMP_NO = c1.EMP_NO 
+            and e1.EMP_NO = edu1.EMP_NO
+           
+         
+            
+    </select>
+     -->
+    
+    
+    
+    <insert id="insertEmpVO" parameterClass="empVO">
+        <![CDATA[
+            INSERT INTO EMP (
+            	EMP_NO,	              
+                EMP_NAME,	              
+                MGR_NO,	              
+                CURRENT_CLASS_CODE,	  
+                CURRENT_CODE,	          
+                GRADE_CLASS_CODE,	      
+                GRADE_CODE,	          
+                DEPT_CLASS_CODE,	      
+                DEPT_CODE,	          
+                EMP_ID,	              
+                EMP_PW,	              
+                LAST_LOGIN,	          
+                ENG_NAME,	              
+                RESIDENT_NO,	          
+                HOUSEHOLDER,	          
+                JOIN_DATE,	          
+                PHONE,	              
+                CELL_PHONE,	          
+                EMAIL,	              
+                ADDRESS,	              
+                RELIGION,	              
+                IMAGE,	              
+                JOIN_CLASS_CODE,	      
+                JOIN_CODE,	          
+                HOUSEHOLDER_NAME,	      
+                HOUSEHOLDER_RELATION,	  
+                REGISTRATION_ADDRESS,	  
+                BIRTH,	              
+                MARRIAGE,	              
+                MARRIAGE_DATE,	      
+                DISABILITY,
+                REGISTRATION_ADDRESS_DETAIL,
+                ADDRESS_DETAIL
+                
+                
+            ) VALUES (
+            
+            	CONCAT(TO_CHAR(SYSDATE,'YYYYMMDD'),LPAD(EMP_NO_SEQ.nextval,4,0)),
+            	
+           		#EMP_NAME#,	              
+                #MGR_NO#,	              
+               'A01',	  
+                #CURRENT_CODE#,	          
+                'A02',	      
+                #GRADE_CODE#,	          
+                'A03',	      
+                #DEPT_CODE#,	          
+                #EMP_ID#,	              
+                #EMP_PW#,	              
+                #LAST_LOGIN#,	          
+                #ENG_NAME#,	              
+                #RESIDENT_NO#,	          
+                #HOUSEHOLDER#,	          
+                #JOIN_DATE#,	          
+                #PHONE#,	              
+                #CELL_PHONE#,	          
+                #EMAIL#,	              
+                #ADDRESS#,	              
+                #RELIGION#,	              
+                #IMAGE#,	              
+                'A04',	      
+                #JOIN_CODE#,	          
+                #HOUSEHOLDER_NAME#,	      
+                #HOUSEHOLDER_RELATION#,	  
+                #REGISTRATION_ADDRESS#,	  
+                #BIRTH#,	              
+                #MARRIAGE#,	              
+                #MARRIAGE_DATE#,	      
+                #DISABILITY#,
+            	#REGISTRATION_ADDRESS_DETAIL#,
+            	#ADDRESS_DETAIL#
+               
+            )
+        ]]>
+    </insert>
+    
+    
+    
+   <!-- 업데이트문 테이블1개  -->
+      <update id="updateEmpVO" parameterClass="empVO">
+        <![CDATA[
+            UPDATE EMP
+            SET          
+                EMP_NAME=#EMP_NAME#,	              
+                MGR_NO=#MGR_NO#,	              
+                CURRENT_CLASS_CODE=#CURRENT_CLASS_CODE#,	  
+                CURRENT_CODE=#CURRENT_CODE#,	          
+                GRADE_CLASS_CODE=#GRADE_CLASS_CODE#,	      
+                GRADE_CODE=#GRADE_CODE#,	          
+                DEPT_CLASS_CODE=#DEPT_CLASS_CODE#,	      
+                DEPT_CODE=#DEPT_CODE#,	          
+                EMP_ID=#EMP_ID#,	              
+                EMP_PW=#EMP_PW#,	              
+                LAST_LOGIN=#LAST_LOGIN#,	          
+                ENG_NAME=#ENG_NAME#,	              
+                RESIDENT_NO=#RESIDENT_NO#,	          
+                HOUSEHOLDER=#HOUSEHOLDER#,	          
+                JOIN_DATE=#JOIN_DATE#,	          
+                PHONE=#PHONE#,	              
+                CELL_PHONE=#CELL_PHONE#,	          
+                EMAIL=#EMAIL#,	              
+                ADDRESS=#ADDRESS#,	              
+                RELIGION=#RELIGION#,	              
+                IMAGE=#IMAGE#,	              
+                JOIN_CLASS_CODE=#JOIN_CLASS_CODE#,	      
+                JOIN_CODE=#JOIN_CODE#,	          
+                HOUSEHOLDER_NAME=#HOUSEHOLDER_NAME#,	      
+                HOUSEHOLDER_RELATION=#HOUSEHOLDER_RELATION#,	  
+                REGISTRATION_ADDRESS=#REGISTRATION_ADDRESS#,	  
+                BIRTH=#BIRTH#,		              
+                MARRIAGE=#MARRIAGE#,	              
+                MARRIAGE_DATE=#MARRIAGE_DATE#,	      
+                DISABILITY=#DISABILITY#,
+                REGISTRATION_ADDRESS_DETAIL=#REGISTRATION_ADDRESS_DETAIL#,
+                ADDRESS_DETAIL=#ADDRESS_DETAIL#
+                
+                
+                
+                
+                WHERE EMP_NO=#EMP_NO#
+        ]]>
+    </update>
+    
+    
+    <!-- <update id="updateEmpVO" parameterClass="empVO">
+        <![CDATA[
+            UPDATE (
+    SELECT * 
+    FROM EMP e1, CAREER c1, education_level edu_l 
+    WHERE e1.EMP_NO = c1.EMP_NO
+    AND e1.EMP_NO = edu_l.EMP_NO
+    )
+SET           
+                EMP_NAME=#EMP_NAME#,	              
+                MGR_NO=#MGR_NO#,	              
+                CURRENT_CLASS_CODE=#CURRENT_CLASS_CODE#,	  
+                CURRENT_CODE=#CURRENT_CODE#,	          
+                GRADE_CLASS_CODE=#GRADE_CLASS_CODE#,	      
+                GRADE_CODE=#GRADE_CODE#,	          
+                DEPT_CLASS_CODE=#DEPT_CLASS_CODE#,	      
+                DEPT_CODE=#DEPT_CODE#,	          
+                EMP_ID=#EMP_ID#,	              
+                EMP_PW=#EMP_PW#,	              
+                LAST_LOGIN=#LAST_LOGIN#,	          
+                ENG_NAME=#ENG_NAME#,	              
+                RESIDENT_NO=#RESIDENT_NO#,	          
+                HOUSEHOLDER=#HOUSEHOLDER#,	          
+                JOIN_DATE=#JOIN_DATE#,	          
+                PHONE=#PHONE#,	              
+                CELL_PHONE=#CELL_PHONE#,	          
+                EMAIL=#EMAIL#,	              
+                ADDRESS=#ADDRESS#,	              
+                RELIGION=#RELIGION#,	              
+                IMAGE=#IMAGE#,	              
+                JOIN_CLASS_CODE=#JOIN_CLASS_CODE#,	      
+                JOIN_CODE=#JOIN_CODE#,	          
+                HOUSEHOLDER_NAME=#HOUSEHOLDER_NAME#,	      
+                HOUSEHOLDER_RELATION=#HOUSEHOLDER_RELATION#,	  
+                REGISTRATION_ADDRESS=#REGISTRATION_ADDRESS#,	  
+                BIRTH=#BIRTH#,		              
+                MARRIAGE=#MARRIAGE#,	              
+                MARRIAGE_DATE=#MARRIAGE_DATE#,	      
+                DISABILITY=#DISABILITY#
+                
+                COMPANY_NAME=#COMPANY_NAME#,	              
+                POSITION=#POSITION#,	              
+                DEPT_NAME=#DEPT_NAME#,	              
+                RETIRE_REASON=#RETIRE_REASON#,	              
+                EDUCATION_NAME=#EDUCATION_NAME#,	      
+                EDU_CATEGORY_CODE=#EDU_CATEGORY_CODE#,	          
+                MAJOR_NAME=#MAJOR_NAME#,	      
+                GRADUATE_CATEGORY=#GRADUATE_CATEGORY#,	  
+                START_DATE=#START_DATE#,	  
+                GRADUATE_DATE=#GRADUATE_DATE#,		              
+                DAYYN=#DAYYN#
+                
+                WHERE EMP_NO=#EMP_NO#
+        ]]>
+    </update> -->
+    
+    
+  
+    
+    
+    <delete id="deleteEmpVO" parameterClass="empVO">
+        <![CDATA[
+            DELETE EMP
+            WHERE EMP_NO=#EMP_NO#
+        ]]>
+    </delete>
+   
+</sqlMap>

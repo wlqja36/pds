@@ -1,0 +1,1123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Business_Trip" classname="Temp01_SingleDetail" left="0" top="0" width="1019" height="595" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img02" taborder="0" left="14" top="454" width="990" height="85" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_titlebg" taborder="4" left="14" top="7" width="989" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="5" text="출결정보" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="sta_33" taborder="8" text="출결상세관리" left="14" top="115" width="120" height="13" style="color:#46463dff;align:center top;font:bold 9 굴림;"/>
+        <ImageViewer id="img_05" taborder="53" left="15" top="68" width="988" height="33" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_15" taborder="60" text="대장명" onclick="sta_15_onclick" left="20" top="461" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_att_book_no" taborder="61" readonly="true" left="138" top="461" width="386" height="22" oneditclick="edt_btr_no2_oneditclick"/>
+        <Static id="sta_02" taborder="102" text="사원명" onclick="sta_15_onclick" left="20" top="484" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="searchEmpNo" taborder="103" left="263" top="73" height="22" width="118" readonly="true"/>
+        <Button id="button04" taborder="104" onclick="button04_onclick" cssclass="btn_WF_SearchSmall" left="376" top="73" width="25" height="22" enable="false"/>
+        <Button id="Button01" taborder="105" text="추가" onclick="Button01_onclick" left="772" top="554" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="insert00" taborder="106" text="등록" onclick="div_Detail_insert_onclick" left="830" top="554" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="Button02" taborder="107" text="삭제" onclick="Button03_onclick" left="888" top="554" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="reset" taborder="108" text="취소" onclick="fn_reset" left="946" top="554" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Edit id="empNo" taborder="116" left="138" top="485" height="22" width="255" readonly="true"/>
+        <Static id="Static00" taborder="117" text="*" left="39" top="465" width="17" height="20" style="color:red;font:arial,18;"/>
+        <Static id="Static01" taborder="118" text="*" left="39" top="489" width="17" height="18" style="color:red;font:arial,18;"/>
+        <Static id="sta_00" taborder="119" text="관리일자" onclick="sta_15_onclick" left="532" top="483" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Calendar id="attendDate" taborder="120" left="651" top="485" height="19" style="align:center middle;" width="126" onmouseleave="attendDate_onmouseleave" readonly="true"/>
+        <Static id="Static02" taborder="123" text="*" left="551" top="489" width="17" height="18" style="color:red;font:arial,18;"/>
+        <Static id="sta_11" taborder="125" text="출근시간" onclick="sta_15_onclick" left="20" top="508" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_12" taborder="127" text="퇴근시간" onclick="sta_15_onclick" left="275" top="508" width="118" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_14" taborder="129" text="휴일여부" onclick="sta_15_onclick" left="532" top="507" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Radio id="holidayYn" taborder="130" innerdataset="@ds_yn" codecolumn="code" datacolumn="data" value="N" direction="vertical" left="681" top="509" height="22" index="1" width="104"/>
+        <Static id="sta_17" taborder="131" text="출결상태" onclick="sta_15_onclick" left="784" top="506" width="103" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="attendCode" taborder="132" index="0" left="893" top="510" height="21" style="align:left middle;" width="105" displayrowcount="-1" value="2110" text="정근" codecolumn="code" datacolumn="data" innerdataset="@ds_attendCode" onitemchanged="attendCode_onitemchanged"/>
+        <Grid id="Grid00" taborder="133" useinputpanel="false" left="14" top="139" height="298" binddataset="ds_attendance_detail" width="989">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="141"/>
+                <Column size="141"/>
+                <Column size="141"/>
+                <Column size="149"/>
+                <Column size="141"/>
+                <Column size="141"/>
+                <Column size="134"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원명"/>
+                <Cell col="1" text="관리일자"/>
+                <Cell col="2" text="대장명"/>
+                <Cell col="3" text="출근시간"/>
+                <Cell col="4" text="퇴근시간"/>
+                <Cell col="5" text="휴일여부"/>
+                <Cell col="6" text="출결상태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:empNo"/>
+                <Cell col="1" text="bind:attendDate"/>
+                <Cell col="2" text="bind:attitudeBookId"/>
+                <Cell col="3" displaytype="normal" edittype="date" text="bind:startTime" mask="HH:mm"/>
+                <Cell col="4" edittype="date" text="bind:endTime" mask="HH:mm"/>
+                <Cell col="5" edittype="combo" text="bind:holidayYn" combodataset="ds_yn" combocodecol="code" combodatacol="data"/>
+                <Cell col="6" displaytype="combo" edittype="combo" text="bind:attendCode" combodataset="ds_attendCode" combocodecol="code" combodatacol="data"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_03" taborder="134" onclick="sta_15_onclick" left="784" top="483" width="213" height="24" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="button00" taborder="139" cssclass="btn_WF_SearchSmall" left="367" top="485" width="26" height="21" onclick="button00_onclick" visible="false" enable="true" enableevent="true"/>
+        <Calendar id="startTime" taborder="142" left="138" top="510" height="20" type="spin" dateformat="HH:mm" value="null" editformat="HH:mm" width="134"/>
+        <Calendar id="endTime" taborder="143" left="397" top="510" height="20" dateformat="HH:mm" value="null" editformat="HH:mm" type="spin" width="127"/>
+        <Button id="attendance_today" taborder="145" text="출결생성" left="471" top="73" height="23" width="76" onclick="attendance_today_onclick" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;font:bold 9 Dotum;cursor:hand;"/>
+        <Combo id="Combo00" taborder="146" text="전체" codecolumn="codecolumn" datacolumn="datacolumn" index="0" left="149" top="74" width="114" height="21" onitemchanged="Combo00_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">mngDate</Col>
+                <Col id="datacolumn">관리일자</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">mngMonth</Col>
+                <Col id="datacolumn">관리월</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">mngEmp</Col>
+                <Col id="datacolumn">사원명</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="empNo_NOT" taborder="147" visible="true" left="2.55%" top="555" right="93.42%" height="21"/>
+        <Edit id="strParam" taborder="148" visible="true" left="7.85%" top="555" right="88.42%" height="21"/>
+        <Calendar id="searchMonth" taborder="149" left="272" top="73" height="23" type="spin" dateformat="yyyy-MM" value="null" editformat="yyyy-MM" width="130" visible="false"/>
+        <Calendar id="searchDate" taborder="151" left="272" top="73" height="23" width="130" visible="false"/>
+        <Button id="Button05" taborder="152" text="검색" onclick="Button05_onclick" left="409" top="73" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Static id="sta_04" taborder="153" text="검색조건" onclick="sta_15_onclick" left="26" top="72" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="searchEmpNo_NOT" taborder="154" left="12.66%" top="557" right="83.81%" height="20" visible="true"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchMonth" type="DATE" size="256"/>
+          <Column id="searchDate" type="DATE" size="256"/>
+          <Column id="searchEmpNo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_attendance_detail" keystring="S:attendDate">
+        <ColumnInfo>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="attendDate" type="DATE" size="256"/>
+          <Column id="attitudeBookId" type="STRING" size="256"/>
+          <Column id="startTime" type="STRING" size="256"/>
+          <Column id="endTime" type="STRING" size="256"/>
+          <Column id="holidayYn" type="STRING" size="1"/>
+          <Column id="attendCode" type="STRING" size="4"/>
+          <Column id="attendCodeName" type="STRING" size="256"/>
+          <Column id="empName" type="STRING" size="256"/>
+          <Column id="REG_EMP_ID" type="STRING" size="256"/>
+          <Column id="EMP_REAL" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="attendCode"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_attendCode">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="data">정근</Col>
+            <Col id="code">2110</Col>
+          </Row>
+          <Row>
+            <Col id="data">지각</Col>
+            <Col id="code">2120</Col>
+          </Row>
+          <Row>
+            <Col id="data">결근</Col>
+            <Col id="code">2130</Col>
+          </Row>
+          <Row>
+            <Col id="data">조퇴</Col>
+            <Col id="code">2140</Col>
+          </Row>
+          <Row>
+            <Col id="data">휴무</Col>
+            <Col id="code">2150</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <!--
+<Parameters>
+      <Parameter id="test_data" type="string" value="edt_btr_no2"/>
+    </Parameters>
+-->
+    <Bind>
+      <!---->
+      <!---->
+      <!--<BindItem id="item13" compid="div_Detail.emp_no" propid="value" datasetid="gds_empno" columnid="emp_no"/>-->
+      <BindItem id="item0" compid="edt_att_book_no" propid="value" datasetid="ds_attendance_detail" columnid="attitudeBookId"/>
+      <BindItem id="item1" compid="empNo" propid="value" datasetid="ds_attendance_detail" columnid="empNo"/>
+      <BindItem id="item2" compid="attendDate" propid="value" datasetid="ds_attendance_detail" columnid="attendDate"/>
+      <BindItem id="item5" compid="holidayYn" propid="value" datasetid="ds_attendance_detail" columnid="holidayYn"/>
+      <BindItem id="item6" compid="attendCode" propid="value" datasetid="ds_attendance_detail" columnid="attendCode"/>
+      <BindItem id="item3" compid="startTime" propid="value" datasetid="ds_attendance_detail" columnid="startTime"/>
+      <BindItem id="item4" compid="endTime" propid="value" datasetid="ds_attendance_detail" columnid="endTime"/>
+      <BindItem id="item26" compid="empNo_NOT" propid="displaynulltext" datasetid="ds_attendance_detail" columnid="EMP_REAL"/>
+      <BindItem id="item27" compid="empNo_NOT" propid="value" datasetid="ds_attendance_detail" columnid="EMP_REAL"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+var imsisave = "";
+
+//부모창 파라미터받기
+var strParam1 = this.parent.param1;
+   
+//기존 출결대장의 maxDate   
+this.selectMaxDate="";   
+  
+//currentRow
+this.rowPosition="";
+
+//출결만들기 확인여부
+
+var makeAttendance="";
+
+//평일이지만 대체공휴일인지확인
+var holiday_wd="";
+
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+    
+    this.ds_search.setColumn(0, "searchCondition",this.strParam1)
+    
+    this.strParam.set_value(strParam1);
+
+    this.fn_onloadList();
+    
+    this.fn_selectMaxDate();
+   
+ 
+ 
+} 
+
+
+//Date를 XDate로
+this.formatDate=function(date) {
+ 
+ 
+   var year = date.getFullYear().toString().padLeft(4, "0");
+    var month = (date.getMonth()+1).toString().padLeft(2, "0");
+    var day = date.getDate().toString().padLeft(2, "0");
+    
+   
+ return year+month+day;
+ 
+ 
+ 
+ 
+ 
+ /*var d = date, 
+   month = '' + (d.getMonth() + 1), 
+   day = '' + d.getDate(), 
+   year = d.getFullYear(); 
+   
+   
+   if (month.length < 2) 
+     month = '0' + month; 
+   if (day.length < 2)
+     day = '0' + day; 
+     
+     return [year, month, day].join('-'); */
+ 
+ }
+
+
+
+
+
+
+
+
+
+//행추가
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	
+	this.ds_attendance_detail.clearData();
+
+	var nRow = this.ds_attendance_detail.addRow();
+    this.edt_att_book_no.set_value(strParam1); 
+    
+    var empNo = this.empNo.value; //<---- 아름추가 
+    trace("사원번호 찍힘? : ", empNo); //<---- 아름추가 
+    this.empNo_NOT.set_value(empNo); //<---- 아름추가 
+	
+	this.attendDate.set_readonly("false");
+	this.button00.set_visible("true");
+	this.searchEmpNo.set_value("");
+	
+	this.attendCode.set_index("0");
+	this.holidayYn.set_index("1");
+	
+	//오늘날짜로 세팅
+     var today=new Date();
+    this.attendDate.set_value(this.formatDate(today));
+	
+	//출퇴근시간 세팅
+	this.startTime.set_value("0900");
+     
+    this.endTime.set_value("1800"); 
+    
+    //배치프로그램 세팅(등록자사번)
+	
+	this.ds_attendance_detail.setColumn(this.ds_attendance_detail.rowposition, "REG_EMP_ID",application.gds_User.getColumn(application.gds_User.rowposition, "sabun"));
+	
+	
+}
+
+
+
+
+
+//삭제
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+ 	
+	var nRow = this.ds_attendance_detail.rowposition;
+	this.ds_attendance_detail.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+
+	if(rtnValue){  
+		this.fn_save("delete");
+	}else{
+		Iject.alert("삭제실패");
+	}
+}
+
+
+
+
+//리셋
+this.fn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//this.ds_user.reset();
+}
+
+
+//저장
+this.fn_save = function(strid)
+{
+
+   var year=this.attendDate.value.getFullYear();
+   var month=this.attendDate.value.getMonth();
+   var date=this.attendDate.value.getDate();
+
+
+    this.startTime.value.setYear(year);  
+    this.startTime.value.setMonth(month);
+    this.startTime.value.setDate(date);
+    
+    this.endTime.value.setYear(year);  
+    this.endTime.value.setMonth(month);
+    this.endTime.value.setDate(date);
+    
+    
+
+	this.ds_attendance_detail.setColumn(this.ds_attendance_detail.rowposition, "empNo", this.empNo_NOT.value);
+	this.ds_attendance_detail.setColumn(this.ds_attendance_detail.rowposition, "startTime", this.startTime.value);
+    this.ds_attendance_detail.setColumn(this.ds_attendance_detail.rowposition, "endTime", this.endTime.value);
+    this.ds_attendance_detail.setColumn(this.ds_attendance_detail.rowposition, "attitudeBookId", this.strParam.value);
+	
+	trace("this.empNo_NOT.value",this.empNo_NOT.value);
+	
+	rowPosition=this.Grid00.currentrow;
+	//Iject.alert(rowPosition);
+	
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "attendanceModifyVO.do",			 
+			  inds :["input1=ds_attendance_detail:U"
+			        ],
+			  outds :[
+				 "ds_attendance_detail=output1"
+			     ],			     
+			  args  : [	""			
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       Iject.alert("완료");
+	      
+       var pThis = this.fobj;   //form object
+      // pThis.searchEmpNo_onchanged() ;
+       pThis.fn_onloadList();
+
+
+
+
+	});
+
+	
+}
+
+
+//저장버튼 클릭시 
+this.div_Detail_insert_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+    
+
+	this.fn_save("save");
+		
+}
+
+
+
+//페이지 onload시 대장으로 전체조회
+
+this. fn_onloadList=function(){
+
+
+
+
+    
+    var searchCondition = strParam1;    
+    //Iject.alert(searchCondition);
+  
+	//this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	//this.ds_search.clearData();
+
+	this.ds_search.setColumn(0, "searchCondition",searchCondition);
+	
+	
+	 
+    
+   
+   var oDatas =  {
+			  svcid : "searchAttendanceList",
+			  sController : "attendanceListSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attendance_detail=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		}
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attendance_detail : " + pThis.ds_attendance_detail.saveXML());
+	       
+		   if(rowPosition!=0){
+	 pThis.ds_attendance_detail.moveRow(rowPosition,rowPosition);
+	 pThis.Grid00.selectRow(rowPosition);
+	 }
+
+
+
+
+
+});
+
+}
+
+
+
+
+
+//
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	
+	 
+   var searchKeyword = this.searchEmpNo.value.substr(0,12);  
+   // Iject.alert(searchKeyword);
+    
+ 	//this.ds_search.setColumn(0, "searchCondition", "empNo");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+
+	
+ 
+   
+   var oDatas =  {
+			  svcid : "searchAttendance",
+			  sController : "attendanceListSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attendance_detail=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attendance_detail : " + pThis.ds_attendance_detail.saveXML());
+	     
+	     
+	  
+	       
+	       
+	       
+	});//트랜잭션함수끝
+
+	
+	
+	
+	
+}
+
+
+//대장+사번찾기 상단
+this.button04_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	
+	
+	
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("attendanceEmp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::atEmpSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+
+	
+		var objParam = {param2:this.strParam1
+  					 	};
+	
+	/* empSearch.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");*/
+     			  
+     
+          			  
+      var emp_NoName = system.showModalWindow(empSearch, 
+                      "searchEmpNo",
+                      this.getOwnerFrame(),
+                      "",
+                      this);			  
+	
+
+	  var objArr = emp_NoName.split(/,/g, 2);      
+	  this.searchEmpNo.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.searchEmpNo_NOT.set_value(objArr[1]);
+      this.Button05_onclick();
+ 		  
+     			  
+	
+	
+}
+
+
+//모든종류의 사원찾기 콜백함수
+this.fn_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "attendanceEmp"){
+        //this.alert("Return Value: " + strReturn);
+       // this.searchEmpNo.set_value(strReturn);
+        //this.empNo.set_value(strReturn);
+       
+        
+        
+       
+        
+    }else if(strPopupID == "attendanceEmp1"){
+        //this.alert("Return Value: " + strReturn);
+        this.empNo.set_value(strReturn);
+     }else if(strPopupID == "fixEmpSearch"){
+        //this.alert("Return Value: " + strReturn);
+        this.fix_emp_id.set_value(strReturn);
+     }
+
+}
+
+
+
+
+ //object 인자 생성함수
+ this.fn_parent = function(pObj)
+ {
+     this.ds_parent.copyData(pObj);
+};
+
+
+
+//모달에서 사번입력되면 바로 조회
+this.searchEmpNo_onchanged = function(obj:Edit, e:nexacro.ChangeEventInfo)
+{
+
+    
+    //Iject.alert(this.searchEmpNo.value);
+   var searchKeyword = this.searchEmpNo.value.substr(0,12);  
+    //Iject.alert(searchKeyword);
+        
+        
+    var searchCondition=strParam1;
+    //Iject.alert(searchCondition);
+    this.ds_search.setColumn(0, "searchCondition",searchCondition );
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	this.ds_search.setColumn(0, "searchCondition", strParam1);
+
+	
+ 
+   
+   var oDatas =  {
+			  svcid : "searchAttendance",
+			  sController : "attendanceListSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attendance_detail=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		}
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attendance_detail : " + pThis.ds_attendance_detail.saveXML());
+	       
+	
+	 if(rowPosition!=0){
+	 pThis.ds_attendance_detail.moveRow(rowPosition,rowPosition);
+	 pThis.Grid00.selectRow(rowPosition);
+	 }
+	      
+	       
+	       
+	       
+	       
+	});//트랜잭션함수끝
+
+
+ /* this.Grid00.setCellProperty("body", 6, "text", 
+        "expr:'출결상태'=='2110'?'text':'정근'");*/
+     
+
+
+
+
+}
+
+
+//새로등록시 사원조회
+this.button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("attendanceEmp1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::atEmpSearch1.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	
+	/*system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);*/
+	
+	
+	
+	
+	
+		var objParam = {
+  					 	};
+	
+	/* empSearch.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");*/
+     			  
+	var emp_NoName = system.showModalWindow(empSearch, 
+                      "attendanceEmp1",
+                      this.getOwnerFrame(),
+                      "",
+                      this);		
+	
+	 var objArr = emp_NoName.split(/,/g, 2);      
+	  this.empNo.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.empNo_NOT.set_value(objArr[1]);
+     // alert(this.empNo.value);
+     // alert(this.empNo_NOT.value);
+		  
+	
+	
+}
+
+//Date 객체 조작하기(날짜)
+
+/*
+
+this.startTime_onchanged = function(obj:MaskEdit, e:nexacro.ChangeEventInfo)
+{
+	
+	Iject.alert(this.startTime.value);
+	var time=nexacro.toNumber(this.startTime.value.substr(0,2));
+	Iject.alert(time);
+	var minute=nexacro.toNumber(this.startTime.value.substr(2,2));
+	Iject.alert(minute);
+	
+	if(time>24){
+	Iject.alert('시간은 0~24시로 입력해주세요');
+	}else if(minute>59){
+	Iject.alert('분은 0~59분으로 입력해주세요');
+	}
+	
+	
+}
+
+this.endTime_onchanged = function(obj:MaskEdit, e:nexacro.ChangeEventInfo)
+{
+	
+	Iject.alert(this.endTime.value);
+	var time=nexacro.toNumber(this.endTime.value.substr(0,2));
+	Iject.alert(time);
+	var minute=nexacro.toNumber(this.endTime.value.substr(2,2));
+	Iject.alert(minute);
+	
+	if(time>24){
+	Iject.alert('시간은 0~24시로 입력해주세요');
+	}else if(minute>59){
+	Iject.alert('분은 0~59분으로 입력해주세요');
+	}
+	
+	
+}
+*/
+this.reloadBtn_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	// this.ds_search.setColumn(0, "searchKeyword", "");
+
+     // this.fn_onloadList();
+     this.reload();
+}
+
+
+
+//최신일자 출결생성
+
+this.attendance_today_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+    var objDate = new Date();
+    var nDay = objDate.getDay();
+    
+    //selectMaxDate값 받아오기
+    
+   
+
+   //평일이지만 법정공휴일인지 확인
+   
+   if(0<nDay<6){
+   
+     
+     	//Iject.alert(this.selectMaxDate);
+
+   
+   holiday_WD=application.confirm(" 생성하실 출결일은 " + this.selectMaxDate+"입니다. \n 법정공휴일 혹은 대체휴일입니까?\n ( 확인 : Y / 취소 : N) ");
+   
+     if(holiday_WD){
+     
+        makeAttendance= application.confirm("출결을 생성하시겠습니까?");
+     
+        //평일이지만 법정공휴일인 경우
+        
+    var searchParam = strParam1;   
+    
+    
+	
+	var oDatas =  {
+			  svcid : "insertBulk",
+			  sController : "insertBulkAttendance.do",			 
+			  inds :[
+			        ],
+			  outds :[
+				 
+			     ],			     
+			  args  : [	"searchParam="+searchParam	, "holidayYn=Y"
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+     
+     
+     
+     
+     }else{
+     
+     //정상적인 평일일 경우
+        
+    var searchParam = strParam1;   
+    
+     makeAttendance= application.confirm("출결을 생성하시겠습니까?");
+    
+	var oDatas =  {
+			  svcid : "insertBulk",
+			  sController : "insertBulkAttendance.do",			 
+			  inds :[
+			        ],
+			  outds :[
+				 
+			     ],			     
+			  args  : [	"searchParam="+searchParam, "holidayYn=N"		
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	
+       
+     
+     }
+   
+   
+   }else{
+   
+   //주말인 경우
+   
+    var searchParam = strParam1;   
+    
+     makeAttendance= application.confirm(" 생성하실 출결일은 " + this.selectMaxDate+"입니다. \n 출결을 생성하시겠습니까?");
+   
+   
+   
+	var oDatas =  {
+			  svcid : "insertBulk",
+			  sController : "insertBulkAttendance.do",			 
+			  inds :[
+			        ],
+			  outds :[
+				 
+			     ],			     
+			  args  : [	"searchParam="+searchParam , "holidayYn=Y"		
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+   
+   
+   
+  }
+     
+
+	
+			
+	
+			
+    if(makeAttendance){
+	
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       Iject.alert("완료");
+	      
+       var pThis = this.fobj;   //form object
+      pThis.reload() ;
+       
+
+
+
+	});
+
+}
+	
+}
+
+
+
+
+// selectMaxDate
+
+this. fn_selectMaxDate=function(){
+
+    
+    var searchCondition = strParam1;    
+   
+   	this.ds_search.setColumn(0, "searchCondition",searchCondition);
+	 
+    
+    var oDatas =  {
+			      svcid : "selectMaxDate",
+			      sController : "selectMaxDate.do",			 
+			      inds :["ds_search=ds_search"],
+			      outds :[
+				 
+			        ],			     
+			      args  : [ 
+			        ],
+			      bAsync : true,    // 비동기여부 (true : async  false: sync)
+			      nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			      bCompress :false,	 //			  
+		       	}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		}
+		
+		  
+	
+
+
+
+
+
+});
+
+}
+
+	
+
+
+this.fn_reset = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+
+
+
+//조회버튼
+this.Button05_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+    var searchCondition = strParam1; 	
+    var searchKeyword = this.Combo00.value;     
+    var searchMonth=this.searchMonth.value;
+    var searchDate=this.searchDate.value;
+    var searchEmpNo=this.searchEmpNo_NOT.value;
+   // var searchE_Date=this.searchEndDate.value;
+    
+     /*
+    this.sta_13.set_visible("false");
+    this.sta_16.set_visible("false");
+    this.sta_17.set_visible("false");
+    this.bookYear.set_visible("false");
+    this.bookMonth.set_visible("false");
+    this.deptCode.set_visible("false");
+    */
+    
+ 
+ 
+ 
+ 
+    
+ 	this.ds_search.setColumn(0, "searchCondition",searchCondition);
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	this.ds_search.setColumn(0, "searchMonth",searchMonth);
+	this.ds_search.setColumn(0, "searchDate", searchDate);
+	this.ds_search.setColumn(0, "searchEmpNo", searchEmpNo);
+	
+	/*
+	   if(this.ds_search.getColumn(this.ds_search.rowposition, "searchCondition")==null ||
+		this.ds_search.getColumn(this.ds_search.rowposition, "searchCondition")=="")
+		{
+			this.ds_search.setColumn(0,"searchCondition","total");
+		}*/
+    
+	
+	
+ 
+   var oDatas =  {
+			  svcid : "searchAttendanceList",
+			  sController : "attendanceListSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attendance_detail=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	 
+	 
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       //trace(" ds_attitude_book : " + pThis.ds_attitude_book.saveXML());
+	       
+	  }); //트랜잭션끝
+	
+	
+}
+
+
+this.Combo00_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	if(this.Combo00.index==1){
+	 this.searchEmpNo.set_visible("false");
+	 this.button04.set_visible("false");
+	 this.searchMonth.set_visible("false");
+	 this.searchDate.set_visible("true");
+	 }else if(this.Combo00.index==2){
+	 this.searchEmpNo.set_visible("false");
+	 this.button04.set_visible("false");
+	 this.searchDate.set_visible("false");
+	 this.searchMonth.set_visible("true");
+	 }else if(this.Combo00.index==3){
+	 this.searchEmpNo.set_visible("true");
+	 this.button04.set_visible("true");
+	 this.button04.set_enable("true");
+	 this.searchDate.set_visible("false");
+	 this.searchMonth.set_visible("false");
+	 }
+}
+]]></Script>
+  </Form>
+</FDL>

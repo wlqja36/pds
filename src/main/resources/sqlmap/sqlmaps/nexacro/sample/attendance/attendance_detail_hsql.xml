@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="attendance">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="attendanceDetailVO"
+		type="nexacro.sample.vo.attendanceVO.AttendanceDetailVO" />
+
+	<!-- Sample resultObject -->
+	<resultMap id="attendanceDetail" class="attendanceDetailVO">
+		<result property="empNo" column="EMP_NO" />
+		<result property="attendDate" column="ATTEND_DATE" />
+		<result property="attitudeBookId" column="ATTITUDE_BOOK_ID" />
+		<result property="startTime" column="START_TIME" />
+		<result property="endTime" column="END_TIME" />
+		<result property="holidayYn" column="HOLIDAYYN"/>
+		<result property="attendCode" column="ATTEND_CODE" />
+		<result property="EMP_REAL" column="EMP_REAL" />
+	</resultMap>
+
+
+
+<!-- 조회 -->
+     <select id="attendance.selectAttendanceList" parameterClass="attendanceDetailVO" resultMap="attendanceDetail">
+      		<![CDATA[
+             SELECT 
+                distinct c.emp_name||'('||c.emp_no||')' as EMP_NO,
+                ATTEND_DATE,
+               (select distinct attitude_book_nm
+                     from attend_info t, attitude_book b
+                     where b.attitude_book_id = t.attitude_book_id
+                     and t.attitude_book_id=#searchCondition# ) as  ATTITUDE_BOOK_ID,
+               START_TIME,
+               END_TIME,
+               HOLIDAYYN,
+               ATTEND_CODE,
+               c.emp_no as EMP_REAL
+            FROM ATTEND_INFO,
+               (select  e.emp_name, a.emp_no, a.attitude_book_id
+                  from emp e, attend_info a
+                   where e.emp_no=a.emp_no
+                    ) c 
+            
+            WHERE attend_info.emp_no=c.emp_no 
+            and attend_info.ATTITUDE_BOOK_ID=#searchCondition#  
+     
+            ]]>			
+			 
+			 <!-- 
+             <dynamic>
+				<isNotEqual prepend=" AND " property="searchKeyword" compareValue="" >
+						 EMP_NO = #searchKeyword#
+				</isNotEqual>
+			</dynamic>
+			  -->
+			  
+			  <dynamic>
+				<isEqual prepend=" AND " property="searchKeyword" compareValue="mngDate">
+						 <![CDATA[ 
+						          substr(attend_date, 1, 8)=substr(to_char(#searchDate#,'yyyy/mm/dd'),3,8)
+						  ]]>						 
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="searchKeyword" compareValue="mngMonth">
+						<![CDATA[ 
+						         
+                         substr(attend_date, 1, 5) = substr(to_char(#searchMonth#,'yyyy/mm/dd'),3,5)
+						         
+						  ]]>
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="searchKeyword" compareValue="mngEmp">
+						 attend_info.EMP_NO = #searchEmpNo#
+				</isEqual>
+			</dynamic>
+			
+			  
+			
+            </select>
+  
+  
+ 
+ 
+ <!-- 존재하는 대장인지 검사(insert시 dynamic 처리 위함) -->
+ 
+ 	<select id="attendance.selectBookExist"  parameterClass="attendanceDetailVO" resultClass="java.lang.Integer">
+	
+	     <![CDATA[
+	          SELECT COUNT(*)
+               FROM ATTENDANCE
+                WHERE ATTEND_DATE=#attendDate# 
+                   AND ATTITUDE_BOOK_ID=#attitudeBookId#
+	
+	      ]]>
+	      
+	</select>
+ 
+ 
+ 
+ 
+ 
+    
+     <!-- 최초 insert시(출결아예 처음부터 쓸때) -->   
+    
+	<insert id="attendance.insertAttendance" parameterClass="attendanceDetailVO">
+        <![CDATA[
+              
+       INSERT ALL
+          INTO ATTEND_INFO(
+                  EMP_NO,
+                  ATTEND_DATE,
+                  ATTITUDE_BOOK_ID,
+                  START_TIME,
+                  END_TIME,
+                  HOLIDAYYN,
+                  ATTEND_CODE
+             ) values(
+                  #empNo#,
+                  #attendDate#,
+                  #attitudeBookId#,
+                  #startTime#,
+                  #endTime#,
+                  #holidayYn#,
+                  #attendCode#
+             )  ]]>
+             
+              <dynamic>
+				<isEqual  property="isExist" compareValue="0" >
+				    INTO ATTENDANCE(
+                    REG_EMP_ID,
+                    REG_DATE,
+                    ATTEND_DATE,
+                    ATTITUDE_BOOK_ID
+            ) values(
+                   #REG_EMP_ID#,
+                   SYSDATE,
+                   #attendDate#,
+                   #attitudeBookId#
+            )
+				</isEqual>
+			</dynamic>
+          
+         SELECT * FROM DUAL           
+                   
+           
+	</insert>
+    
+    
+    
+    
+    
+    
+    
+    
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+   <update id="attendance.updateAttendance" parameterClass="attendanceDetailVO"> 
+		 <![CDATA[
+            UPDATE ATTEND_INFO 
+            SET 
+				EMP_NO = #empNo#,	
+				ATTEND_DATE =#attendDate#,
+				ATTITUDE_BOOK_ID =#attitudeBookId#,
+				START_TIME =#startTime#,	
+				END_TIME =#endTime#,
+				HOLIDAYYN=#holidayYn#,       
+				ATTEND_CODE =#attendCode# 
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#
+		       AND EMP_NO = #empNo#
+		        AND ATTEND_DATE =#attendDate#
+        ]]>
+		</update> 
+		
+		
+		<delete id="attendance.deleteAttendance" parameterClass="attendanceDetailVO"> 
+		   <![CDATA[ 
+		    DELETE FROM ATTEND_INFO 
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#
+		      AND EMP_NO = #empNo#
+		        AND ATTEND_DATE =#attendDate#   
+		   ]]>
+	    </delete> 
+    
+    
+    
+   <!-- 평일 기본 세팅 쿼리 -->     
+   
+       <insert id="attendance.insertBulkAttendance_WD" parameterClass="java.lang.String">    
+            
+            <![CDATA[
+            INSERT INTO ATTEND_INFO (
+                                 EMP_NO,
+                                 ATTEND_DATE,
+                                 ATTITUDE_BOOK_ID,
+                                 START_TIME,
+                                 END_TIME,
+                                 ATTEND_CODE
+                                 )
+                    SELECT EMP_NO,
+                           ATTEND_DATE+1,
+                           ATTITUDE_BOOK_ID,
+                           START_TIME,
+                           END_TIME,
+                           ATTEND_CODE
+                     FROM ATTEND_INFO 
+                      WHERE 1=1 AND ATTEND_DATE=( SELECT MAX(ATTEND_DATE) 
+                                            FROM ATTEND_INFO
+                                             WHERE ATTITUDE_BOOK_ID=#searchParam# 
+                                          )
+                        
+            ]]>
+            
+        
+            </insert>
+    
+
+    <!-- 휴일, 법정공휴일 기본 세팅 쿼리 -->
+
+          <insert id="attendance.insertBulkAttendance_WE" parameterClass="java.lang.String">    
+            
+            <![CDATA[
+            INSERT INTO ATTEND_INFO (
+                                 EMP_NO,
+                                 ATTEND_DATE,
+                                 ATTITUDE_BOOK_ID,
+                                 START_TIME,
+                                 END_TIME,
+                                 HOLIDAYYN,
+                                 ATTEND_CODE
+                                 )
+                    SELECT EMP_NO,
+                           ATTEND_DATE+1,
+                           ATTITUDE_BOOK_ID,
+                           START_TIME,
+                           END_TIME,
+                           'Y',
+                           ATTEND_CODE
+                     FROM ATTEND_INFO 
+                      WHERE ATTEND_DATE=( SELECT MAX(ATTEND_DATE) 
+                                            FROM ATTEND_INFO
+                                             WHERE ATTITUDE_BOOK_ID=#searchParam# 
+                                          )
+                        
+            ]]>
+            
+        
+            </insert>
+    
+
+	
+	<update id="attendance.updateAttitudeInfo" parameterClass="java.lang.String">
+		UPDATE ATTITUDE_INFO b 
+			SET (
+			    NOMAL_WORK_HOURS
+			    , OVERTIME_HOURS
+			    , HOLIDAY_WORK_HOURS
+			    , WORK_DAY_CNT
+			    , LATE_CNT
+			    , ABSENT_CNT
+			    , EARLY_LEAVE_CNT
+			    , HOLIDAY_CNT) 
+			    = 
+			    (SELECT NOMAL_WORK_HOURS
+			    , OVERTIME_HOURS
+			    , HOLIDAY_WORK_HOURS
+			    , WORK_DAY_CNT
+			    , LATE_CNT
+			    , ABSENT_CNT
+			    , EARLY_LEAVE_CNT
+			    , HOLIDAY_CNT FROM
+			            (SELECT 
+			                EMP_NO,
+			                sum(LEAST(a.TOTAL_WORK_HOURS, a.NOMAL_WORK_HOURS)) AS NOMAL_WORK_HOURS
+			                , sum(CASE WHEN HOLIDAYYN ='N' THEN LEAST(GREATEST(a.TOTAL_WORK_HOURS - a.NOMAL_WORK_HOURS, 0), a.OVERTIME_HOURS) ELSE 0 END) AS OVERTIME_HOURS
+			                , sum(CASE WHEN HOLIDAYYN ='Y' THEN LEAST(GREATEST(a.TOTAL_WORK_HOURS - a.NOMAL_WORK_HOURS, 0), a.OVERTIME_HOURS) ELSE 0 END) AS HOLIDAY_WORK_HOURS
+			                , NVL(sum(a.WORK_DAY_CNT), 0) WORK_DAY_CNT
+			                , NVL(sum(a.LATE_CNT), 0) LATE_CNT
+			                , NVL(sum(a.ABSENT_CNT), 0) ABSENT_CNT
+			                , NVL(sum(a.EARLY_LEAVE_CNT), 0) EARLY_LEAVE_CNT
+			                , NVL(sum(a.HOLIDAY_CNT), 0) HOLIDAY_CNT
+			                FROM (SELECT 
+			                            ATTITUDE_BOOK_ID
+			                            , EMP_NO
+			                            , HOLIDAYYN
+			                            , CASE WHEN HOLIDAYYN ='Y' THEN 0 ELSE 9 END AS NOMAL_WORK_HOURS <!-- 기본근무시간 - 평일: 9 / 주말: 0 -->
+			                            , CASE WHEN HOLIDAYYN ='Y' THEN 6 ELSE 4 END AS OVERTIME_HOURS <!-- 최대연장근무시간 - 평일: 4 / 주말 :6 -->
+			                            , CASE WHEN HOLIDAYYN ='Y' THEN 0 ELSE 0 END AS HOLIDAY_WORK_HOURS <!-- 주말근무시간  -->
+			                            , FLOOR((END_TIME - START_TIME)*24) AS TOTAL_WORK_HOURS <!-- 총근무시간 -->
+			                            , ATTEND_CODE
+			                            <!-- 근태일수 계산  -->
+			                            , DECODE(ATTEND_CODE, '2110', 1, 0) AS WORK_DAY_CNT 
+			                            , DECODE(ATTEND_CODE, '2120', 1, 0) AS LATE_CNT
+			                            , DECODE(ATTEND_CODE, '2130', 1, 0) AS ABSENT_CNT
+			                            , DECODE(ATTEND_CODE, '2140', 1, 0) AS EARLY_LEAVE_CNT
+			                            , DECODE(HOLIDAYYN, 'Y', 1, 0) HOLIDAY_CNT
+			                            FROM ATTEND_INFO
+			                            WHERE ATTITUDE_BOOK_ID=#searchParam# ) a
+			                group by EMP_NO) c <!-- group으로 묶음  -->
+			    WHERE b.EMP_NO = c.EMP_NO) 
+	</update>
+	
+	
+
+    <!-- 현재 생성된 최신 출결일 가져오기 -->
+
+  
+     <select id="attendance.selectMaxDate"  parameterClass="attendanceDetailVO" resultClass="java.lang.String">
+     
+     <![CDATA[
+               SELECT TO_CHAR(MAX(ATTEND_DATE)+1,'yyyy"년 "mm"월 "dd"일" ')
+                FROM ATTEND_INFO
+                  WHERE ATTITUDE_BOOK_ID=#searchCondition# 
+ 
+    ]]>
+     
+     
+     </select>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--  
+    
+     <select id="attitude_book.selectAttitudeSeq" resultClass="java.lang.Integer">
+      		SELECT ATTITUDE_BOOK_SEQ.nextval
+      		     FROM DUAL           
+    </select>
+
+
+	    -->  
+
+
+</sqlMap>

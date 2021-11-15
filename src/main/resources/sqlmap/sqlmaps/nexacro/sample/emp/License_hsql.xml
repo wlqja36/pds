@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="License">
+
+    <typeAlias  alias="licenseVO" type="nexacro.sample.vo.emp.LicenseVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+
+   
+    <resultMap id="license" class="licenseVO">
+        <result property="CERTIFICATION_NO"    		  column="CERTIFICATION_NO"/>	              
+        <result property="EMP_NO"  						 column="EMP_NO"/>	              
+        <result property="CERTIFICATION"    			 column="CERTIFICATION"/>	              
+        <result property="CERTIFICATION_RATE"			 column="CERTIFICATION_RATE"/>	 
+        <result property="ISSUE_DATE"     				column="ISSUE_DATE"/>	          
+        <result property="EFFECTIVE_DATE"    			column="EFFECTIVE_DATE"/>	      
+        <result property="CERTIFICATION_CLASS_COD"    column="CERTIFICATION_CLASS_COD"/>	          
+        <result property="LICENSE_NO"    				column="LICENSE_NO"/>	          
+      </resultMap>
+    
+      <select id="selectLicenseVOList" parameterClass="licenseVO" resultMap="license">
+            SELECT
+            	*
+            FROM License
+            WHERE 
+            EMP_NO=#searchKeyword#
+        
+    </select> 
+    
+    <insert id="insertLicenseVO" parameterClass="licenseVO">
+        <![CDATA[
+            INSERT INTO LICENSE (
+            	CERTIFICATION_NO,
+            	EMP_NO,
+            	CERTIFICATION,
+            	CERTIFICATION_RATE,
+            	ISSUE_DATE,
+            	EFFECTIVE_DATE,
+            	CERTIFICATION_CLASS_COD,
+            	LICENSE_NO
+            	     
+            	
+            	 
+            ) VALUES (
+          	        #CERTIFICATION_NO#,    		
+          	         #EMP_NO#, 					
+          	        #CERTIFICATION#,   		
+          	        #CERTIFICATION_RATE#,	
+          	        #ISSUE_DATE#,    			
+          	        #EFFECTIVE_DATE#,    		
+          	        #CERTIFICATION_CLASS_COD#, 	
+          	        LICENSE_NO_SEQ.nextval
+              )
+            
+        ]]>
+    </insert>
+ 
+    
+   <!-- 업데이트문 테이블1개  -->
+      <update id="updateLicenseVO" parameterClass="licenseVO">
+        <![CDATA[
+            UPDATE LICENSE
+            SET     
+            	CERTIFICATION_NO=#CERTIFICATION_NO#,
+            	CERTIFICATION=#CERTIFICATION#,
+            	CERTIFICATION_RATE=#CERTIFICATION_RATE#,
+            	ISSUE_DATE=#ISSUE_DATE#,
+            	EFFECTIVE_DATE=#EFFECTIVE_DATE#,         
+                CERTIFICATION_CLASS_COD=#CERTIFICATION_CLASS_COD#
+                    
+                WHERE 
+                LICENSE_NO=#LICENSE_NO#
+        ]]>
+    </update> 
+    
+   <delete id="deleteLicenseVO" parameterClass="licenseVO">
+        <![CDATA[
+            DELETE LICENSE
+            where
+            LICENSE_NO=#LICENSE_NO#
+        ]]>
+    </delete>
+  
+    
+    
+   
+</sqlMap>

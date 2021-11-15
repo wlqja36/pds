@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Search_S_Book" left="0" top="0" width="460" height="348" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img01" taborder="0" left="15" top="65" width="430" height="272" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_titlebg" taborder="1" left="14" top="7" width="432" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="3" text="사원 검색" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Grid id="Grid00" taborder="7" useinputpanel="false" left="5.22%" top="75" right="5%" height="214" binddataset="ds_Emp_Book1" oncellclick="oneCell_click">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="사원명"/>
+                <Cell col="2" text="입사일자"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_NO"/>
+                <Cell col="1" text="bind:EMP_NAME"/>
+                <Cell col="2" text="bind:JOIN_DATE" calendardisplaynulltype="none"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_select" taborder="9" text="선택" onclick="btn_select_onclick1" left="368" top="304" width="69" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+      </Layout>
+    </Layouts>
+    <Bind/>
+    <Objects>
+      <Dataset id="ds_Emp_Book1">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+          <Column id="JOIN_DATE" type="DATE" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EMP_NO">test</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search_info1">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="12"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchDateFrom" type="STRING" size="256"/>
+          <Column id="searchDateTo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchCondition">check</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+/**
+ * form onload 함수
+ * @return 
+ * @example
+ *
+ * @memberOf this
+ */
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+	trace("폼 로딩됨! - Search_Emp_Book"); 
+	
+	var objParam = this.parent.param1;
+	trace("===뭐 가져왔지?? ", objParam.saveXML());
+	
+	this.ds_Emp_Book1.copyData(objParam);
+	trace("===뭐 담겼지?? ", this.ds_Emp_Book1.saveXML());
+
+} 
+
+
+this.btn_select_onclick1 = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_Emp_Book1.rowposition;
+	trace(" rowposition : " + nRow);
+	var empNo = this.ds_Emp_Book1.getColumn(nRow , "EMP_NO");
+	var empName = this.ds_Emp_Book1.getColumn(nRow , "EMP_NAME");
+	var strReturn =empName+'('+empNo+')';
+	this.close(strReturn);
+}
+]]></Script>
+  </Form>
+</FDL>

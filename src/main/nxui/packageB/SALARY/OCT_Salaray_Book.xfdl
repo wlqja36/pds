@@ -1,0 +1,576 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Oct_Salaray_Book" left="0" top="0" width="1280" height="1024" onload="Oct_SalaryBook_onload" titletext="New Form" style="color:#46463dff;">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer04" taborder="298" left="23" top="70" width="1235" height="44" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="img_titlebg" taborder="0" left="7" top="8" width="1265" height="45" style="background:#165fa6ff;"/>
+        <Grid id="grd_payroll_list" taborder="6" useinputpanel="false" left="23" top="123" height="314" style="background:#4ea084ff;color:white;" width="1228" binddataset="ds_salaryconfirm" oncelldblclick="btrgrid_oncelldblclick" oncellclick="btrgrid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="160"/>
+                <Column size="189"/>
+                <Column size="144"/>
+                <Column size="172"/>
+                <Column size="134"/>
+                <Column size="138"/>
+                <Column size="158"/>
+                <Column size="114"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="급여대장번호"/>
+                <Cell col="1" text="대장명"/>
+                <Cell col="2" text="급여지급일"/>
+                <Cell col="3" text="등록자"/>
+                <Cell col="4" text="확정일자"/>
+                <Cell col="5" text="확정자"/>
+                <Cell col="6" text="지급총액"/>
+                <Cell col="7" text="성과평가"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:salary_book_no"/>
+                <Cell col="1" text="bind:salary_book_nm"/>
+                <Cell col="2" text="bind:salary_send_date"/>
+                <Cell col="3" text="bind:salary_reg_user_no"/>
+                <Cell col="4" text="bind:salary_acc_date"/>
+                <Cell col="5" text="bind:salary_acc_user_no"/>
+                <Cell col="6" text="bind:salary_total"/>
+                <Cell col="7" text="bind:record_money"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static02" taborder="7" text="급여대장" left="1.56%" top="478" right="91.09%" height="28" style="font:bold 14 Dotum;"/>
+        <Static id="Static00" taborder="200" text="급여대장" onclick="Static00_onclick" left="1.56%" top="11" right="85.94%" height="36" style="color:#ffffffff;font:bold 16 Dotum;"/>
+        <Static id="Static04" taborder="227" wordwrap="char" left="27" top="74" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;" width="1228"/>
+        <Static id="sta_payroll_title" taborder="224" text="대장명" left="30" top="80" width="165" height="26" style="background:#f4edfaff;color:#133678ff;align:middle;font:bold 9 굴림;"/>
+        <Combo id="combo_payroll_month" taborder="225" codecolumn="cd" datacolumn="txt" onitemchanged="Combo00_onitemchanged" left="192" top="80" width="193" height="21" innerdataset="@ds_month" displaynulltext="월선택"/>
+        <Button id="btn_payroll_listsearch" taborder="226" text="조회" onclick="fn_search" left="664" top="79" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+        <ImageViewer id="img02" taborder="229" left="14" top="512" width="1243" height="142" style="background:#d8dcedff;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_02" taborder="230" left="21" top="518" width="1227" height="33" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_payroll_title2" taborder="232" text="대장명" onclick="sta_15_onclick" left="20" top="519" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_08" taborder="233" left="20" top="614" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <ImageViewer id="img_04" taborder="234" left="20" top="582" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_payroll_modifydate" taborder="235" text="수정일시" onclick="sta_15_onclick" left="20" top="583" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_confirmdate" taborder="236" text="확정일시" onclick="sta_15_onclick" left="573" top="582" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_modifynm" taborder="239" text="수정자" onclick="sta_15_onclick" left="295" top="582" width="125" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_00" taborder="240" left="20" top="550" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_payroll_no" taborder="241" text="급여대장번호" onclick="sta_15_onclick" left="20" top="550" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_regdate" taborder="242" text="등록일시" onclick="sta_15_onclick" left="573" top="550" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_regnm" taborder="243" text="등록자" onclick="sta_15_onclick" left="916" top="550" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_salarycd" taborder="250" text="급여코드" onclick="sta_15_onclick" left="573" top="518" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_confirmrnm" taborder="255" text="확정자" onclick="sta_15_onclick" left="916" top="582" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_salstartdate" taborder="262" text="급여계산시작일" onclick="sta_15_onclick" left="20" top="615" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_salenddate" taborder="264" text="급여계산종료일" onclick="sta_15_onclick" left="296" top="615" width="124" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_totalpay" taborder="270" text="지급총액" onclick="sta_15_onclick" left="573" top="615" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_payroll_paydate" taborder="273" text="급여지급일" onclick="sta_15_onclick" left="916" top="518" width="143" height="33" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_payroll_title1" taborder="274" left="168" top="524" height="21" width="390" readonly="false" displaynulltext="oooo년 00월 00부 00급여" enable="false"/>
+        <Edit id="edt_payroll_no" taborder="275" left="168" top="555" height="21" width="390" readonly="false" maxlength="12" enable="false"/>
+        <Combo id="combo_payroll_salarycd" taborder="276" left="727" top="528" height="21" width="175" innerdataset="@ds_salarykind" codecolumn="cd" datacolumn="text" enable="false"/>
+        <Calendar id="cal_payroll_regdate" taborder="277" left="727" top="559" height="21" width="175" enable="false"/>
+        <Calendar id="cal_payroll_paydate" taborder="278" left="1068" top="525" height="21" width="174" enable="false"/>
+        <Calendar id="cal_payroll_confirmdate" taborder="279" left="727" top="589" height="21" width="175" enable="false"/>
+        <Edit id="edt_payroll_regnm" taborder="280" left="1068" top="558" height="21" width="174" oneditclick="edt_payroll_regnm_oneditclick" readonly="true"/>
+        <Edit id="edt_payroll_confirmnm" taborder="281" left="1068" top="589" height="21" width="174" readonly="true"/>
+        <Button id="btn_payroll_regnm" taborder="282" left="1211" top="559" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;" width="31" onclick="btn_payroll_regnm_onclick" enable="false"/>
+        <Button id="btn_payroll_confirmnm" taborder="283" left="1211" top="590" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;" width="31" onclick="btn_payroll_confirmnm_onclick" enable="false"/>
+        <Calendar id="cal_payroll_modifydate" taborder="285" left="168" top="588" height="21" width="112" enable="false"/>
+        <Calendar id="cal_payroll_salstartdate" taborder="286" left="168" top="621" height="21" width="113" enable="false"/>
+        <Calendar id="cal_payroll_salenddate" taborder="287" left="432" top="621" height="21" width="128" enable="false"/>
+        <Edit id="edt_payroll_totalpay" taborder="290" left="727" top="622" height="21" width="509" enable="false"/>
+        <Button id="btn_payroll_insert" taborder="291" text="추가" left="931" top="476" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_payroll_insert_onclick"/>
+        <Button id="btn_payroll_save" taborder="292" text="등록" left="1102" top="476" width="77" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_payroll_save_onclick"/>
+        <Button id="btn_payroll_delete" taborder="293" text="삭제" left="1186" top="476" width="68" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_payroll_delete_onclick"/>
+        <Button id="btn_payroll_reset" taborder="294" text="초기화" onclick="btn_payroll_reset_onclick" left="847" top="476" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+        <Combo id="combo_payroll_depart" taborder="295" codecolumn="cd" datacolumn="txt" onitemchanged="Combo00_onitemchanged" left="390" top="81" width="264" height="21" innerdataset="@ds_departcode" index="-1" displaynulltext="부서선택"/>
+        <Edit id="edt_payroll_modifynm" taborder="296" left="432" top="587" height="21" width="128" readonly="true"/>
+        <Button id="btn_payroll_modifynm" taborder="297" left="529" top="587" height="21" style="image:URL('img::btn_WF_SearchSmall.png');color:white;" width="31" onclick="btn_payroll_modifynm_onclick" enable="false"/>
+        <Button id="btn_payroll_fix" taborder="299" text="수정" onclick="btn_payroll_fix_onclick" left="1014" top="476" width="77" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="edt_payroll_title1" propid="value" datasetid="ds_salaryconfirm" columnid="salary_book_nm"/>
+      <BindItem id="item1" compid="combo_payroll_salarycd" propid="value" datasetid="ds_salaryconfirm" columnid="salary_book_code"/>
+      <BindItem id="item2" compid="cal_payroll_paydate" propid="value" datasetid="ds_salaryconfirm" columnid="salary_send_date"/>
+      <BindItem id="item3" compid="edt_payroll_no" propid="value" datasetid="ds_salaryconfirm" columnid="salary_book_no"/>
+      <BindItem id="item4" compid="cal_payroll_regdate" propid="value" datasetid="ds_salaryconfirm" columnid="salary_book_reg_date"/>
+      <BindItem id="item5" compid="edt_payroll_regnm" propid="value" datasetid="ds_salaryconfirm" columnid="salary_reg_user_no"/>
+      <BindItem id="item6" compid="cal_payroll_modifydate" propid="value" datasetid="ds_salaryconfirm" columnid="salary_mod_date"/>
+      <BindItem id="item7" compid="edt_payroll_modifynm" propid="value" datasetid="ds_salaryconfirm" columnid="salary_mod_user_no"/>
+      <BindItem id="item8" compid="cal_payroll_confirmdate" propid="value" datasetid="ds_salaryconfirm" columnid="salary_acc_date"/>
+      <BindItem id="item9" compid="edt_payroll_confirmnm" propid="value" datasetid="ds_salaryconfirm" columnid="salary_acc_user_no"/>
+      <BindItem id="item10" compid="cal_payroll_salstartdate" propid="value" datasetid="ds_salaryconfirm" columnid="salary_cal_sta_date"/>
+      <BindItem id="item11" compid="cal_payroll_salenddate" propid="value" datasetid="ds_salaryconfirm" columnid="salary_cal_end_date"/>
+      <BindItem id="item14" compid="edt_payroll_totalpay" propid="value" datasetid="ds_salaryconfirm" columnid="salary_total"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_month">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">01</Col>
+            <Col id="txt">01월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">02</Col>
+            <Col id="txt">02월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">03</Col>
+            <Col id="txt">03월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">04</Col>
+            <Col id="txt">04월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">05</Col>
+            <Col id="txt">05월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">06</Col>
+            <Col id="txt">06월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">07</Col>
+            <Col id="txt">07월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">08</Col>
+            <Col id="txt">08월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">09</Col>
+            <Col id="txt">09월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">10</Col>
+            <Col id="txt">10월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">11</Col>
+            <Col id="txt">11월</Col>
+          </Row>
+          <Row>
+            <Col id="cd">12</Col>
+            <Col id="txt">12월</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_salaryconfirm" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="salary_book_code" type="STRING" size="256"/>
+          <Column id="salary_book_nm" type="STRING" size="256"/>
+          <Column id="salary_book_reg_date" type="DATE" size="256"/>
+          <Column id="salary_send_date" type="DATE" size="256"/>
+          <Column id="salary_reg_user_no" type="STRING" size="256"/>
+          <Column id="salary_mod_date" type="DATE" size="256"/>
+          <Column id="salary_mod_user_no" type="STRING" size="256"/>
+          <Column id="salary_acc_date" type="DATE" size="256"/>
+          <Column id="salary_acc_user_no" type="STRING" size="256"/>
+          <Column id="salary_acc_yn" type="STRING" size="256"/>
+          <Column id="salary_cal_sta_date" type="DATE" size="256"/>
+          <Column id="salary_cal_end_date" type="DATE" size="256"/>
+          <Column id="salary_total" type="STRING" size="256"/>
+          <Column id="attitude_book_id" type="STRING" size="256"/>
+          <Column id="record_money" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="salary_book_no"/>
+            <Col id="salary_book_code"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_salarykind">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="text" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">3010</Col>
+            <Col id="text">정기급여</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3020</Col>
+            <Col id="text">특별성과금</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_departcode">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">1210</Col>
+            <Col id="txt">경영지원부</Col>
+          </Row>
+          <Row>
+            <Col id="cd">1220</Col>
+            <Col id="txt">영업부</Col>
+          </Row>
+          <Row>
+            <Col id="cd">1230</Col>
+            <Col id="txt">개발부</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_salary">
+        <ColumnInfo>
+          <Column id="salaryBookNo" type="STRING" size="12"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="basicMoney" type="INT" size="10"/>
+          <Column id="bonusSum" type="INT" size="10"/>
+          <Column id="costSum" type="INT" size="10"/>
+          <Column id="taxSum" type="INT" size="10"/>
+          <Column id="minusTax" type="INT" size="10"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchCondition"/>
+            <Col id="searchKeyword"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_ResultEval">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="record_code" type="STRING" size="256"/>
+          <Column id="record_score" type="STRING" size="256"/>
+          <Column id="record_money" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+var rownum ="";
+
+this.Oct_SalaryBook_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+
+	Iject.formOnload(obj);
+	var nRow = this.ds_search.addRow();
+
+	this.fn_search();
+} 
+
+//조회(검색)버튼
+this.fn_search = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.combo_payroll_month.value != null || this.combo_payroll_depart.value != null){
+		 var nRow2 = this.ds_search.addRow();
+		 var searchKeyword = this.combo_payroll_month.text+" "+this.combo_payroll_depart.text;
+		 this.ds_search.setColumn(nRow2,"searchKeyword", searchKeyword);
+	}else if(this.combo_payroll_month.value == null || this.combo_payroll_depart.value == null){
+		var nRow2 = this.ds_search.addRow();
+		 this.ds_search.setColumn(nRow2,"searchKeyword","");
+		 
+	}
+		
+	
+	 var oDatas =  {
+			  svcid : "search",
+			  sController : "Oct_SalaryBookSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_salaryconfirm=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    
+			  nDataType : 0,   
+			  bCompress :false		  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+		
+	
+	 Iject.transaction(this,oDatas,function(){   
+		
+		//alert(" this.errorcode : " + this.errorcode);
+		
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid      : 서비스 ID
+		*   @param : {object}    this.fobj       : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	       var pThis = this.fobj;   //form object	      
+		   pThis.grd_payroll_list.selectCell(rownum);
+	});
+	 this.ds_search.clearData();
+	
+
+}
+
+//급여대장 그리드 더블클릭시
+this.btrgrid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+		
+ 	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	var Oct_Salary_Book = new ChildFrame();
+ 	
+ 	Oct_Salary_Book.init("Oct_Salary_Book"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 524
+ 					, 332
+ 					, null
+ 					, null
+ 					, "SALARY::OCT_Salary_Test.xfdl");
+ 
+ 	Oct_Salary_Book.set_openalign("center middle");
+ 	Oct_Salary_Book.set_dragmovetype("all");
+  	
+	var objParam = {param1:this.edt_payroll_no.value};				
+          
+    Oct_Salary_Book.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+   			  
+		
+}
+
+//추가
+this.btn_payroll_insert_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	var nRow = this.ds_salaryconfirm.addRow();
+	
+	this.edt_payroll_title1.set_enable(true);
+	this.combo_payroll_salarycd.set_enable(true);
+	this.cal_payroll_paydate.set_enable(true);
+	this.edt_payroll_regnm.set_enable(true);
+	this.cal_payroll_confirmdate.set_enable(true);
+	this.edt_payroll_confirmnm.set_enable(true);
+	this.cal_payroll_salstartdate.set_enable(true);
+	this.cal_payroll_salenddate.set_enable(true);
+	this.edt_payroll_totalpay.set_enable(true);
+	this.btn_payroll_regnm.set_enable(true);
+	this.btn_payroll_confirmnm.set_enable(true);
+	
+
+}
+
+//등록
+this.btn_payroll_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+this.fn_save = function(strid)
+{
+   
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "Oct_SalaryBookModifyVO.do",			 
+			  inds :["input1=ds_salaryconfirm:U"],
+			  outds :[
+				 "ds_salaryconfirm=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			rownum = this.ds_salaryconfirm.rowposition;
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		
+		if(this.errorcode < 0)
+		{		
+		   Iject.alert("입력정보를 다시확인해 주세요","알림");			
+		   return;
+		}			
+	      
+	      var pThis = this.fobj;   //form object
+	      switch(strid)
+	      {
+	         case "save" : 
+				Iject.alert("등록완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+			
+	      }
+	      this.grd_payroll_list.selectRow(-1,true)
+		  pThis.fn_search();
+	});
+}
+
+//삭제
+this.btn_payroll_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	var nRow = this.ds_salaryconfirm.rowposition;
+	this.ds_salaryconfirm.deleteRow(nRow);
+	if(rtnValue)
+	{
+		this.fn_save("delete");	
+	}
+	else
+	{
+		this.fn_search();
+	}
+}
+
+//등록자검색
+this.btn_payroll_regnm_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.edt_payroll_regnm.set_value(emp_no);
+
+	//this.Edit01.set_value(empPlus);
+}
+
+//수정자 검색
+this.btn_payroll_modifynm_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.edt_payroll_modifynm.set_value(emp_no);
+
+	//this.Edit01.set_value(empPlus);
+}
+
+//확정자 검색
+this.btn_payroll_confirmnm_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.edt_payroll_confirmnm.set_value(emp_no);
+
+}
+
+
+
+//리셋
+this.btn_payroll_reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+//수정
+this.btn_payroll_fix_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//this.edt_payroll_title1.set_enable(true);
+	this.combo_payroll_salarycd.set_enable(true);
+	this.cal_payroll_paydate.set_enable(true);
+	//this.edt_payroll_regnm.set_enable(true);
+	this.cal_payroll_confirmdate.set_enable(true);
+	this.edt_payroll_confirmnm.set_enable(true);
+	this.cal_payroll_salstartdate.set_enable(true);
+	this.cal_payroll_salenddate.set_enable(true);
+	this.edt_payroll_totalpay.set_enable(true);
+	//this.btn_payroll_regnm.set_enable(true);
+	this.btn_payroll_confirmnm.set_enable(true);
+	this.cal_payroll_modifydate.set_enable(true);
+	this.edt_payroll_modifynm.set_enable(true);
+	this.btn_payroll_modifynm.set_enable(true);
+}
+]]></Script>
+  </Form>
+</FDL>

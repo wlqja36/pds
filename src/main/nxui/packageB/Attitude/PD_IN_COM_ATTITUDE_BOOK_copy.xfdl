@@ -1,0 +1,1195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Attitude_form" classname="Temp01_SingleDetail" left="0" top="0" width="1028" height="713" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img02" taborder="0" top="480" width="996" height="183" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" left="15"/>
+        <ImageViewer id="img_titlebg" taborder="4" left="14" top="7" width="996" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="5" text="근태대장" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="sta_33" taborder="8" text="근태대장관리" left="17" top="122" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Grid id="attitude_grid" taborder="48" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="16" top="146" width="994" height="279" binddataset="ds_attitude_book" oncelldblclick="attitude_grid_oncelldblclick" oncellclick="attitude_grid_oncellclick" style="font:9 dotum;">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="92"/>
+                <Column size="75"/>
+                <Column size="71"/>
+                <Column size="67"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="대장번호"/>
+                <Cell col="1" text="대장명"/>
+                <Cell col="2" text="관리시작일"/>
+                <Cell col="3" text="관리종료일"/>
+                <Cell col="4" text="등록일시"/>
+                <Cell col="5" text="등록자사번"/>
+                <Cell col="6" text="수정일시"/>
+                <Cell col="7" text="수정자사번"/>
+                <Cell col="8" text="확정일시"/>
+                <Cell col="9" text="확정자사번"/>
+                <Cell col="10" text="확정여부"/>
+                <Cell col="11" text="출결정보"/>
+                <Cell col="12" text="근태"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:attitudeBookId"/>
+                <Cell col="1" text="bind:attitudeBookName"/>
+                <Cell col="2" text="bind:startDate"/>
+                <Cell col="3" text="bind:endDate"/>
+                <Cell col="4" text="bind:regDate"/>
+                <Cell col="5" text="bind:regEmpId"/>
+                <Cell col="6" text="bind:modifyDate"/>
+                <Cell col="7" text="bind:modifyEmpId"/>
+                <Cell col="8" text="bind:fixDate"/>
+                <Cell col="9" text="bind:regEmpId"/>
+                <Cell col="10" text="bind:fixYn"/>
+                <Cell col="11" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="출결상세"/>
+                <Cell col="12" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="근태상세"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img_05" taborder="53" left="15" top="79" width="995" height="33" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_01" taborder="54" text="검색조건" onclick="sta_15_onclick" left="20" top="83" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_15" taborder="60" text="대장번호" onclick="sta_15_onclick" left="23" top="488" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_att_book_no" taborder="61" readonly="true" left="143" top="488" width="252" height="22" oneditclick="edt_btr_no2_oneditclick"/>
+        <Static id="sta_11" taborder="67" text="관리시작일" onclick="sta_15_onclick" left="23" top="583" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_12" taborder="69" text="관리종료일" onclick="sta_15_onclick" left="280" top="583" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_03" taborder="74" text="등록일시" onclick="sta_15_onclick" left="23" top="607" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_04" taborder="76" text="등록자 사번" onclick="sta_15_onclick" left="280" top="607" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_09" taborder="78" text="수정일시" onclick="sta_15_onclick" left="535" top="607" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_14" taborder="79" text="수정자 사번" onclick="sta_15_onclick" left="786" top="608" width="98" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_06" taborder="82" text="확정일시" onclick="sta_15_onclick" left="23" top="631" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_07" taborder="84" text="확정여부" onclick="sta_15_onclick" left="280" top="631" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_05" taborder="86" text="확정자 사번" onclick="sta_15_onclick" left="535" top="631" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <MaskEdit id="reg_emp_id" taborder="87" readonly="false" oneditclick="ok_emp_no_oneditclick" cssclass="essential" left="400" top="610" width="119" height="20"/>
+        <Button id="button09" taborder="88" onclick="button09_onclick" cssclass="btn_WF_SearchSmall" left="506" top="610" width="22" height="20"/>
+        <Static id="sta_10" taborder="90" onclick="sta_15_onclick" left="786" top="631" width="217" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <MaskEdit id="modify_emp_id" taborder="95" readonly="false" oneditclick="ok_emp_no_oneditclick" cssclass="essential" left="889" top="610" width="97" height="20"/>
+        <Button id="button00" taborder="96" onclick="button09_onclick" cssclass="btn_WF_SearchSmall" left="981" top="610" width="22" height="20"/>
+        <Button id="button03" taborder="98" onclick="button09_onclick" cssclass="btn_WF_SearchSmall" left="763" top="634" width="20" height="20"/>
+        <Static id="sta_13" taborder="101" onclick="sta_15_onclick" left="535" top="584" width="468" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_02" taborder="102" text="대장명" onclick="sta_15_onclick" left="23" top="511" width="115" height="75" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="searchBook" taborder="103" left="263" top="84" height="23" width="213" displaynulltext="생산1" value="생산1"/>
+        <Button id="Button01" taborder="105" text="추가" onclick="Button01_onclick" left="776" top="673" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="insert00" taborder="106" text="등록" onclick="div_Detail_insert_onclick" left="834" top="673" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="Button02" taborder="107" text="삭제" onclick="Button02_onclick" left="892" top="673" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="reset" taborder="108" text="취소" onclick="fn_reset" left="950" top="673" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Calendar id="reg_date" taborder="109" left="143" top="610" height="19" style="align:center middle;" width="131" value="null" dateformat="yyyy-MM-dd ddd" oneditclick="reg_date_oneditclick"/>
+        <Calendar id="fix_date" taborder="110" left="143" top="632" height="19" style="align:center middle;" width="131" locale="ko_KR" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Calendar id="start_date" taborder="111" left="143" top="586" height="20" style="align:center middle;" width="131" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Calendar id="end_date" taborder="112" left="400" top="586" height="20" style="align:center middle;" width="128" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Calendar id="modify_date" taborder="113" left="654" top="612" height="20" style="align:center middle;" width="129" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Radio id="fixyn" taborder="114" left="416" top="632" height="19" innerdataset="@ds_yn" direction="vertical" codecolumn="code" datacolumn="data" index="1" style="align:center middle;" width="101" value="N"/>
+        <MaskEdit id="fix_emp_id" taborder="115" oneditclick="ok_emp_no_oneditclick" cssclass="essential" left="654" top="634" width="110" height="20"/>
+        <Button id="Button05" taborder="118" text="검색" onclick="Button05_onclick" left="473" top="84" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <TextArea id="attitudeBookName" taborder="119" left="144" top="515" height="62" width="859"/>
+        <Static id="sta_00" taborder="122" text="관리종료일" onclick="sta_15_onclick" left="776" top="83" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_08" taborder="123" text="관리시작일" onclick="sta_15_onclick" left="541" top="83" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Calendar id="searchStartDate" taborder="124" left="64.4%" top="85" right="24.81%" height="20"/>
+        <Calendar id="searchEndDate" taborder="125" left="87.16%" top="85" right="2.24%" height="20"/>
+        <Combo id="Combo00" taborder="126" left="13.91%" top="85" right="75.1%" height="21" codecolumn="codecolumn" datacolumn="datacolumn" index="0" text="전체">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">bookId</Col>
+                <Col id="datacolumn">대장번호</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">bookName</Col>
+                <Col id="datacolumn">대장명</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">mngDate</Col>
+                <Col id="datacolumn">관리일자</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Static id="stc_Prev" taborder="127" text="이전" onclick="div_page_stc_Prev_onclick" visible="true" left="311" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No0" taborder="128" text="1" onclick="div_page_stc_No_onclick" visible="true" left="351" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No1" taborder="129" text="2" onclick="div_page_stc_No_onclick" visible="true" left="383" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No2" taborder="130" text="3" onclick="div_page_stc_No_onclick" visible="true" left="415" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No3" taborder="131" text="4" onclick="div_page_stc_No_onclick" visible="true" left="447" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No4" taborder="132" text="5" onclick="div_page_stc_No_onclick" visible="true" left="479" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No5" taborder="133" text="6" onclick="div_page_stc_No_onclick" visible="true" left="511" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No6" taborder="134" text="7" onclick="div_page_stc_No_onclick" visible="true" left="543" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No7" taborder="135" text="8" onclick="div_page_stc_No_onclick" visible="true" left="575" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No8" taborder="136" text="9" onclick="div_page_stc_No_onclick" visible="true" left="607" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_No9" taborder="137" text="10" onclick="div_page_stc_No_onclick" visible="true" left="639" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+        <Static id="stc_Next" taborder="138" text="다음" onclick="div_page_stc_Next_onclick" visible="true" left="681" top="440" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchStartDate" type="DATE" size="256"/>
+          <Column id="searchEndDate" type="DATE" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_attitude_book">
+        <ColumnInfo>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="attitudeBookName" type="STRING" size="255"/>
+          <Column id="startDate" type="DATE" size="256"/>
+          <Column id="endDate" type="DATE" size="256"/>
+          <Column id="regDate" type="DATE" size="256"/>
+          <Column id="regEmpId" type="STRING" size="12"/>
+          <Column id="modifyDate" type="DATE" size="256"/>
+          <Column id="modifyEmpId" type="STRING" size="12"/>
+          <Column id="fixDate" type="DATE" size="256"/>
+          <Column id="fixEmpId" type="STRING" size="12"/>
+          <Column id="fixYn" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <!--
+<Parameters>
+      <Parameter id="test_data" type="string" value="edt_btr_no2"/>
+    </Parameters>
+-->
+    <Bind>
+      <BindItem id="item17" compid="attitude_grid" propid="binddataset" datasetid="ds_attitude_book" columnid=""/>
+      <BindItem id="item0" compid="edt_att_book_no" propid="value" datasetid="ds_attitude_book" columnid="attitudeBookId"/>
+      <BindItem id="item14" compid="reg_emp_id" propid="value" datasetid="ds_attitude_book" columnid="regEmpId"/>
+      <BindItem id="item19" compid="reg_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item3" compid="modify_emp_id" propid="value" datasetid="ds_attitude_book" columnid="modifyEmpId"/>
+      <BindItem id="item4" compid="modify_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item2" compid="fix_emp_id" propid="value" datasetid="ds_attitude_book" columnid="fixEmpId"/>
+      <BindItem id="item5" compid="fix_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item1" compid="searchBook" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item6" compid="attitudeBookName" propid="value" datasetid="ds_attitude_book" columnid="attitudeBookName"/>
+      <BindItem id="item7" compid="start_date" propid="value" datasetid="ds_attitude_book" columnid="startDate"/>
+      <BindItem id="item8" compid="end_date" propid="value" datasetid="ds_attitude_book" columnid="endDate"/>
+      <BindItem id="item10" compid="modify_date" propid="value" datasetid="ds_attitude_book" columnid="modifyDate"/>
+      <BindItem id="item11" compid="fix_date" propid="value" datasetid="ds_attitude_book" columnid="fixDate"/>
+      <BindItem id="item12" compid="fixyn" propid="value" datasetid="ds_attitude_book" columnid="fixYn"/>
+      <BindItem id="item13" compid="reg_date" propid="value" datasetid="ds_attitude_book" columnid="regDate"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+this.yook=0;
+var imsisave = "";
+
+
+this.confirmStr = "";
+var pageNum = "";
+var rowNum = "";
+var strSwitch = "";
+
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+
+    this.Button05_onclick();
+} 
+
+
+
+//페이지 온로드되면 바로 전체조회되어 나오도록
+this.btn_sc_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+    this.fv_iStartPageNo    = 0;   
+	this.fv_iUnitSelRowNo   = 100; 
+	this.fv_iStartSelRowNo  = 1;   
+	this.fv_iMaxPageNum     = 10;  
+	this.fv_iServerRowCount = 0; 
+
+   
+   	this.ds_search.setColumn(0,"searchKeyword",this.searchBook.value);
+	this.ds_search.setColumn(0,"searchCondition",this.Combo00.value);
+	if(this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")==null ||
+		this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")=="")
+		{
+			this.ds_search.setColumn(0,"search_condition","total");
+		}
+
+
+   
+	this.gfn_transaction(this,
+ 						"empSearch",
+ 						"administrator/selectEmp.do",
+ 						"ds_search=ds_search",
+ 						"ds_emp=ds_output",
+ 						"",
+ 						"transaction_callback"
+ 						);
+ 						
+ 	
+	
+}
+
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+	var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+	this.ds_emp.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+			
+		if (this.ds_emp.getRowCount() == 0)
+		{
+			this.ds_emp.filter("");
+			this.div_page.set_visible("false");
+			this.alert("조회할 자료가 없습니다.");
+					
+			return;
+		}
+		else
+		{
+			this.div_page.set_visible("true");
+			this.fv_iServerRowCount = this.ds_emp.getRowCount();
+			this.fn_SetStyle();
+			this.fn_SetPageNo();
+			this.div_page.stc_No0.style.set_color("gray");
+		} 
+				
+	this.pageSelect(1);
+	
+}
+
+
+
+
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		var emp_no = this.ds_emp.getColumn(this.ds_emp.rowposition, "emp_no");	
+		application.gds_empno.addRow();
+		application.gds_empno.setColumn(application.gds_empno.rowposition, "emp_no", emp_no);
+		this.close();
+		
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//조회
+this.fn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+    var searchCondition = this.Combo00.value;
+    var searchKeyword = this.edt_searchKeyword.value;       
+ 	this.ds_search.setColumn(0, "searchCondition",searchCondition);
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+ 
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "btrSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_user=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_user : " + pThis.ds_user.saveXML());
+	});
+	
+		var imsi = this.edt_searchKeyword.value;
+	   //this.edt_btrip_dno.set_value(imsi);
+	
+	
+	
+	 
+}
+
+
+
+
+
+
+//행추가
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var imsi1 = this.searchBook.value;
+	var nRow = this.ds_attitude_book.addRow();
+	this.attitudeBookName.set_value(imsi1);
+
+	
+}
+
+
+
+
+
+//삭제
+this.Button02_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+ 	
+	var nRow = this.ds_attitude_book.rowposition;
+	this.ds_attitude_book.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+
+	if(rtnValue){  
+		this.fn_save("delete");
+	}else{
+		this.fn_search();
+	}
+}
+
+
+
+
+//리셋
+this.fn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_attitude_book.reset();
+}
+
+
+
+
+
+
+
+
+
+//오늘날짜 자동채번
+
+function gfn_today()
+{
+ var sToday = "";
+ var objDate = new Date();
+ 
+ function gfn_getLengthB2(sValue)
+{
+ //if(gfn_isNull(sValue)) return 0;
+
+ var sChk = sValue.toString();
+ var iCnt = 0;
+
+ for(var i=0; i<sChk.length; i++)
+  (sChk.charCodeAt(i) > 127) ? iCnt += 2 : iCnt++;
+
+ return iCnt;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ function gfn_padLeftB(sValue, nLength, sChar)
+{
+
+/*
+    if(gfn_isNull(sValue)) return sValue;
+    if(gfn_isNull(sChar)) sChar = " ";
+    */
+
+    var sRetVal = new String(sValue);
+    var nIteration  = nLength - gfn_getLengthB2(sRetVal);
+    var sPadChar = (sChar.length > 1) ? sChar.charAt(0) : sChar;
+
+    for(var i=0; i<nIteration; i++)
+        sRetVal = sPadChar + sRetVal;
+
+    return sRetVal;
+}
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ var sToday  = objDate.getFullYear() + "";
+  sToday += gfn_padLeftB(objDate.getMonth() + 1, 2, "0");
+  sToday += gfn_padLeftB(objDate.getDate(), 2, "0");
+
+ return sToday;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//저장
+this.fn_save = function(strid)
+{
+
+    var sToday=gfn_today();
+    this.edt_att_book_no.set_value(sToday);  
+    
+   
+	this.ds_attitude_book.setColumn(this.ds_attitude_book.rowposition, "reg_emp_id", this.reg_emp_id.value);
+	this.ds_attitude_book.setColumn(this.ds_attitude_book.rowposition, "modify_emp_id", this.modify_emp_id.value);
+	this.ds_attitude_book.setColumn(this.ds_attitude_book.rowposition, "fix_emp_id", this.fix_emp_id.value);
+    
+
+	
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "attitudeBookModifyVO.do",			 
+			  inds :["input1=ds_attitude_book:U"],
+			  outds :[
+				 "ds_attitude_book=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}else{
+		   
+		          //var pThis = this.fobj;
+                 //  Iject.alert(pThis.yook);
+                  
+                  // this.edt_att_book_no.set_value(sToday+pThis.yook.padLeft(2,'0'));  
+		  		   Iject.alert("완료");
+				 }
+	      
+
+	});
+
+
+   // var nsToday=sToday+pThis.yook;
+   // this.edt_att_book_no.set_value(nsToday);
+
+	/*var imsi3 = this.searchBook.value;
+	this.searchBook.set_value(imsi3);*/
+	
+}
+
+
+//저장버튼 클릭시 (등록/수정)
+this.div_Detail_insert_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+var imsi4 = this.searchBook.value;
+
+	this.fn_save("save");
+		//this.searchBook.set_value(imsi4);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+// //검색  Enter키
+// this.div_search_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+// {
+// 	if ( e.keycode == 13 )
+// 	{
+// 		this.fn_search();
+// 	}
+// }
+
+
+
+
+//사원찾기
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+}
+
+
+//승인자사번찾기
+this.button03_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::ok_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//대체업무사원
+this.button05_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::re_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+}
+
+this.edt_btr_no2_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+
+//클릭시 출결대장으로 이동 
+//author : 김희선
+
+/*
+this.insert01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+//this.go("Attitude::PD_IN_COM_ATTENDANCE.xfdl");
+
+
+
+
+
+	
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var Attendance= new ChildFrame();
+ 	
+ 	Attendance.init("Attendance"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "Attitude::PD_IN_COM_ATTENDANCE.xfdl");
+ 	
+ 	
+ 	
+ 	Attendance.set_openalign("center middle");
+ 	Attendance.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_att_book_no.value
+						,param2:this.TextArea00.value
+  					 	};
+						
+  	
+   
+          
+    	  Attendance.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+     			
+ 
+		
+}
+
+//근태로 이동  버튼
+
+
+
+
+this.Button06_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+//this.go("Attitude::PD_IN_COM_ATTITUDE_GENERAL.xfdl");
+	
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var Attitude_general= new ChildFrame();
+ 	
+ 	Attitude_general.init("Attitude_general"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "Attitude::PD_IN_COM_ATTITUDE_GENERAL.xfdl");
+ 	
+ 	
+ 	
+ 	Attitude_general.set_openalign("center middle");
+ 	Attitude_general.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_att_book_no.value
+						,param2:this.TextArea00.value
+						,param3:this.searchBook.value
+  					 	};
+						
+  	
+   
+          
+    	  Attitude_general.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+ 
+	
+
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 
+ //출장내역관리 콜백함수
+  this.fn_popupCallback = function(strPopupID, strReturn)
+  {
+      if(strReturn == undefined){
+          return;
+      }
+  
+      if(strPopupID == "Attendance"||"Attitude_general"){
+          this.alert("Return Value: " + strReturn);
+      }
+ };
+	
+
+	 //object 인자 생성함수
+ this.fn_parent = function(pObj)
+ {
+     this.ds_parent.copyData(pObj);
+};
+	
+	*/
+	
+	
+
+
+
+//그리드셀클릭시
+this.attitude_grid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+    if(e.cell==11){
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var Attendance_detail= new ChildFrame();
+ 	
+ 	Attendance_detail.init("Attendance_detail"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "Attitude::PD_IN_COM_ATTENDANCE_DETAIL.xfdl");
+ 	
+ 	
+ 	
+ 	Attendance_detail.set_openalign("center middle");
+ 	Attendance_detail.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_att_book_no.value
+  					 	};
+						
+  	
+   
+          
+    	  Attendance_detail.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+ 
+	
+
+	
+        }else if(e.cell==12){
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	var Attitude_general= new ChildFrame();
+ 	
+ 	Attitude_general.init("Attitude_general"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "Attitude::PD_IN_COM_ATTITUDE_GENERAL.xfdl");
+ 	
+ 	
+ 	
+ 	Attitude_general.set_openalign("center middle");
+ 	Attitude_general.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_att_book_no.value
+						,param2:this.TextArea00.value
+						,param3:this.searchBook.value
+  					 	};
+						
+  	
+   
+          
+    	  Attitude_general.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+ 
+	
+
+
+	
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 
+ //출장내역관리 콜백함수
+  this.fn_popupCallback = function(strPopupID, strReturn)
+  {
+      if(strReturn == undefined){
+          return;
+      }
+  
+      if(strPopupID == "Attendance_detail"||"Attitude_general"){
+          this.alert("Return Value: " + strReturn);
+      }
+ };
+	
+
+	 //object 인자 생성함수
+ this.fn_parent = function(pObj)
+ {
+     this.ds_parent.copyData(pObj);
+};
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+	
+/*	
+function fn_select(){
+	
+	
+	var searchCondition =  "NAME";
+   var searchKeyword = this.attitudeBookName.value;       
+ 	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "attitudeBookSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attitude_book=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attitude_book : " + pThis.ds_user.saveXML());
+	});
+	
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	}
+*/	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+//희선- 조건별 대장조회
+this.Button05_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+    this.fv_iStartPageNo    = 0;   
+	this.fv_iUnitSelRowNo   = 100; 
+	this.fv_iStartSelRowNo  = 1;   
+	this.fv_iMaxPageNum     = 10;  
+	this.fv_iServerRowCount = 0;
+
+
+	var searchCondition = this.Combo00.value;
+    var searchKeyword = this.searchBook.value;     
+    var searchS_Date=this.searchStartDate.value;
+    var searchE_Date=this.searchEndDate.value;
+    
+ 
+    
+ 	this.ds_search.setColumn(0, "searchCondition",searchCondition);
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	this.ds_search.setColumn(0, "searchStartDate",searchS_Date);
+	this.ds_search.setColumn(0, "searchEndDate", searchE_Date);
+	
+	
+	   if(this.ds_search.getColumn(this.ds_search.rowposition, "searchCondition")==null ||
+		this.ds_search.getColumn(this.ds_search.rowposition, "searchCondition")=="")
+		{
+			this.ds_search.setColumn(0,"searchCondition","total");
+		}
+    
+	
+	
+ 
+	
+ /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "attitudeBookSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attitude_book=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attitude_book : " + pThis.ds_user.saveXML());
+	});
+	
+		var imsi = this.searchBook.value;
+	  
+	  this.attitudeBookName.set_value(imsi);
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+	
+	pageNum = iNo;
+	
+	this.pageSelect(iNo);
+	
+}
+
+
+this.pageSelect = function(page)
+{
+	var iFirstNum = (page-1) * this.fv_iMaxPageNum + 1;
+
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+
+	this.fn_SetStyle();
+	this.div_page.components["stc_No"+(page-1)].style.set_color("gray");
+	this.ds_emp.filter("");
+	
+	this.ds_emp.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+
+
+
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	
+	this.transaction_callback("empSearch", 0, "succ");
+}
+
+
+
+
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	
+	this.transaction_callback("empSearch", 0, "succ");
+}
+
+
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+
+}
+
+
+
+
+]]></Script>
+  </Form>
+</FDL>

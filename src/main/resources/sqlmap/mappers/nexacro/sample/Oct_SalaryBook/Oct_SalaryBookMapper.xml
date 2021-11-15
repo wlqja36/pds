@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Oct_SalaryBookMapper">
+
+	<!-- Sample resultObject -->
+	<resultMap id="SalaryBook" type="nexacro.sample.vo.Oct_SalaryBook.Oct_SalaryBookVO">
+		<result property="salary_book_no" column="SALARY_BOOK_NO" />
+		<result property="salary_book_code" column="SALARY_BOOK_CODE" />
+		<result property="salary_book_nm" column="SALARY_BOOK_NM" />
+		<result property="salary_book_reg_date" column="SALARY_BOOK_REG_DATE" />
+		<result property="salary_send_date" column="SALARY_SEND_DATE" />
+		<result property="salary_reg_user_no" column="SALARY_REG_USER_NO" />
+		<result property="salary_mod_date" column="SALARY_MOD_DATE" />
+		<result property="salary_mod_user_no" column="SALARY_MOD_USER_NO" />
+		<result property="salary_acc_date" column="SALARY_ACC_DATE" />
+		<result property="salary_acc_user_no" column="SALARY_ACC_USER_NO" />
+		<result property="salary_acc_yn" column="SALARY_ACC_YN" />
+		<result property="salary_cal_sta_date" column="SALARY_CAL_STA_DATE" />
+		<result property="salary_cal_end_date" column="SALARY_CAL_END_DATE" />
+		<result property="salary_total" column="SALARY_TOTAL" />
+		<result property="attitude_book_id" column="ATTITUDE_BOOK_ID" />
+	</resultMap>
+	
+	
+	<select id="selectOctSalaryBookVO" parameterType="nexacro.sample.vo.Oct_SalaryBook.Oct_SalaryBookVO"
+		resultMap="SalaryBook">
+		SELECT
+			SALARY_BOOK_NO,
+			SALARY_BOOK_CODE,
+			SALARY_BOOK_NM,
+			SALARY_BOOK_REG_DATE,
+			SALARY_SEND_DATE,
+			SALARY_REG_USER_NO,
+			SALARY_MOD_DATE,
+			SALARY_MOD_USER_NO,
+			SALARY_ACC_DATE,
+			SALARY_ACC_USER_NO,
+			SALARY_ACC_YN,
+			SALARY_CAL_STA_DATE,
+			SALARY_CAL_END_DATE,
+			SALARY_TOTAL,
+			ATTITUDE_BOOK_ID
+		FROM 
+		(SELECT SALARY_BOOK_NO, 
+		SALARY_BOOK_CODE,
+		SALARY_BOOK_NM,
+		SALARY_BOOK_REG_DATE,
+		SALARY_SEND_DATE,
+		(SELECT EMP_NAME FROM EMP WHERE SALARY_REG_USER_NO = EMP_NO)||' '||SALARY_REG_USER_NO AS SALARY_REG_USER_NO,
+		SALARY_MOD_DATE,
+		(SELECT EMP_NAME FROM EMP WHERE SALARY_MOD_USER_NO = EMP_NO)||' '||SALARY_MOD_USER_NO AS SALARY_MOD_USER_NO,
+		SALARY_ACC_DATE,
+		(SELECT EMP_NAME FROM EMP WHERE SALARY_ACC_USER_NO = EMP_NO)||' '||SALARY_ACC_USER_NO AS SALARY_ACC_USER_NO,
+		SALARY_ACC_YN,
+		SALARY_CAL_STA_DATE,
+		SALARY_CAL_END_DATE,
+		SALARY_TOTAL,
+		ATTITUDE_BOOK_ID
+		FROM SALARY_BOOK ORDER BY SALARY_BOOK_NM)
+		<if test='searchKeyword !="SALARY_BOOK_NM"'>WHERE SALARY_BOOK_NM LIKE '%'||#{searchKeyword}||'%'</if>
+
+	</select>
+
+
+	<insert id="insertOctSalaryBookVO" parameterType="nexacro.sample.vo.Oct_SalaryBook.Oct_SalaryBookVO">
+        <![CDATA[
+            INSERT INTO SALARY_BOOK (
+                SALARY_BOOK_NO,	
+				SALARY_BOOK_CODE,	
+				SALARY_BOOK_NM,
+				SALARY_BOOK_REG_DATE,	
+				SALARY_SEND_DATE,	
+				SALARY_REG_USER_NO,	
+				SALARY_MOD_DATE,	
+				SALARY_MOD_USER_NO,	
+				SALARY_ACC_DATE,	
+				SALARY_ACC_USER_NO,	
+				SALARY_ACC_YN,	
+				SALARY_CAL_STA_DATE,	
+				SALARY_CAL_END_DATE,
+				SALARY_TOTAL,
+				ATTITUDE_BOOK_ID) 
+			VALUES (
+                TO_CHAR(SYSDATE, 'YYYY') ||TO_CHAR(SYSDATE, 'MM')|| TO_CHAR(SYSDATE, 'DD')||SALARY_BOOK_SEQ.NEXTVAL,
+				#{salary_book_code, jdbcType = VARCHAR},
+				#{salary_book_nm, jdbcType = VARCHAR},
+				SYSDATE,
+				#{salary_send_date, jdbcType = VARCHAR},
+				#{salary_reg_user_no, jdbcType = VARCHAR},
+				#{salary_mod_date, jdbcType = VARCHAR},
+				#{salary_mod_user_no, jdbcType = VARCHAR},
+				#{salary_acc_date, jdbcType = VARCHAR},
+				#{salary_acc_user_no, jdbcType = VARCHAR},
+				#{salary_acc_yn, jdbcType = VARCHAR},
+				#{salary_cal_sta_date, jdbcType = VARCHAR},
+				#{salary_cal_end_date, jdbcType = VARCHAR},
+				#{salary_total, jdbcType = VARCHAR},
+				#{attitude_book_id, jdbcType = VARCHAR})
+        ]]>
+	</insert>
+
+	<update id="updateOctSalaryBookVO" parameterType="nexacro.sample.vo.Oct_SalaryBook.Oct_SalaryBookVO">
+        <![CDATA[
+            UPDATE SALARY_BOOK 
+            SET 
+				SALARY_BOOK_CODE =#{salary_book_code, jdbcType = VARCHAR},
+				SALARY_BOOK_NO =#{salary_book_no, jdbcType = VARCHAR},
+				SALARY_BOOK_NM =#{salary_book_nm, jdbcType = VARCHAR},
+				SALARY_BOOK_REG_DATE =#{salary_book_reg_date, jdbcType = VARCHAR},	
+				SALARY_SEND_DATE =#{salary_send_date, jdbcType = VARCHAR},
+				SALARY_MOD_DATE = SYSDATE,	
+				SALARY_MOD_USER_NO = #{salary_mod_user_no, jdbcType = VARCHAR},	
+				SALARY_ACC_DATE = #{salary_acc_date, jdbcType = VARCHAR},
+				SALARY_ACC_USER_NO = #{salary_acc_user_no, jdbcType = VARCHAR},
+				SALARY_ACC_YN= #{salary_acc_yn, jdbcType = VARCHAR},	
+				SALARY_CAL_STA_DATE = #{salary_cal_sta_date, jdbcType = VARCHAR},	
+				SALARY_CAL_END_DATE = #{salary_cal_end_date, jdbcType = VARCHAR},
+				SALARY_TOTAL = #{salary_total, jdbcType = VARCHAR}	
+				WHERE SALARY_BOOK_NO=#{salary_book_no, jdbcType = VARCHAR}
+        ]]>
+	</update>
+
+	<delete id="deleteOctSalaryBookVO" parameterType="nexacro.sample.vo.Oct_SalaryBook.Oct_SalaryBookVO">
+        <![CDATA[
+            DELETE FROM SALARY_BOOK
+            WHERE SALARY_BOOK_NO=#{salary_book_no}
+        ]]>
+	</delete>
+
+   	  
+
+</mapper>
+

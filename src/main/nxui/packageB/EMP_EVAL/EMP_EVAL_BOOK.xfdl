@@ -1,0 +1,723 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="EMP_EVAL_BOOK" inheritanceid="" position="absolute" titletext="인사평가대장" onload="form_onload" left="0" top="0" width="1024" height="654">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img00" taborder="14" left="8" top="125" width="1009" height="303" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img02" taborder="1" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" position="absolute" left="7" top="471" height="118" width="1010"/>
+        <Static id="sta_02" taborder="13" left="12" top="504" width="1000" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;" tooltiptype="default"/>
+        <Static id="sta_00" taborder="12" left="12" top="480" width="1000" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <ImageViewer id="img_titlebg" taborder="1" style="background:#3366ffff;color:#ffffffff;" position="absolute" left="7" top="7" height="50" width="1012" onclick="img_titlebg_onclick"/>
+        <Static id="sta_title" text="인사평가대장" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29" onclick="sta_title_onclick"/>
+        <ImageViewer id="img01" taborder="1" position="absolute" left="7" top="65" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" width="1012"/>
+        <Static id="sta_01" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;" position="absolute" left="60" top="70" height="25" width="944"/>
+        <Static id="sta_no" text="평가기간코드" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;" onclick="sta_no_onclick" position="absolute" left="20" width="105" top="70" height="25"/>
+        <Button id="btn_search" taborder="6" text="검색" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" position="absolute" left="567" width="55" top="71" height="23" onclick="btn_search_onclick"/>
+        <Static id="sta_17" text="인사평가대장명" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;" onclick="sta_17_onclick" position="absolute" left="12" width="121" top="480" height="25"/>
+        <Static id="sta_05" taborder="66" left="12" top="528" width="1000" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Edit id="edit_emp_eval_book_nm" taborder="0" maxlength="30" enable="true" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" position="absolute" left="138" width="162" top="482" height="20"/>
+        <Button id="btn_aprv" taborder="0" text="추가" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;" position="absolute" top="434" height="23" onclick="btn_aprv_onclick" left="829" width="55"/>
+        <Button id="btn_save" taborder="1" text="저장" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;" position="absolute" top="434" height="23" onclick="fn_save" left="949" width="55"/>
+        <Combo id="combo_eval_term_code_top" taborder="1" index="0" position="absolute" left="138" width="130" top="73" height="19" displaynulltext="선택" onitemchanged="Combo00_onitemchanged" innerdataset="@ds_eval_date_code" datacolumn="name" codecolumn="code" value="4000" text="전체"/>
+        <Button id="btn_del" taborder="1" text="삭제" class="btn_WFSA_Search" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;" position="absolute" top="434" height="23" onclick="btn_del_onclick" left="889" width="55"/>
+        <Div id="div_page" taborder="10" text="Div00" left="222" top="436" width="573" height="18" visible="false">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="25" text="이전" onclick="div_page_stc_Prev_onclick" visible="true" left="98" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_Next" taborder="26" text="다음" onclick="div_page_stc_Next_onclick" visible="true" left="468" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No0" taborder="27" text="1" onclick="div_page_stc_No_onclick" visible="true" left="138" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No1" taborder="28" text="2" onclick="div_page_stc_No_onclick" visible="true" left="170" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No2" taborder="29" text="3" onclick="div_page_stc_No_onclick" visible="true" left="202" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No3" taborder="30" text="4" onclick="div_page_stc_No_onclick" visible="true" left="234" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No4" taborder="31" text="5" onclick="div_page_stc_No_onclick" visible="true" left="266" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No5" taborder="32" text="6" onclick="div_page_stc_No_onclick" visible="true" left="298" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No6" taborder="33" text="7" onclick="div_page_stc_No_onclick" visible="true" left="330" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No7" taborder="34" text="8" onclick="div_page_stc_No_onclick" visible="true" left="362" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No8" taborder="35" text="9" onclick="div_page_stc_No_onclick" visible="true" left="394" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No9" taborder="36" text="10" onclick="div_page_stc_No_onclick" visible="true" left="426" top="-1" width="29" height="19" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="sta_12" taborder="11" text="인사평가대장목록" onclick="sta_12_onclick" left="10" top="109" width="111" height="13" style="background:transparent;border:0 none white ;color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Static id="sta_03" taborder="15" text="확정여부" left="646" top="504" width="113" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_09" taborder="31" text="평가시작일" left="12" top="504" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;" onclick="sta_09_onclick"/>
+        <Static id="sta_04" taborder="37" text="평가기간코드" onclick="sta_17_onclick" left="325" top="480" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Combo id="combo_eval_term_code" taborder="41" displaynulltext="선택" codecolumn="code" datacolumn="name" left="451" top="482" width="162" height="19" innerdataset="@ds_eval_date_code_bottom" onitemchanged="Combo02_onitemchanged"/>
+        <Static id="sta_22" taborder="45" text="총점" onclick="sta_19_onclick" left="646" top="480" width="113" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edit_search_emp_no" taborder="65" maxlength="30" left="399" top="72" width="162" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_18" text="평가종료일" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;" onclick="sta_18_onclick" position="absolute" left="325" width="121" top="504" height="25"/>
+        <Static id="sta_06" taborder="67" text="등록일시" left="12" top="528" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_11" taborder="75" left="12" top="552" width="1000" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_10" taborder="73" text="등록자사번" onclick="sta_18_onclick" left="12" top="552" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Edit id="edit_emp_eval_reg_user_no" taborder="74" maxlength="30" left="138" top="555" width="162" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="edit_emp_eval_reg_user_no_oneditclick"/>
+        <Static id="sta_13" taborder="76" text="수정일시" left="325" top="528" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;" onclick="sta_13_onclick"/>
+        <Static id="sta_14" taborder="78" text="수정자사번" onclick="sta_18_onclick" left="325" top="552" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Edit id="edit_emp_eval_mod_user_no" taborder="79" maxlength="3" left="452" top="555" width="162" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_15" taborder="80" text="확정일" left="646" top="528" width="113" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_16" taborder="82" text="확정자사번" onclick="sta_18_onclick" left="646" top="552" width="113" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Edit id="edit_emp_eval_acc_user_no" taborder="83" maxlength="30" left="767" top="555" width="170" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_no00" taborder="86" text="사원번호" onclick="sta_no_onclick" left="281" top="70" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Radio id="radio_emp_eval_acc_yn" taborder="87" left="767" top="508" height="19" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" index="0" value="Y" width="165" visible="true">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">Y</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">N</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Grid id="Grid00" taborder="100" useinputpanel="false" left="15" top="132" height="284" binddataset="ds_emp_eval_book" oncelldblclick="grd_plaintiff_oncelldbclick" width="995" oncellclick="grd_plaintiff_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="60"/>
+                <Column size="123"/>
+                <Column size="91"/>
+                <Column size="102"/>
+                <Column size="103"/>
+                <Column size="96"/>
+                <Column size="160"/>
+                <Column size="92"/>
+                <Column size="160"/>
+                <Column size="84"/>
+                <Column size="160"/>
+                <Column size="107"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="번호"/>
+                <Cell col="1" text="대장명"/>
+                <Cell col="2" text="평가기간코드"/>
+                <Cell col="3" text="평가시작일"/>
+                <Cell col="4" text="평가종료일"/>
+                <Cell col="5" text="등록날짜"/>
+                <Cell col="6" text="등록자사번"/>
+                <Cell col="7" text="수정날짜"/>
+                <Cell col="8" text="수정자사번"/>
+                <Cell col="9" text="확정날짜"/>
+                <Cell col="10" text="확정자사번"/>
+                <Cell col="11" text="확정여부"/>
+                <Cell col="12" text="총합"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_EVAL_BOOK_NO"/>
+                <Cell col="1" edittype="text" text="bind:EMP_EVAL_BOOK_NM"/>
+                <Cell col="2" displaytype="text" edittype="combo" text="bind:EVAL_TERM_CODE" combodataset="ds_eval_date_code_bottom" combocodecol="code" combodatacol="name"/>
+                <Cell col="3" displaytype="normal" edittype="date" text="bind:EMP_EVAL_STA_DATE" editacceptsenter="false"/>
+                <Cell col="4" displaytype="normal" edittype="date" text="bind:EMP_EVAL_END_DATE"/>
+                <Cell col="5" edittype="date" text="bind:EMP_EVAL_REG_DATE"/>
+                <Cell col="6" edittype="none" text="bind:EMP_NAME"/>
+                <Cell col="7" edittype="date" text="bind:EMP_EVAL_MOD_DATE"/>
+                <Cell col="8" text="bind:EMP_MOD_NAME"/>
+                <Cell col="9" edittype="date" text="bind:EMP_EVAL_ACC_DATE"/>
+                <Cell col="10" text="bind:EMP_ACC_NAME"/>
+                <Cell col="11" displaytype="combo" edittype="combo" text="bind:EMP_EVAL_ACC_YN" combodataset="ds_eval_book_acc_yn" combocodecol="code" combodatacol="name"/>
+                <Cell col="12" text="bind:EMP_EVAL_SUM"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="fn_search01" taborder="103" onclick="fn_reempno_search_onclick" cssclass="btn_WF_SearchSmall" left="591" top="555" width="22" height="20"/>
+        <Button id="fn_search02" taborder="104" onclick="fn_okempno_search_onclick" cssclass="btn_WF_SearchSmall" left="914" top="555" width="22" height="20"/>
+        <Button id="fn_search00" taborder="105" onclick="fn_empno_search_onclick" cssclass="btn_WF_SearchSmall" left="539" top="72" width="22" height="20"/>
+        <Static id="Static02" taborder="106" text="*" left="16" top="487" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Static id="Static00" taborder="107" text="*" left="335" top="487" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Button id="fn_search03" taborder="108" onclick="fn_regempno_search_onclick" cssclass="btn_WF_SearchSmall" left="277" top="555" width="22" height="20"/>
+        <Calendar id="calendar_emp_eval_mod_date" taborder="109" left="452" top="530" height="20" width="162"/>
+        <Static id="Static01" taborder="112" text="Static01" left="766" top="484" right="20.31%" height="16" onclick="Static01_onclick"/>
+        <Calendar id="calendar_emp_eval_reg_date" taborder="113" left="138" top="530" width="162" height="20"/>
+        <Calendar id="calendar_emp_eval_acc_date" taborder="114" left="767" top="530" width="170" height="20"/>
+        <Calendar id="calendar_emp_eval_sta_date" taborder="115" left="138" top="506" width="162" height="20"/>
+        <Calendar id="calendar_emp_eval_end_date" taborder="116" left="452" top="506" width="162" height="20"/>
+        <Edit id="edit_searchNotVisible" taborder="117" left="0.88%" top="662" right="84.28%" height="16" enable="false" visible="false"/>
+        <Edit id="edit_emp_eval_reg_user_no_NOT" taborder="118" maxlength="30" left="169" top="662" width="162" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" visible="false" enable="false"/>
+        <Edit id="edit_emp_eval_mod_user_no_NOT" taborder="119" maxlength="3" left="7" top="690" width="162" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" visible="false" enable="false"/>
+        <Edit id="edit_emp_eval_acc_user_no_NOT" taborder="120" maxlength="30" left="179" top="690" width="170" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" visible="false" enable="false"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item10" compid="edit_emp_eval_book_nm" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+      <BindItem id="item2" compid="edit_search_emp_no" propid="value" datasetid="ds_masterCodeList" columnid="className"/>
+      <BindItem id="item8" compid="PD_IN_COM_MM001" propid="font" datasetid="ds_search" columnid=""/>
+      <BindItem id="item4" compid="edit_emp_eval_book_nm" propid="" datasetid="ds_emp_eval_book" columnid="emp_eval_book_no"/>
+      <BindItem id="item16" compid="edit_emp_eval_acc_user_no" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+      <BindItem id="item0" compid="radio_emp_eval_acc_yn" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_ACC_YN"/>
+      <BindItem id="item18" compid="combo_eval_term_code" propid="text" datasetid="ds_eval_date_code_bottom" columnid="name"/>
+      <BindItem id="item20" compid="combo_eval_term_code" propid="value" datasetid="ds_emp_eval_book" columnid="EVAL_TERM_CODE"/>
+      <BindItem id="item7" compid="calendar_emp_eval_mod_date" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_MOD_DATE"/>
+      <BindItem id="item21" compid="Static01" propid="text" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_SUM"/>
+      <BindItem id="item5" compid="calendar_emp_eval_reg_date" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_REG_DATE"/>
+      <BindItem id="item13" compid="calendar_emp_eval_acc_date" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_ACC_DATE"/>
+      <BindItem id="item22" compid="calendar_emp_eval_sta_date" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_STA_DATE"/>
+      <BindItem id="item23" compid="calendar_emp_eval_end_date" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_END_DATE"/>
+      <BindItem id="item1" compid="edit_emp_eval_reg_user_no_NOT" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_REG_USER_NO"/>
+      <BindItem id="item3" compid="edit_emp_eval_mod_user_no_NOT" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_MOD_USER_NO"/>
+      <BindItem id="item6" compid="edit_emp_eval_acc_user_no_NOT" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_ACC_USER_NO"/>
+      <BindItem id="item9" compid="edit_emp_eval_acc_user_no_NOT" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+      <BindItem id="item11" compid="edit_emp_eval_reg_user_no" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_NAME"/>
+      <BindItem id="item12" compid="edit_emp_eval_mod_user_no" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_MOD_NAME"/>
+      <BindItem id="item14" compid="edit_emp_eval_acc_user_no" propid="value" datasetid="ds_emp_eval_book" columnid="EMP_ACC_NAME"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_emp_eval_book">
+        <ColumnInfo>
+          <Column id="EMP_EVAL_BOOK_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_BOOK_NM" type="STRING" size="256"/>
+          <Column id="EVAL_TERM_CODE" type="STRING" size="4"/>
+          <Column id="EMP_EVAL_STA_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_END_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_MOD_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_MOD_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_ACC_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_YN" type="STRING" size="1"/>
+          <Column id="EMP_EVAL_SUM" type="INT" size="3"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="EMP_NAME2" type="STRING" size="256"/>
+          <Column id="EMP_ACC_NAME" type="STRING" size="256"/>
+          <Column id="EMP_MOD_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_eval_date_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4000</Col>
+            <Col id="name">전체</Col>
+          </Row>
+          <Row>
+            <Col id="code">4010</Col>
+            <Col id="name">년간/4010</Col>
+          </Row>
+          <Row>
+            <Col id="code">4020</Col>
+            <Col id="name">반/4020</Col>
+          </Row>
+          <Row>
+            <Col id="name">분기/4030</Col>
+            <Col id="code">4030</Col>
+          </Row>
+          <Row>
+            <Col id="name">월간/4040</Col>
+            <Col id="code">4040</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <ConstColumn id="PageIndex" type="INT" size="30" value="1"/>
+          <ConstColumn id="PageSize" type="INT" size="30" value="5"/>
+          <ConstColumn id="PageUnit" type="INT" size="30" value="5"/>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_addFile">
+        <ColumnInfo>
+          <Column id="addFileRelSeq" type="STRING" size="256"/>
+          <Column id="addFilePcFile" type="STRING" size="256"/>
+          <Column id="addFilePcFileExt" type="STRING" size="256"/>
+          <Column id="addFileSize" type="STRING" size="256"/>
+          <Column id="addFileSerPath" type="STRING" size="256"/>
+          <Column id="addFileSerFileName" type="STRING" size="256"/>
+          <Column id="addFileDel" type="STRING" size="256"/>
+          <Column id="addFileRegDate" type="STRING" size="256"/>
+          <Column id="addFileChanDate" type="STRING" size="256"/>
+          <Column id="addFileAdmName" type="STRING" size="256"/>
+          <Column id="instAdmCode" type="STRING" size="256"/>
+          <Column id="preAddFileSeq" type="STRING" size="256"/>
+          <Column id="preIwrNo" type="STRING" size="256"/>
+          <Column id="edocAddFileSeq" type="STRING" size="256"/>
+          <Column id="edocAdmSeq" type="STRING" size="256"/>
+          <Column id="lawsuitAdmNo" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_eval_date_code_bottom">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4010</Col>
+            <Col id="name">년간/4010</Col>
+          </Row>
+          <Row>
+            <Col id="code">4020</Col>
+            <Col id="name">반/4020</Col>
+          </Row>
+          <Row>
+            <Col id="name">분기/4030</Col>
+            <Col id="code">4030</Col>
+          </Row>
+          <Row>
+            <Col id="name">월간/4040</Col>
+            <Col id="code">4040</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_eval_book_acc_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="name">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="name">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+this.g_currentRow = 0;
+this.confirmStr = "";
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	
+	//변수초기화
+	var nRow = this.ds_search.addRow();
+	this.ds_search.setColumn(0,"searchCondition", "all");
+	this.ds_search.setColumn(0,"searchKeyword", "not");
+	this.test=0;
+	
+	var objCalendar = new Calendar("Calendar", "absolute", 100, 120, 196, 46, null, null);
+	
+	objCalendar.show(); 
+
+	this.btn_search_onclick();
+	/////초기 셀렉트
+
+}
+
+this.grd_plaintiff_oncelldbclick = function(obj:Grid, e:nexacro.GridClickEventInfo){
+
+	if(e.col == "0"){
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+
+	var objChildFrame = new ChildFrame();
+    objChildFrame.init("chf_popup1"//팝업창id
+	          ,"absolute"
+                      , nLeft 
+                      , nTop 
+                      , 400
+                      , 350
+                      , null
+                      , null
+                      , "EMP_EVAL::EMP_EVAL.xfdl");
+	
+	var objParam = {param1:this.ds_emp_eval_book.getColumn(this.Grid00.currentrow,"EMP_EVAL_BOOK_NO"),
+					param2:this.edit_emp_eval_reg_user_no_NOT.value,
+					param3:this.edit_emp_eval_reg_user_no.value};
+					objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , function(){
+                   
+							var nRow = this.ds_search.addRow();
+							this.ds_search.setColumn(0,"searchCondition", "all");
+							this.ds_search.setColumn(0,"searchKeyword", "not");
+							this.test=0;
+							this.g_currentRow = this.Grid00.currentrow;
+							this.btn_search_onclick();
+                          
+                          });
+        }       
+        else if (e.col == '6'){
+			this.fn_regempno_search_onclick();
+        }
+        else if (e.col == '8'){
+			this.fn_reempno_search_onclick();
+        }
+        else if( e.col == '10'){
+			this.fn_okempno_search_onclick();
+        }
+}
+
+
+
+
+this.grd_plaintiff_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	
+	
+	
+}
+
+
+
+//////////////////////////////////////////////////////
+this.btn_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+     var nRow = this.ds_search.addRow();
+     
+	 if(this.combo_eval_term_code_top.value == 4000){
+		this.ds_search.setColumn(nRow,"searchCondition", "all");
+	 }else{
+		this.ds_search.setColumn(nRow,"searchCondition", this.combo_eval_term_code_top.value);
+	 }
+	 //검색창이 비어 있다면
+	 if(this.edit_search_emp_no.value == '' || this.edit_search_emp_no.value == null){
+		this.ds_search.setColumn(nRow,"searchKeyword", "not");
+	 }else{
+		this.ds_search.setColumn(nRow,"searchKeyword", this.edit_searchNotVisible.value);
+	 }
+	 
+	 var oDatas =  {
+	 
+			  svcid : "search",
+			  sController : "empEvalBookSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_emp_eval_book=ds_output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    
+			  nDataType : 0,   
+			  bCompress :false		  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+		
+	
+	 Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert("검색결과가 없습니다.");			
+		   return;
+		} 
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_emp_eval_book : " + pThis.ds_emp_eval_book.saveXML());
+			
+		    //가져온 사원이름과 사원번호 조합
+	       for(var i = 0; i < pThis.ds_emp_eval_book.getRowCount(); i++){ 
+				pThis.ds_emp_eval_book.setColumn(i, "EMP_NAME",  pThis.ds_emp_eval_book.getColumn(i,"EMP_NAME") + "(" + pThis.ds_emp_eval_book.getColumn(i,"EMP_EVAL_REG_USER_NO") + ")");
+	       }			
+		    //가져온 수정자 이름과 사원번호 조합
+	       for(var i = 0; i < pThis.ds_emp_eval_book.getRowCount(); i++){
+				pThis.ds_emp_eval_book.setColumn(i, "EMP_MOD_NAME", pThis.ds_emp_eval_book.getColumn(i,"EMP_MOD_NAME") + "(" + pThis.ds_emp_eval_book.getColumn(i,"EMP_EVAL_MOD_USER_NO") + ")");
+	       }
+	       //가져온 확정자 이름과 사원번호 조합
+	       for(var i = 0; i < pThis.ds_emp_eval_book.getRowCount(); i++){
+				pThis.ds_emp_eval_book.setColumn(i, "EMP_ACC_NAME", pThis.ds_emp_eval_book.getColumn(i,"EMP_ACC_NAME") + "(" + pThis.ds_emp_eval_book.getColumn(i,"EMP_EVAL_ACC_USER_NO") + ")");
+	       }
+	       //가져온 평가기간코드와 네임 조합
+	       for(var i = 0; i < pThis.ds_emp_eval_book.getRowCount(); i++){
+				for(var j = 0; j < pThis.ds_eval_date_code.getRowCount(); j++){
+					if(pThis.ds_eval_date_code.getColumn(j,"code") == pThis.ds_emp_eval_book.getColumn(i,"EVAL_TERM_CODE")){
+						pThis.ds_emp_eval_book.addColumn("EMP_CODE_NAME", "string", 256);
+						pThis.ds_emp_eval_book.setColumn(i, "EMP_CODE_NAME", pThis.ds_eval_date_code.getColumn(j, "name"));
+					}
+				}
+	       }
+	       
+	       pThis.Grid00.selectCell(pThis.g_currentRow);
+	       pThis.g_currentRow = 0;
+	 });
+	
+
+	 
+	 this.ds_search.clearData();
+}
+
+//삭제
+this.fn_delete = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_emp_eval_book.rowposition;
+	this.ds_emp_eval_book.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		//this.fn_search();
+	}
+}
+
+
+
+//저장
+this.fn_save = function(strid)
+{
+
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "empEvalBookModifyVO.do",			 
+			  inds :["ds_input=ds_emp_eval_book:U"],
+			  outds :[
+				 "ds_emp_eval_book=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,   
+			  nDataType : 0,   
+			  bCompress :false,	 		  
+	}; 
+	
+
+	
+	Iject.transaction(this,oDatas,function(){   
+ 
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	       
+	       if(pThis.confirmStr == "insert"){
+				Iject.alert("추가 완료");
+	       }else if(pThis.confirmStr == "update"){
+				Iject.alert("수정 완료");
+	       }
+	       
+	      switch(strid)
+	      {
+			 case "insert" :
+				Iject.alert("삽입완료");
+				break;
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	    
+	    pThis.g_currentRow = pThis.Grid00.currentrow;
+	    pThis.btn_search_onclick();
+		
+	});
+	
+	
+}
+
+//추가버튼
+this.btn_aprv_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	
+	var nRow = this.ds_emp_eval_book.addRow();
+	var oDatas =  {
+			 svcid : "select",
+			 sController : "selectEmpEvalBookNo.do",	
+			 bAsync : true,   
+			 nDataType : 0,   
+			 bCompress :false,	 		  
+		};
+		
+	Iject.transaction(this,oDatas,function(){
+		var pThis = this.fobj;
+		pThis.ds_emp_eval_book.setColumn(nRow, "EMP_EVAL_BOOK_NO", pThis.test);
+		pThis.ds_emp_eval_book.setColumn(nRow, "EMP_EVAL_SUM", 0);
+		pThis.edit_(nRow, "EMP_EVAL_SUM", 0);
+		alert(pThis.ds_emp_eval_book.getColumn(nRow, "EMP_EVAL_SUM"));
+	});
+	
+	
+
+}
+
+this.btn_del_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_emp_eval_book.rowposition;
+	this.ds_emp_eval_book.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		//this.fn_search();
+	}
+}
+
+/*
+this.useless = function()
+{
+	//그리드 행번호 가져옴
+	var nRow = this.grd_plaintiff.currentrow;
+	alert(nRow);
+	
+	//그행의 사번 가져옴
+	
+	
+	//행수정
+	//this.ds_emp_eval_book.setColumn(nRow, "EMP_EVAL_REG_USER_NO", strText + "(육근우)");
+	
+	for(var i = 0; i < this.ds_emp_eval_book.getRowCount(); i++){
+		var strText = this.grd_plaintiff.getCellText(i,6);
+		this.ds_emp_eval_book.setColumn(i, "EMP_EVAL_REG_USER_NO", strText + "(육근우)");
+	}
+	
+	
+}*/
+
+
+//사번검색
+this.fn_empno_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	var emp_NoName = system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+	//문자열 ,를 기준으로 잘라서 배열로 저장
+	objArr = emp_NoName.split(/,/g, 2); 					
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_no");
+	this.edit_search_emp_no.set_value(objArr[0] + "(" + objArr[1] + ")");
+	this.edit_searchNotVisible.set_value(objArr[1]);
+	
+
+}
+
+//등록자사번검색
+this.fn_regempno_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	var emp_NoName = system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var objArr = emp_NoName.split(/,/g, 2); 					
+	this.edit_emp_eval_reg_user_no.set_value(objArr[0] + "(" + objArr[1] + ")");
+	this.edit_emp_eval_reg_user_no_NOT.set_value(objArr[1]);
+	
+}
+
+
+//수정자사번검색
+this.fn_reempno_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	var emp_NoName = system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var objArr = emp_NoName.split(/,/g, 2); 
+	this.edit_emp_eval_mod_user_no.set_value(objArr[0] + "(" + objArr[1] + ")");
+	this.edit_emp_eval_mod_user_no_NOT.set_value(objArr[1]);						
+							
+
+}
+
+
+
+
+//확정자사번검색
+this.fn_okempno_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	var emp_NoName = system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+
+	var objArr = emp_NoName.split(/,/g, 2); 
+	this.edit_emp_eval_acc_user_no.set_value(objArr[0] + "(" + objArr[1] + ")");
+	this.edit_emp_eval_acc_user_no_NOT.set_value(objArr[1]);	
+}
+
+
+
+
+
+this.Calendar02_oneditclick = function(obj:Calendar, e:nexacro.EditClickEventInfo)
+{
+
+}
+
+this.Static01_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

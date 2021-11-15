@@ -1,0 +1,347 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="VACATION_CODE" left="0" top="0" width="800" height="768" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text=" 연차 LIST" left="1%" top="8" right="6.88%" height="61" style="background:#3366ffff;border:1 solid #808080ff ;color:azure;font:bold 12 굴림;" onclick="Static00_onclick"/>
+        <Grid id="Grid00" taborder="3" useinputpanel="false" left="1.13%" top="107" right="7%" height="123" binddataset="ds_vacation" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="120"/>
+                <Column size="96"/>
+                <Column size="85"/>
+                <Column size="130"/>
+                <Column size="137"/>
+                <Column size="110"/>
+                <Column size="58"/>
+                <Column size="88"/>
+                <Column size="85"/>
+                <Column size="84"/>
+                <Column size="63"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="연차코드번호"/>
+                <Cell col="1" text="등록자사번"/>
+                <Cell col="2" text="등록일자"/>
+                <Cell col="3" text="연차명"/>
+                <Cell col="4" text="시작일"/>
+                <Cell col="5" text="종료일"/>
+                <Cell col="6" text="확정"/>
+                <Cell col="7" text="수정일시"/>
+                <Cell col="8" text="수정사번"/>
+                <Cell col="9" text="확정일시"/>
+                <Cell col="10" text="확정자사번"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:vacation_code_id"/>
+                <Cell col="1" text="bind:reg_emp_id"/>
+                <Cell col="2" text="bind:reg_date"/>
+                <Cell col="3" text="bind:vacation_nm"/>
+                <Cell col="4" text="bind:start_date"/>
+                <Cell col="5" text="bind:end_date"/>
+                <Cell col="6" displaytype="checkbox" text="expr:confirmyn ==&quot;Y&quot;?1:0&quot;"/>
+                <Cell col="7" text="bind:modify_date"/>
+                <Cell col="8" text="bind:modify_emp_id"/>
+                <Cell col="9" text="bind:confirm_date"/>
+                <Cell col="10" text="bind:confirm_emp_id"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="Static01" taborder="31" text="연차등록" left="1%" top="80" right="83.13%" height="19" onclick="Static01_onclick" style="font:bold 10 굴림;"/>
+        <Div id="Div00" taborder="32" left="1%" top="238" right="7.12%" height="154" style="background:lavenderblush;border:1 solid #808080ff ;">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="1.5%" top="9" right="1.64%" height="129" style="background:#f0f0f0ff;border:1 solid #808080ff ;">
+                <Layouts>
+                  <Layout>
+                    <Div id="Div01" taborder="1" left="0%" top="35" right="0%" height="28" style="border:1 solid #808080ff ;">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static00" taborder="0" text="연차명" left="0%" top="-1" right="82.23%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static01" taborder="2" text="수정일시" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static02" taborder="4" text="확정여부" left="64.65%" top="-2" right="17.6%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Calendar id="Calendar00" taborder="7" left="50.94%" top="2" right="36.08%" height="21"/>
+                          <Radio id="Radio00" taborder="8" left="83.12%" top="3" right="0.43%" height="21" onitemclick="Div00_Div00_Div01_Radio00_onitemclick" codecolumn="codecolumn" datacolumn="datacolumn" columncount="2">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">Y</Col>
+                                  <Col id="datacolumn">사용</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">N</Col>
+                                  <Col id="datacolumn">비사용</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Radio>
+                          <Combo id="Combo00" taborder="9" left="18.47%" top="3" right="68.54%" height="21" onitemchanged="Div00_Div00_Div01_Combo00_onitemchanged" codecolumn="codecolumn" datacolumn="datacolumn">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">01</Col>
+                                  <Col id="datacolumn">연차무급휴가</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">02</Col>
+                                  <Col id="datacolumn">생리휴가</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">03</Col>
+                                  <Col id="datacolumn">출산전휴가</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">04</Col>
+                                  <Col id="datacolumn">배우자출산휴가</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">05</Col>
+                                  <Col id="datacolumn">경조사휴가</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">06</Col>
+                                  <Col id="datacolumn">병가휴가</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">07</Col>
+                                  <Col id="datacolumn">기타휴가</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Combo>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div02" taborder="2" left="0%" top="63" right="0%" height="28" style="border:1 solid #808080ff ;">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static00" taborder="0" text="연차기준코드" left="0%" top="-1" right="82.23%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static01" taborder="2" text="수정자사번" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Calendar id="Calendar00" taborder="7" left="50.94%" top="3" right="36.08%" height="21"/>
+                          <Combo id="Combo00" taborder="8" left="18.47%" top="1" right="68.69%" height="21" onitemchanged="Div00_Div00_Div02_Combo00_onitemchanged" codecolumn="codecolumn" datacolumn="datacolumn">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">2310</Col>
+                                  <Col id="datacolumn">40시간제</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">2320</Col>
+                                  <Col id="datacolumn">44시간제</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Combo>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div03" taborder="3" left="0%" top="91" right="0%" height="28" style="border:1 solid #808080ff ;">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static00" taborder="6" left="0%" top="-1" right="82.23%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;" text="등록일시"/>
+                          <Static id="Static01" taborder="8" text="확정일시" left="32.27%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Calendar id="Calendar00" taborder="16" left="18.47%" top="2" right="68.83%" height="21"/>
+                          <Calendar id="Calendar01" taborder="17" left="50.94%" top="3" right="36.08%" height="21"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div00" taborder="4" left="0%" top="7" right="0%" height="28" style="border:1 solid #808080ff ;">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static01" taborder="8" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;" text="등록자사번"/>
+                          <Static id="Static02" taborder="10" left="64.65%" top="-1" right="17.6%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;" text="확정자사번"/>
+                          <Edit id="Edit01" taborder="12" left="83.12%" top="3" right="0.43%" height="21"/>
+                          <Calendar id="Calendar00" taborder="13" left="50.94%" top="3" right="36.08%" height="21"/>
+                          <Static id="Static00" taborder="14" text="연차코드번호" left="0%" top="-1" right="82.25%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Edit id="Edit00" taborder="15" oneditclick="Div00_Div00_Div00_Edit00_oneditclick" left="18.47%" top="3" right="68.54%" height="21"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="33" text="초기화" left="76.38%" top="400" right="15.88%" height="37" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 10 굴림;" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="34" text="등록" left="85.13%" top="400" right="7.12%" height="37" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 10 굴림;" onclick="Button01_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="vacation_code_id" type="STRING" size="256"/>
+          <Column id="vacation_standard_code" type="STRING" size="256"/>
+          <Column id="vacation_nm" type="STRING" size="256"/>
+          <Column id="start_date" type="DATE" size="256"/>
+          <Column id="end_date" type="DATE" size="256"/>
+          <Column id="reg_date" type="DATE" size="256"/>
+          <Column id="reg_emp_id" type="STRING" size="256"/>
+          <Column id="modify_date" type="DATE" size="256"/>
+          <Column id="modify_emp_id" type="STRING" size="256"/>
+          <Column id="confirm_date" type="DATE" size="256"/>
+          <Column id="confirm_emp_id" type="STRING" size="256"/>
+          <Column id="confirmyn" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vacation_info">
+        <ColumnInfo>
+          <Column id="vacation_code_id" type="STRING" size="256"/>
+          <Column id="emp_id" type="STRING" size="256"/>
+          <Column id="use_end" type="STRING" size="256"/>
+          <Column id="vacation_days" type="STRING" size="256"/>
+          <Column id="use_days" type="STRING" size="256"/>
+          <Column id="emp_name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <ConstColumn id="PageIndex" type="INT" size="30" value="1"/>
+          <ConstColumn id="PageSize" type="INT" size="30" value="5"/>
+          <ConstColumn id="PageUnit" type="INT" size="30" value="5"/>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword">홍길동</Col>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.Div00.Div00.Edit00" propid="value" datasetid="ds_vacation" columnid="vacation_code_id"/>
+      <BindItem id="item1" compid="Div00.Div00.Div01.Combo00" propid="value" datasetid="ds_vacation" columnid="vacation_nm"/>
+      <BindItem id="item2" compid="Div00.Div00.Div02.Combo00" propid="value" datasetid="ds_vacation" columnid="vacation_standard_code"/>
+      <BindItem id="item3" compid="Div00.Div00.Div03.Calendar00" propid="value" datasetid="ds_vacation" columnid="reg_date"/>
+      <BindItem id="item4" compid="Div00.Div00.Div00.Calendar00" propid="value" datasetid="ds_vacation" columnid="reg_emp_id"/>
+      <BindItem id="item5" compid="Div00.Div00.Div01.Calendar00" propid="value" datasetid="ds_vacation" columnid="modify_date"/>
+      <BindItem id="item6" compid="Div00.Div00.Div02.Calendar00" propid="value" datasetid="ds_vacation" columnid="modify_emp_id"/>
+      <BindItem id="item7" compid="Div00.Div00.Div03.Calendar01" propid="value" datasetid="ds_vacation" columnid="confirm_date"/>
+      <BindItem id="item8" compid="Div00.Div00.Div00.Edit01" propid="value" datasetid="ds_vacation" columnid="confirm_emp_id"/>
+      <BindItem id="item9" compid="Div00.Div00.Div01.Radio00" propid="value" datasetid="ds_vacation" columnid="confirmyn"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	Iject.formOnload(obj);	
+	this.fn_search_onclick();
+
+} 
+
+
+//초기화
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.alert("초기화버튼 클릭");
+	this.ds_vacation.reset();
+}
+
+//등록
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.alert("등록버튼 클릭");
+
+}
+
+ //팝업처리
+ this.Grid00_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+ {
+ 	
+ 	var nLeft = system.clientToScreenX(this, 10);
+  	var nTop = system.clientToScreenY(this, 10);
+ 
+ 
+ var VACARTION_INFO = new ChildFrame();
+ 
+     VACARTION_INFO.init("VACARTION_INFO"
+					   ,"absolute"
+                       , nLeft 
+                       , nTop 
+                       , 400
+                       , 350
+                       , null
+                       , null
+                       , "Vacation::VACATION_INFO.xfdl");
+ 
+ 
+     VACARTION_INFO.set_dragmovetype("all");
+     VACARTION_INFO.set_openalign("center middle");
+     
+    // objChildFrame.set_overlaycolor("RGBA(196,196,196,0.5)")
+ //     
+      var objParam = {param1:this.Edit00.value
+                    };
+ 
+     VACARTION_CODE.showModal(this.getOwnerFrame()
+                           ,objParam
+                           ,this
+                           ,"fn_popupCallback");
+ }
+
+ //콜백함수
+ this.fn_popupCallback = function(strPopupID, strReturn)
+ {
+     if(strReturn == undefined){
+         return;
+     }
+ 
+     if(strPopupID == "VACARTION_CODE"){
+         this.alert("Return Value: " + strReturn);
+     }
+ };
+ 
+ this.fn_parent = function(pObj)
+{
+    this.ds_parent.copyData(pObj);
+};
+
+// 
+// this.Grid00_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo){
+// var nLeft = system.clientToScreenX(this, 10);
+// 	var nTop = system.clientToScreenY(this, 10);
+// 	 
+// 	var empSearch = new ChildFrame;
+// 	empSearch.init("emp"
+// 					, "absolute", nLeft, nTop, 300, 250, null, null
+// 					, "Vacation::VACATION_INFO.xfdl");
+// 					
+// 	empSearch.set_openalign("center middle");
+// 	empSearch.set_dragmovetype("all");
+// 	
+// 	system.showModalWindow(empSearch, 
+// 							"empModal",
+// 							this.getOwnerFrame(),
+// 							"",
+// 							this);
+//}]]></Script>
+  </Form>
+</FDL>

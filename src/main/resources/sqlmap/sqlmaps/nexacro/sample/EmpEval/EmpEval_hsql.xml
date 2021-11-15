@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="EmpEval">
+
+    <typeAlias alias="empEvalVO" type="nexacro.sample.vo.emp_eval.EmpEvalVO"/>
+    <typeAlias  alias="empVO" type="nexacro.sample.vo.emp.EmpVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+      
+    <resultMap id="empEval" class="empEvalVO">
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_BOOK_NM"	column="EMP_EVAL_BOOK_NM"/>
+        <result  property="EVAL_TERM_CODE"	column="EVAL_TERM_CODE"/>
+        <result  property="EMP_EVAL_STA_DATE"	column="EMP_EVAL_STA_DATE"/>
+        <result  property="EMP_EVAL_END_DATE"	column="EMP_EVAL_END_DATE"/>
+        <result  property="EMP_EVAL_REG_DATE"	column="EMP_EVAL_REG_DATE"/>
+        <result  property="EMP_EVAL_REG_USER_NO"	column="EMP_EVAL_REG_USER_NO"/>
+        <result  property="EMP_EVAL_MOD_DATE"	column="EMP_EVAL_MOD_DATE"/>
+        <result  property="EMP_EVAL_MOD_USER_NO"	column="EMP_EVAL_MOD_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_DATE"	column="EMP_EVAL_ACC_DATE"/>
+        <result  property="EMP_EVAL_ACC_USER_NO"	column="EMP_EVAL_ACC_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_YN"	column="EMP_EVAL_ACC_YN"/>
+        <result  property="EMP_EVAL_SUM"	column="EMP_EVAL_SUM"/>      
+        <result  property="EMP_NAME"	column="EMP_NAME"/>      
+    </resultMap>
+    
+
+    <select id="empEval.selectEmpEvalVOList" parameterClass="empEvalVO" resultMap="empEval">
+		<![CDATA[
+		SELECT 
+			emp.EMP_NAME,
+			eb.EMP_EVAL_BOOK_NO,
+			eb.EMP_EVAL_BOOK_NM,
+			eb.EVAL_TERM_CODE,
+			eb.EMP_EVAL_STA_DATE,
+			eb.EMP_EVAL_END_DATE,
+			eb.EMP_EVAL_REG_DATE,
+			eb.EMP_EVAL_REG_USER_NO,
+			eb.EMP_EVAL_MOD_DATE,
+			eb.EMP_EVAL_MOD_USER_NO,
+			eb.EMP_EVAL_ACC_DATE,
+			eb.EMP_EVAL_ACC_USER_NO,
+			eb.EMP_EVAL_ACC_YN,
+			eb.EMP_EVAL_SUM
+		 FROM EMP_EVAL_BOOK eb, EMP emp
+		 WHERE emp.EMP_NO = eb.EMP_EVAL_REG_USER_NO
+		 
+		 ]]>
+		 
+
+		 <isNotEqual property="searchCondition" compareValue="all">
+			AND eb.EVAL_TERM_CODE = #searchCondition#
+			<isNotEqual property="searchKeyword" compareValue="not">
+				AND eb.EMP_EVAL_REG_USER_NO = #searchKeyword#
+			</isNotEqual>
+		 </isNotEqual>
+		 <isEqual property="searchCondition" compareValue="all">
+			<isNotEqual property="searchKeyword" compareValue="not">
+				AND eb.EMP_EVAL_REG_USER_NO = #searchKeyword#
+			</isNotEqual>
+		 </isEqual>
+		 
+		 <![CDATA[
+		 ORDER BY eb.EMP_EVAL_BOOK_NO ASC
+		 ]]>
+    </select>
+    
+    <select id="empEval.selectEmpEvalModName" parameterClass="empEvalVO" resultMap="empEval">
+		<![CDATA[
+		SELECT 
+			emp.EMP_NAME,
+			eb.EMP_EVAL_BOOK_NO,
+			eb.EMP_EVAL_BOOK_NM,
+			eb.EVAL_TERM_CODE,
+			eb.EMP_EVAL_STA_DATE,
+			eb.EMP_EVAL_END_DATE,
+			eb.EMP_EVAL_REG_DATE,
+			eb.EMP_EVAL_REG_USER_NO,
+			eb.EMP_EVAL_MOD_DATE,
+			eb.EMP_EVAL_MOD_USER_NO,
+			eb.EMP_EVAL_ACC_DATE,
+			eb.EMP_EVAL_ACC_USER_NO,
+			eb.EMP_EVAL_ACC_YN,
+			eb.EMP_EVAL_SUM
+		 FROM EMP_EVAL_BOOK eb, EMP emp
+		 WHERE emp.EMP_NO = eb.EMP_EVAL_MOD_USER_NO
+		 
+		 ]]>
+		 
+		 <isNotEqual property="searchCondition" compareValue="all">
+			AND eb.EVAL_TERM_CODE = #searchCondition#
+			<isNotEqual property="searchKeyword" compareValue="not">
+				AND eb.EMP_EVAL_REG_USER_NO = #searchKeyword#
+			</isNotEqual>
+		 </isNotEqual>
+		 <![CDATA[
+		 ORDER BY eb.EMP_EVAL_BOOK_NO ASC
+		 ]]>
+		 
+    </select>
+    
+    <select id="empEval.selectEmpEvalAccName" parameterClass="empEvalVO" resultMap="empEval">
+		<![CDATA[
+		SELECT 
+			emp.EMP_NAME,
+			eb.EMP_EVAL_BOOK_NO,
+			eb.EMP_EVAL_BOOK_NM,
+			eb.EVAL_TERM_CODE,
+			eb.EMP_EVAL_STA_DATE,
+			eb.EMP_EVAL_END_DATE,
+			eb.EMP_EVAL_REG_DATE,
+			eb.EMP_EVAL_REG_USER_NO,
+			eb.EMP_EVAL_MOD_DATE,
+			eb.EMP_EVAL_MOD_USER_NO,
+			eb.EMP_EVAL_ACC_DATE,
+			eb.EMP_EVAL_ACC_USER_NO,
+			eb.EMP_EVAL_ACC_YN,
+			eb.EMP_EVAL_SUM
+		 FROM EMP_EVAL_BOOK eb, EMP emp
+		 WHERE emp.EMP_NO = eb.EMP_EVAL_ACC_USER_NO
+		 
+		 ]]>
+		 
+		<isNotEqual property="searchCondition" compareValue="all">
+			AND eb.EVAL_TERM_CODE = #searchCondition#
+			<isNotEqual property="searchKeyword" compareValue="not">
+				AND eb.EMP_EVAL_REG_USER_NO = #searchKeyword#
+			</isNotEqual>
+		 </isNotEqual>
+		 <![CDATA[
+		 ORDER BY eb.EMP_EVAL_BOOK_NO ASC
+		 ]]>
+    </select>
+    
+    
+    <insert id="empEval.insertEmpEval" parameterClass="empEvalVO">
+		<![CDATA[
+		INSERT INTO EMP_EVAL_BOOK
+			(EMP_EVAL_BOOK_NO,
+			EMP_EVAL_BOOK_NM,
+			EVAL_TERM_CODE,
+			EMP_EVAL_STA_DATE,
+			EMP_EVAL_END_DATE,
+			EMP_EVAL_REG_DATE,
+			EMP_EVAL_REG_USER_NO,
+			EMP_EVAL_MOD_DATE,
+			EMP_EVAL_MOD_USER_NO,
+			EMP_EVAL_ACC_DATE,
+			EMP_EVAL_ACC_USER_NO,
+			EMP_EVAL_ACC_YN,
+			EMP_EVAL_SUM)
+		VALUES (
+   	  		#EMP_EVAL_BOOK_NO#,
+   	  		#EMP_EVAL_BOOK_NM#,
+   	  		#EVAL_TERM_CODE#,
+   	  		#EMP_EVAL_STA_DATE#,
+   	  		#EMP_EVAL_END_DATE#,
+   	  		#EMP_EVAL_REG_DATE#,
+   	  		#EMP_EVAL_REG_USER_NO#,
+   	  		#EMP_EVAL_MOD_DATE#,
+   	  		#EMP_EVAL_MOD_USER_NO#,
+   	  		#EMP_EVAL_ACC_DATE#,
+   	  		#EMP_EVAL_ACC_USER_NO#,
+   	  		#EMP_EVAL_ACC_YN#,
+   	  		#EMP_EVAL_SUM#
+   	  	 )
+	 ]]>
+    </insert>
+    
+    
+    
+    <update id="empEval.updateEmpEval" parameterClass="empEvalVO">
+		<![CDATA[
+		UPDATE EMP_EVAL_BOOK SET
+			EMP_EVAL_BOOK_NM = #EMP_EVAL_BOOK_NM#,
+			EVAL_TERM_CODE = #EVAL_TERM_CODE#,
+			EMP_EVAL_STA_DATE = #EMP_EVAL_STA_DATE#,
+			EMP_EVAL_END_DATE = #EMP_EVAL_END_DATE#,
+			EMP_EVAL_REG_DATE = #EMP_EVAL_REG_DATE#,
+			EMP_EVAL_REG_USER_NO = #EMP_EVAL_REG_USER_NO#,
+			EMP_EVAL_MOD_DATE = #EMP_EVAL_MOD_DATE#,
+			EMP_EVAL_MOD_USER_NO = #EMP_EVAL_MOD_USER_NO#,
+			EMP_EVAL_ACC_DATE = #EMP_EVAL_ACC_DATE#,
+			EMP_EVAL_ACC_USER_NO = #EMP_EVAL_ACC_USER_NO#,
+			EMP_EVAL_ACC_YN = #EMP_EVAL_ACC_YN#,
+			EMP_EVAL_SUM = #EMP_EVAL_SUM#
+		WHERE
+			EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#
+   	  	
+	 	]]>
+    </update>
+    
+    <delete id="empEval.deleteEmpEval" parameterClass="empEvalVO">
+		<![CDATA[
+			DELETE
+			FROM
+				EMP_EVAL_BOOK
+			WHERE
+				EMP_EVAL_BOOK_NO = #EMP_EVAL_BOOK_NO#    	  	
+	 	]]>
+    </delete>
+    
+    <select id="empEval.selectEmpEvalBookNo" resultClass="java.lang.Integer">
+		<![CDATA[
+		 SELECT 
+			EMP_EVAl_BOOK_SEQ.nextval
+		 FROM DUAL
+		]]>
+    </select>
+    
+    
+
+</sqlMap>

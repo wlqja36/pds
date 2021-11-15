@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="SPENDING_RESOLRUTION" left="0" top="0" width="688" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="14" top="7" width="664" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="1" text="지출결의서" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <ImageViewer id="img02" taborder="2" left="16" top="65" width="662" height="85" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_11" taborder="3" text="기간" onclick="sta_15_onclick" left="24" top="69" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Calendar id="start_date" taborder="4" left="144" top="72" width="131" height="20" style="align:center middle;"/>
+        <Static id="Static00" taborder="5" text="~" left="41.28%" top="74" right="55.23%" height="20"/>
+        <Calendar id="start_date00" taborder="6" left="301" top="72" width="131" height="20" style="align:center middle;"/>
+        <Button id="Button04" taborder="7" text="조회" onclick="Button04_onclick" left="451" top="69" width="69" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Grid id="Grid00" taborder="8" useinputpanel="false" left="2.47%" top="159" right="1.31%" height="135" binddataset="ds_spending">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="급여대장번호"/>
+                <Cell col="1" text="지출유형코드"/>
+                <Cell col="2" text="총지출경비"/>
+                <Cell col="3" text="등록자사번"/>
+                <Cell col="4" text="수정자사번"/>
+                <Cell col="5" text="수정일시"/>
+                <Cell col="6" text="승인자사번"/>
+                <Cell col="7" text="승인일시"/>
+                <Cell col="8" text="승인여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ATTITUDE_BOOK_ID"/>
+                <Cell col="1" text="bind:RESOLUTION_CODE"/>
+                <Cell col="2" text="bind:TOTAL_COST"/>
+                <Cell col="3" text="bind:REG_EMP_NO"/>
+                <Cell col="4" text="bind:MODIFY_EMP_NO"/>
+                <Cell col="5" text="bind:MODIFY_DATE"/>
+                <Cell col="6" text="bind:CONFIRM_EMP_NO"/>
+                <Cell col="7" text="bind:CONFIRM_DATE"/>
+                <Cell col="8" text="bind:CONFIRM_YN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_15" taborder="9" text="유형코드" onclick="sta_15_onclick" left="24" top="94" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="Combo00" taborder="11" text="Combo00" left="20.93%" top="94" right="60.03%" height="25" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" index="-1"/>
+        <Edit id="edt_att_book_no" taborder="12" oneditclick="edt_btr_no2_oneditclick" left="144" top="122" width="159" height="22"/>
+        <Static id="sta_00" taborder="13" text="사원번호" onclick="sta_15_onclick" left="26" top="119" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="button00" taborder="14" onclick="button09_onclick" cssclass="btn_WF_SearchSmall" left="304" top="122" width="24" height="23"/>
+        <ImageViewer id="img00" taborder="17" left="17" top="324" width="662" height="394" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_33" taborder="18" text="지출결의서 상세" left="17" top="307" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;" onclick="sta_33_onclick"/>
+        <Static id="Static01" taborder="19" text="지출결의서" left="2.62%" top="323" right="43.46%" height="82" style="border:1 solid #808080ff ;align:center middle;font:28 Dotum;"/>
+        <Static id="Static02" taborder="20" text="결제" left="56.25%" top="323" right="35.47%" height="82" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Static id="Static03" taborder="21" text="담당" left="64.39%" top="323" right="24.13%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Static id="Static04" taborder="22" text="부서장" left="75.73%" top="323" right="12.79%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;" onclick="Static04_onclick"/>
+        <Static id="Static05" taborder="23" text="사장" left="87.06%" top="323" right="1.45%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Edit id="edt_att_book_no00" taborder="24" oneditclick="edt_btr_no2_oneditclick" left="443" top="352" width="79" height="53"/>
+        <Edit id="edt_att_book_no01" taborder="25" oneditclick="edt_btr_no2_oneditclick" left="521" top="352" width="79" height="53"/>
+        <Edit id="edt_att_book_no02" taborder="26" oneditclick="edt_btr_no2_oneditclick" left="600" top="352" width="79" height="53"/>
+        <Static id="Static06" taborder="27" text="회계일자" left="2.62%" top="431" right="79.94%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Static id="Static07" taborder="28" text="품의자" left="2.62%" top="459" right="79.94%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Static id="Static08" taborder="29" text="합계금액" left="2.62%" top="487" right="80.09%" height="40" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Edit id="edt_att_book_no03" taborder="30" oneditclick="edt_btr_no2_oneditclick" left="137" top="432" width="215" height="29"/>
+        <Edit id="edt_att_book_no04" taborder="31" oneditclick="edt_btr_no2_oneditclick" left="137" top="461" width="215" height="27"/>
+        <Edit id="edt_att_book_no05" taborder="32" oneditclick="edt_btr_no2_oneditclick" left="138" top="487" width="540" height="41"/>
+        <Static id="Static09" taborder="33" text="품위일자" left="51.02%" top="431" right="31.54%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Static id="Static10" taborder="34" text="품의부서" left="51.02%" top="459" right="31.54%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Edit id="edt_att_book_no06" taborder="35" oneditclick="edt_btr_no2_oneditclick" left="470" top="432" width="210" height="29"/>
+        <Edit id="edt_att_book_no07" taborder="36" oneditclick="edt_btr_no2_oneditclick" left="470" top="458" width="210" height="30"/>
+        <Static id="Static11" taborder="37" text="급여대장번호" left="2.62%" top="403" right="79.94%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Edit id="edt_att_book_no08" taborder="38" oneditclick="edt_btr_no2_oneditclick" left="137" top="403" width="215" height="30"/>
+        <Static id="Static12" taborder="39" text="지출유형코드" left="51.02%" top="403" right="31.54%" height="29" style="border:1 solid #808080ff ;align:center middle;font:11 Dotum;"/>
+        <Combo id="Combo01" taborder="40" text="Combo00" left="67.59%" top="532" right="1.45%" height="27" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Static id="sta_01" taborder="41" text="급여대장번호" onclick="sta_15_onclick" left="19" top="531" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no09" taborder="42" oneditclick="edt_btr_no2_oneditclick" left="134" top="531" width="215" height="29"/>
+        <Static id="sta_02" taborder="43" text="지출유형코드" onclick="sta_15_onclick" left="349" top="531" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_03" taborder="45" text="품위자" onclick="sta_15_onclick" left="19" top="560" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no11" taborder="46" oneditclick="edt_btr_no2_oneditclick" left="134" top="560" width="215" height="29"/>
+        <Static id="sta_04" taborder="47" text="품위일자" onclick="sta_15_onclick" left="349" top="560" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no12" taborder="48" oneditclick="edt_btr_no2_oneditclick" left="464" top="560" width="215" height="29"/>
+        <Static id="sta_05" taborder="49" text="수정자" onclick="sta_15_onclick" left="19" top="589" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no13" taborder="50" oneditclick="edt_btr_no2_oneditclick" left="134" top="589" width="215" height="29"/>
+        <Static id="sta_06" taborder="51" text="수정일시" onclick="sta_15_onclick" left="349" top="589" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no14" taborder="52" oneditclick="edt_btr_no2_oneditclick" left="464" top="589" width="215" height="29"/>
+        <Static id="sta_07" taborder="53" text="승인자" onclick="sta_15_onclick" left="19" top="617" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no10" taborder="54" oneditclick="edt_btr_no2_oneditclick" left="134" top="617" width="215" height="29"/>
+        <Static id="sta_08" taborder="55" text="승인일시" onclick="sta_15_onclick" left="349" top="617" width="115" height="29" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no15" taborder="56" oneditclick="edt_btr_no2_oneditclick" left="464" top="617" width="215" height="29"/>
+        <Static id="sta_09" taborder="57" text="총지출경비" onclick="sta_15_onclick" left="20" top="646" width="114" height="49" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_att_book_no16" taborder="58" oneditclick="edt_btr_no2_oneditclick" left="135" top="646" width="543" height="49"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_spending">
+        <ColumnInfo>
+          <Column id="ATTITUDE_BOOK_ID" type="STRING" size="12"/>
+          <Column id="RESOLUTION_CODE" type="STRING" size="4"/>
+          <Column id="TOTAL_COST" type="INT" size="10"/>
+          <Column id="REG_EMP_NO" type="STRING" size="12"/>
+          <Column id="MODIFY_EMP_NO" type="STRING" size="12"/>
+          <Column id="MODIFY_DATE" type="DATE" size="256"/>
+          <Column id="CONFIRM_EMP_NO" type="STRING" size="12"/>
+          <Column id="CONFIRM_DATE" type="DATE" size="256"/>
+          <Column id="CONFIRM_YN" type="STRING" size="1"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ATTITUDE_BOOK_ID">200612200090</Col>
+            <Col id="RESOLUTION_CODE">5100</Col>
+            <Col id="TOTAL_COST">52000</Col>
+            <Col id="REG_EMP_NO">202104160001</Col>
+            <Col id="MODIFY_EMP_NO">202104160001</Col>
+            <Col id="MODIFY_DATE">20210520</Col>
+            <Col id="CONFIRM_EMP_NO">202104160001</Col>
+            <Col id="CONFIRM_DATE">20210522</Col>
+            <Col id="CONFIRM_YN">Y</Col>
+          </Row>
+          <Row>
+            <Col id="ATTITUDE_BOOK_ID">200612200091</Col>
+            <Col id="RESOLUTION_CODE">5100</Col>
+            <Col id="TOTAL_COST">32000</Col>
+            <Col id="REG_EMP_NO">202104160001</Col>
+            <Col id="MODIFY_EMP_NO">202104160001</Col>
+            <Col id="MODIFY_DATE">20210520</Col>
+            <Col id="CONFIRM_EMP_NO">202104160001</Col>
+            <Col id="CONFIRM_DATE">20210522</Col>
+            <Col id="CONFIRM_YN">Y</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_empno" propid="value" datasetid="ds_attitude_book" columnid="ATTITUDE_BOOK_ID"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[
+this.Static04_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.sta_33_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

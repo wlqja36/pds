@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="s_book">
+
+	<typeAlias alias="s_empSearchVO" type="nexacro.sample.vo.s_bookVO.S_empSearchVO" />
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+
+	<resultMap id="s_empSearch" class="s_empSearchVO">
+		<result property="emp_no" column="EMP_NO" />
+		<result property="emp_name" column="EMP_NAME" />
+		<result property="dept" column="DEPT" />
+	</resultMap>
+
+	
+	<select id="selects_empSearchVO" resultMap="s_empSearch" parameterClass="s_empSearchVO">
+		<![CDATA[
+		SELECT
+		EMP_NO,
+		EMP_NAME,
+		DEPT
+		
+		FROM 
+		(SELECT EMP_NO,
+		EMP_NAME,
+		(SELECT CODE_NAME FROM COMMON_CODE_DETAIL WHERE DEPT_CODE=CODE_NO) DEPT
+		FROM EMP ORDER BY EMP_NAME)
+		WHERE 1=1
+		]]>
+		
+	
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="emp_no">
+						EMP_NO LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="emp_name">
+						EMP_NAME LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="dept">
+						DEPT LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="total">
+						EMP_NO '%' || #keyword# || '%'
+						OR EMP_NAME '%' || #keyword# || '%'
+						OR DEPT '%' || #keyword# || '%'
+						
+				</isEqual>
+			</dynamic>
+	</select>
+
+
+
+
+<!-- 	<select id="selects_bookSearchCodeVO" parameterClass="s_bookCodeVO"
+		resultMap="s_code">
+		
+		SELECT
+		ATTITUDE_BOOK_ID,
+		ATTITUDE_BOOK_NM
+		FROM ATTITUDE_BOOK
+		WHERE ATTITUDE_BOOK_NM LIKE #searchCondition#||'%'
+		
+
+	
+	</select> -->
+
+	
+</sqlMap>
+

@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_ATTITUDE_BOOK_JSH" left="0" top="0" width="1280" height="1024" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_title" taborder="0" left="7" top="8" height="45" width="1265" style="background:#165fa6ff;border:1 solid #e5e5e5ff ;color:#ffffffff;"/>
+        <Static id="st_title" taborder="1" text="근태코드" left="19" top="15" height="30" width="170" style="color:white;font:bold 16 Dotum;"/>
+        <ImageViewer id="img_mainbg" taborder="13" left="8" top="89" width="1265" height="411" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <Grid id="attitude_grid" taborder="67" binddataset="ds_attitude_book" useinputpanel="false" autofittype="col" useselcolor="false" left="15" top="95" width="700" height="400">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="92"/>
+                <Column size="91"/>
+                <Column size="90"/>
+                <Column size="97"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="근태코드"/>
+                <Cell col="1" text="근태명"/>
+                <Cell col="2" text="연차사용"/>
+                <Cell col="3" text="연차코드"/>
+                <Cell col="4" text="적요"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:ATTITUDE_ID"/>
+                <Cell col="1" text="bind:ATTITUDE_NM"/>
+                <Cell col="2" text="bind:HOL_USEYN"/>
+                <Cell col="3" text="bind:VACATION_CODE_ID"/>
+                <Cell col="4" text="bind:BRIFE"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="st_att_subtitle" taborder="68" text="근태 코드 리스트" left="20" top="67" width="120" height="13" style="font:bold 9 굴림;"/>
+        <ImageViewer id="img_01" taborder="85" left="720" top="95" width="548" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_00" taborder="103" left="720" top="130" width="548" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_02" taborder="104" left="720" top="165" width="548" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_03" taborder="105" left="720" top="200" width="548" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <ImageViewer id="img_04" taborder="106" left="720" top="235" width="548" height="260" style="background:#f0f0f0ff;border:1 solid #969696ff ;font:bold 9 굴림;"/>
+        <Static id="sta_att_brife" taborder="107" text="적요" left="720" top="235" width="270" height="260" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <TextArea id="TextArea_att_brife" taborder="111" left="995" top="241" width="268" height="248"/>
+        <Radio id="radio_vac_code_yn" taborder="112" index="-1" innerdataset="@ds_yn" codecolumn="code" datacolumn="data" direction="vertical" onitemclick="fixyn_onitemclick" left="1059" top="209" width="200" height="21" style="align:left middle;"/>
+        <Combo id="edt_vac_code" taborder="113" innerdataset="@ds_commoncode" codecolumn="VACATION_CODE_ID" datacolumn="VACATION_NM" left="995" top="172" width="268" height="22"/>
+        <Edit id="edt_atti_nm" taborder="114" left="995" top="136" width="268" height="22"/>
+        <Button id="insert00" taborder="115" text="수정" left="1020" top="520" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;"/>
+        <Button id="Button03" taborder="116" text="삭제" left="1107" top="520" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;"/>
+        <Button id="reset" taborder="117" text="저장" left="1193" top="520" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;"/>
+        <Button id="btn_save" taborder="118" text="추가" left="933" top="520" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 15 Stencil;"/>
+        <Edit id="edt_atti_id" taborder="119" left="995" top="102" width="268" height="22"/>
+        <Static id="sta_atti_id" taborder="120" text="근태번호" left="720" top="95" width="270" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_vac_code_yn" taborder="121" text="사용여부" left="720" top="200" width="270" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_atti_nm" taborder="122" text="근태명" left="720" top="130" width="270" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="sta_vac_code" taborder="123" text="연차코드" left="720" top="165" width="270" height="36" style="background:#f4edfaff;border:1 solid #808080ff ;color:darkblue;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static00" taborder="124" text="*" left="816" top="104" width="10" height="11" style="color:red;align:left top;font:18 arial;"/>
+        <Static id="Static02" taborder="125" text="*" left="816" top="139" width="10" height="11" style="color:red;align:left top;font:18 arial;"/>
+        <Static id="Static03" taborder="126" text="*" left="816" top="209" width="10" height="11" style="color:red;align:left top;font:18 arial;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">사용</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">미사용</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_atti_code">
+        <ColumnInfo>
+          <Column id="ATTITUDE_ID" type="STRING" size="4"/>
+          <Column id="ATTITUDE_NM" type="STRING" size="256"/>
+          <Column id="HOL_USEYN" type="STRING" size="1"/>
+          <Column id="VACATION_CODE_ID" type="STRING" size="4"/>
+          <Column id="BRIFE" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="ATTITUDE_ID">2210</Col>
+            <Col id="ATTITUDE_NM">연차휴가</Col>
+            <Col id="HOL_USEYN">Y</Col>
+            <Col id="VACATION_CODE_ID">2101</Col>
+          </Row>
+          <Row>
+            <Col id="ATTITUDE_ID">2220</Col>
+            <Col id="ATTITUDE_NM">경조휴가</Col>
+            <Col id="HOL_USEYN">Y</Col>
+            <Col id="VACATION_CODE_ID">2101</Col>
+          </Row>
+          <Row>
+            <Col id="ATTITUDE_ID">2230</Col>
+            <Col id="ATTITUDE_NM">병가</Col>
+            <Col id="HOL_USEYN">Y</Col>
+            <Col id="VACATION_CODE_ID">2101</Col>
+          </Row>
+          <Row>
+            <Col id="ATTITUDE_ID">2240</Col>
+            <Col id="ATTITUDE_NM">출산휴가</Col>
+            <Col id="HOL_USEYN">N</Col>
+            <Col id="VACATION_CODE_ID">N/A</Col>
+          </Row>
+          <Row>
+            <Col id="ATTITUDE_ID">2250</Col>
+            <Col id="ATTITUDE_NM">생리휴가</Col>
+            <Col id="HOL_USEYN">N</Col>
+            <Col id="VACATION_CODE_ID">N/A</Col>
+          </Row>
+          <Row>
+            <Col id="ATTITUDE_ID">1111</Col>
+            <Col id="ATTITUDE_NM">체크중</Col>
+            <Col id="HOL_USEYN">N</Col>
+            <Col id="VACATION_CODE_ID">N/A</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_commoncode">
+        <ColumnInfo>
+          <Column id="confirmyn" type="STRING" size="256"/>
+          <Column id="VACATION_CODE_ID" type="STRING" size="256"/>
+          <Column id="VACATION_NM" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="VACATION_CODE_ID">2101</Col>
+            <Col id="VACATION_NM">2021년 연차코드</Col>
+            <Col id="confirmyn">3333</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+  </Form>
+</FDL>

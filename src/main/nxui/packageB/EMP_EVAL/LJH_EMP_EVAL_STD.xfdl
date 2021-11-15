@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="LJH_EMP_EVAL_STD" left="0" top="0" width="700" height="300" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer00" taborder="0" left="0" top="0" height="45" style="background:#165fa6ff;" width="700"/>
+        <Static id="sta_eval_title" taborder="1" text="인사평가기준" left="10" top="2" height="40" style="color:#ffffffff;font:bold 16 Arial Black;" width="352"/>
+        <ImageViewer id="ImageViewer01" taborder="2" left="14" top="68" height="133" style="background:#d8dcedff;border:1 solid #969696ff ;" width="672"/>
+        <Static id="sta_eval_01" taborder="3" left="25" top="81" height="48" style="background:#f0f0f0ff;border:1 solid #969696ff ;" width="648"/>
+        <Static id="sta_eval_02" taborder="4" left="25" top="136" height="51" style="background:#f0f0f0ff;border:1 solid #969696ff ;" width="648"/>
+        <Static id="sta_eval_03" taborder="5" text="인사평가대장번호" left="25" top="81" height="48" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;align:center;font:bold 9 Dotum;" width="126"/>
+        <Static id="sta_eval_04" taborder="6" text="사원번호" left="25" top="136" height="51" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;align:center;font:bold 9 Dotum;" width="126"/>
+        <Static id="sta_eval_05" taborder="7" text="인사평가점수" left="335" top="81" height="48" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;align:center;font:bold 9 Dotum;" width="132"/>
+        <Static id="sta_eval_06" taborder="8" text="인사평가코드" left="334" top="136" height="51" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;align:center;font:bold 9 Dotum;" width="132"/>
+        <Edit id="edit_emp_eval_book_nm" taborder="9" left="157" top="88" height="32" width="173"/>
+        <Edit id="edit_eval_emp_no" taborder="10" left="156" top="144" height="34" width="173"/>
+        <Edit id="edt_eval_score" taborder="11" left="471" top="89" height="32" width="197"/>
+        <Combo id="ds_eval_code" taborder="12" text="선택" left="471" top="147" height="30" width="197" innerdataset="@ds_eval_code00" codecolumn="code" datacolumn="name" displaynulltext="선택"/>
+        <Button id="btn_back" taborder="13" text="뒤로가기" onclick="Button00_onclick" left="10" top="242" height="30" width="118" style="background:URL('img::btn_imgs.png') stretch 0,0;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_emp_eval_book">
+        <ColumnInfo>
+          <Column id="EMP_EVAL_BOOK_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_BOOK_NM" type="STRING" size="256"/>
+          <Column id="EVAL_TERM_CLASS_CODE" type="STRING" size="4"/>
+          <Column id="EVAL_TERM_CODE" type="STRING" size="4"/>
+          <Column id="EMP_EVAL_STA_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_END_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_MOD_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_MOD_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_ACC_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_YN" type="STRING" size="1"/>
+          <Column id="EMP_EVAL_SUM" type="INT" size="3"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_eval_code00" enableevent="false">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4210</Col>
+            <Col id="name">4210/출결평가</Col>
+          </Row>
+          <Row>
+            <Col id="code">4220</Col>
+            <Col id="name">4220/근태평가</Col>
+          </Row>
+          <Row>
+            <Col id="code">4230</Col>
+            <Col id="name">4230/능력평가</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_masterCodeList">
+        <ColumnInfo>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+          <Column id="mainTable" type="STRING" size="256"/>
+          <Column id="mainColumn" type="STRING" size="256"/>
+          <Column id="classDesc" type="STRING" size="256"/>
+          <Column id="registTime" type="STRING" size="256"/>
+          <Column id="registId" type="STRING" size="256"/>
+          <Column id="modifyTime" type="STRING" size="256"/>
+          <Column id="modifyId" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_detailCodeList">
+        <ColumnInfo>
+          <Column id="rownum" type="INT" size="256"/>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+          <Column id="codeNo" type="STRING" size="256"/>
+          <Column id="codeName" type="STRING" size="256"/>
+          <Column id="codeName2" type="STRING" size="256"/>
+          <Column id="codeEngName" type="STRING" size="256"/>
+          <Column id="etcCode1" type="STRING" size="256"/>
+          <Column id="etcCode2" type="STRING" size="256"/>
+          <Column id="codeDesc" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+          <Column id="sort" type="STRING" size="256"/>
+          <Column id="registTime" type="STRING" size="256"/>
+          <Column id="registId" type="STRING" size="256"/>
+          <Column id="modifyTime" type="STRING" size="256"/>
+          <Column id="modifyId" type="STRING" size="256"/>
+          <Column id="lastModyDate" type="STRING" size="256"/>
+          <Column id="higherClassCode" type="STRING" size="256"/>
+          <Column id="higherCodeNo" type="STRING" size="256"/>
+          <Column id="rnum" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item8" compid="LJH_EMP_EVAL_BOOK" propid="font" datasetid="ds_search" columnid=""/>
+      <BindItem id="item0" compid="edit_emp_eval_book_nm" propid="value" datasetid="ds_masterCodeList" columnid="className"/>
+      <BindItem id="item1" compid="edit_emp_eval_book_nm" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+      <BindItem id="item2" compid="edt_eval_score" propid="value" datasetid="ds_masterCodeList" columnid="mainColumn"/>
+      <BindItem id="item3" compid="edit_eval_emp_no" propid="value" datasetid="ds_detailCodeList" columnid="codeName"/>
+      <BindItem id="item4" compid="edit_eval_emp_no" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_SUM"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.go("EMP_EVAL::LJH_EMP_EVAL.xfdl");
+}
+]]></Script>
+  </Form>
+</FDL>

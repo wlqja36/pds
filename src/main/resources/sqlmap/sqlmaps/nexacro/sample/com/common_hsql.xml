@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="administrator">
+
+	<typeAlias alias="comCodeVO" type="nexacro.sample.vo.com.ComCodeVO" />
+	<typeAlias alias="detailCodeVO" type="nexacro.sample.vo.com.DetailCodeVO" />
+
+	<resultMap id="comCode" class="comCodeVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="useYn" column="USE_YN" />
+		<result property="mainTable" column="MAIN_TABLE" />
+		<result property="mainColumn" column="MAIN_COLUMN" />
+		<result property="classDesc" column="CLASS_DESC" />
+		<result property="registTime" column="REGIST_TIME" />
+		<result property="registId" column="REGIST_ID" />
+		<result property="modifyId" column="MODIFY_ID" />
+		<result property="modifyTime" column="MODIFY_TIME" />
+	</resultMap>
+
+	<resultMap id="detailCode" class="comCodeVO">
+		<result property="detailCode" column="DETAIL_CODE" />
+	</resultMap>
+	
+	<resultMap id="detailClassCode" class="detailCodeVO">
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="codeFull" column="CODE_FULL" />
+	</resultMap>
+	
+	<resultMap id="idxNum" class="comCodeVO">
+		<result property="rnum" column="RNUM" />
+	</resultMap>
+	
+	<resultMap id="idxDNum" class="detailCodeVO">
+		<result property="rnum" column="RNUM" />
+	</resultMap>
+	
+	<resultMap id="Mcode" class="comCodeVO">
+		<result property="classCode" column="CLASS_CODE"/>
+	</resultMap>
+	
+	<resultMap id="Dcode" class="detailCodeVO">
+		<result property="codeNo" column="CODE_NO"/>
+	</resultMap>
+	
+	<resultMap id="detailCodeList" class="detailCodeVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="rnum" column="RNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="codeNo" column="CODE_NO" />
+		<result property="codeName" column="CODE_NAME" />
+		<result property="codeName2" column="CODE_NAME2" />
+		<result property="codeEngName" column="CODE_ENG_NAME" />
+		<result property="etcCode1" column="ETC_CODE1" />
+		<result property="etcCode2" column="ETC_CODE2" />
+		<result property="codeDesc" column="CODE_DESC" />
+		<result property="useYn" column="USE_YN" />
+		<result property="sort" column="SORT" />
+		<result property="registTime" column="REGIST_TIME" />
+		<result property="registId" column="REGIST_ID" />
+		<result property="modifyTime" column="MODIFY_TIME" />
+		<result property="modifyId" column="MODIFY_ID" />
+		<result property="lastModyDate" column="LAST_MODY_DATE" />
+		<result property="higherClassCode" column="HIGHER_CLASS_CODE" />
+		<result property="higherCodeNo" column="HIGHER_CODE_NO" />
+	</resultMap>
+	
+	
+	<!-- 공통코드 전체내역 조회하기 -->
+	<select id="common.selectCode" resultMap="comCode"
+		parameterClass="comCodeVO">
+		<![CDATA[
+		SELECT ROWNUM, T1.* FROM
+			(
+			SELECT
+			CLASS_CODE,
+			CLASS_NAME,
+			USE_YN,
+			MAIN_TABLE,
+			MAIN_COLUMN,
+			CLASS_DESC,
+			REGIST_TIME,
+			CONCAT(
+				CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO = REGIST_ID),'('),
+				CONCAT(REGIST_ID,')')
+				) REGIST_ID,
+			TO_CHAR(MODIFY_TIME,'YYYY-MM-DD') MODIFY_TIME,
+			CONCAT(
+				CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO = MODIFY_ID),'('),
+				CONCAT(MODIFY_ID,')')
+				) MODIFY_ID
+		FROM 
+			COMMON_CODE_MASTER
+		WHERE 1=1
+		]]>
+		<dynamic>
+			<isNotNull property="searchKeyword">
+				<isEqual prepend=" AND " property="searchCondition"
+					compareValue="CLASS_CODE">
+					CLASS_CODE LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual prepend=" AND " property="searchCondition"
+					compareValue="CLASS_NAME">
+					CLASS_NAME LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+				<isEqual prepend=" AND " property="searchCondition"
+					compareValue="useYn">
+					USE_YN LIKE '%' || #searchKeyword# || '%'
+				</isEqual>
+			</isNotNull>
+		</dynamic>
+        <![CDATA[
+		ORDER BY CLASS_CODE) T1
+		]]>
+	</select>
+	<select id="common.selectRnum" resultMap="idxNum" parameterClass="String">
+		SELECT T1.RNUM RNUM FROM
+			(
+			SELECT
+            ROWNUM RNUM,
+			CLASS_CODE
+
+		FROM 
+			COMMON_CODE_MASTER
+		ORDER BY CLASS_CODE) T1 WHERE T1.CLASS_CODE LIKE #classCode#
+	</select>
+
+	<!-- 마스터코드 코드번호 또는 코드네임 가져오기 -->
+	<select id="common.detailCode" resultMap="detailCode"
+		parameterClass="java.util.HashMap">
+		<![CDATA[
+		SELECT
+		]]>
+		<dynamic>
+			<isEqual property="codeSwitch"
+				compareValue="CLASS_NAME">
+				CLASS_NAME AS DETAIL_CODE
+			</isEqual>
+			<isEqual property="codeSwitch"
+				compareValue="CLASS_CODE">
+				CLASS_CODE AS DETAIL_CODE
+			</isEqual>
+		</dynamic>
+		<![CDATA[
+		FROM COMMON_CODE_MASTER
+		ORDER BY DETAIL_CODE ASC
+		]]>
+	</select>
+	
+	<!-- 코드마스터 등록 -->
+	<insert id="common.insertCode" parameterClass="comCodeVO">
+		INSERT INTO 
+			COMMON_CODE_MASTER
+		(
+			CLASS_CODE,
+			CLASS_NAME,
+			USE_YN,
+			MAIN_TABLE,
+			MAIN_COLUMN,
+			CLASS_DESC,
+			REGIST_TIME,
+			REGIST_ID
+		)	
+		VALUES
+		(
+			#classCode#,
+			#className#,
+			#useYn#,
+			#mainTable#,
+			#mainColumn#,
+			#classDesc#,
+			SYSDATE,
+			#registId#
+		)
+	</insert>
+	
+	<!-- 코드마스터 업데이트 -->
+	<update id="common.updateCode" parameterClass="comCodeVO">
+		UPDATE
+			COMMON_CODE_MASTER
+		SET
+			CLASS_NAME = #className#,
+			USE_YN = #useYn#,
+			MAIN_TABLE = #mainTable#,
+			MAIN_COLUMN = #mainColumn#,
+			CLASS_DESC = #classDesc#,
+			MODIFY_ID = #registId#,
+			MODIFY_TIME = SYSDATE
+		WHERE
+			CLASS_CODE = #classCode#
+	</update>
+	
+	<!-- 코드마스터 삭제 -->
+	<delete id="common.deleteCode" parameterClass="comCodeVO">
+		DELETE
+		FROM
+			COMMON_CODE_MASTER
+		WHERE
+			CLASS_CODE = #classCode#
+	</delete>
+	
+	<!-- 코드마스터 중복검사 -->
+	<select id="common.searchCode" resultMap="Mcode"
+	parameterClass="java.lang.String">
+	SELECT
+		NVL(MAX(CLASS_CODE), 'NONE') AS CLASS_CODE 
+	FROM
+		COMMON_CODE_MASTER
+	WHERE
+		CLASS_CODE = #classCode#
+	</select>
+	
+	<!-- 상세코드 분류코드 가져오기 -->
+	<select id="common.selectDetailCode" resultMap="detailClassCode">
+	SELECT
+		' ' AS CLASS_CODE
+		,'' AS CLASS_NAME
+		,'전체' AS CODE_FULL
+	FROM
+		DUAL
+	UNION
+	SELECT
+		D.CLASS_CODE
+		,M.CLASS_NAME
+		,D.CLASS_CODE || ' / ' || M.CLASS_NAME AS CODE_FULL
+	FROM 
+		COMMON_CODE_DETAIL D , COMMON_CODE_MASTER M
+	WHERE 
+		D.CLASS_CODE = M.CLASS_CODE
+	AND D.USE_YN = 'Y'
+	AND M.USE_YN = 'Y'
+	ORDER BY CLASS_CODE ASC
+	</select>
+	
+	<!-- 분류코드에 따른 상세코드 가져오기 -->
+	<select id="common.selectDetailList" resultMap="detailCodeList"
+	parameterClass="detailCodeVO">
+	<![CDATA[
+	SELECT ROWNUM, T1.* FROM
+		(
+		SELECT
+		ROWNUM AS RNUM,
+		D.CLASS_CODE,
+		D.CODE_NO,
+		D.CODE_NAME,
+		D.CODE_NAME2,
+		D.CODE_ENG_NAME,
+		D.ETC_CODE1,
+		D.ETC_CODE2,
+		D.CODE_DESC,
+		D.USE_YN,
+		D.SORT,
+		D.REGIST_TIME,
+		CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO=D.REGIST_ID),CONCAT('(',CONCAT(D.REGIST_ID,')'))) REGIST_ID,
+		D.MODIFY_TIME,
+		CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO=D.MODIFY_ID),CONCAT('(',CONCAT(D.MODIFY_ID,')'))) MODIFY_ID,
+		D.LAST_MODY_DATE,
+		D.HIGHER_CLASS_CODE,
+		D.HIGHER_CODE_NO,
+		M.CLASS_NAME
+	FROM
+		COMMON_CODE_DETAIL D, COMMON_CODE_MASTER M
+	WHERE D.CLASS_CODE = M.CLASS_CODE
+	]]>
+		<dynamic>
+			<isNotNull property="searchCondition" prepend=" AND ">
+					D.CLASS_CODE LIKE '%' || #searchCondition# || '%'
+			</isNotNull>
+			<isNotNull property="searchKeyword" prepend=" AND ">
+					D.CODE_NO LIKE '%' || #searchKeyword# || '%'
+			</isNotNull>
+			<isNotNull property="searchUseYn" prepend=" AND ">
+					D.CODE_NAME LIKE '%' || #searchUseYn# || '%'
+			</isNotNull>
+		</dynamic>
+	<![CDATA[
+	ORDER BY M.CLASS_CODE ASC, SORT ASC) T1
+	]]>
+	</select>
+	
+	<!-- 상세코드 입력 -->
+	<insert id="common.insertDetailCode" parameterClass="detailCodeVO">
+	INSERT INTO
+	    COMMON_CODE_DETAIL
+	(
+	CLASS_CODE, 
+	CODE_NO, 
+	CODE_NAME, 
+	CODE_NAME2, 
+	CODE_ENG_NAME, 
+	ETC_CODE1, 
+	ETC_CODE2, 
+	CODE_DESC,
+	USE_YN, 
+	SORT, 
+	REGIST_TIME,
+	REGIST_ID
+	)
+	VALUES
+	(
+	#classCode#,
+	#codeNo#,
+	#codeName#,
+	#codeName2#,
+	#codeEngName#,
+	#etcCode1#,
+	#etcCode2#,
+	#codeDesc#,
+	#useYn#,
+	#sort#,
+	<!-- #sortSeq#, -->
+	<!-- (SELECT NVL(MAX(SORT_SEQ), 0) + 1 FROM CMM_CODE_DETAIL WHERE CLASS_CODE = #classCode#), -->
+	SYSDATE,
+	#registId#
+	)
+	</insert>
+	
+	<!-- 상세코드 수정 -->
+	<update id="common.updateDetailCode"
+	parameterClass="detailCodeVO">
+	UPDATE COMMON_CODE_DETAIL
+	SET
+		CODE_NAME = #codeName#,
+		CODE_NAME2 = #codeName2#,
+		CODE_ENG_NAME = #codeEngName#,
+		ETC_CODE1 = #etcCode1#,
+		ETC_CODE2 = #etcCode2#,
+		CODE_DESC = #codeDesc#,
+		USE_YN = #useYn#,
+		SORT = #sort#,
+		<!-- SORT_SEQ = (SELECT NVL(MAX(SORT_SEQ), 0) + 1 FROM CMM_CODE_DETAIL WHERE CLASS_CODE = #detailCodeVO.classCode#), -->
+		MODIFY_ID = #registId#,
+		MODIFY_TIME = SYSDATE,
+		LAST_MODY_DATE = SYSDATE
+	WHERE
+		CLASS_CODE = #classCode#
+	AND
+		CODE_NO = #codeNo#
+	</update>
+	
+	<!-- 상세코드 삭제 -->
+	<delete id="common.deleteDetailCode" parameterClass="detailCodeVO">
+		DELETE
+		FROM
+			COMMON_CODE_DETAIL
+		WHERE
+			CLASS_CODE = #classCode#
+		AND
+			CODE_NO = #codeNo#
+	</delete>
+	
+	<!-- 상세코드 중복검사 -->
+	<select id="common.searchDetailCode" resultMap="Dcode"
+	parameterClass="java.lang.String">
+	SELECT
+		NVL(MAX(CODE_NO), 'NONE') AS CODE_NO 
+	FROM
+		COMMON_CODE_DETAIL
+	WHERE
+		CODE_NO = #codeNo#
+	</select>
+	
+	<select id="common.selectDRnum" resultMap="idxDNum" parameterClass="String">
+		SELECT T2.RNUM RNUM FROM(SELECT ROWNUM RNUM, T1.CODE_NO CODE_NO FROM
+			(
+			SELECT
+            
+            CLASS_CODE,
+			CODE_NO
+
+		FROM 
+			COMMON_CODE_DETAIL ORDER BY CLASS_CODE ASC, SORT ASC) T1) T2 WHERE T2.CODE_NO=#codeNo#
+	</select>
+	
+</sqlMap>

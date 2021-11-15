@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="s_salbook">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="salVO" type="nexacro.sample.vo.s_salbookVO.SalaryVO" />
+	<typeAlias alias="bonus_VO" type="nexacro.sample.vo.s_salbookVO.BonusVO" />
+	<!-- <typeAlias alias="tax_VO" type="nexacro.sample.vo.s_salbookVO.TaxVO" /> -->
+
+	<!-- Sample resultObject -->
+
+	<!-- 샐러리 vo -->
+	<resultMap id="sal" class="salVO">
+		<result property="salarybookno" column="SALARY_BOOK_NO" />
+		<result property="empno" column="EMP_NO" />
+		<result property="basicmoney" column="BASIC_MONEY" />
+		<result property="bonussum" column="BONUS_SUM" />
+		<result property="costsum" column="COST_SUM" />
+		<result property="taxsum" column="TAX_SUM" />
+		<result property="minustax" column="MINUS_TAX" />
+	</resultMap>
+
+	<!-- 보너스vo -->
+	<resultMap id="bonus" class="bonus_VO">
+		<result property="salarybookno" column="SALARY_BOOK_NO" />
+		<result property="empno" column="EMP_NO" />
+		<result property="bonuscode" column="BONUS_CODE" />
+		<result property="bonusmoney" column="BONUS_MONEY" />
+	</resultMap>
+
+ 	<!-- 세금vo -->
+	<!-- <resultMap id="tax_" class="tax_VO">
+		<result property="salarybookno" column="SALARY_BOOK_NO" />
+		<result property="empno" column="EMP_NO" />
+		<result property="taxcode" column="TAX_CODE" />
+		<result property="taxmoney" column="TAX_MONEY" />
+	</resultMap>  -->
+
+
+	<!-- 샐러리 자동넣기 -->
+	<insert id="s_book.insertsalVO" parameterClass="salVO">
+		INSERT INTO SALARY(
+		SALARY_BOOK_NO,
+		EMP_NO,
+		BASIC_MONEY,
+		BONUS_SUM,
+		COST_SUM,
+		TAX_SUM,
+		MINUS_TAX
+		)
+		SELECT
+		$searchKeyword$,
+		EMP_NO,
+		BASIC_MONEY,
+		BONUS_SUM,
+		COST_SUM,
+		TAX_SUM,
+		MINUS_TAX
+		FROM 
+		SALARY
+		WHERE 
+		SALARY_BOOK_NO = #searchCondition#
+
+	</insert>
+
+
+	<!-- 보너스 자동넣기 -->
+	<insert id="s_book.insertbonus_VO" parameterClass="bonus_VO">
+		INSERT INTO SAL_BONUS(
+		SALARY_BOOK_NO,
+		EMP_NO,
+		BONUS_CODE,
+		BONUS_MONEY
+		)
+		SELECT
+		$searchKeyword$,
+		EMP_NO,
+		BONUS_CODE,
+		BONUS_MONEY
+		FROM
+		SAL_BONUS
+		WHERE
+		SALARY_BOOK_NO = #searchCondition#
+	</insert>
+
+	<!-- 세금 자동넣기 -->
+	<!-- <insert id="s_book.inserttax_VO" parameterClass="tax_VO">
+		INSERT INTO SAL_TAX(
+		SALARY_BOOK_NO,
+		EMP_NO,
+		TAX_CODE,
+		TAX_MONEY
+		)
+		SELECT 
+		$searchKeyword$,
+		EMP_NO,
+		TAX_CODE,
+		TAX_MONEY
+		FROM
+		SAL_TAX
+		WHERE
+		SALARY_BOOK_NO = #searchCondition#
+		
+	</insert> -->
+
+</sqlMap>

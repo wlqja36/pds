@@ -1,0 +1,2175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Salary" classname="Temp01_SingleDetail" left="0" top="0" width="1030" height="781" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img_01" taborder="2" left="14" top="65" width="996" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_01" taborder="3" onclick="sta_01_onclick" left="60" top="70" width="508" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <ImageViewer id="img_titlebg" taborder="4" left="14" top="7" width="996" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="5" text="급여" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="sta_no" taborder="6" text="급여대장번호" onclick="sta_no_onclick" left="20" top="70" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_33" taborder="8" text="급여 세부 관리&#13;&#10;" left="17" top="479" width="175" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;" onclick="sta_33_onclick"/>
+        <Button id="Button00" taborder="24" text="검색" left="248" top="21" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="fn_search2_onclick"/>
+        <Button id="btn_add" taborder="25" text="추가" left="792" top="442" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="fn_add"/>
+        <Button id="btn_save" taborder="26" text="등록" left="860" top="442" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="div_Detail_insert_onclick"/>
+        <Button id="btn_delete" taborder="27" text="삭제" left="928" top="442" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="fn_delete_salary"/>
+        <Grid id="Grid00" taborder="83" useinputpanel="false" left="15" top="100" height="332" binddataset="ds_salary" style="align:center middle;font:9 Dotum;" scrollbars="autovert" width="995" autofittype="col" cellsizingtype="col" cellmovingtype="col" autosizingtype="none" oncelldblclick="Grid00_oncelldblclick" nodatatext="데이터가 없습니다." onkeyup="Grid00_onkeyup" selecttype="row" oncellclick="Grid00_oncellclick" onkeydown="Grid00_onkeydown">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="40"/>
+                <Column size="107"/>
+                <Column size="227"/>
+                <Column size="178"/>
+                <Column size="0"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="100"/>
+                <Column size="130"/>
+                <Column size="67"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="NO."/>
+                <Cell col="1" style="font:bold 9 Arial;" text="급여대장번호" combodisplay="edit"/>
+                <Cell col="2" text="대장명"/>
+                <Cell col="3" style="font:bold 9 Arial;" text="사원명(사원번호)"/>
+                <Cell col="4" style="font:bold 9 Arial;" text="사원번호"/>
+                <Cell col="5" style="font:bold 9 Arial;" text="기본급"/>
+                <Cell col="6" text="수당합계"/>
+                <Cell col="7" text="경비합계"/>
+                <Cell col="8" text="세금합계"/>
+                <Cell col="9" text="세후급여"/>
+                <Cell col="10" text="상세확인"/>
+              </Band>
+              <Band id="body">
+                <Cell text="expr:currow +1"/>
+                <Cell col="1" displaytype="text" edittype="text" style="align:center;" text="bind:salaryBookNo" editdisplay="edit" editacceptsenter="true" tooltiptext="급여대장번호는 필수 입력값입니다."/>
+                <Cell col="2" displaytype="normal" edittype="none" text="bind:salaryBookNm" editdisplay="edit"/>
+                <Cell col="3" displaytype="text" edittype="text" text="bind:empUser" editdisplay="edit" tooltiptext="사원번호는 필수 입력값입니다."/>
+                <Cell col="4" displaytype="text" edittype="text" style="align:center;" text="bind:empNo" editdisplay="edit" editacceptsenter="true"/>
+                <Cell col="5" displaytype="number" edittype="text" style="align:center;" text="bind:basicMoney" mask="###,###,###,#0" editclipmode="includespace" editdisplay="edit" editacceptsenter="true" calendardisplaynulltype="none" tooltiptext="기본 급여는 필수 입력값입니다." autosizerow="default"/>
+                <Cell col="6" displaytype="number" edittype="text" style="align:center;" text="bind:bonusSum" mask="###,###,###,#0" editdisplay="edit" editacceptsenter="true" combodisplay="edit" calendardisplaynulltype="none"/>
+                <Cell col="7" displaytype="number" edittype="text" style="align:center;" text="bind:costSum" mask="###,###,###,#0" editdisplay="edit" editacceptsenter="true" calendardisplaynulltype="none"/>
+                <Cell col="8" displaytype="number" edittype="text" style="align:center;" text="bind:taxSum" mask="###,###,###,#0" editdisplay="edit" editacceptsenter="true" calendardisplaynulltype="none"/>
+                <Cell col="9" displaytype="number" edittype="text" style="align:center;" text="bind:minusTax" mask="###,###,###,#0" editclipmode="includespace" editdisplay="edit" editacceptsenter="true" expandshow="hide" calendardisplaynulltype="none" tooltiptext="기본급+수당+경비-세금"/>
+                <Cell col="10" style="cursor:pointer;" editlimitbymask="decimal" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="급여내역"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_no00" taborder="89" text="사원번호" onclick="sta_no_onclick" left="308" top="70" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="Button01" taborder="91" text="검색" onclick="fn_search_onclick" left="501" top="16" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Tab id="Tab00" taborder="92" left="0.87%" top="511" height="228" onchanged="Tab00_onchanged" tabindex="0" scrollbars="autoboth" width="994">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="수당">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="0%" top="0" height="146" binddataset="ds_bonus" width="100%" scrollbars="autovert" nodatatext="데이터가 없습니다." cellmovingtype="col" cellsizingtype="none" autofittype="col" oncellclick="Tab00_tabpage1_Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="153"/>
+                          <Column size="153"/>
+                          <Column size="153"/>
+                          <Column size="190"/>
+                          <Column size="190"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                          <Row size="24" band="summ"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell style="font:bold 9 Arial;" text="급여대장번호"/>
+                          <Cell col="1" style="font:bold 9 Arial;" text="사원번호"/>
+                          <Cell col="2" text="사원명"/>
+                          <Cell col="3" style="font:bold 9 Arial;" text="수당코드"/>
+                          <Cell col="4" text="수당금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="text" edittype="text" style="align:center;" text="bind:salaryBookNo" editdisplay="edit" tooltiptext="급여대장번호는 필수 입력값입니다."/>
+                          <Cell col="1" displaytype="text" edittype="text" style="align:center;" text="bind:empNo" editdisplay="edit" combodisplay="display" tooltiptext="사원 번호는 필수 입력값입니다."/>
+                          <Cell col="2" displaytype="normal" edittype="none" style="align:center;selectbackground:gainsboro;selectcolor:black;" text="bind:empName" editdisplay="edit"/>
+                          <Cell col="3" displaytype="combo" edittype="combo" style="align:center;" text="bind:bonusCode" combodataset="ds_combo_bonus" combocodecol="b_code" combodatacol="b_value" combodisplaynulltext="수당코드" combodisplay="display" tooltiptext="수당코드는 필수 입력값입니다."/>
+                          <Cell col="4" displaytype="number" edittype="text" style="align:center;" text="bind:bonusMoney" mask="###,###,###,#0" editdisplay="edit" combodisplay="display"/>
+                        </Band>
+                        <Band id="summary">
+                          <Cell colspan="4">
+                            <Cell/>
+                            <Cell col="1"/>
+                            <Cell col="2"/>
+                            <Cell col="3" expr="dataset..getRowCount('bonus_code')"/>
+                          </Cell>
+                          <Cell col="4" expr="&quot;총 금액 &quot;+dataset.getSum('bonusMoney')"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="Button00" taborder="1" text="추가" left="78.93%" top="163" height="23" onclick="Tab00_tabpage1_Button00_onclick" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" width="55"/>
+                  <Button id="Button01" taborder="2" text="등록" left="85.79%" top="163" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage1_Button01_onclick" right="8.67%"/>
+                  <Button id="Button02" taborder="3" text="삭제" left="919" top="163" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage1_Button02_onclick" width="55"/>
+                  <Static id="Static00" taborder="4" text="*" left="235" top="2" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="Static01" taborder="5" text="*" left="40" top="3" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="Static02" taborder="6" text="*" left="621" top="2" width="18" height="22" style="color:red;font:arial,18;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="경비" onclick="Tab00_onclick">
+              <Layouts>
+                <Layout width="1018" height="171">
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="0%" top="0" height="146" binddataset="ds_cost" width="100%" scrollbars="autovert" nodatatext="데이터가 없습니다." autosizingtype="none" autofittype="col" oncellclick="Tab00_tabpage2_Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="139"/>
+                          <Column size="139"/>
+                          <Column size="139"/>
+                          <Column size="55"/>
+                          <Column size="190"/>
+                          <Column size="190"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                          <Row size="24" band="summ"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell style="font:bold 9 Arial;" text="급여대장번호"/>
+                          <Cell col="1" style="font:bold 9 Arial;" text="사원번호"/>
+                          <Cell col="2" text="사원명"/>
+                          <Cell col="3" style="font:bold 9 Arial;" text="순번"/>
+                          <Cell col="4" text="경비코드"/>
+                          <Cell col="5" text="경비금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="text" edittype="text" style="align:center;" text="bind:salaryBookNo" editdisplay="edit" tooltiptext="급여대장번호는 필수 입력값입니다."/>
+                          <Cell col="1" displaytype="text" edittype="text" style="align:center;" text="bind:empNo" editdisplay="edit" tooltiptext="사원 번호는 필수 입력값입니다."/>
+                          <Cell col="2" displaytype="normal" edittype="none" style="align:center;selectbackground:gainsboro;selectcolor:black;" text="bind:empName" editdisplay="edit"/>
+                          <Cell col="3" displaytype="normal" edittype="none" style="align:center;selectbackground:gainsboro;selectcolor:black;" text="bind:costNo" editdisplay="edit" tooltiptext="자동 입력 값입니다."/>
+                          <Cell col="4" displaytype="combo" edittype="combo" style="align:center;" text="bind:costCode" combodataset="ds_combo_cost" combocodecol="c_code" combodatacol="c_value" combodisplaynulltext="경비코드" combodisplay="display"/>
+                          <Cell col="5" displaytype="number" edittype="text" style="align:center;" text="bind:costMoney" mask="###,###,###,#0" editdisplay="edit"/>
+                        </Band>
+                        <Band id="summary">
+                          <Cell colspan="5">
+                            <Cell/>
+                            <Cell col="1"/>
+                            <Cell col="2"/>
+                            <Cell col="3"/>
+                            <Cell col="4"/>
+                          </Cell>
+                          <Cell col="5" expr="&quot;총 금액 &quot;+dataset.getSum('costMoney')"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="Button00" taborder="1" text="추가" left="78.93%" onclick="Tab00_tabpage2_Button00_onclick" top="163" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" width="55" height="23"/>
+                  <Button id="Button01" taborder="2" text="등록" left="85.79%" top="163" right="8.67%" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage2_Button01_onclick"/>
+                  <Button id="Button02" taborder="3" text="삭제" left="919" top="163" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage2_Button02_onclick" width="55"/>
+                  <Static id="Static00" taborder="4" text="*" left="32" top="3" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="Static01" taborder="5" text="*" left="209" top="2" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="Static02" taborder="6" text="*" left="496" top="1" width="18" height="22" style="color:red;font:arial,18;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="세금">
+              <Layouts>
+                <Layout width="1013" height="171">
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="0%" top="0" height="146" width="100%" scrollbars="autovert" binddataset="ds_tax" nodatatext="데이터가 없습니다." autofittype="col" oncellclick="Tab00_tabpage3_Grid00_oncellclick">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="153"/>
+                          <Column size="153"/>
+                          <Column size="153"/>
+                          <Column size="190"/>
+                          <Column size="190"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                          <Row size="24" band="summ"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell style="font:bold 9 Arial;" text="급여대장번호"/>
+                          <Cell col="1" style="font:bold 9 Arial;" text="사원번호"/>
+                          <Cell col="2" text="사원명"/>
+                          <Cell col="3" style="font:bold 9 Arial;" text="세금코드"/>
+                          <Cell col="4" text="세금액"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell displaytype="text" edittype="text" style="align:center;" text="bind:salaryBookNo" editdisplay="edit" tooltiptext="급여대장번호는 필수 입력값입니다."/>
+                          <Cell col="1" displaytype="text" edittype="text" style="align:center;" text="bind:empNo" editdisplay="edit" tooltiptext="사원번호는 필수 입력값입니다."/>
+                          <Cell col="2" displaytype="normal" edittype="none" style="align:center;selectbackground:gainsboro;selectcolor:black;" text="bind:empName" editdisplay="edit"/>
+                          <Cell col="3" displaytype="combo" edittype="combo" style="align:center;" text="bind:taxCode" combodataset="ds_combo_tax" combocodecol="t_code" combodatacol="t_value" combodisplaynulltext="세금코드" combodisplay="display" tooltiptext="세금코드는 필수 입력값입니다."/>
+                          <Cell col="4" displaytype="number" edittype="text" style="align:center;" text="bind:taxMoney" mask="###,###,###,#0" editdisplay="edit" calendardisplaynulltext="0"/>
+                        </Band>
+                        <Band id="summary">
+                          <Cell colspan="4">
+                            <Cell/>
+                            <Cell col="1"/>
+                            <Cell col="2"/>
+                            <Cell col="3"/>
+                          </Cell>
+                          <Cell col="4" expr="&quot;총 금액 &quot;+dataset.getSum('taxMoney')"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                  <Button id="Button00" taborder="1" text="추가" left="78.93%" top="163" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage3_Button00_onclick" width="55" height="23"/>
+                  <Button id="Button01" taborder="2" text="등록" left="85.79%" top="163" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage3_Button01_onclick" width="55" height="23"/>
+                  <Button id="Button02" taborder="3" text="삭제" left="919" top="163" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;" onclick="Tab00_tabpage3_Button02_onclick" width="55" height="23"/>
+                  <Static id="Static00" taborder="4" text="*" left="43" top="3" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="Static01" taborder="5" text="*" left="235" top="4" width="18" height="22" style="color:red;font:arial,18;"/>
+                  <Static id="Static02" taborder="6" text="*" left="620" top="2" width="18" height="22" style="color:red;font:arial,18;"/>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Edit id="edt_searchKeyword" taborder="96" oneditclick="edt_searchKeyword_oneditclick" left="425" top="71" width="144" height="23"/>
+        <Edit id="Edit00" taborder="97" left="137" top="71" height="23" width="144" oneditclick="Edit00_oneditclick"/>
+        <Static id="Static03" taborder="98" text="*" left="358" top="99" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Static id="Static00" taborder="99" text="*" left="509" top="100" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Static id="Static01" taborder="100" text="*" left="48" top="100" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Edit id="Edit01" taborder="101" left="5.44%" top="768" right="83.59%" height="19" visible="false" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Edit id="Edit02" taborder="102" left="16.8%" top="768" right="70.49%" height="20" oneditclick="Edit02_oneditclick" visible="false" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;"/>
+        <Button id="Button02" taborder="103" text="검색" left="592" top="69" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button02_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_tax" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="salaryBookNo" type="STRING" size="12"/>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="empName" type="STRING" size="100"/>
+          <Column id="taxCode" type="STRING" size="4"/>
+          <Column id="taxMoney" type="INT" size="10"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_cost" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="salaryBookNo" type="STRING" size="12"/>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="empName" type="STRING" size="100"/>
+          <Column id="costCode" type="STRING" size="4"/>
+          <Column id="costMoney" type="INT" size="10"/>
+          <Column id="costNo" type="INT" size="2"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_bonus" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="salaryBookNo" type="STRING" size="12"/>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="empName" type="STRING" size="100"/>
+          <Column id="bonusCode" type="STRING" size="4"/>
+          <Column id="bonusMoney" type="INT" size="10"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_salary" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="salaryBookNo" type="STRING" size="12"/>
+          <Column id="salaryBookNm" type="STRING" size="256"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="empName" type="STRING" size="100"/>
+          <Column id="basicMoney" type="INT" size="10"/>
+          <Column id="bonusSum" type="INT" size="10"/>
+          <Column id="costSum" type="INT" size="10"/>
+          <Column id="taxSum" type="INT" size="10"/>
+          <Column id="minusTax" type="INT" size="10"/>
+          <Column id="emp_no" type="STRING" size="256"/>
+          <Column id="emp_name" type="STRING" size="256"/>
+          <Column id="grade" type="STRING" size="256"/>
+          <Column id="dept" type="STRING" size="256"/>
+          <Column id="birth" type="STRING" size="256"/>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="emp_user" type="STRING" size="256"/>
+          <Column id="empUser" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="salaryBookNo"/>
+            <Col id="salaryBookNm"/>
+            <Col id="empNo"/>
+            <Col id="empName"/>
+            <Col id="basicMoney"/>
+            <Col id="bonusSum"/>
+            <Col id="costSum"/>
+            <Col id="taxSum"/>
+            <Col id="minusTax"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_combo_bonus" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="b_code" type="STRING" size="256"/>
+          <Column id="b_value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="b_code">3110</Col>
+            <Col id="b_value">야근수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3120</Col>
+            <Col id="b_value">특근수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3130</Col>
+            <Col id="b_value">주휴수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3140</Col>
+            <Col id="b_value">연차수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3150</Col>
+            <Col id="b_value">직급수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3160</Col>
+            <Col id="b_value">상여수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3170</Col>
+            <Col id="b_value">성과수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3180</Col>
+            <Col id="b_value">자격증수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3190</Col>
+            <Col id="b_value">육아보수수당</Col>
+          </Row>
+          <Row>
+            <Col id="b_code">3199</Col>
+            <Col id="b_value">부양가족수당</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_combo_cost" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="c_code" type="STRING" size="256"/>
+          <Column id="c_value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="c_code">3210</Col>
+            <Col id="c_value">주유비</Col>
+          </Row>
+          <Row>
+            <Col id="c_value">숙박비</Col>
+            <Col id="c_code">3220</Col>
+          </Row>
+          <Row>
+            <Col id="c_code">3230</Col>
+            <Col id="c_value">기타경비</Col>
+          </Row>
+          <Row>
+            <Col id="c_code">3240</Col>
+            <Col id="c_value">식비</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_combo_tax" useclientlayout="true">
+        <ColumnInfo>
+          <Column id="t_code" type="STRING" size="256"/>
+          <Column id="t_value" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="t_code">3310</Col>
+            <Col id="t_value">소득세</Col>
+          </Row>
+          <Row>
+            <Col id="t_code">3320</Col>
+            <Col id="t_value">주민세</Col>
+          </Row>
+          <Row>
+            <Col id="t_code">3330</Col>
+            <Col id="t_value">국민연금</Col>
+          </Row>
+          <Row>
+            <Col id="t_code">3340</Col>
+            <Col id="t_value">건강보험</Col>
+          </Row>
+          <Row>
+            <Col id="t_code">3350</Col>
+            <Col id="t_value">고용보험</Col>
+          </Row>
+          <Row>
+            <Col id="t_code">3360</Col>
+            <Col id="t_value">장기요양</Col>
+          </Row>
+          <Row>
+            <Col id="t_code">3370</Col>
+            <Col id="t_value">사우회비</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="emp_no" type="STRING" size="256"/>
+          <Column id="emp_name" type="STRING" size="256"/>
+          <Column id="grade" type="STRING" size="256"/>
+          <Column id="dept" type="STRING" size="256"/>
+          <Column id="birth" type="STRING" size="256"/>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="emp_user" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <!--
+<Parameters>
+      <Parameter id="test_data" type="string" value="edt_btr_no2"/>
+    </Parameters>
+          
+          나중에 뭘 할라치면 get으로 가져와서 set으로 넣어주면 되니까.
+          <BindItem id="item10" compid="edt_searchKeyword00" propid="value" datasetid="ds_salary" columnid="empNo"/>
+                <BindItem id="item9" compid="edt_searchKeyword00" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+          
+-->
+    <Bind>
+      <BindItem id="item1" compid="Tab00.tabpage2.Grid00" propid="binddataset" datasetid="ds_cost" columnid=""/>
+      <BindItem id="item2" compid="Tab00.tabpage1.Grid00" propid="binddataset" datasetid="ds_bonus" columnid=""/>
+      <BindItem id="item5" compid="edt_searchKeyword" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item60" compid="edt_searchKeyword" propid="value" datasetid="ds_salary" columnid="empNo"/>
+      <BindItem id="item37" compid="edt_searchKeyword" propid="value" datasetid="gds_empno" columnid="emp_no"/>
+      <BindItem id="item3" compid="Grid00" propid="binddataset" datasetid="ds_salary" columnid=""/>
+      <BindItem id="item4" compid="Tab00.tabpage3.Grid00" propid="binddataset" datasetid="ds_tax" columnid=""/>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_salary" columnid="salaryBookNo"/>
+      <BindItem id="item61" compid="Edit00" propid="value" datasetid="ds_search" columnid="searchCondition"/>
+      <BindItem id="item6" compid="Edit01" propid="value" datasetid="ds_bonus" columnid="salaryBookNo"/>
+      <BindItem id="item7" compid="Edit02" propid="value" datasetid="ds_bonus" columnid="empNo"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs"; //단축키 작동 안함 ctrl+f x -> ctrl+R 
+
+var imsisave = "";
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+	
+	
+	//사원번호는 할 필요가 없지. 온로드.. 대장번호 가져올 거니까. 맞나???
+	//대장 번호만 온로드 시키면 됨.
+	//this.Button00_onclick();
+	this.fn_search2_onclick();
+} 
+
+
+//사원번호로 조회
+this.fn_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		 //이게 xml에서 동적으로 가져가는 값인가? #searchKeyword#  //이거 건들면 안되는 구나 아래서 다 쓰고 있으니까.
+    var searchCondition =  "NAME";
+    var searchKeyword = this.edt_searchKeyword.value;     
+      
+	if (searchKeyword.length == 0){ // 
+		alert("검색어를 입력해주세요");
+		this.ds_salary.reset();
+		//this.ds_salary.addRow();
+		return false;
+	} 
+      
+	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+	
+ /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+   
+
+
+
+   //급여
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "salSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_salary=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_salary : " + pThis.ds_salary.saveXML());
+		if(pThis.ds_salary.getRowCount() < 1){
+			//pThis.ds_salary.insertRow();
+			pThis.ds_salary.addRow();
+			alert("데이터가 없습니다.\n검색어를 확인해주세요.");
+		}
+	});
+	//this.ds_salary.clearData();
+	//이걸 없애면 대장번호 검색을 할 수 없네.
+
+
+
+	//수당
+	var oDatasBon =  {
+			  svcid : "searchBon",
+			  sController : "salBonSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_bonus=outputBon"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	 
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasBon,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_bonus : " + pThis.ds_bonus.saveXML());
+	});
+	this.ds_bonus.clearData();
+	//경비
+	var oDatasCost =  {
+			  svcid : "searchCost",
+			  sController : "salCostSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_cost=outputCost"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasCost,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_cost : " + pThis.ds_cost.saveXML());
+	});
+	this.ds_cost.clearData();
+	
+	//세금
+	var oDatasTax =  {
+			  svcid : "searchTax",
+			  sController : "salTaxSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_tax=outputTax"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasTax,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_tax : " + pThis.ds_tax.saveXML());
+	});
+	this.ds_tax.clearData();
+	
+//이거 없는데 
+ 		var imsi = this.edt_searchKeyword.value;
+ 	   this.edt_btrip_dno.set_value(imsi);
+	
+	
+}
+
+//급여대장번호로 검색
+this.fn_search2_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	// 이 문장 그대로 나중에 onload 에서 써줘야함. 여기서는 대장번호로 가는 이거지
+// 		var strParam1 = this.parent.param1;
+//  		this.edt_btrip_dno.set_value(strParam1);
+// 		this.fn_search2_onclick();
+	
+		 //이게 xml에서 동적으로 가져가는 값인가? #searchKeyword#
+   // var searchCondition =  "NAME";
+   
+   
+    var salaryBookNo = this.Edit00.value;   
+        
+        
+    	trace("null을 찾아봅시다"+salaryBookNo);
+	
+// 	//전체 검색 테스트 중 주석. 0528
+// 	if (salaryBookNo.length == 0){ // 여기에서 걸렸어!!! 멋진애잖아.
+// 		alert("검색어를 입력해주세요");		
+// 		//this.ds_salary.clearData(); // 이렇게 하니까 그냥 지워진 느낌.
+// 		this.ds_salary.reset();
+// 		//this.ds_salary.addRow();
+// 		return false;
+// 	} 
+
+ 	//this.ds_salary.setColumn(0, "searchCondition", "NAME");
+	this.ds_salary.setColumn(0, "salaryBookNo", salaryBookNo); // 화면에서 넣는 게 아니라 
+																// 이게 검색어 값을 넣어주는 구문이구나. 이 변수명에 맞게 쿼리문도 맞춰줘야함.
+																//이거 해당 컬럼 이름 바꿔줬음.
+	
+// 	if(this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo")==null ||
+// 	this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo")=="")
+// 	{
+// 		this.ds_salary.setColumn(0,"salaryBookNo","total");//total이 뭐지?
+// 	}
+	trace("값 확인용"+salaryBookNo);															
+ /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+   
+   //급여
+   var oDatas =  {
+			  svcid : "searchBook",
+			  sController : "salSelectBookVO.do",			 
+			  inds :["ds_salary=ds_salary"],
+			  outds :[
+				 "ds_salary=output10"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	 
+
+		
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	   var pThis = this.fobj;   //form object	      
+	   trace(" ds_salary : " + pThis.ds_salary.saveXML());
+			if(pThis.ds_salary.getRowCount() < 1){
+				//pThis.ds_salary.insertRow();
+				pThis.ds_salary.addRow();
+				alert("데이터가 없습니다.\n검색어를 확인해주세요.");
+			}
+	
+	});
+	
+	this.ds_bonus.clearData();
+	this.ds_cost.clearData();
+	this.ds_tax.clearData();
+}
+
+
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}	
+}
+
+//사원찾기 edt_searchKeyword로
+this.edt_searchKeyword_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	// 그래 이거지!!!!-번호가 없다고? - 그럼 다 넣어줘버려!!
+	var empUser = this.ds_salary.getColumn(this.ds_salary.rowposition, "empUser");
+	if(new String(empUser).valueOf() == "undefined"){ // 여기에서 걸렸어!!! 멋진애잖아.
+		var searchKeyword = this.edt_searchKeyword.value;
+		this.ds_salary.setColumn(this.ds_salary.rowposition, "empUser", searchKeyword);
+		this.ds_salary.setColumn(this.ds_salary.rowposition, "empNo", searchKeyword);
+	} 
+	
+	var salaryBookNo = this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo");
+	if(new String(salaryBookNo).valueOf() == "undefined"){ // 여기에서 걸렸어!!! 멋진애잖아.
+		var searchEdit00BookNo = this.Edit00.value;
+		this.ds_salary.setColumn(this.ds_salary.rowposition, "salaryBookNo", searchEdit00BookNo);
+	} 
+}
+
+//사원찾기 박스 누르면 -> 팝업 -> 값이 eit박스에 남고 -> 그 값으로 #동적 쿼리문# 을 구성해서
+//xml 들어가서 작업함.
+
+
+//add 추가
+//salary row add
+this.fn_add = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	//var imsi1 = this.edt_searchKeyword.value;
+// 	var nRow = this.ds_salary.addRow();
+// 	//this.emp_no.set_value(imsi1);   /// 이거 왜 한 걸까? 데이터셋 컬럼에 값을 넣어준거야?
+// 	// 이거 list 에는 사원번호가 없으니까 이런식으로 넣어준 걸까!!!! 이거 나중에 쓸 수 있을 듯!!!
+// 	
+// 	//this.ds_salary.addRow();
+// 	this.ds_bonus.setColumn(nRow, "empNo", empNo);
+// 	this.ds_bonus.setColumn(nRow, "salaryBookNo", salaryBookNo);
+	
+	///
+	//이거 두줄이 시작부분이야.
+// 	var bRow = this.ds_salary.addRow();
+// 	var nRow = this.ds_salary.set_rowposition(bRow);
+// 	
+// 	
+// 	// 됐다 이거 값 넣어주는 거 하지 말자. 안되네. 급여는 직접 넣는게 나을 것 같기도 하고.
+// 	
+// 	// 이게 뭘까.
+// // 	this.div_data.grd_data.showEditor(true);
+// // 	this.div_data.grd_data.setFocus(true);
+// 
+// // 	var empno = this.ds_bonus.getColumn(0, "empNo");
+// // 	var bookno = this.ds_bonus.getColumn(0, "salary_book_no");
+// 	
+// 	var salaryBookNo = this.ds_salary.copyData(this.ds_salary.rowposition, "salaryBookNo");
+// 	var empNo = this.ds_salary.copyData(this.ds_salary.rowposition, "empNo")
+// 	
+// // 	var empNo = this.edt_searchKeyword.value;
+// // 	var salaryBookNo = this.Edit00.value;
+// 	
+// 	trace(" salary 추가 키워드의 empno를 못찾네 -  서치랑 묶여서 그렇구나. 아니야 같은 바인딩이면 안되는 거야. "+empNo);
+// 	trace(" salary 추가 키워드 salaryBookNo "+salaryBookNo);
+// 	
+// 	// 현 위치를 못 찾네
+// 	this.ds_salary.setColumn(nRow, "empNo", empNo);
+// 	this.ds_salary.setColumn(nRow, "salaryBookNo", salaryBookNo);
+// 	
+	
+	
+	
+	
+	
+	
+	
+	
+		// 값을 넣어줄 필요가 없어. 추가할 때 있는 걸 넣을 게 아니니까.
+	var bRow = this.ds_salary.addRow();
+	var nRow = this.ds_salary.set_rowposition(bRow);
+	
+// 	var empNo = this.Edit02.value;
+// 	var salaryBookNo = this.Edit01.value;
+// 	
+// 	trace("급여 추가 row"+empNo);
+// 	
+// 	this.ds_salary.setColumn(nRow, "empNo", empNo);
+// 	this.ds_salary.setColumn(nRow, "salaryBookNo", salaryBookNo);
+// 	
+	
+	
+}
+
+
+//저장
+this.div_Detail_insert_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//var imsi4 = this.edt_searchKeyword.value;
+	
+	
+	var salNoNullCheck = this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo");
+	var empNo = this.ds_salary.getColumn(this.ds_salary.rowposition, "empNo");
+	var basicMoney = this.ds_salary.getColumn(this.ds_salary.rowposition, "basicMoney");
+	var empUser = this.ds_salary.getColumn(this.ds_salary.rowposition, "empUser");
+	
+	trace("null을 찾아봅시다"+salNoNullCheck);
+	
+	//this.gfn_isNull(empNo); //null 확인용
+	if (new String(salNoNullCheck).valueOf() == "undefined"){ // 여기에서 걸렸어!!! 멋진애잖아.
+		alert("급여대장번호를 확인해 주세요");
+		return false;
+	} else if (new String(empUser).valueOf() == "undefined") {
+		alert("사원이름을 제외한\n사원번호를 입력해 주세요");
+		return false;
+	} else if (new String(basicMoney).valueOf() == "undefined"){
+		alert("기본급을 입력해 주세요");
+		return false;
+	}
+	
+	//displaytype이 currency 였을 땐 이거고 type을 Number로 바꾸니까 안됨 //
+// 	 else if (basicMoney.length == 0) {
+// 		alert("기본급을 입력해주세요");
+// 		return false;
+// 	}
+	
+	//데이터셋 건드리는 중-select 한 값이 db에 바로 저장 되도록
+	//이거 있으면 무결성은 안 잡고 - 바로 저장되는구나 
+	//대신 이게 없으면 저장이 안됨....   ===> 이거 살리고 공통코드에 있던 중복 검사하는 로직 만들어야함.
+	// 중복만 무시하고 넣는 건가 했는데 그냥 싹 무시하고 넣는 거였음. sql 자체를 무시해버림--무서운 애였네
+// 	this.ds_salary.set_updatecontrol(false);
+// 	
+// 	var nRow = this.ds_salary.rowposition;
+// 	this.ds_salary.setRowType(nRow,Dataset.ROWTYPE_UPDATE);
+// 이거 되는지 테스트 해보자
+//	this.ds_salary.set_updatecontrol(true);
+	
+	this.fn_save("save");
+	//this.edt_searchKeyword.set_value(imsi4);
+	///뭔 작업인지 몰랐는데 이게 있어야만 동적쿼리를 구성하는 건가? xml 에서 ##으로 받았던거?
+	//그런데 내 화면단에는 번호가 있으니까. 필요 없긴 한데
+	//처음 구성할 때 searchKworkd로 구성 했으니까 필수적으로 필요한 구문인지도..
+	// 아닌가?
+	
+	//여기다 두는게 아니구만
+	//Iject.alert("저장되었습니다.");
+}
+
+// 저장 버튼 클릭시 동작할 함수
+this.fn_save = function(strid)
+{
+	//this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+	//this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.re_emp_no.value);
+	//그리드의 ok 컬럼은 있는데 re 컬럼은 없었음. 이게 뭐지?? 현재 행에 값을 ...?
+// 	
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "salary_book_no", this.ok_emp_no.value);
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "re_Emp_No", this.re_emp_no.value);
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "re_Emp_No", this.re_emp_no.value);
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "re_Emp_No", this.re_emp_no.value);
+// 	this.ds_salary.setColumn(this.ds_salary.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+
+// 위에 구문이 들어가는 이유가 있던 거야.
+// 이걸 안해주면 현재 선택한 rowpositrion 의 값이 아니라 다 delete 되는 거지.
+
+	
+	var nRow = this.ds_salary.rowposition;
+
+	trace("저장버튼 서비스 id를 알아봅시다"+strid);
+	
+	
+	var oDatas =  {
+			//"input1=ds_salary:u" 중요 이슈 알림 창 --- INDS 에서  :u 옵션 뺌. SELECT 문을 통해 하단의 결과를 재계산 후 출결 하는 과정에서
+			// 넥사크로가 이전 버전과의 차이를 인지하지 못함. 그게 맞게도 하고. DB 상으로는 다른 값이 들어가 있지만
+			// 계산상으로는 그냥 나온 결과값 그대로를 저장한다고 해서 변할일은 없을 테니까. 그래서 :U 옵션을 지움
+			// 급여대장번호+사원번호 = 1ROW 은 결과가 어쨌든 하나일 테니 .... 크게 무리는 없지 않을까...
+			// 그렇지만 다른 활동일때 이를테면.... 급여대장 하나 검색해서 수십, 수백개가 나온 상테에서 
+			// 목록에 있는 특정한 누군가의 값만 살짝 바꿨다든지.... 그럴 경우에는... 뭐 답 없음. 수십 수백개가 다 저장 될테니..=> 데이터 과부화 걸릴 것임.
+			  svcid : strid,
+			  sController : "salModifyVO.do",			 
+			  inds :["input1=ds_salary:u"], //  Dataset ID 뒤에 옵션이 붙을 수 있다 :U - 갱신된 내용만 전송
+			  outds :[
+				 "ds_salary=output1"//이거 조회때 썼던 거잖아.
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{	
+// 			var deletedRow = Iject.ds_salary.getDeletedRowCount();
+// 			trace("삭제1 row"+deletedRow);
+			
+		   	switch(strid){
+				case "save":
+					Iject.alert("급여 저장 실패"); 
+					break;
+				
+				case "delete":
+					Iject.alert("급여 삭제 실패 1차"); 
+					break;
+			}
+		   //Iject.alert("급여 저장에 실패했습니다.",this.errorMsg);
+		   //Iject.alert(this.errorMsg,"알림");			
+		   return false;
+		}			
+		
+		//이거 썼었는데 switch 이거 쓰면서 뺐음
+	     //Iject.alert("switch 위 저장되었습니다."); 
+	     
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+
+			//여기다 스위치 넣으니까 다 뜨네-break 때문이였음
+			switch(strid){
+				case "save":
+					Iject.alert("저장되었습니다."); 
+					break;
+				
+				case "delete":
+					Iject.alert("삭제되었습니다.");
+					trace("나오나요");
+					var objGdS = new Dataset; 
+					this.Grid00.set_binddataset("strDataset")
+					var nRowCnt = Iject.ds_salary.getDeletedRowCount();
+					trace("삭제3 row"+nRowCnt);
+					if(nRowCnt > 0) {
+						Iject.alert("삭제되었습니다.");
+					}else{
+						Iject.alert("급여 삭제 실패 2차");
+					}
+				break;
+			}
+
+	});
+ 			
+// 			//여기있으니까 트랜잭션 결과에 상관 없이 다 그냥 뜸.
+// 			switch(strid){
+// 			case "save":
+// 				Iject.alert("switch 밖 저장되었습니다."); 
+// 				break;
+// 			
+// 			case "delete":
+// 				Iject.alert("switch 안 삭제되었습니다."); 
+// 				break;
+// 
+// 		}//switch(sSvcId)
+	
+	
+	var nRow = this.ds_salary.rowposition;
+	
+	var salaryBookNo = this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo");
+	
+	var basicMoney = this.ds_salary.getColumn(this.ds_salary.rowposition, "basicMoney");
+	var bonusSum = this.ds_salary.getColumn(this.ds_salary.rowposition, "bonusSum");
+	var costSum = this.ds_salary.getColumn(this.ds_salary.rowposition, "costSum");
+	var taxSum = this.ds_salary.getColumn(this.ds_salary.rowposition, "taxSum");
+
+	var updateSal = basicMoney+bonusSum+costSum+taxSum;
+	trace("급여대장 합계 : "+updateSal);
+	
+	
+// 	this.ds_salary.setColumn(nRow, "salaryBookNo", salaryBookNo);
+// 	this.ds_salary.setColumn(nRow, "empNo", empNo);
+	
+
+
+
+
+/*	this.fn_search();*/
+	//var imsi3 = this.edt_searchKeyword.value; // 값을 담아서
+	//this.edt_searchKeyword.set_value(imsi3); // 값을 저장하고
+	//Iject.alert(this.ds_salary.saveXML());	
+	
+	//0530  --- 중복검사하는 로직 만들어야함.
+// 	switch(sSvcId){
+// 		case "codeChecker": 
+// 			var check = this.ds_check.getColumn(this.ds_check.rowposition, "classCode");
+// 			if(check != "NONE"){
+// 				this.alert("중복 코드입니다.");
+// 				this.edit00.set_value(null);
+// 				this.edit00.set_text("");
+// 				this.edit00.setFocus();
+// 			}
+// 			break;
+// 	}
+	
+	
+	
+	
+}/// 이거 값 계속 담는 이유가 뭐지? 그리드에 담는 건 그 값에 해당하는 컬럼이 없어서 바인딩을 못하니까.
+// 넣어주는 건 알겠어. 그런데 저장 함수에서도 키워드에 담고, 저장 버튼  눌러서 실행 시킬 때도 담고...
+
+
+//삭제 이거 해서 안되면 다시 가져오자
+this.fn_delete_salary = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+
+		var nRow = this.ds_salary.rowposition;
+		var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	//삭제가 됐다가 안 됐다가 그러네. 진짜
+	trace("삭제 confirm y/n undefined 뜨지만 알아서 if을 잘 타고 있다.  "+this.rtnValue)
+	if(rtnValue){  
+		this.ds_salary.deleteRow(nRow);
+		this.fn_save("delete");
+		//this.fn_search_onclick();
+	}else{
+		this.fn_search();
+	}
+
+	
+	
+}
+
+
+
+//수당
+
+this.Tab00_tabpage1_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var bRow = this.ds_bonus.addRow();
+	var nRow = this.ds_bonus.set_rowposition(bRow);
+// 	this.div_data.grd_data.showEditor(true);
+// 	this.div_data.grd_data.setFocus(true);
+// 	var empno = this.ds_bonus.getColumn(0, "empNo");
+// 	var bookno = this.ds_bonus.getColumn(0, "salary_book_no");
+	
+	var empNo = this.edt_searchKeyword.value;
+	var salaryBookNo = this.Edit00.value;
+	trace("추가 row"+empNo);
+	
+	this.ds_bonus.setColumn(nRow, "empNo", empNo);
+	this.ds_bonus.setColumn(nRow, "salaryBookNo", salaryBookNo);
+	
+
+	
+}
+
+this.Tab00_tabpage1_Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var salNoNullCheck = this.ds_bonus.getColumn(this.ds_bonus.rowposition, "salaryBookNo");
+	var empNo = this.ds_bonus.getColumn(this.ds_bonus.rowposition, "empNo");
+	var bonusCode = this.ds_bonus.getColumn(this.ds_bonus.rowposition, "bonusCode");
+	
+	trace("null을 찾아봅시다"+salNoNullCheck);
+	
+	//1. 그리드에서 표현식 쓰는거 안됨.
+	//salaryBookNo ==  8 ? salaryBookNo : comp.parent.alter() // 
+	//salaryBookNo ==  null ? salaryBookNo : comp.parent.alter(currow)
+	//salaryBookNo ==  8 ? salaryBookNo : comp.parent.parent.alter(currow)
+	
+	//2. if 걸어서 확인하는 것도 안되고
+// 	this.gfn_isNull(salNoNullCheck);
+// 	if(salNoNullCheck == null) {
+// 		Iject.alert("급여대장번호를 확인해주세요");
+// 		return;
+// 	}
+	
+	//필더 걸어서 확인하는거
+// 	this.ds_bonus.filter();
+// 	this.ds_bonus.filter(""); // 이거 필터 초기화 한거구나
+// 	var abc =this.ds_bonus.filter("salaryBookNo == 'null'");
+	
+	//if(this.ds_bonus.filter("salaryBookNo == ''")){// 필더는 있나 없나 보는게 아니라 -- 참을 보여주는거구나
+													// 이걸로 조건이 안 잡혀 - null 일 때 그대로 있어버림.
+	//if(this.ds_bonus.filter("salaryBookNo > 0")){
+// 	if(salNoNullCheck == "null"){
+// 		Iject.alert("급여대장번호를 확인해주세요");
+// 		return false;
+// 	}else if(this.ds_bonus.filter("empNo == 'null'")){
+// 		Iject.alert("사원번호를 확인해주세요");
+// 		return;
+// 	}
+//===> 이거 될 것 같은데 안됨 버려
+	
+// 	if(e.cell == "0"){
+// 		Iject.alert("급여대장번호를 확인해주세요");
+// 	}
+	
+	//좋아? 아니야.
+// 	if(this.ds_bonus.getColumn(this.ds_bonus.rowposition, 'salaryBookNo').val = null){
+// 		Iject.alert("급여대장번호를 확인해주세요");
+// 	}
+	
+	//좋아좋아
+	// 공통 함수라고 하는데 안돌아가. => 돌아감. 그럼.. 그 값을 가지고 와서 직접 해보면 좋지 않을까?
+// 	if(this.gfn_isNull(salNoNullCheck)){
+// 		alter("다시 확인 요망");	
+// 		return false;
+// 	}else if(this.gfn_isNull(empNo)){
+// 		alter("번호  확인 요망");	
+// 		return false;
+// 	}
+	//bonusCode
+	if (new String(salNoNullCheck).valueOf() == "undefined"){ // 여기에서 걸렸어!!! 멋진애잖아.
+		alert("급여대장번호를 확인해 주세요");
+		return false;
+	} else if (new String(empNo).valueOf() == "undefined") {
+		alert("사원번호를 확인해 주세요");
+		return false;
+	} else if (new String(bonusCode).valueOf() == "undefined") { // 그냥 edit 박스에 값이 있는지 확인하는 애하고 콤보 박스에 값이 있는지 확인하는 애하고 다른애였음.
+		alert("수당코드를 확인해 주세요");
+		return false;
+	}
+	
+	this.fn_save1("save")
+	//
+	this.Edit02_oneditclick();
+}
+
+
+// 저장 버튼 클릭시 동작할 함수
+this.fn_save1 = function(strid)
+{
+	//this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+	//this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.re_emp_no.value);
+	//그리드의 ok 컬럼은 있는데 re 컬럼은 없었음. 이게 뭐지?? 현재 행에 값을 ...?
+
+
+	trace("저장버튼 서비스 id를 알아봅시다"+strid);
+	
+	
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "salBonModifyVO.do",			 
+			  inds :["inputBon=ds_bonus:u"], //  Dataset ID 뒤에 옵션이 붙을 수 있다 :U - 갱신된 내용만 전송
+			  outds :[
+				 "ds_bonus=outputBon"//이거 조회때 썼던 거잖아.
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{	
+			switch(strid){
+				case "save":
+					Iject.alert("수당 저장 실패"); 
+					break;
+				
+				case "delete":
+					Iject.alert("수당 삭제 실패"); 
+					break;
+			}
+
+		   //Iject.alert("실패했습니다.",this.errorMsg);	
+		   //Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	     
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+		
+			switch(strid){
+				case "save":
+					Iject.alert("저장되었습니다."); 
+					break;
+				
+				case "delete":
+					Iject.alert("삭제되었습니다."); 
+					break;
+			}
+
+
+	});
+/*	this.fn_search();*/
+	//var imsi3 = this.edt_searchKeyword.value; // 값을 담아서
+	//this.edt_searchKeyword.set_value(imsi3); // 값을 저장하고
+	//Iject.alert(this.ds_bonus.saveXML());	
+}/// 이거 값 계속 담는 이유가 뭐지? 그리드에 담는 건 그 값에 해당하는 컬럼이 없어서 바인딩을 못하니까.
+// 넣어주는 건 알겠어. 그런데 저장 함수에서도 키워드에 담고, 저장 버튼  눌러서 실행 시킬 때도 담고...
+
+
+this.Tab00_tabpage1_Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		
+		var nRow = this.ds_bonus.rowposition;
+		var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+		this.ds_bonus.deleteRow(nRow);
+	
+	//var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+// 	this.ds_bonus.deleteRow(this.ds_bonus.rowposition);
+// 	
+	
+// 	
+//  	
+//  	var confirm = this.ds_confirm.getColumn();
+//  	
+//  	if(this.confirm != null){
+//  		this.alert("출장일정내용을 확인하세요");
+//  	}else 
+	trace("삭제 서비스"+this.rtnValue)
+	if(rtnValue){  
+		this.fn_save1("delete"); //수정
+		this.Grid00_oncelldblclick();
+	}else{
+		this.fn_search();
+	}
+	
+}
+
+
+
+//경비
+this.Tab00_tabpage2_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+// 	var nRow = this.ds_cost.addRow();
+// 	
+// 		
+// 	var empno = this.ds_cost.getColumn(0, "emp_no");
+// 	var bookno = this.ds_cost.getColumn(0, "salary_book_no");
+// 	
+// 	this.ds_cost.setColumn(nRow, "emp_no", empno);
+// 	this.ds_cost.setColumn(nRow, "salary_book_no", bookno);
+// 	
+	
+	var bRow = this.ds_cost.addRow();
+	var nRow = this.ds_cost.set_rowposition(bRow);
+	
+	var empNo = this.edt_searchKeyword.value;
+	var salaryBookNo = this.Edit00.value;
+	trace("추가 row"+empNo);
+	
+	this.ds_cost.setColumn(nRow, "empNo", empNo);
+	this.ds_cost.setColumn(nRow, "salaryBookNo", salaryBookNo);
+	
+	
+// 	var bRow = this.ds_cost.addRow();
+// 	var nRow = this.ds_cost.set_rowposition(bRow);
+// // 	this.div_data.grd_data.showEditor(true);
+// // 	this.div_data.grd_data.setFocus(true);
+// // 	var empno = this.ds_bonus.getColumn(0, "empNo");
+// // 	var bookno = this.ds_bonus.getColumn(0, "salary_book_no");
+// 	
+// 	var empNo = this.edt_searchKeyword.value;
+// 	var salaryBookNo = this.Edit00.value;
+// 	trace("추가 row"+empNo);
+// 	
+// 	this.ds_cost.setColumn(nRow, "empNo", empNo);
+// 	this.ds_cost.setColumn(nRow, "salaryBookNo", salaryBookNo);
+// 	
+}
+
+this.Tab00_tabpage2_Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var salNoNullCheck = this.ds_cost.getColumn(this.ds_cost.rowposition, "salaryBookNo");
+	var empNo = this.ds_cost.getColumn(this.ds_cost.rowposition, "empNo");
+	var costCode = this.ds_cost.getColumn(this.ds_cost.rowposition, "costCode");
+		
+	trace("COST null을 찾아봅시다"+salNoNullCheck);
+	
+	if (new String(salNoNullCheck).valueOf() == "undefined"){ // 여기에서 걸렸어!!! 멋진애잖아.
+		alert("급여대장번호를 확인해 주세요");
+		return false;
+	} else if (new String(empNo).valueOf() == "undefined") {
+		alert("사원번호를 확인해 주세요");
+		return false;
+	} else if (new String(costCode).valueOf() == "undefined") {
+		alert("경비코드를 확인해 주세요");
+		return false;
+	}
+	
+	this.fn_save2("save");
+	//
+	this.Edit02_oneditclick();
+}
+
+
+// 저장 버튼 클릭시 동작할 함수
+this.fn_save2 = function(strid)
+{
+	//this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+	//this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.re_emp_no.value);
+	//그리드의 ok 컬럼은 있는데 re 컬럼은 없었음. 이게 뭐지?? 현재 행에 값을 ...?
+
+
+	trace("저장버튼 서비스 id를 알아봅시다"+strid);
+	
+	
+	var oDatasMoCost =  {
+			  svcid : strid,
+			  sController : "salCostModifyVO.do",			 
+			  inds :["inputCost=ds_cost:u"], //  Dataset ID 뒤에 옵션이 붙을 수 있다 :U - 갱신된 내용만 전송
+			  outds :[
+				 "ds_cost=outputCost"//이거 조회때 썼던 거잖아.
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasMoCost,function(){   
+		
+		if(this.errorcode < 0)
+		{	
+		
+			switch(strid){
+				case "save":
+					Iject.alert("경비 저장 실패"); 
+					break;
+				
+				case "delete":
+					Iject.alert("경비 삭제 실패"); 
+					break;
+			}
+		   //Iject.alert("경비 저장에 실패했습니다.",this.errorMsg);
+		   //Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	    //Iject.alert("저장되었습니다.");  
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+			
+			switch(strid){
+				case "save":
+					Iject.alert("저장되었습니다."); 
+					break;
+				
+				case "delete":
+					Iject.alert("삭제되었습니다."); 
+					break;
+			}
+
+	});
+/*	this.fn_search();*/
+	//var imsi3 = this.edt_searchKeyword.value; // 값을 담아서
+	//this.edt_searchKeyword.set_value(imsi3); // 값을 저장하고
+	//Iject.alert(this.ds_bonus.saveXML());	
+}/// 이거 값 계속 담는 이유가 뭐지? 그리드에 담는 건 그 값에 해당하는 컬럼이 없어서 바인딩을 못하니까.
+// 넣어주는 건 알겠어. 그런데 저장 함수에서도 키워드에 담고, 저장 버튼  눌러서 실행 시킬 때도 담고...
+
+
+this.Tab00_tabpage2_Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		
+		var nRow = this.ds_cost.rowposition;
+// 		var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+// 		this.ds_cost.set_rowposition(nRow);
+// 		this.ds_cost.showEditor(true);  //이거 그리드에서 뭔가 활성화 하는 거라고 했는데 넣으니까 에러남
+// 		this.ds_cost.setFocus(true);
+	
+		var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+		this.ds_cost.deleteRow(nRow);
+	
+// 	
+//  	
+//  	var confirm = this.ds_confirm.getColumn();
+//  	
+//  	if(this.confirm != null){
+//  		this.alert("출장일정내용을 확인하세요");
+//  	}else 
+	trace("삭제 서비스 아이디"+this.rtnValue)
+	if(rtnValue){  
+		//this.fn_save("delete"); //수정
+		//this.fn_delete("delete");
+		this.fn_save2("delete");
+		this.Grid00_oncelldblclick();
+	}else{
+		this.fn_search();
+	}
+	
+}
+
+
+//세금
+this.Tab00_tabpage3_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+// 	var nRow = this.ds_tax.addRow();
+// 	
+// 	var empno = this.ds_tax.getColumn(0, "emp_no");
+// 	var bookno = this.ds_tax.getColumn(0, "salary_book_no");
+// 	
+// 	this.ds_tax.setColumn(nRow, "emp_no", empno);
+// 	this.ds_tax.setColumn(nRow, "salary_book_no", bookno);
+	
+	
+	var bRow = this.ds_tax.addRow();
+	var nRow = this.ds_tax.set_rowposition(bRow);
+	
+	var empNo = this.edt_searchKeyword.value;
+	var salaryBookNo = this.Edit00.value;
+	trace(" 세금 추가 row"+empNo);
+	
+	this.ds_tax.setColumn(nRow, "empNo", empNo);
+	this.ds_tax.setColumn(nRow, "salaryBookNo", salaryBookNo);
+}
+
+this.Tab00_tabpage3_Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var salNoNullCheck = this.ds_tax.getColumn(this.ds_tax.rowposition, "salaryBookNo");
+	var empNo = this.ds_tax.getColumn(this.ds_tax.rowposition, "empNo");
+	var taxCode = this.ds_tax.getColumn(this.ds_tax.rowposition, "taxCode");
+	
+	trace("null을 찾아봅시다"+salNoNullCheck);
+	
+	if (new String(salNoNullCheck).valueOf() == "undefined"){ // 여기에서 걸렸어!!! 멋진애잖아.
+		alert("급여대장번호를 확인해 주세요");
+		return false;
+	} else if (new String(empNo).valueOf() == "undefined") {
+		alert("사원번호를 확인해 주세요");
+		return false;
+	} else if (new String(taxCode).valueOf() == "undefined") {
+		alert("세금코드를 확인해 주세요");
+		return false;
+	}
+	
+	this.fn_save3("save");
+	//
+	this.Edit02_oneditclick();
+}
+
+// 저장 버튼 클릭시 동작할 함수
+this.fn_save3 = function(strid)
+{
+	//this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+	//this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.re_emp_no.value);
+	//그리드의 ok 컬럼은 있는데 re 컬럼은 없었음. 이게 뭐지?? 현재 행에 값을 ...?
+
+
+	trace("저장버튼 서비스 id를 알아봅시다"+strid);
+	
+	
+	var oDatax =  {
+			  svcid : strid,//트랜잭션을 구분하기 위한 ID 값입니다.
+			  sController : "salTaxModifyVO.do",	//트랜잭션을 요청할 주소 값입니다.		 
+			  inds :["inputTax=ds_tax:u"], //  Dataset ID 뒤에 옵션이 붙을 수 있다 :U - 갱신된 내용만 전송
+			  outds :[
+				 "ds_tax=outputTax"//이거 조회때 썼던 거잖아.//트랜잭션의 처리 결과를 받을 데이터셋 id 값
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 // postdata 압축할지 여부
+			}; 
+			// in-데이터셋을 input 이름으로 받고: out-
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatax,function(){   
+		
+		if(this.errorcode < 0)
+		{	
+			switch(strid){
+				case "save":
+					Iject.alert("세금 저장 실패"); 
+					break;
+				
+				case "delete":
+					Iject.alert("세금 삭제 실패"); 
+					break;
+			}
+		   //Iject.alert("세금 저장에 실패했습니다.",this.errorMsg);
+		   //Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	     // Iject.alert("저장되었습니다.");
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+			switch(strid){
+				case "save":
+					Iject.alert("저장되었습니다."); 
+					break;
+				
+				case "delete":
+					Iject.alert("삭제되었습니다."); 
+					break;
+			}
+	});
+/*	this.fn_search();*/
+	//var imsi3 = this.edt_searchKeyword.value; // 값을 담아서
+	//this.edt_searchKeyword.set_value(imsi3); // 값을 저장하고
+	//Iject.alert(this.ds_bonus.saveXML());	
+}/// 이거 값 계속 담는 이유가 뭐지? 그리드에 담는 건 그 값에 해당하는 컬럼이 없어서 바인딩을 못하니까.
+// 넣어주는 건 알겠어. 그런데 저장 함수에서도 키워드에 담고, 저장 버튼  눌러서 실행 시킬 때도 담고...
+
+this.Tab00_tabpage3_Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+// 		var nRow = this.ds_tax.rowposition;
+// 		var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+// 		this.ds_tax.deleteRow(nRow);
+// 		trace(this.ds_tax.deleteRow(nRow));
+// 		
+// 		trace("삭제"+this.rtnValue)
+// 		if(rtnValue){  
+// 			this.fn_save3("save");
+// 			this.fn_search_onclick();
+// 		}else{
+// 			this.fn_search();
+// 		}
+	
+	var nRow = this.ds_tax.rowposition;
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	
+	trace("삭제 서비스 아이디"+this.rtnValue)
+	if(rtnValue){  
+		this.ds_tax.deleteRow(nRow);
+		this.fn_save3("delete");
+		this.Grid00_oncelldblclick();
+	}else{
+		this.fn_search();
+	}
+
+	
+
+
+
+	
+}
+
+
+// 이거 파람값 가져오는 거 할 수 있겠나. - 파람값을 넘기고 자시고 하는게 아니라 그런 클릭하면
+//검색으로 넘어가 게 해보자
+this.Grid00_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+// 	 var salary_book_no = this.Edit00.value;       
+//  	//this.ds_salary.setColumn(0, "searchCondition", "NAME");
+// 	this.ds_salary.setColumn(0, "salary_book_no", salary_book_no);
+// 	
+
+	
+//	어플리케이션 찍고 가져오는 거 안 써도 되겠다.
+// 	var id = application.gds_User.getColumn(application.gds_User.rowposition, "id");
+
+
+	//	var nRow = this.ds_salary.rowposition;
+	//	trace(this.ds_salary.getColumn(this.ds_salary.rowposition, "emp_no"));
+	 //var salaryBookNo = this.Edit00.value;     
+	   
+	   // 그리드에서 직접 가져다가 써볼라고 했는데 안됨. 
+// 	 var nRow = this.ds_salary.rowposition;
+// 	trace(this.ds_salary.getColumn(nRow, "empNo"));
+// 	
+// 	trace(this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo"));
+// 
+// 	
+// 	 var empNo = this.ds_salary.getColumn(nRow, "empNo");
+// 	 var salaryBookNo = this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo");
+// 	 
+// // 	 var empNo = empNo1.value;
+// // 	 var salaryBookNo = salaryBookNo1.value;
+//  	//this.ds_salary.setColumn(0, "searchCondition", "NAME");
+// 	this.ds_bonus.setColumn(0, "empNo", empNo); 
+// 	this.ds_bonus.setColumn(0, "salaryBookNo", salaryBookNo); // 화면에서 넣는 게 아니라 
+// 																// 이게 검색어 값을 넣어주는 구문이구나. 이 변수명에 맞게 쿼리문도 맞춰줘야함.
+// 																//이거 해당 컬럼 이름 바꿔줬음.
+// 	
+// 	
+// // 	this.ds_bonus.setColumn(0, "empNo", this.ds_salary.getColumn(this.ds_salary.rowposition, "empNo")); 
+// // 	this.ds_bonus.setColumn(0, "salaryBookNo", this.ds_salary.getColumn(this.ds_salary.rowposition, "salaryBookNo"));
+// 	
+// 	
+// 	trace("값 확인용"+salaryBookNo);					//이건 변수명으로 찾는거야		
+// 	trace("이게 안 되고 있는 거지?"+this.ds_bonus.setColumn(0, "empNo", empNo));
+// 	trace("이게 안 되고 있는 거지?"+empNo);
+// 	trace(this.ds_bonus.saveXML())
+//  /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+	
+	//Edit00  //edt_searchKeyword
+	if(e.cell==10){
+	var empNo = this.edt_searchKeyword.value;
+	var salaryBookNo = this.Edit00.value;
+	
+	this.ds_search.setColumn(0, "searchCondition", salaryBookNo);
+	this.ds_search.setColumn(0, "searchKeyword", empNo);
+ 	
+ 	//그리드 0행에 입력되어버림.
+// 	this.ds_salary.setColumn(0, "salaryBookNo", salaryBookNo);	
+// 	this.ds_salary.setColumn(0, "empNo", empNo);
+	
+	trace("값 확인용"+salaryBookNo);	
+	
+   //수당
+   var oDatasBonNo =  {
+			  svcid : "searchBonEmpBookNo",
+			  sController : "salBonSelectEmpBookVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_bonus=output20"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_bonus : " + this.ds_bonus.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasBonNo,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	      // trace(" ds_bonus : " + pThis.ds_bonus.saveXML());
+	});
+	
+
+	
+   //경비
+   var oDatasCostNo =  {
+			  svcid : "searchCostEmpBookNo",
+			  sController : "salCostSelectEmpBookVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_cost=output21"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_cost : " + this.ds_cost.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasCostNo,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_cost : " + pThis.ds_cost.saveXML());
+	});
+	
+
+
+	
+   //세금
+   var oDatasTaxNo =  {
+			  svcid : "searchTaxEmpBookNo",
+			  sController : "salTaxSelectEmpBookVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_tax=output22"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_tax : " + this.ds_tax.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasTaxNo,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_tax : " + pThis.ds_tax.saveXML());
+	});
+	
+	}//if(e.cell==9) salary 그리드를 누르면 간다.
+	
+	
+// 이거 시험해볼 수가 없네. 현재 값을 담아서 보내서. 동작을 한다는 건데 => 그게 안되네. 값이 안 담겨??? 
+//    //급여 재확인
+//    var oDatasSalEmpBook =  {
+// 			  svcid : "searchSalEmpBookNo",
+// 			  sController : "salSelectEmpBookVO.do",			 
+// 			  inds :["ds_search=ds_search"],
+// 			  outds :[
+// 				 "ds_salary=output100"
+// 				 
+// 			     ],			     
+// 			  args  : [				
+// 			  ],
+// 			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+// 			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+// 			  bCompress :false,	 //			  
+// 			}; 
+// 			
+// 	 trace(" this.ds_salary : " + this.ds_salary.saveXML());
+// 	  
+//     //공통 transaction 함수 호츨   //function callback 
+// 	Iject.transaction(this,oDatasSalEmpBook,function(){   
+// 		
+// 	
+// 		if(this.errorcode < 0)
+// 		{
+// 		   Iject.alert(this.errorMsg);			
+// 		   return;
+// 		} 
+// 	      
+// 	       var pThis = this.fobj;   //form object	      
+// 	      // trace(" ds_bonus : " + pThis.ds_bonus.saveXML());
+// 	});
+	
+
+
+
+
+
+
+
+
+
+
+
+}
+
+//셀 움직임을 편하게 해보려 해봤지만 안됨.
+this.Grid00_onkeyup = function(obj:Grid, e:nexacro.KeyEventInfo)
+{
+	//ds_salary.moveToNextCell();
+}
+
+// null 체크 공통함수
+this.gfn_isNull = function(val)
+{
+	if (new String(val).valueOf() == "undefined"){ //Number,combo
+		alert("undefined 필수값");
+		return true;
+	}
+	if (val == null){
+		alert(" null 필수값");
+		return true;
+	}
+	if (("x" + val == "xNaN") && (new String(val.length).valueOf() == "undefined")){
+		alert("val.length 필수값");
+		return true;
+	}
+	if (val.length == 0){ // 여기에서 걸렸어!!! 멋진애잖아. //Text,Currency
+		alert(" length == 0 필수값");
+		return true;
+	}
+	alert("end 필수값");
+	return false;
+}
+
+//
+this.alter = function()
+{
+	alert("필수값");
+    return false;
+}
+
+
+// 이거 값 가져오는 거 할 수 있겠나. - 람값을 넘기고 자시고 하는게 아니라 그런 클릭하면
+//검색으로 넘어가 게 해보자
+this.Edit02_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+		
+	var salaryBookNo = this.Edit01.value;
+	var empNo = this.Edit02.value;
+	
+	this.ds_salary.setColumn(0, "salaryBookNo", salaryBookNo);
+	this.ds_salary.setColumn(0, "empNo", empNo);
+ 	
+ 	//그리드 0행에 입력되어버림.
+// 	this.ds_salary.setColumn(0, "salaryBookNo", salaryBookNo);	
+// 	this.ds_salary.setColumn(0, "empNo", empNo);
+	
+	trace("값 확인용"+salaryBookNo);	
+	
+	
+// 이거 시험해볼 수가 없네. 현재 값을 담아서 보내서. 동작을 한다는 건데 => 그게 안되네. 값이 안 담겨??? 
+   //급여 재확인
+   var oDatasSalEmpBook =  {
+			  svcid : "searchSalEmpBookNo",
+			  sController : "salSelectEmpBookVO.do",			 
+			  inds :["ds_salary=ds_salary"],
+			  outds :[
+				 "ds_salary=output100"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_salary : " + this.ds_salary.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasSalEmpBook,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	      // trace(" ds_bonus : " + pThis.ds_bonus.saveXML());
+	});
+}
+
+
+
+
+
+
+//salry 클릭 이벤트
+// 클릭시 해당 문자열의 가장 끝열로 커서가 갈 수 있도록
+this.Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+
+		
+ //그리드 원클릭으로 edit되도록 - 이거에서 에러난 거였네. 뭐야 이 쓰잘데기 없는 건
+
+if(this.Grid00.getCurEditType() == "text")
+ {
+  this.Grid00.setCellPos(e.cell);
+  this.Grid00.showEditor(true);
+
+  //내용있을 때 클릭 시 편집커서가 맨 오른쪽에 가도록(Caret) 002  -- 잠깐 이건 되잖아!!! 뭐였지?? // 안됨  // 
+  //uxs (8188): SD 21:35:11:509 TypeError: Object [object Object] has no method 'gfnIsNull'
+//    var cellText = obj.getCellText(e.row, e.cell);
+//   if(!this.gfnIsNull(cellText))
+//   {
+// 	obj.setEditSelect(cellText.length, cellText.length);
+//   }
+
+	// 커서 가장 오른쪽에 위치하도록
+	var cellText = obj.getCellText(e.row, e.cell);
+	obj.setEditSelect(cellText.length, cellText.length);
+	
+ }//else if(
+
+
+// 콤보 박스도 없지
+//  if (grid.getCurEditType() == "combo")
+//  {
+//   grid.setCellPos(e.cell);
+//   grid.showEditor(true);
+//   grid.dropdownCombo();
+// 
+//  }
+// 난 안쓰니까 버려
+// else if(grid.getCurEditType() == "date")
+//  {
+//   grid.setCellPos(e.cell);
+//   grid.showEditor(true);
+//   grid.dropdownCalendar();
+// 
+//  }
+
+}//this.Grid00_oncellclick
+
+// 하단 그리드 수당, 경비, 세금 클릭시 이벤트
+this.Tab00_tabpage1_Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+// 아래에 넣음
+// 	var cellText = obj.getCellText(e.row, e.cell);
+// 	obj.setEditSelect(cellText.length, cellText.length);
+	
+  if(this.Tab00.tabpage1.Grid00.getCurEditType() == "text")
+ {
+  this.Tab00.tabpage1.Grid00.setCellPos(e.cell);
+  this.Tab00.tabpage1.Grid00.showEditor(true);
+
+	// 커서 가장 오른쪽에 위치하도록
+	var cellText = obj.getCellText(e.row, e.cell);
+	obj.setEditSelect(cellText.length, cellText.length);
+	
+ }else if(this.Tab00.tabpage1.Grid00.getCurEditType() == "combo")
+ {
+  this.Tab00.tabpage1.Grid00.setCellPos(e.cell);
+  this.Tab00.tabpage1.Grid00.showEditor(true);
+  this.Tab00.tabpage1.Grid00.dropdownCombo();
+ }
+}
+
+this.Tab00_tabpage2_Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+// 	var cellText = obj.getCellText(e.row, e.cell);
+// 	obj.setEditSelect(cellText.length, cellText.length);
+  if(this.Tab00.tabpage2.Grid00.getCurEditType() == "text")
+ {
+  this.Tab00.tabpage2.Grid00.setCellPos(e.cell);
+  this.Tab00.tabpage2.Grid00.showEditor(true);
+
+	// 커서 가장 오른쪽에 위치하도록
+	var cellText = obj.getCellText(e.row, e.cell);
+	obj.setEditSelect(cellText.length, cellText.length);
+	
+ }else if(this.Tab00.tabpage2.Grid00.getCurEditType() == "combo")
+ {
+  this.Tab00.tabpage2.Grid00.setCellPos(e.cell);
+  this.Tab00.tabpage2.Grid00.showEditor(true);
+  this.Tab00.tabpage2.Grid00.dropdownCombo();
+ }
+}
+
+this.Tab00_tabpage3_Grid00_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+// 	var cellText = obj.getCellText(e.row, e.cell);
+// 	obj.setEditSelect(cellText.length, cellText.length);
+  if(this.Tab00.tabpage3.Grid00.getCurEditType() == "text")
+ {
+  this.Tab00.tabpage3.Grid00.setCellPos(e.cell);
+  this.Tab00.tabpage3.Grid00.showEditor(true);
+
+	// 커서 가장 오른쪽에 위치하도록
+	var cellText = obj.getCellText(e.row, e.cell);
+	obj.setEditSelect(cellText.length, cellText.length);
+	
+ }else if(this.Tab00.tabpage3.Grid00.getCurEditType() == "combo")
+ {
+  this.Tab00.tabpage3.Grid00.setCellPos(e.cell);
+  this.Tab00.tabpage3.Grid00.showEditor(true);
+  this.Tab00.tabpage3.Grid00.dropdownCombo();
+ }
+ 
+}//this.Tab00_tabpage3
+
+
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+			
+	var salaryBookNo = this.Edit00.value;
+	var empNo = this.edt_searchKeyword.value;
+	
+	this.ds_salary.setColumn(0, "salaryBookNo", salaryBookNo);
+	this.ds_salary.setColumn(0, "empNo", empNo);
+ 	
+ 	//그리드 0행에 입력되어버림.
+// 	this.ds_salary.setColumn(0, "salaryBookNo", salaryBookNo);	
+// 	this.ds_salary.setColumn(0, "empNo", empNo);
+	
+	trace("값 확인용"+salaryBookNo);	
+	
+	
+// 이거 시험해볼 수가 없네. 현재 값을 담아서 보내서. 동작을 한다는 건데 => 그게 안되네. 값이 안 담겨??? 
+   //급여 재확인
+   var oDatasSalEmpBook =  {
+			  svcid : "searchSalEmpBookNo",
+			  sController : "salSelectEmpBookVO.do",			 
+			  inds :["ds_salary=ds_salary"],
+			  outds :[
+				 "ds_salary=output100"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_salary : " + this.ds_salary.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatasSalEmpBook,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	      // trace(" ds_bonus : " + pThis.ds_bonus.saveXML());
+	      	       trace(" ds_salary : " + pThis.ds_salary.saveXML());
+		if(pThis.ds_salary.getRowCount() < 1){
+			//pThis.ds_salary.insertRow();
+			pThis.ds_salary.addRow();
+			alert("데이터가 없습니다.\n검색어를 확인해주세요.");
+		}
+	});
+}
+// 
+// this.edt_searchKeyword00_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+// {
+// 	var nLeft = system.clientToScreenX(this, 10);
+// 	var nTop = system.clientToScreenY(this, 10);
+// 	 
+// 	var empSearch = new ChildFrame;
+// 		empSearch.init("emp"
+// 					, "absolute", nLeft, nTop, 300, 250, null, null
+// 					, "SALARY::empSearch_copy.xfdl");
+// 					
+// 	empSearch.set_openalign("center middle");
+// 	empSearch.set_dragmovetype("all");
+// 	
+// 	system.showModalWindow(empSearch, 
+// 							"empModal",
+// 							this.getOwnerFrame(),
+// 							"",//{mode:’showModalWindow’,ds:this.Dataset01} //이렇게 자식창에 Argument 를 던져주는듯
+// 							this);
+// 
+// 							
+// 							
+// 							
+// 	var emp_user = this.ds_emp.getColumn(0,"emp_user");
+// 	this.edt_searchKeyword00.set_value(emp_user);
+// }
+
+
+// 이거 모르겠네 
+this.edt_searchKeyword00_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "SALARY::empSearch_copy.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, //생성한 자식창
+							"empModal",//id
+							this.getOwnerFrame(),//부모
+							"",//{mode:’showModalWindow’,ds:this.Dataset01} //이렇게 자식창에 Argument 를 던져주는듯
+							this);
+							
+							
+							
+	var emp_user = this.ds_emp.getColumn(0,"emp_user");
+	this.edt_searchKeyword00.set_value(emp_user);
+}
+
+
+
+//셀 값 복붙 안되서 일단 막음
+this.Grid00_onkeydown = function(obj:Grid, e:nexacro.KeyEventInfo)
+{
+// 	var strGrdDsNm = obj.binddataset;
+// 
+// var v_clip = "";
+// 
+// var strSeperate = " ";
+// 
+// for (var i=obj.selectstartrow;i<=obj.selectendrow;i++) {
+// 
+//  for (var j=obj.selectstartcol;j<=obj.selectendcol;j++) {
+// 
+//   if (j < obj.selectendcol) {
+// 
+//    v_clip += obj.getCellValue(i,j) + strSeperate;
+// 
+//   } else {
+// 
+//    v_clip += obj.getCellValue(i,j);
+// 
+//   }
+// 
+//  }
+// 
+//  if (i < obj.selectendrow) {
+// 
+//   v_clip += "\r\n";
+// 
+//  }
+// 
+// }
+// 
+// v_clip += "\r\n";
+// 
+// system.clearClipboard();
+// 
+// system.setClipboard("CF_TEXT",v_clip); 
+// 
+// //Dataset setcolumn
+// 
+// for (var j=nGrdCellPos;j<nLoopCnt;j++) { 
+// 
+//  obj.setCellPos(j);
+// 
+//  obj.showEditor(true);
+// 
+//  obj.setEditText(arrText2[k]);
+// 
+//  k++;
+// 
+//  obj.showEditor(false);
+// 
+// }  
+}
+]]></Script>
+  </Form>
+</FDL>

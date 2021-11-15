@@ -1,0 +1,330 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Oct_Salary_Test" left="0" top="0" width="553" height="386" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="14" top="7" width="535" height="45" style="background:#165fa6ff;color:azure;font:bold 16 Dotum;" text="성과평가"/>
+        <Button id="btn_resutltest_reset" taborder="2" text="초기화" onclick="fn_reset" left="480" top="200" width="52" height="23" style="background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_resultest_add" taborder="3" text="추가" onclick="btn_resultest_add_onclick" left="306" top="200" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_resulttest_insert" taborder="4" text="등록" onclick="btn_resulttest_insert_onclick" left="364" top="200" width="55" height="23" style="background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_resulttest_delete" taborder="5" text="삭제" onclick="btn_resulttest_delete_onclick" left="422" top="200" width="55" height="23" style="background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Grid id="grd_resulttest_list" taborder="6" binddataset="ds_ResultEval" scrollbars="autovert" useinputpanel="false" autofittype="col" left="14" top="80" width="530" height="92">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="급여대장번호"/>
+                <Cell col="1" text="성과코드"/>
+                <Cell col="2" text="성과점수"/>
+                <Cell col="3" text="성과금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:salary_book_no"/>
+                <Cell col="1" displaytype="combo" edittype="combo" text="bind:record_code" combodataset="ds_SalaryTestCode" combocodecol="cd" combodatacol="txt" combodisplay="display"/>
+                <Cell col="2" displaytype="text" edittype="text" text="bind:record_score"/>
+                <Cell col="3" text="bind:record_money"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img02" taborder="7" left="18" top="240" width="518" height="63" style="background:#d8dcedff;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_02" taborder="8" left="42" top="246" width="477" height="26" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_00" taborder="9" text="성과평가기준" left="19" top="222" width="90" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Static id="sta_resulttest_payrollno" taborder="10" text="급여대장번호" onclick="sta_15_onclick" left="36" top="246" width="86" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_resulttest_cd" taborder="12" text="성과코드" onclick="sta_15_onclick" left="280" top="246" width="72" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_00" taborder="14" left="42" top="272" width="477" height="26" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_resulttest_score" taborder="15" text="성과점수" onclick="sta_15_onclick" left="36" top="272" width="86" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_resulttest_price" taborder="16" text="성과금액" onclick="sta_15_onclick" left="280" top="271" width="72" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_resulttest_payrollno" taborder="17" left="130" top="251" height="17" width="144" enable="false"/>
+        <Edit id="edt_resulttest_price1" taborder="19" left="360" top="277" height="17" width="144" enable="false"/>
+        <Combo id="combo_resulttest_cd" taborder="20" left="360" top="251" height="17" width="144" innerdataset="@ds_SalaryTestCode" codecolumn="cd" datacolumn="txt"/>
+        <Spin id="spin_resulttest_score" taborder="21" value="0" left="23.51%" top="276" right="50.45%" height="17" max="100" displaynulltext="0~100까지 입력하세요"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item2" compid="combo_resulttest_cd" propid="value" datasetid="ds_ResultEval" columnid="record_code"/>
+      <BindItem id="item4" compid="edt_resulttest_price1" propid="value" datasetid="ds_ResultEval" columnid="record_money"/>
+      <BindItem id="item1" compid="edt_resulttest_payrollno" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item0" compid="spin_resulttest_score" propid="value" datasetid="ds_ResultEval" columnid="record_score"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_ResultEval">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="record_code" type="STRING" size="256"/>
+          <Column id="record_score" type="STRING" size="256"/>
+          <Column id="record_money" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_SalaryTestCode">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">3600</Col>
+            <Col id="txt">0%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3610</Col>
+            <Col id="txt">10%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3620</Col>
+            <Col id="txt">20%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3630</Col>
+            <Col id="txt">30%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3640</Col>
+            <Col id="txt">40%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3650</Col>
+            <Col id="txt">50%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3660</Col>
+            <Col id="txt">60%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3670</Col>
+            <Col id="txt">70%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3680</Col>
+            <Col id="txt">80%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3690</Col>
+            <Col id="txt">90%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3699</Col>
+            <Col id="txt">100%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);
+		
+		//OCT_SALARY_BOOK으로 부터 파람받기
+ 		var strParam1 = this.parent.param1;
+ 		this.edt_resulttest_payrollno.set_value(strParam1);
+ 
+		this.fn_search_onclick();
+		
+
+} 
+//조회처리
+this.fn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var searchCondition =  "NAME";
+    var searchKeyword = this.edt_resulttest_payrollno.value;       
+	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "Oct_SalaryTestSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_ResultEval=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	 trace(" this.ds_ResultEval : " + this.ds_ResultEval.saveXML());
+	 
+	 
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_search : " + this.ds_search.saveXML());
+	});
+}
+
+
+//추가
+this.btn_resultest_add_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+
+	var imsi = this.edt_resulttest_payrollno.value;
+	var nRow = this.ds_ResultEval.addRow();
+	this.edt_resulttest_payrollno.set_value(imsi);
+	
+	
+	
+	
+}
+
+
+ //등록버튼 누를시
+ this.btn_resulttest_insert_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+ {	
+	var resultTest_money = 0;
+	if(this.spin_resulttest_score.value <= 60){
+		resultTest_money = 0;
+	}else if(this.spin_resulttest_score.value <=70){
+		resultTest_money = 10000;
+	}else if(this.spin_resulttest_score.value <=80){
+		resultTest_money = 20000;
+	}else if(this.spin_resulttest_score.value <=90){
+		resultTest_money = 30000;
+	}else if(this.spin_resulttest_score.value < 100){
+		resultTest_money = 40000;
+	}else if(this.spin_resulttest_score.value = 100){
+		resultTest_money = 50000;
+	}
+	
+	alert("성과점수의 돈은"+resultTest_money);
+	
+	var total = 0;
+	if(this.combo_resulttest_cd.value == 3600){
+		total = resultTest_money
+	}else if(this.combo_resulttest_cd.value == 3610){
+		total = resultTest_money + 5000;
+	}else if(this.combo_resulttest_cd.value == 3620){
+		total = resultTest_money + 6000;
+	}else if(this.combo_resulttest_cd.value == 3630){
+		total = resultTest_money + 7000;
+	}else if(this.combo_resulttest_cd.value == 3640){
+		total = resultTest_money + 8000;
+	}else if(this.combo_resulttest_cd.value == 3650){
+		total = resultTest_money + 9000;
+	}else if(this.combo_resulttest_cd.value == 3660){
+		total = resultTest_money + 10000;
+	}else if(this.combo_resulttest_cd.value == 3670){
+		total = resultTest_money + 15000;
+	}else if(this.combo_resulttest_cd.value == 3680){
+		total = resultTest_money + 20000;
+	}else if(this.combo_resulttest_cd.value == 3690){
+		total = resultTest_money + 30000;
+	}else if(this.combo_resulttest_cd.value == 3699){
+		total = resultTest_money + 40000;
+	}
+
+
+	alert("합친금액은 "+total);
+	this.ds_ResultEval.setColumn(this.ds_ResultEval.rowposition, "record_money",total);
+ 	this.fn_save("save");
+ }
+
+
+//저장
+this.fn_save = function(strid)
+{
+	
+	this.ds_ResultEval.setColumn(this.ds_ResultEval.rowposition, 
+								"salary_book_no", this.edt_resulttest_payrollno.value);
+   
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "Oct_SalaryTestModifyVO.do",			 
+			  inds :["input=ds_ResultEval:U"],
+			  outds :[
+				 "ds_ResultEval=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	       trace(this.svcid);
+		    switch(this.svcid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	    
+	});
+}
+
+
+
+//삭제
+this.btn_resulttest_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+ 
+	var nRow = this.ds_ResultEval.rowposition;
+	this.ds_ResultEval.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+// 	
+// 	  var searchCondition =  "NAME";
+//     var searchKeyword = this.edt_btrip_dno.value;       
+// 	this.ds_search.setColumn(0, "searchCondition", "NAME");
+// 	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+//    
+  
+	
+	if(rtnValue){
+		this.fn_save("delete");
+	}else{
+		this.fn_search();
+	}
+}
+
+ 
+//초기화
+this.fn_reset = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_ResultEval.reset();
+}]]></Script>
+  </Form>
+</FDL>

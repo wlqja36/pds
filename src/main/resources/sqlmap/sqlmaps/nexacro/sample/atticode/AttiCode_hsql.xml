@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="nexacro.sqlmap.sqlmaps.nexacro.sample.atticode">
+
+	<typeAlias  alias="attiCodeVO" type="nexacro.sample.vo.atticode.AttiCodeVO"/>
+<!-- 	<typeAlias  alias="vacCodeVO" type="nexacro.sample.vo.vacation.vacationCodeVO"/> -->
+	<typeAlias  alias="vacCodeVO" type="nexacro.sample.vo.atticode.VacCodeVO"/>
+    
+     
+    <resultMap id="attiCodeInfo" class="attiCodeVO">
+        <result property="ATTITUDE_ID"      	column="ATTITUDE_ID" />	                         
+        <result property="ATTITUDE_NM"      	column="ATTITUDE_NM" />	                         
+        <result property="HOL_USEYN"           	column="HOL_USEYN"/>	              
+        <result property="BRIFE"  				column="BRIFE"/>	      
+        <result property="VACATION_CODE_ID"     column="VACATION_CODE_ID"/>	                                   
+    </resultMap>
+
+    <resultMap id="vacCodeInfo" class="vacCodeVO">
+        <result property="VACATION_CODE_ID"     column="VACATION_CODE_ID" />	                         
+        <result property="VACATION_NM"      	column="VACATION_NM" />	                                                       
+    </resultMap>
+
+	<select id="loadAttiCodeList" resultMap="attiCodeInfo">
+		SELECT 
+			ATTITUDE_ID, 
+			ATTITUDE_NM, 
+			HOL_USEYN, 
+			BRIFE, 
+			VACATION_CODE_ID 
+		FROM ATTITUDE_CODE
+	</select>
+
+	
+	<select id="atticode.loadVacCodeList" resultMap="vacCodeInfo">
+		SELECT 
+			VACATION_CODE_ID,  
+			VACATION_NM ||'('||VACATION_CODE_ID||')' AS VACATION_NM
+		FROM VACATION_CODE
+	</select>
+	
+	
+	<insert id="insertAttiCodeList" parameterClass="attiCodeVO">
+		<![CDATA[
+			INSERT INTO ATTITUDE_CODE (
+				ATTITUDE_ID, 
+				ATTITUDE_NM, 
+				HOL_USEYN, 
+				BRIFE, 
+				VACATION_CODE_ID )
+			VALUES (
+				#ATTITUDE_ID#, 
+				#ATTITUDE_NM#, 
+				#HOL_USEYN#, 
+				#BRIFE#, 
+				#VACATION_CODE_ID#
+			)
+		]]>  
+	</insert>
+	
+	<update id="updateAttiCodeList" parameterClass="attiCodeVO">
+			UPDATE ATTITUDE_CODE SET
+				ATTITUDE_NM =#ATTITUDE_NM#, 
+				HOL_USEYN = #HOL_USEYN#, 
+				BRIFE = #BRIFE#, 
+				VACATION_CODE_ID = #VACATION_CODE_ID#
+            WHERE ATTITUDE_ID = #ATTITUDE_ID#
+	</update>
+
+	<delete id="deleteAttiCodeList" parameterClass="attiCodeVO">
+		<![CDATA[
+			DELETE FROM ATTITUDE_CODE
+            WHERE ATTITUDE_ID = #ATTITUDE_ID#
+		]]>  
+	</delete>
+	
+	
+
+</sqlMap>

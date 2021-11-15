@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Military">
+
+    <typeAlias  alias="militaryVO" type="nexacro.sample.vo.emp.MilitaryVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+
+   
+    <resultMap id="military" class="militaryVO">
+        <result property="EMP_NO"    		  column="EMP_NO"/>	              
+        <result property="MIL_YN"  						 column="MIL_YN"/>	              
+        <result property="MIL_CATEGORY_CODE"    			 column="MIL_CATEGORY_CODE"/>	              
+        <result property="NO_MIL_REA"			 column="NO_MIL_REA"/>	 
+        <result property="MIL_GRADE_CODE"     				column="MIL_GRADE_CODE"/>	          
+        <result property="MIL_ENTER_DATE"    			column="MIL_ENTER_DATE"/>	      
+        <result property="MIL_DISCHARGE_DATE"    column="MIL_DISCHARGE_DATE"/>	          
+        <result property="MIL_NO"    column="MIL_NO"/>	          
+      </resultMap>
+    
+      <select id="selectMilitaryVOList" parameterClass="militaryVO" resultMap="military">
+            SELECT
+            	*
+            FROM MILITARY
+            WHERE 
+            EMP_NO=#searchKeyword#
+        
+    </select> 
+    
+    <insert id="insertMilitaryVO" parameterClass="militaryVO">
+        <![CDATA[
+            INSERT INTO MILITARY (
+            	EMP_NO,
+            	MIL_YN,
+            	MIL_CATEGORY_CODE,
+            	NO_MIL_REA,
+            	MIL_GRADE_CODE,
+            	MIL_ENTER_DATE,
+            	MIL_DISCHARGE_DATE,
+            	MIL_NO
+            	 
+            ) VALUES (
+          	        #EMP_NO#,    		
+          	        #MIL_YN#, 					
+          	        #MIL_CATEGORY_CODE#,   		
+          	        #NO_MIL_REA#,	
+          	        #MIL_GRADE_CODE#,    			
+          	        #MIL_ENTER_DATE#,    		
+          	        #MIL_DISCHARGE_DATE#, 	
+          	        MIL_NO_SEQ.nextval
+              )
+            
+        ]]>
+    </insert>
+ 
+    
+   <!-- 업데이트문 테이블1개  -->
+        <update id="updateMilitaryVO" parameterClass="militaryVO">
+        <![CDATA[
+            UPDATE MILITARY
+            SET     
+            	MIL_YN=#MIL_YN#,
+            	MIL_CATEGORY_CODE=#MIL_CATEGORY_CODE#,
+            	NO_MIL_REA=#NO_MIL_REA#,
+            	MIL_GRADE_CODE=#MIL_GRADE_CODE#,
+            	MIL_ENTER_DATE=#MIL_ENTER_DATE#,         
+                MIL_DISCHARGE_DATE=#MIL_DISCHARGE_DATE#
+                
+                
+                WHERE 
+                MIL_NO=#MIL_NO#
+        ]]>
+    </update> 
+    
+   <delete id="deleteMilitaryVO" parameterClass="militaryVO">
+        <![CDATA[
+            DELETE MILITARY
+            where
+            MIL_NO=#MIL_NO#
+        ]]>
+    </delete>
+   
+    
+   
+</sqlMap>

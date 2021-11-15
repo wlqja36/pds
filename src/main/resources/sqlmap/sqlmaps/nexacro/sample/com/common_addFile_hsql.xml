@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="common">
+ 	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+	<typeAlias alias="addFileVO" type="nexacro.sample.vo.com.AddFileVO" />
+	
+	<!-- 
+		2020.01.15 최광훈
+		파일추가 관련 코드 추가.
+	 -->
+
+	<!-- 준비서면 첨부파일 조회-->
+	<select id="common.getPreAddFile" resultClass="egovMap" parameterClass="addFileVO">
+		SELECT	T1.LAWSUIT_ADM_NO
+				,T1.INST_ADM_CODE
+				,T1.PRE_IWR_NO	
+				,T1.ADD_FILE_REL_SEQ	
+				,T1.PRE_ADD_FILE_SEQ
+				,TO_CHAR(T1.ADD_FILE_REG_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ADD_FILE_REG_DATE	
+				,T1.ADD_FILE_CHAN_DATE	
+				,T1.ADD_FILE_DEL
+				,T2.ADD_FILE_REL_SEQ	
+				,T2.ADD_FILE_PC_FILE	
+				,T2.ADD_FILE_PC_FILE_EXT	
+				,T2.ADD_FILE_SIZE	
+				,T2.ADD_FILE_SER_PATH	
+				,T2.ADD_FILE_SER_FILE_NAME	
+				,T2.ADD_FILE_ADM_NAME
+		FROM 	TAB_PRE_ADD_FILE T1, TAB_ADD_FILE T2
+		
+		WHERE	T1.ADD_FILE_REL_SEQ = T2.ADD_FILE_REL_SEQ
+	    AND		T1.LAWSUIT_ADM_NO = #lawsuitAdmNo#
+		AND		T1.INST_ADM_CODE = #instAdmCode#
+		AND		T1.PRE_IWR_NO = #preIwrNo#
+		AND		T1.ADD_FILE_DEL = 'N'
+	</select>
+
+	 <!-- 21.05 사진 업로드 불러오기-->
+	<select id="common.getEdocAddFile" resultClass="String" parameterClass="String">
+	    SELECT ADD_FILE_PC_FILE	
+			FROM  (
+    			SELECT 
+       			 *
+    			FROM TAB_ADD_FILE
+    			ORDER BY ADD_FILE_REL_SEQ DESC)
+		WHERE ADD_FILE_REL_SEQ = (SELECT MAX(TO_NUMBER(ADD_FILE_REL_SEQ)) FROM TAB_ADD_FILE ) 
+	</select>
+	
+	
+	
+	<!-- 준비서면 첨부파일내역 등록 -->
+	<insert id="common.insertFilePre" parameterClass="addFileVO">
+		INSERT INTO TAB_PRE_ADD_FILE (
+			LAWSUIT_ADM_NO		
+			,INST_ADM_CODE
+			,PRE_IWR_NO	
+			,ADD_FILE_REL_SEQ	
+			,PRE_ADD_FILE_SEQ	
+			,ADD_FILE_REG_DATE	
+			,ADD_FILE_CHAN_DATE	
+			,ADD_FILE_DEL	
+		) VALUES(
+			 #lawsuitAdmNo#
+			,#instAdmCode#
+			,#preIwrNo#
+			,#addFileRelSeq#
+			,(SELECT NVL( MAX(TO_NUMBER(PRE_ADD_FILE_SEQ)), 0 )+1 FROM TAB_PRE_ADD_FILE)
+			,SYSDATE
+			,SYSDATE
+			,'N'
+		)
+	</insert>
+	
+	<!-- 20.01.22 서증 첨부파일내역 등록 -->
+	<insert id="common.insertFileEdoc" parameterClass="addFileVO">
+		INSERT INTO TAB_EDOC_ADD_FILE (
+			LAWSUIT_ADM_NO	
+			,EDOC_ADM_SEQ	
+			,ADD_FILE_REL_SEQ	
+			,EDOC_ADD_FILE_SEQ	
+			,ADD_FILE_REG_DATE	
+			,ADD_FILE_CHAN_DATE	
+			,ADD_FILE_DEL
+		) VALUES(
+			 #lawsuitAdmNo,jdbcType=VARCHAR#
+			,#edocAdmSeq#
+			,#addFileRelSeq#
+			,(SELECT NVL( MAX(TO_NUMBER(EDOC_ADD_FILE_SEQ)), 0 )+1 FROM TAB_EDOC_ADD_FILE)
+			,SYSDATE
+			,SYSDATE
+			,'N'
+		)
+	</insert>
+	
+	<!-- 20.01.23 준비서면 첨부파일 삭제 -->
+	<update id="common.deleteFilePre" parameterClass="addFileVO">
+		UPDATE 	TAB_PRE_ADD_FILE 
+		SET		ADD_FILE_DEL = 'Y' 
+		WHERE	LAWSUIT_ADM_NO = #lawsuitAdmNo#
+		AND		INST_ADM_CODE = #instAdmCode#
+		AND		PRE_IWR_NO = #preIwrNo# 
+		AND		ADD_FILE_REL_SEQ = #addFileRelSeq#
+	</update>
+	
+	<!-- 20.01.23 서증 첨부파일 삭제 -->
+	<update id="common.deleteFileEdoc" parameterClass="addFileVO">
+		UPDATE 	TAB_EDOC_ADD_FILE 
+		SET		ADD_FILE_DEL = 'Y' 
+		WHERE	LAWSUIT_ADM_NO = #lawsuitAdmNo#
+		AND		EDOC_ADM_SEQ = #edocAdmSeq#
+		AND		ADD_FILE_REL_SEQ = #addFileRelSeq#
+	</update>
+	
+	
+	<!-- 전체 첨부 파일 조회  WHERE 	ADD_FILE_ADM_NAME = #addFileAdmName#-->
+	<select id="common.getAddFile" resultClass="egovMap" parameterClass="addFileVO">	    
+	    SELECT 	MAX(ADD_FILE_REL_SEQ) AS ADD_FILE_REL_SEQ
+	    FROM 	TAB_ADD_FILE	
+	</select> 
+	
+	<!-- 200.01.22 첨부파일 등록 -->
+	<insert id="common.insertFile" parameterClass="addFileVO">
+		INSERT INTO TAB_ADD_FILE (
+			ADD_FILE_REL_SEQ	
+			,ADD_FILE_PC_FILE	
+			,ADD_FILE_PC_FILE_EXT	
+			,ADD_FILE_SIZE	
+			,ADD_FILE_SER_PATH	
+			,ADD_FILE_SER_FILE_NAME	
+			,ADD_FILE_ADM_NAME
+		) VALUES(
+			 (SELECT NVL( MAX(TO_NUMBER(ADD_FILE_REL_SEQ)), 0 )+1 FROM TAB_ADD_FILE)
+			,#addFilePcFile#
+			,#addFilePcFileExt#
+			,#addFileSize#
+			,#addFileSerPath#
+			,Replace(#addFileAdmName#||'_'||#addFilePcFile#,' ')
+			,#addFileAdmName#
+		)
+	</insert>
+	
+</sqlMap>

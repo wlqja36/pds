@@ -1,0 +1,752 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="EMS" left="0" top="0" width="1280" height="1024" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer00" taborder="0" left="7" top="8" height="45" onclick="ImageViewer00_onclick" style="background:#165fa6ff;border:1 solid #e5e5e5ff ;color:white;font:bold 16 Dotum;" width="1265"/>
+        <Static id="Static00" taborder="1" text="사원관리" left="20" top="17" height="25" style="color:white;font:bold 16 Dotum;" width="150"/>
+        <ImageViewer id="ImageViewer01" taborder="2" left="20" top="64" height="41" width="1235" style="background:#d8dcedff;border:1 solid #969696ff ;color:#46463dff;" onclick="ImageViewer01_onclick"/>
+        <ImageViewer id="ImageViewer02" taborder="10" onclick="ImageViewer01_onclick" left="20" top="110" width="1235" height="410" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <Static id="Static02" taborder="11" left="25" top="115" height="240" style="background:#f0f0f0ff;border:1 solid #969696ff ;" width="1225"/>
+        <Edit id="Edit01" taborder="12" left="48" top="120" height="170" oneditclick="Edit01_oneditclick" width="145"/>
+        <Static id="Static03" taborder="13" text="사진" onclick="Static01_onclick" left="48" top="292" width="145" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Button id="Button05" taborder="14" text="업로드" onclick="Button04_onclick" left="48" top="320" width="145" height="25" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <Static id="Static04" taborder="15" text="사원 번호" onclick="Static01_onclick" left="220" top="120" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit02" taborder="16" oneditclick="Edit01_oneditclick" left="365" top="120" width="170" height="25"/>
+        <Static id="Static05" taborder="17" text="사원 ID" onclick="Static01_onclick" left="565" top="120" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit03" taborder="18" oneditclick="Edit01_oneditclick" left="710" top="120" width="170" height="25"/>
+        <Static id="Static06" taborder="19" text="사원 PW" onclick="Static01_onclick" left="910" top="120" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit04" taborder="20" oneditclick="Edit01_oneditclick" left="1055" top="120" width="170" height="25"/>
+        <Static id="Static07" taborder="21" text="성명" onclick="Static01_onclick" left="220" top="160" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit05" taborder="22" oneditclick="Edit01_oneditclick" left="365" top="160" width="170" height="25"/>
+        <Static id="Static08" taborder="23" text="영문 성명" onclick="Static01_onclick" left="565" top="160" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit06" taborder="24" oneditclick="Edit01_oneditclick" left="710" top="160" width="170" height="25"/>
+        <Static id="Static09" taborder="25" text="주민등록번호" onclick="Static01_onclick" left="220" top="200" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static10" taborder="27" text="생일" onclick="Static01_onclick" left="565" top="200" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Calendar id="Calendar00" taborder="28" left="710" top="200" height="25" width="170"/>
+        <Static id="Static11" taborder="29" text="주민등록상 주소" onclick="Static01_onclick" left="220" top="240" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit08" taborder="30" oneditclick="Edit01_oneditclick" left="365" top="240" width="340" height="25"/>
+        <Static id="Static12" taborder="31" text="상세 주소" onclick="Static01_onclick" left="820" top="240" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit09" taborder="32" oneditclick="Edit01_oneditclick" left="965" top="240" width="260" height="25"/>
+        <Button id="Button06" taborder="33" text="주소 검색" onclick="Button04_onclick" left="710" top="240" width="85" height="25" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <Static id="Static13" taborder="34" text="실제 주소" onclick="Static01_onclick" left="220" top="280" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit10" taborder="35" oneditclick="Edit01_oneditclick" left="365" top="280" width="340" height="25"/>
+        <Button id="Button07" taborder="36" text="주소 검색" onclick="Button04_onclick" left="710" top="280" width="85" height="25" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <Static id="Static14" taborder="37" text="상세 주소" onclick="Static01_onclick" left="820" top="280" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit11" taborder="38" oneditclick="Edit01_oneditclick" left="965" top="280" width="260" height="25"/>
+        <Static id="Static15" taborder="39" text="전화번호" onclick="Static01_onclick" left="220" top="320" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static16" taborder="41" text="휴대폰 번호" onclick="Static01_onclick" left="565" top="320" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit13" taborder="42" oneditclick="Edit01_oneditclick" left="710" top="320" width="170" height="25"/>
+        <Static id="Static17" taborder="43" text="이메일" onclick="Static01_onclick" left="910" top="320" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit14" taborder="44" oneditclick="Edit01_oneditclick" left="1055" top="320" width="170" height="25"/>
+        <Static id="Static18" taborder="45" text="입사 일자" onclick="Static01_onclick" left="28" top="370" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static19" taborder="47" text="관리자 이름" onclick="Static01_onclick" left="340" top="370" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit16" taborder="48" oneditclick="Edit01_oneditclick" left="483" top="370" width="150" height="25"/>
+        <Static id="Static20" taborder="50" text="최종접속 시간" onclick="Static01_onclick" left="955" top="370" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static21" taborder="51" text="재직 코드" onclick="Static01_onclick" left="28" top="405" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Calendar id="Calendar01" taborder="53" left="173" top="370" height="25" width="150"/>
+        <MaskEdit id="MaskEdit00" taborder="54" left="1098" top="370" height="25" width="150" mask="####-##-## ##:##:##"/>
+        <Combo id="Combo00" taborder="56" left="173" top="405" height="25" width="150"/>
+        <Static id="Static22" taborder="57" text="직급 코드" onclick="Static01_onclick" left="340" top="405" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Combo id="Combo01" taborder="58" left="483" top="405" width="150" height="25"/>
+        <Button id="Button08" taborder="59" left="608" top="370" height="25" width="25" style="image:URL('img::btn_WF_SearchSmall.png');"/>
+        <Static id="Static23" taborder="60" text="부서 코드" onclick="Static01_onclick" left="647" top="405" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Combo id="Combo02" taborder="61" left="790" top="405" width="150" height="25"/>
+        <Static id="Static24" taborder="62" text="입사구분 코드" onclick="Static01_onclick" left="955" top="405" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Combo id="Combo03" taborder="63" left="1098" top="405" width="150" height="25"/>
+        <Static id="Static25" taborder="64" text="종교" onclick="Static01_onclick" left="28" top="440" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit15" taborder="65" oneditclick="Edit01_oneditclick" left="173" top="440" width="150" height="25"/>
+        <Static id="Static26" taborder="66" text="결혼 여부" onclick="Static01_onclick" left="340" top="440" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <CheckBox id="CheckBox00" taborder="67" text="예" left="483" top="440" height="25" width="130" style="color:#46463dff;font:9 Dotum;"/>
+        <Static id="Static27" taborder="68" text="세대주여부" onclick="Static01_onclick" left="647" top="440" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <CheckBox id="CheckBox01" taborder="69" text="세대원" left="790" top="440" width="130" height="25" style="color:#46463dff;font:9 Dotum;"/>
+        <Static id="Static28" taborder="70" text="장애 여부" onclick="Static01_onclick" left="28" top="475" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Combo id="Combo04" taborder="71" left="173" top="475" width="150" height="25"/>
+        <Static id="Static29" taborder="72" text="결혼기념일" onclick="Static01_onclick" left="340" top="475" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Calendar id="Calendar02" taborder="73" left="483" top="475" width="150" height="25"/>
+        <Static id="Static30" taborder="74" text="세대주 성명" onclick="Static01_onclick" left="955" top="440" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit17" taborder="75" oneditclick="Edit01_oneditclick" left="1098" top="440" width="150" height="25"/>
+        <Static id="Static31" taborder="76" text="세대주와의 관계" onclick="Static01_onclick" left="647" top="475" width="140" height="25" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit18" taborder="77" oneditclick="Edit01_oneditclick" left="790" top="475" width="150" height="25"/>
+        <Button id="Button09" taborder="78" text="인사발령" left="956" top="475" height="30" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;" width="110"/>
+        <Button id="Button10" taborder="79" text="교육관리" left="1081" top="475" width="110" height="30" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <Tab id="Tab00" taborder="88" left="20" top="537" height="183" tabindex="0" scrollbars="autoboth" onchanged="Tab00_onchanged" width="1235">
+          <Tabpages>
+            <Tabpage id="tabpage1" text="경력관리">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" binddataset="ds_CAREER" useinputpanel="false" left="0" top="0" height="150" autofittype="col" oncelldblclick="Tab00_tabpage1_Grid00_oncelldblclick" width="1233">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="순번"/>
+                          <Cell col="1" text="사원번호"/>
+                          <Cell col="2" displaytype="normal" edittype="none" text="입사일자"/>
+                          <Cell col="3" text="퇴사일자"/>
+                          <Cell col="4" text="회사명"/>
+                          <Cell col="5" text="직책"/>
+                          <Cell col="6" text="부서명"/>
+                          <Cell col="7" text="퇴사사유"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:CAREER_NO"/>
+                          <Cell col="1" displaytype="normal" edittype="none" text="bind:EMP_NO"/>
+                          <Cell col="2" displaytype="date" edittype="date" text="bind:JOIN_DATE"/>
+                          <Cell col="3" displaytype="date" edittype="date" text="bind:RETIRE_DATE"/>
+                          <Cell col="4" displaytype="text" edittype="text" text="bind:COMPANY_NAME"/>
+                          <Cell col="5" edittype="text" text="bind:POSITION"/>
+                          <Cell col="6" edittype="text" text="bind:DEPT_NAME"/>
+                          <Cell col="7" edittype="text" text="bind:RETIRE_REASON" expandshow="show" expandimage="URL('C:\Users\pdsys\Pictures\사원관리-가족관리.PNG')"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage2" text="학력관리" onclick="Tab00_onclick">
+              <Layouts>
+                <Layout width="1000" height="219">
+                  <Grid id="Grid01" taborder="0" binddataset="ds_EDUCATION_LEVEL" useinputpanel="false" left="0" top="0" height="150" width="1233" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                          <Column size="110"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="순번"/>
+                          <Cell col="1" text="사원번호"/>
+                          <Cell col="2" displaytype="normal" edittype="combo" text="학력구분코드"/>
+                          <Cell col="3" text="교육기관명"/>
+                          <Cell col="4" text="전공명"/>
+                          <Cell col="5" edittype="combo" text="졸업구분코드"/>
+                          <Cell col="6" displaytype="normal" edittype="date" text="입학년월"/>
+                          <Cell col="7" text="졸업년월"/>
+                          <Cell col="8" text="주간여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:EDU_NO"/>
+                          <Cell col="1" edittype="none" text="bind:EMP_NO"/>
+                          <Cell col="2" displaytype="combo" edittype="combo" text="bind:EDU_CATEGORY_CODE" combodataset="EDU_CATEGORY_CODE" combocodecol="EDU_CATEGORY_CODE" combodatacol="CONTENT" combodisplayrowcount="-1" combodisplay="edit"/>
+                          <Cell col="3" edittype="text" text="bind:EDUCATION_NAME"/>
+                          <Cell col="4" edittype="text" text="bind:MAJOR_NAME"/>
+                          <Cell col="5" displaytype="combo" edittype="combo" text="bind:GRADUATE_CATEGORY" combodataset="GRADUATE_CATEGORY" combocodecol="GRADUATE_CATEGORY" combodatacol="CONTENT"/>
+                          <Cell col="6" displaytype="date" edittype="date" text="bind:START_DATE"/>
+                          <Cell col="7" edittype="date" text="bind:GRADUATE_DATE"/>
+                          <Cell col="8" displaytype="checkbox" edittype="checkbox" text="bind:DAYYN" mask="#" editlimitbymask="both"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage3" text="어학능력" scrollbars="none">
+              <Layouts>
+                <Layout width="1013" height="171">
+                  <Grid id="Grid00" taborder="0" useinputpanel="false" left="0" top="0" height="150" width="1233" binddataset="ds_LANGUAGE_ABILITY" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="순번"/>
+                          <Cell col="1" text="지역명"/>
+                          <Cell col="2" text="사원번호"/>
+                          <Cell col="3" text="자격증명"/>
+                          <Cell col="4" text="자격증번호"/>
+                          <Cell col="5" text="등급코드"/>
+                          <Cell col="6" text="발행일자"/>
+                          <Cell col="7" text="유효일자"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell edittype="text" text="bind:LANG_NO"/>
+                          <Cell col="1" edittype="normal" text="bind:CONTURY"/>
+                          <Cell col="2" text="bind:EMP_NO"/>
+                          <Cell col="3" edittype="normal" text="bind:LANG_CERTIFICATION"/>
+                          <Cell col="4" edittype="normal" text="bind:LANG_CERTIFICATION_NO"/>
+                          <Cell col="5" displaytype="combo" edittype="combo" text="bind:LANG_CERTIFICATION_RATE" combodataset="LANG_CERTIFICATION_RATE" combocodecol="LANG_CERTIFICATION_RATE" combodatacol="CONTENT"/>
+                          <Cell col="6" edittype="date" text="bind:LANG_ISSUE_DATE"/>
+                          <Cell col="7" edittype="date" text="bind:LANG_EFFECTIVE_DATE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage4" text="자격증관리">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" binddataset="ds_LICENSE" useinputpanel="false" left="0" top="0" height="150" width="1233" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                          <Column size="120"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="순번"/>
+                          <Cell col="1" text="자격증번호"/>
+                          <Cell col="2" text="사원번호"/>
+                          <Cell col="3" text="자격증명"/>
+                          <Cell col="4" displaytype="normal" edittype="combo" text="등급코드"/>
+                          <Cell col="5" text="발행일자"/>
+                          <Cell col="6" text="유효일자"/>
+                          <Cell col="7" text="등급클래스코드"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:LICENSE_NO"/>
+                          <Cell col="1" edittype="text" text="bind:CERTIFICATION_NO"/>
+                          <Cell col="2" text="bind:EMP_NO"/>
+                          <Cell col="3" edittype="text" text="bind:CERTIFICATION"/>
+                          <Cell col="4" displaytype="combo" edittype="combo" text="bind:CERTIFICATION_RATE" combodataset="LICENSE_CERTIFICATION_RATE" combocodecol="CODE" combodatacol="CONTENT"/>
+                          <Cell col="5" edittype="date" text="bind:ISSUE_DATE"/>
+                          <Cell col="6" edittype="date" text="bind:EFFECTIVE_DATE"/>
+                          <Cell col="7" edittype="mask" text="bind:CERTIFICATION_CLASS_COD" mask="9999"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage5" text="가족관리">
+              <Layouts>
+                <Layout>
+                  <Grid id="Grid00" taborder="0" binddataset="ds_FAMILY" useinputpanel="false" left="0" top="0" height="150" width="1233" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                          <Column size="87"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="순번"/>
+                          <Cell col="1" text="사원번호"/>
+                          <Cell col="2" text="주민등록번호"/>
+                          <Cell col="3" text="성명"/>
+                          <Cell col="4" text="관계"/>
+                          <Cell col="5" text="최종학력"/>
+                          <Cell col="6" text="직업"/>
+                          <Cell col="7" text="회사명"/>
+                          <Cell col="8" text="직위"/>
+                          <Cell col="9" text="동거여부"/>
+                          <Cell col="10" text="부양여부"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:FAMILY_NO"/>
+                          <Cell col="1" edittype="text" text="bind:EMP_NO"/>
+                          <Cell col="2" edittype="mask" text="bind:REG_NO" mask="######-#######"/>
+                          <Cell col="3" edittype="text" text="bind:FAMILY_NAME"/>
+                          <Cell col="4" edittype="text" text="bind:FAMILY_RELATION"/>
+                          <Cell col="5" edittype="text" text="bind:FAMILY_EDU_LEVEL"/>
+                          <Cell col="6" edittype="text" text="bind:FAMILY_JOBS"/>
+                          <Cell col="7" edittype="text" text="bind:FAMILY_COMPANY_NAME"/>
+                          <Cell col="8" edittype="text" text="bind:FAMILY_GRADE"/>
+                          <Cell col="9" displaytype="combo" edittype="combo" text="bind:FAMILY_LIVINGYN" combodataset="YN" combocodecol="CODE" combodatacol="CONTENT"/>
+                          <Cell col="10" displaytype="combo" edittype="combo" text="bind:FAMILY_DEPENDENTYN" combodataset="YN" combocodecol="CODE" combodatacol="CONTENT"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+            <Tabpage id="tabpage6" text="병역관리">
+              <Layouts>
+                <Layout width="1013" height="171">
+                  <Grid id="Grid00" taborder="0" binddataset="ds_MILITARY" useinputpanel="false" left="0" top="0" height="150" width="1233" autofittype="col">
+                    <Formats>
+                      <Format id="default">
+                        <Columns>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                          <Column size="123"/>
+                        </Columns>
+                        <Rows>
+                          <Row size="24" band="head"/>
+                          <Row size="24"/>
+                        </Rows>
+                        <Band id="head">
+                          <Cell text="순번"/>
+                          <Cell col="1" text="사원번호"/>
+                          <Cell col="2" text="병역여부"/>
+                          <Cell col="3" text="군별코드"/>
+                          <Cell col="4" text="미필사유"/>
+                          <Cell col="5" text="계급코드"/>
+                          <Cell col="6" edittype="date" text="입대일자"/>
+                          <Cell col="7" edittype="date" text="제대일자"/>
+                        </Band>
+                        <Band id="body">
+                          <Cell text="bind:MIL_NO"/>
+                          <Cell col="1" edittype="text" text="bind:EMP_NO"/>
+                          <Cell col="2" displaytype="combo" edittype="combo" text="bind:MIL_YN" combodataset="YN" combocodecol="CODE" combodatacol="CONTENT"/>
+                          <Cell col="3" displaytype="combo" edittype="combo" text="bind:MIL_CATEGORY_CODE" combodataset="MIL_CATEGORY_CODE" combocodecol="CODE" combodatacol="CONTENT"/>
+                          <Cell col="4" edittype="textarea" text="bind:NO_MIL_REA"/>
+                          <Cell col="5" displaytype="combo" edittype="combo" text="bind:MIL_GRADE_CODE" combodataset="MIL_GRADE_CODE" combocodecol="CODE" combodatacol="CONTENT"/>
+                          <Cell col="6" displaytype="date" edittype="date" text="bind:MIL_ENTER_DATE" calendardisplay="edit"/>
+                          <Cell col="7" displaytype="date" edittype="date" text="bind:MIL_DISCHARGE_DATE"/>
+                        </Band>
+                      </Format>
+                    </Formats>
+                  </Grid>
+                </Layout>
+              </Layouts>
+            </Tabpage>
+          </Tabpages>
+        </Tab>
+        <Button id="Button11" taborder="81" text="추가" onclick="Button01_onclick" left="1070" top="535" width="55" height="25" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <Button id="Button12" taborder="82" text="저장" left="1135" top="535" width="55" height="25" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <Button id="Button13" taborder="83" text="삭제" left="1200" top="535" width="55" height="25" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 13 Stencil;"/>
+        <MaskEdit id="MaskEdit01" taborder="84" left="365" top="200" height="25" width="170" mask="######-#{######}"/>
+        <MaskEdit id="MaskEdit02" taborder="85" mask="(999)####-####" left="365" top="320" width="170" height="25"/>
+        <ImageViewer id="ImageViewer03" taborder="89" onclick="ImageViewer01_onclick" left="25" top="68" width="1225" height="33" style="background:#f0f0f0ff;border:1 solid #969696ff ;color:#46463dff;"/>
+        <Static id="Static01" taborder="90" text="사용자" onclick="Static01_onclick" left="28" top="72" width="140" height="25" style="background:#f4edfaff;border:0 solid slategray ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="Edit00" taborder="91" left="170" top="72" width="300" height="25"/>
+        <Button id="Button00" taborder="92" text="검색" left="480" top="71" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 14 Stencil;"/>
+        <Button id="Button01" taborder="93" text="추가" onclick="Button01_onclick" left="891" top="71" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 14 Stencil;"/>
+        <Button id="Button02" taborder="94" text="저장" left="980" top="71" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 14 Stencil;"/>
+        <Button id="Button03" taborder="95" text="삭제" left="1069" top="71" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 14 Stencil;"/>
+        <Button id="Button04" taborder="96" text="초기화" onclick="Button04_onclick" left="1158" top="71" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:white;font:bold 14 Stencil;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="LANG_CERTIFICATION_RATE">
+        <ColumnInfo>
+          <Column id="LANG_CERTIFICATION_RATE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="LANG_CERTIFICATION_RATE">5210</Col>
+            <Col id="CONTENT">상</Col>
+          </Row>
+          <Row>
+            <Col id="LANG_CERTIFICATION_RATE">5220</Col>
+            <Col id="CONTENT">중</Col>
+          </Row>
+          <Row>
+            <Col id="LANG_CERTIFICATION_RATE">5230</Col>
+            <Col id="CONTENT">하</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_LICENSE">
+        <ColumnInfo>
+          <Column id="LICENSE_NO" type="STRING" size="256"/>
+          <Column id="CERTIFICATION_NO" type="STRING" size="256"/>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="CERTIFICATION" type="STRING" size="256"/>
+          <Column id="CERTIFICATION_RATE" type="STRING" size="256"/>
+          <Column id="ISSUE_DATE" type="DATE" size="256"/>
+          <Column id="EFFECTIVE_DATE" type="DATE" size="256"/>
+          <Column id="CERTIFICATION_CLASS_COD" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="LICENSE_CERTIFICATION_RATE">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">5110</Col>
+            <Col id="CONTENT">1등급</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">5120</Col>
+            <Col id="CONTENT">2등급</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">5130</Col>
+            <Col id="CONTENT">3등급</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_CAREER">
+        <ColumnInfo>
+          <Column id="CAREER_NO" type="STRING" size="256"/>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="DATE" size="8"/>
+          <Column id="RETIRE_DATE" type="DATE" size="8"/>
+          <Column id="COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="RETIRE_REASON" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_EDUCATION_LEVEL">
+        <ColumnInfo>
+          <Column id="EDU_NO" type="STRING" size="256"/>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="EDUCATION_NAME" type="STRING" size="256"/>
+          <Column id="EDU_CATEGORY_CODE" type="STRING" size="256"/>
+          <Column id="MAJOR_NAME" type="STRING" size="256"/>
+          <Column id="GRADUATE_CATEGORY" type="STRING" size="256"/>
+          <Column id="START_DATE" type="DATE" size="256"/>
+          <Column id="GRADUATE_DATE" type="DATE" size="256"/>
+          <Column id="DAYYN" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_LANGUAGE_ABILITY">
+        <ColumnInfo>
+          <Column id="LANG_NO" type="STRING" size="256"/>
+          <Column id="EDU_NO" type="STRING" size="256"/>
+          <Column id="CONTURY" type="STRING" size="256"/>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="LANG_CERTIFICATION" type="STRING" size="256"/>
+          <Column id="LANG_CERTIFICATION_NO" type="STRING" size="256"/>
+          <Column id="LANG_CERTIFICATION_RATE" type="STRING" size="256"/>
+          <Column id="LANG_ISSUE_DATE" type="DATE" size="256"/>
+          <Column id="LANG_EFFECTIVE_DATE" type="DATE" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_masterCodeList">
+        <ColumnInfo>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="classCode" type="STRING" size="256"/>
+          <Column id="className" type="STRING" size="256"/>
+          <Column id="useYn" type="STRING" size="256"/>
+          <Column id="mainTable" type="STRING" size="256"/>
+          <Column id="mainColumn" type="STRING" size="256"/>
+          <Column id="classDesc" type="STRING" size="256"/>
+          <Column id="registTime" type="STRING" size="256"/>
+          <Column id="registId" type="STRING" size="256"/>
+          <Column id="modifyTime" type="STRING" size="256"/>
+          <Column id="modifyId" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="EDU_CATEGORY_CODE">
+        <ColumnInfo>
+          <Column id="EDU_CATEGORY_CODE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1410</Col>
+            <Col id="CONTENT">초등학교</Col>
+          </Row>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1420</Col>
+            <Col id="CONTENT">중학교</Col>
+          </Row>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1430</Col>
+            <Col id="CONTENT">고등학교</Col>
+          </Row>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1440</Col>
+            <Col id="CONTENT">대학교(2,3년제)</Col>
+          </Row>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1450</Col>
+            <Col id="CONTENT">대학교(4년제)</Col>
+          </Row>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1460</Col>
+            <Col id="CONTENT">대학원(석사)</Col>
+          </Row>
+          <Row>
+            <Col id="EDU_CATEGORY_CODE">1470</Col>
+            <Col id="CONTENT">대학원(박사)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="GRADUATE_CATEGORY">
+        <ColumnInfo>
+          <Column id="GRADUATE_CATEGORY" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="GRADUATE_CATEGORY">1510</Col>
+            <Col id="CONTENT">재학</Col>
+          </Row>
+          <Row>
+            <Col id="GRADUATE_CATEGORY">1520</Col>
+            <Col id="CONTENT">수료</Col>
+          </Row>
+          <Row>
+            <Col id="GRADUATE_CATEGORY">1530</Col>
+            <Col id="CONTENT">졸업</Col>
+          </Row>
+          <Row>
+            <Col id="GRADUATE_CATEGORY">1540</Col>
+            <Col id="CONTENT">중퇴</Col>
+          </Row>
+          <Row>
+            <Col id="GRADUATE_CATEGORY">1550</Col>
+            <Col id="CONTENT">휴학</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="YN">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">Y</Col>
+            <Col id="CONTENT">Y</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">N</Col>
+            <Col id="CONTENT">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_MILITARY">
+        <ColumnInfo>
+          <Column id="MIL_NO" type="STRING" size="256"/>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="MIL_YN" type="STRING" size="256"/>
+          <Column id="MIL_CATEGORY_CODE" type="STRING" size="256"/>
+          <Column id="NO_MIL_REA" type="STRING" size="256"/>
+          <Column id="MIL_GRADE_CODE" type="STRING" size="256"/>
+          <Column id="MIL_ENTER_DATE" type="STRING" size="256"/>
+          <Column id="MIL_DISCHARGE_DATE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="MIL_CATEGORY_CODE">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">1610</Col>
+            <Col id="CONTENT">육군</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1620</Col>
+            <Col id="CONTENT">해군</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1630</Col>
+            <Col id="CONTENT">공군</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1640</Col>
+            <Col id="CONTENT">해병대</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1650</Col>
+            <Col id="CONTENT">공익</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1660</Col>
+            <Col id="CONTENT">전문연구요원</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="MIL_GRADE_CODE">
+        <ColumnInfo>
+          <Column id="CODE" type="STRING" size="256"/>
+          <Column id="CONTENT" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE">1710</Col>
+            <Col id="CONTENT">병장</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1720</Col>
+            <Col id="CONTENT">하사</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1730</Col>
+            <Col id="CONTENT">중사</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1740</Col>
+            <Col id="CONTENT">상사</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1750</Col>
+            <Col id="CONTENT">소위</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1760</Col>
+            <Col id="CONTENT">중위</Col>
+          </Row>
+          <Row>
+            <Col id="CODE">1770</Col>
+            <Col id="CONTENT">대위</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_EMP">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="MGR_NO" type="STRING" size="256"/>
+          <Column id="CURRENT_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="CURRENT_CODE" type="STRING" size="256"/>
+          <Column id="GRADE_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="GRADE_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="EMP_ID" type="STRING" size="256"/>
+          <Column id="EMP_PW" type="STRING" size="256"/>
+          <Column id="LAST_LOGIN" type="STRING" size="256"/>
+          <Column id="ENG_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENT_NO" type="STRING" size="256"/>
+          <Column id="HOUSEHOLDER" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="PHONE" type="STRING" size="256"/>
+          <Column id="CELL_PHONE" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="RELIGION" type="STRING" size="256"/>
+          <Column id="IMAGE" type="STRING" size="256"/>
+          <Column id="JOIN_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="JOIN_CODE" type="STRING" size="256"/>
+          <Column id="HOUSEHOLDER_NAME" type="STRING" size="256"/>
+          <Column id="HOUSEHOLDER_RELATION" type="STRING" size="256"/>
+          <Column id="REGISTRATION_ADDRESS" type="STRING" size="256"/>
+          <Column id="BIRTH" type="STRING" size="256"/>
+          <Column id="MARRIAGE" type="STRING" size="256"/>
+          <Column id="MARRIAGE_DATE" type="STRING" size="256"/>
+          <Column id="DISABILITY" type="STRING" size="256"/>
+          <Column id="REGISTRATION_ADDRESS_DETAIL" type="STRING" size="256"/>
+          <Column id="ADDRESS_DETAIL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_FAMILY">
+        <ColumnInfo>
+          <Column id="FAMILY_NO" type="STRING" size="256"/>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="REG_NO" type="STRING" size="256"/>
+          <Column id="FAMILY_NAME" type="STRING" size="256"/>
+          <Column id="FAMILY_RELATION" type="STRING" size="256"/>
+          <Column id="FAMILY_EDU_LEVEL" type="STRING" size="256"/>
+          <Column id="FAMILY_JOBS" type="STRING" size="256"/>
+          <Column id="FAMILY_COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="FAMILY_GRADE" type="STRING" size="256"/>
+          <Column id="FAMILY_LIVINGYN" type="STRING" size="256"/>
+          <Column id="FAMILY_DEPENDENTYN" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.ImageViewer00_onclick = function(obj:ImageViewer, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.Static01_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.Button04_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.ImageViewer01_onclick = function(obj:ImageViewer, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.Edit01_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

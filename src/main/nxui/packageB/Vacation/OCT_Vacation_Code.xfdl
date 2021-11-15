@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Oct_Vacation_Code" left="0" top="0" width="1280" height="1024" titletext="New Form" onload="Oct_Vacation_Code_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer04" taborder="18" left="20" top="67" width="1235" height="44" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="img_titlebg" taborder="0" left="7" top="8" width="1265" height="45" style="background:#165fa6ff;"/>
+        <Static id="Static00" taborder="1" text="연차코드" left="1.56%" top="11" right="85.94%" height="36" onclick="Static00_onclick" style="color:#ffffffff;font:bold 16 Dotum;"/>
+        <Static id="Static04" taborder="17" wordwrap="char" left="23" top="71" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;" width="1228" onclick="Static04_onclick"/>
+        <Grid id="grd_vac_list" taborder="8" scrollbars="fixedboth" useinputpanel="false" oncelldblclick="grd_vac_list_oncelldblclick" left="23" top="147" height="314" width="1228" binddataset="ds_vacation" autoenter="none" autosizingtype="none">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="119"/>
+                <Column size="119"/>
+                <Column size="125"/>
+                <Column size="110"/>
+                <Column size="136"/>
+                <Column size="110"/>
+                <Column size="136"/>
+                <Column size="110"/>
+                <Column size="136"/>
+                <Column size="110"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="연차코드번호"/>
+                <Cell col="1" text="연차명"/>
+                <Cell col="2" text="연차기준코드" combodataset="ds_vacation_standard" combocodecol="code" combodatacol="name"/>
+                <Cell col="3" text="등록일시"/>
+                <Cell col="4" text="등록자사번"/>
+                <Cell col="5" text="수정일시"/>
+                <Cell col="6" text="수정자사번"/>
+                <Cell col="7" text="확정일시"/>
+                <Cell col="8" text="확정자사번"/>
+                <Cell col="9" text="확정여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:vacation_code_id"/>
+                <Cell col="1" text="bind:vacation_nm" combodataset="ds_code_list" combocodecol="code" combodatacol="name"/>
+                <Cell col="2" text="bind:vacation_standard_code" combodataset="ds_vacation_standard" combodatacol="name"/>
+                <Cell col="3" text="bind:reg_date"/>
+                <Cell col="4" text="bind:reg_emp_id"/>
+                <Cell col="5" text="bind:modify_date"/>
+                <Cell col="6" text="bind:modify_emp_id"/>
+                <Cell col="7" text="bind:confirm_date"/>
+                <Cell col="8" text="bind:confirm_emp_id"/>
+                <Cell col="9" text="bind:confirmyn"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Button id="btn_vac_reset" taborder="11" text="초기화" left="820" top="476" height="27" width="76" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_vac_reset_onclick"/>
+        <Button id="btn_vac_insert" taborder="12" text="추가" left="908" top="476" height="27" width="76" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="btn_vac_insert_onclick"/>
+        <Button id="btn_vac_save" taborder="13" text="등록" left="1082" top="476" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" width="76" onclick="btn_vac_save_onclick"/>
+        <Button id="btn_vac_delete" taborder="14" text="삭제" left="1168" top="476" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" width="76" onclick="btn_vac_delete_onclick"/>
+        <Div id="Div00" taborder="15" left="20" top="509" height="136" style="align:left middle;background:#d8dcedff;border:1 solid #808080ff ;" scrollbars="none" width="1231">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="0.49%" top="-5" right="0.9%" height="177" style="background:0;border:0 solid #808080ff ;">
+                <Layouts>
+                  <Layout>
+                    <Div id="Div03" taborder="8" left="0%" top="104" right="0%" height="33" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none">
+                      <Layouts>
+                        <Layout>
+                          <Calendar id="cal_vac_confirmdate" taborder="8" left="44.05%" top="4" width="235" height="21" enable="false"/>
+                          <Static id="sta_vac_confirmdate" taborder="9" text="확정일시" left="32.31%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="sta_vac_regdate" taborder="10" text="등록일시" left="0%" top="-2" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Calendar id="cal_vac_insertdate" taborder="11" enable="false" left="12.15%" top="4" width="235" height="21"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div01" taborder="9" left="0%" top="40" right="0%" height="33" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none" dragscrolltype="none">
+                      <Layouts>
+                        <Layout>
+                          <Static id="sta_vac_modifydate" taborder="49" text="수정일시" left="32.31%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Calendar id="cal_vac_modifydate" taborder="50" enable="false" left="44.05%" top="6" right="36.53%" height="21"/>
+                          <Combo id="combo_vac_title" taborder="51" value="2210" text="연차휴가" displaynulltext="연차선택" codecolumn="code" datacolumn="name" index="0" onitemchanged="Div00_Div00_Div01_combo_vac_title_onitemchanged" left="12.15%" top="4" width="235" height="21" innerdataset="@ds_code_list" enable="false"/>
+                          <Radio id="rd_vac_confirmryn" taborder="52" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" left="80.17%" top="5" right="3.55%" height="22" enable="false" onitemclick="Div00_Div00_Div01_rd_vac_confirmryn_onitemclick" index="1" rowcount="0" onitemchanged="rd_vac_confirmryn_onitemchanged" value="N">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">Y</Col>
+                                  <Col id="datacolumn">확정</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">N</Col>
+                                  <Col id="datacolumn">미확정</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Radio>
+                          <Static id="sta_vac_deteryn" taborder="53" text="확정여부" left="65.04%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="sta_vac_title" taborder="54" text="연차명" left="0%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div00" taborder="10" left="0%" top="7" right="0%" height="33" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none">
+                      <Layouts>
+                        <Layout width="723" height="28">
+                          <Edit id="edt_vac_empno" taborder="80" left="44.07%" top="5" width="235" height="21" enable="false"/>
+                          <Static id="sta_vac_empno" taborder="81" text="등록자사번" left="32.31%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Edit id="edt_vac_cd" taborder="82" enable="false" left="12.15%" top="5" width="235" height="21"/>
+                          <Edit id="edt_vac_confirmno" taborder="83" left="77.44%" top="5" right="0.33%" height="21" enable="false"/>
+                          <Static id="sta_vac_deterno" taborder="84" text="확정자사번" left="65.04%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="sta_vac_cd" taborder="85" text="연차코드번호" left="0%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Button id="btn_vac_empno" taborder="86" onclick="Div00_Div00_Div00_btn_vac_empno_onclick" left="60.5%" top="6" right="36.53%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" enable="false"/>
+                          <Button id="btn_vac_confirmno" taborder="87" onclick="Div00_Div00_Div00_btn_vac_confirmno_onclick" left="96.78%" top="6" right="0.33%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" enable="false"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div02" taborder="11" left="0%" top="72" right="0%" height="33" style="background:#f0f0f0ff;border:1 solid #808080ff ;" scrollbars="none">
+                      <Layouts>
+                        <Layout width="708" height="28">
+                          <Static id="sta_vac_modifycd" taborder="48" text="수정자사번" left="32.31%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Combo id="combo_vac_standardcd" taborder="49" displaynulltext="시간제선택" codecolumn="codecolumn" datacolumn="datacolumn" left="12.15%" top="7" width="235" height="21" enable="false">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">2310</Col>
+                                  <Col id="datacolumn">40시간제</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">2320</Col>
+                                  <Col id="datacolumn">44시간제</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Combo>
+                          <Edit id="edt_vac_modifycd" taborder="50" enable="false" left="44.05%" top="5" width="235" height="21"/>
+                          <Static id="sta_vac_standardcd" taborder="51" text="연차기준코드" left="0%" top="-1" width="139" height="33" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Button id="btn_vac_modifycd" taborder="52" onclick="Div00_Div00_Div02_btn_vac_modifycd_onclick" left="60.58%" top="6" right="36.53%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" enable="false"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="btn_vac_search" taborder="5" text="조회" onclick="fn_search" left="796" top="77" height="27" width="76" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+        <Static id="sta_vac_search" taborder="3" text="연차조회" left="30" top="74" height="32" style="background:#f4edfaff;color:#133678ff;align:middle;font:bold 9 굴림;" width="165"/>
+        <Combo id="combo_vac_search" taborder="9" codecolumn="code" datacolumn="name" onitemchanged="Combo00_onitemchanged" left="192" top="75" height="29" width="590" index="-1" innerdataset="@ds_code_list"/>
+        <Button id="btn_vac_fix" taborder="19" text="수정" onclick="btn_vac_fix_onclick" left="994" top="476" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="vacation_code_id" type="STRING" size="4"/>
+          <Column id="vacation_standard_code" type="STRING" size="4"/>
+          <Column id="vacation_nm" type="STRING" size="256"/>
+          <Column id="reg_date" type="STRING" size="256"/>
+          <Column id="reg_emp_id" type="STRING" size="12"/>
+          <Column id="modify_date" type="STRING" size="256"/>
+          <Column id="modify_emp_id" type="STRING" size="12"/>
+          <Column id="confirm_date" type="STRING" size="256"/>
+          <Column id="confirm_emp_id" type="STRING" size="12"/>
+          <Column id="confirmyn" type="STRING" size="1"/>
+          <Column id="emp_reg_name" type="STRING" size="256"/>
+          <Column id="emp_ok_name" type="STRING" size="256"/>
+          <Column id="emp_mod_name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows/>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <ConstColumn id="ConstColumn0" type="STRING" size="30" value=""/>
+          <ConstColumn id="ConstColumn1" type="STRING" size="30" value=""/>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchCondition">111</Col>
+            <Col id="searchKeyword">111</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_code_list">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2210</Col>
+            <Col id="name">연차휴가(2210)</Col>
+          </Row>
+          <Row>
+            <Col id="code">2220</Col>
+            <Col id="name">경조휴가(2220)</Col>
+          </Row>
+          <Row>
+            <Col id="code">2230</Col>
+            <Col id="name">병가(2230)</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vacation_standard">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2310</Col>
+            <Col id="name">40시간제</Col>
+          </Row>
+          <Row>
+            <Col id="code">2320</Col>
+            <Col id="name">44시간제</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_employee">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="MGR_NO" type="STRING" size="256"/>
+          <Column id="CURRENT_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="CURRENT_CODE" type="STRING" size="256"/>
+          <Column id="GRADE_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="GRADE_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="DEPT_CODE" type="STRING" size="256"/>
+          <Column id="EMP_ID" type="STRING" size="256"/>
+          <Column id="EMP_PW" type="STRING" size="256"/>
+          <Column id="LAST_LOGIN" type="STRING" size="256"/>
+          <Column id="ENG_NAME" type="STRING" size="256"/>
+          <Column id="RESIDENT_NO" type="STRING" size="256"/>
+          <Column id="HOUSEHOLDER" type="STRING" size="256"/>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="PHONE" type="STRING" size="256"/>
+          <Column id="CELL_PHONE" type="STRING" size="256"/>
+          <Column id="EMAIL" type="STRING" size="256"/>
+          <Column id="ADDRESS" type="STRING" size="256"/>
+          <Column id="RELIGION" type="STRING" size="256"/>
+          <Column id="IMAGE" type="STRING" size="256"/>
+          <Column id="JOIN_CLASS_CODE" type="STRING" size="256"/>
+          <Column id="JOIN_CODE" type="STRING" size="256"/>
+          <Column id="HOUSEHOLDER_NAME" type="STRING" size="256"/>
+          <Column id="HOUSEHOLDER_RELATION" type="STRING" size="256"/>
+          <Column id="REGISTRATION_ADDRESS" type="STRING" size="256"/>
+          <Column id="BIRTH" type="STRING" size="256"/>
+          <Column id="MARRIAGE" type="STRING" size="256"/>
+          <Column id="MARRIAGE_DATE" type="STRING" size="256"/>
+          <Column id="DISABILITY" type="STRING" size="256"/>
+          <Column id="REGISTRATION_ADDRESS_DETAIL" type="STRING" size="256"/>
+          <Column id="ADDRESS_DETAIL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Div00.Div00.Div00.edt_vac_cd" propid="value" datasetid="ds_vacation" columnid="vacation_code_id"/>
+      <BindItem id="item1" compid="Div00.Div00.Div00.edt_vac_empno" propid="value" datasetid="ds_vacation" columnid="reg_emp_id"/>
+      <BindItem id="item2" compid="Div00.Div00.Div00.edt_vac_confirmno" propid="value" datasetid="ds_vacation" columnid="confirm_emp_id"/>
+      <BindItem id="item3" compid="Div00.Div00.Div01.combo_vac_title" propid="value" datasetid="ds_vacation" columnid="vacation_nm"/>
+      <BindItem id="item6" compid="Div00.Div00.Div01.rd_vac_confirmryn" propid="value" datasetid="ds_vacation" columnid="confirmyn"/>
+      <BindItem id="item5" compid="Div00.Div00.Div02.combo_vac_standardcd" propid="value" datasetid="ds_vacation" columnid="vacation_standard_code"/>
+      <BindItem id="item7" compid="Div00.Div00.Div02.edt_vac_modifycd" propid="value" datasetid="ds_vacation" columnid="modify_emp_id"/>
+      <BindItem id="item8" compid="Div00.Div00.Div03.cal_vac_insertdate" propid="value" datasetid="ds_vacation" columnid="reg_date"/>
+      <BindItem id="item9" compid="Div00.Div00.Div03.cal_vac_confirmdate" propid="value" datasetid="ds_vacation" columnid="confirm_date"/>
+      <BindItem id="item4" compid="Div00.Div00.Div01.cal_vac_modifydate" propid="value" datasetid="ds_vacation" columnid="modify_date"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+
+//폼 로드
+this.Oct_Vacation_Code_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	Iject.formOnload(obj);
+	var nRow = this.ds_vacation.addRow();
+	this.ds_search.setColumn(nRow,"searchCondition");	
+	this.fn_search();
+	
+} 
+
+//조회
+this.fn_search = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nRow = this.ds_search.addRow();  
+ 	var searchCondition = this.combo_vac_search.value;
+    
+	this.ds_search.setColumn(nRow, "searchCondition",searchCondition);
+	
+	
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "Oct_vacationSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_vacation=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	trace(this.ds_vacation.saveXML());
+    //공통 transaction 함수 호츨 
+	Iject.transaction(this,oDatas,function(){   
+
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+		  pThis.grd_vac_list.selectCell(Rownum);
+	});
+	
+	this.ds_search.clearData();
+	
+}
+
+
+//사원조회버튼
+this.Div00_Div00_Div00_btn_vac_empno_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_name + "(" + emp_no +")";
+   
+	this.Div00.Div00.Div00.edt_vac_empno.set_value(empPlus);
+}
+
+this.Div00_Div00_Div02_btn_vac_modifycd_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", 10, 10, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_name + "(" + emp_no +")";
+
+	this.Div00.Div00.Div02.edt_vac_modifycd.set_value(empPlus);
+
+}
+
+this.Div00_Div00_Div00_btn_vac_confirmno_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_name + "(" + emp_no +")";
+	
+	this.Div00.Div00.Div00.edt_vac_confirmno.set_value(empPlus);
+
+}
+
+
+//초기화
+this.btn_vac_reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+	
+}
+
+//추가
+this.btn_vac_insert_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		
+		var nRow = this.ds_vacation.addRow();
+
+		var today = new Date();
+		var year = today.getFullYear().toString().padLeft(4,"0");		
+		var month = (today.getMonth()+1).toString().padLeft(2,"0");
+		var day1 = today.getDate().toString().padLeft(2,"0");
+		
+		this.Div00.Div00.Div03.cal_vac_insertdate.set_value(year+month+day1);
+		
+		this.Div00.Div00.Div00.edt_vac_empno.set_enable(true);
+		this.Div00.Div00.Div00.edt_vac_confirmno.set_enable(true);
+		this.Div00.Div00.Div01.combo_vac_title.set_enable(true);
+		this.Div00.Div00.Div01.rd_vac_confirmryn.set_enable(true);
+		this.Div00.Div00.Div02.combo_vac_standardcd.set_enable(true);
+		this.Div00.Div00.Div03.cal_vac_insertdate.set_enable(true);
+		this.Div00.Div00.Div03.cal_vac_confirmdate.set_enable(true);
+		this.Div00.Div00.Div00.btn_vac_empno.set_enable(true);
+		this.Div00.Div00.Div00.btn_vac_confirmno.set_enable(true);
+		
+		//if(this.Div00.Div00.Div01.rd_vac_confirmryn.value == 'Y'){
+		//	this.Div00.Div00.Div00.edt_vac_confirmno.set_enable(true)
+		//};
+		
+		
+		
+	
+}
+
+
+
+//저장
+this.fn_save = function(strid)
+{
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "Oct_vacationModifyVO.do",			 
+			  inds :["input2=ds_vacation:U"],
+			  outds :[
+				 "ds_vacation=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			Rownum = this.ds_vacation.rowposition;
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		
+		if(this.errorcode < 0)
+		{		
+		   Iject.alert("입력정보를 다시확인해 주세요","알림");			
+		   return;
+		}			
+	      
+	      var pThis = this.fobj;   //form object
+	      switch(strid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+			
+	      }
+	     
+		  pThis.fn_search();
+
+	});
+}
+
+//삭제
+this.btn_vac_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_vacation.rowposition;
+	this.ds_vacation.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.fn_search();
+	}
+}
+
+//저장
+this.btn_vac_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+
+}
+
+
+
+//그리드 팝업띄우기
+this.grd_vac_list_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	if(this.Div00.Div00.Div01.rd_vac_confirmryn.value == 'Y'){
+
+	var objChildFrame = new ChildFrame();
+    objChildFrame.init("vacainfof_popup"//팝업창id
+	          ,"absolute"
+                      , 10 
+                      , 10 
+                      , 400
+                      , 350
+                      , null
+                      , null
+                      , "VACATION::OCT_Vacation_Info.xfdl");
+	
+	var objParam = {param1:this.Div00.Div00.Div00.edt_vac_cd.value,
+					param2:this.Div00.Div00.Div00.edt_vac_empno.value,
+					//param3:this.Div00.Div00.Div01.rd_vac_confirmryn.value,
+					param4:this.Div00.Div00.Div03.cal_vac_insertdate.value,
+					param5:this.Div00.Div00.Div00.edt_vac_confirmno.value
+					};
+	
+    objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this);
+    
+	}else{Iject.alert("확정이 되지 않았습니다.","알림");}
+}
+//수정
+this.btn_vac_fix_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		//this.Div00.Div00.Div00.edt_vac_empno.set_enable(true);
+		this.Div00.Div00.Div00.edt_vac_confirmno.set_enable(true);
+		this.Div00.Div00.Div01.combo_vac_title.set_enable(true);
+		this.Div00.Div00.Div01.rd_vac_confirmryn.set_enable(true);
+		this.Div00.Div00.Div02.combo_vac_standardcd.set_enable(true);
+		this.Div00.Div00.Div02.edt_vac_modifycd.set_enable(true);
+		this.Div00.Div00.Div03.cal_vac_insertdate.set_enable(true);
+		this.Div00.Div00.Div03.cal_vac_confirmdate.set_enable(true);
+		//this.Div00.Div00.Div00.btn_vac_empno.set_enable(true);
+		this.Div00.Div00.Div00.btn_vac_confirmno.set_enable(true);
+		this.Div00.Div00.Div02.btn_vac_modifycd.set_enable(true);
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

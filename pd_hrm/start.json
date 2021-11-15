@@ -1,0 +1,38 @@
+﻿{
+    "version" : "14.0.0.1",
+    "runtime" :
+    {
+        "target" :
+        {
+            "os" : "windows"
+        },
+        "framework" :
+        [
+
+        ],
+        "component" :
+        [
+
+        ],
+        "form" :
+        [
+
+        ],
+        "xadl" :
+        {
+          "launch" : "./pd_hrm.xadl.js",
+					"quickview" : "./pd_hrm.xadl.quickview.js"
+        },
+        "protocol":
+        {
+            "adaptors":
+            [
+          
+            ]
+        },
+        "resource" :
+        {
+
+        }
+    }
+}

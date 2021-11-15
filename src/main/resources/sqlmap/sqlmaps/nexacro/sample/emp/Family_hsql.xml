@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Family">
+
+    <typeAlias  alias="familyVO" type="nexacro.sample.vo.emp.FamilyVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+
+   
+    <resultMap id="family" class="familyVO">
+        <result property="EMP_NO"    		  column="EMP_NO"/>	              
+        <result property="REG_NO"  						 column="REG_NO"/>	              
+        <result property="FAMILY_NAME"    			 column="FAMILY_NAME"/>	              
+        <result property="FAMILY_RELATION"			 column="FAMILY_RELATION"/>	 
+        <result property="FAMILY_EDU_LEVEL"     				column="FAMILY_EDU_LEVEL"/>	          
+        <result property="FAMILY_JOBS"    			column="FAMILY_JOBS"/>	      
+        <result property="FAMILY_COMPANY_NAME"    column="FAMILY_COMPANY_NAME"/>	          
+        <result property="FAMILY_GRADE"    				column="FAMILY_GRADE"/>	          
+        <result property="FAMILY_LIVINGYN"    				column="FAMILY_LIVINGYN"/>	          
+        <result property="FAMILY_DEPENDENTYN"    				column="FAMILY_DEPENDENTYN"/>	          
+        <result property="FAMILY_NO"    				column="FAMILY_NO"/>	          
+      </resultMap>
+    
+      <select id="selectFamilyVOList" parameterClass="familyVO" resultMap="family">
+            SELECT
+            	*
+            FROM FAMILY
+            WHERE 
+            EMP_NO=#searchKeyword#
+        
+    </select> 
+    
+    <insert id="insertFamilyVO" parameterClass="familyVO">
+        <![CDATA[
+            INSERT INTO FAMILY (
+            	EMP_NO,
+            	REG_NO,
+            	FAMILY_NAME,
+            	FAMILY_RELATION,
+            	FAMILY_EDU_LEVEL,
+            	FAMILY_JOBS,
+            	FAMILY_COMPANY_NAME,
+            	FAMILY_GRADE,
+            	FAMILY_LIVINGYN,
+            	FAMILY_DEPENDENTYN,
+            	FAMILY_NO
+            	     
+            	
+            	 
+            ) VALUES (
+          	        #EMP_NO#,    		
+          	        #REG_NO#, 					
+          	        #FAMILY_NAME#,   		
+          	        #FAMILY_RELATION#,	
+          	        #FAMILY_EDU_LEVEL#,    			
+          	        #FAMILY_JOBS#,    		
+          	        #FAMILY_COMPANY_NAME#, 	
+          	        #FAMILY_GRADE#,    		
+          	        #FAMILY_LIVINGYN#, 	
+          	        #FAMILY_DEPENDENTYN#,    		
+          	        FAMILY_NO_SEQ.nextval
+              )
+            
+        ]]>
+    </insert>
+ 
+    
+   <!-- 업데이트문 테이블1개  -->
+       <update id="updateFamilyVO" parameterClass="familyVO">
+        <![CDATA[
+            UPDATE FAMILY
+            SET     
+            	REG_NO=#REG_NO#,
+            	FAMILY_NAME=#FAMILY_NAME#,
+            	FAMILY_RELATION=#FAMILY_RELATION#,
+            	FAMILY_EDU_LEVEL=#FAMILY_EDU_LEVEL#,
+            	FAMILY_JOBS=#FAMILY_JOBS#,         
+                FAMILY_COMPANY_NAME=#FAMILY_COMPANY_NAME#,
+                FAMILY_GRADE=#FAMILY_GRADE#,
+                FAMILY_LIVINGYN=#FAMILY_LIVINGYN#,
+                FAMILY_DEPENDENTYN=#FAMILY_DEPENDENTYN#
+                    
+                WHERE 
+                FAMILY_NO=#FAMILY_NO#
+        ]]>
+    </update> 
+    
+   <delete id="deleteFamilyVO" parameterClass="familyVO">
+        <![CDATA[
+            DELETE FAMILY
+            where
+            FAMILY_NO=#FAMILY_NO#
+        ]]>
+    </delete>
+   
+    
+    
+   
+</sqlMap>

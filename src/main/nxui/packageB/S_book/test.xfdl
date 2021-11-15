@@ -1,0 +1,628 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Business_Trip" classname="Temp01_SingleDetail" left="0" top="0" width="1030" height="876" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img02" taborder="0" left="14" top="145" width="996" height="210" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_01" taborder="2" left="14" top="65" width="338" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_01" taborder="3" onclick="sta_01_onclick" left="60" top="70" width="284" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <ImageViewer id="img_titlebg" taborder="4" left="14" top="7" width="996" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="5" text="출장관리" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="sta_no" taborder="6" text="사원이름" onclick="sta_no_onclick" left="20" top="70" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_02" taborder="7" left="55" top="152" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_33" taborder="8" text="출장관리내역" left="17" top="123" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Static id="Static02" taborder="9" text="*" left="39" top="159" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Edit id="edt_searchKeyword" taborder="10" left="146" top="73" width="140" height="19" readonly="true"/>
+        <Static id="sta_15" taborder="11" text="출장관리번호" onclick="sta_15_onclick" left="20" top="152" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="Static00" taborder="12" text="*" left="26" top="155" width="18" height="22" style="color:red;font:arial,18;"/>
+        <ImageViewer id="img_08" taborder="13" left="55" top="197" width="950" height="99" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_00" taborder="14" text="주요일정내용" onclick="sta_15_onclick" left="20" top="199" width="115" height="97" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_04" taborder="15" left="55" top="295" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_03" taborder="16" text="출장시작일" onclick="sta_15_onclick" left="20" top="295" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_04" taborder="17" text="출장종료일" onclick="sta_15_onclick" left="277" top="295" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_03" taborder="18" left="55" top="319" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_06" taborder="19" text="승인일시" onclick="sta_15_onclick" left="20" top="319" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_07" taborder="20" text="승인여부" onclick="sta_15_onclick" left="277" top="319" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_09" taborder="21" text="대체업무사원" onclick="sta_15_onclick" left="532" top="295" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="reset" taborder="22" text="취소" onclick="fn_reset" left="951" top="393" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="fn_search" taborder="23" cssclass="btn_WF_SearchSmall" left="501" top="154" width="22" height="20" onclick="fn_search_onclick"/>
+        <Button id="Button00" taborder="24" text="검색" left="289" top="71" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="25" text="추가" left="777" top="393" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button01_onclick"/>
+        <Button id="insert00" taborder="26" text="등록" left="835" top="393" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="div_Detail_insert_onclick"/>
+        <Button id="Button02" taborder="27" text="삭제" left="893" top="393" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button03_onclick"/>
+        <ImageViewer id="img_00" taborder="28" left="55" top="175" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_02" taborder="29" text="출장명" onclick="sta_15_onclick" left="20" top="175" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_08" taborder="30" text="출장국가" onclick="sta_15_onclick" left="277" top="175" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_11" taborder="31" text="출장지역" onclick="sta_15_onclick" left="532" top="175" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_12" taborder="32" text="사원번호" onclick="sta_15_onclick" left="769" top="175" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_btr_no2" taborder="33" readonly="true" cssclass="edt_WF_Search" left="140" top="154" width="361" height="20"/>
+        <Static id="sta_13" taborder="34" onclick="sta_15_onclick" left="532" top="152" width="473" height="24" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="btr_name" taborder="35" left="140" top="177" width="132" height="20"/>
+        <Edit id="nation" taborder="36" cssclass="essential" left="396" top="177" width="127" height="20"/>
+        <Edit id="area" taborder="37" cssclass="essential" left="650" top="177" width="118" height="20"/>
+        <MaskEdit id="emp_no" taborder="38" readonly="true" cssclass="essential" left="884" top="177" width="114" height="20"/>
+        <TextArea id="purpose" taborder="39" left="139" top="201" width="863" height="90"/>
+        <Static id="sta_14" taborder="40" text="총예상경비" onclick="sta_15_onclick" left="769" top="295" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_05" taborder="41" onclick="sta_15_onclick" left="532" top="319" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" text="승인자"/>
+        <Calendar id="s_date" taborder="42" displaynulltext="2021-00-00" left="140" top="297" width="130" height="20" type="normal" locale="ko_KR" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Calendar id="ok_date" taborder="43" displaynulltext="2021-00-00" oneditclick="div_Detail_Calendar02_oneditclick" left="140" top="322" width="129" height="20" readonly="true" locale="ko_KR" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Calendar id="f_date" taborder="44" displaynulltext="2021-00-00" cssclass="essential" left="396" top="297" width="128" height="20" locale="ko_KR" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Radio id="ok_Ascertain" taborder="45" innerdataset="ds_yn" codecolumn="code" datacolumn="data" value="2" direction="vertical" onitemclick="Tab00_tabpage1_div_Detail_ok_Ascertain_onitemclick" left="400" top="322" width="123" height="20" ds_yn="[object Dataset]" readonly="false">
+          <Dataset id="ds_yn">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">Y</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">N</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <MaskEdit id="re_emp_no" taborder="46" cssclass="essential" left="650" top="298" width="96" height="20" readonly="true"/>
+        <MaskEdit id="ex_expenses" taborder="47" left="887" top="297" width="113" height="20"/>
+        <Grid id="btrgrid" taborder="48" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="14" top="462" width="996" height="266" binddataset="ds_user" oncelldblclick="btrgrid_oncelldblclick" oncellclick="btrgrid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="90"/>
+                <Column size="140"/>
+                <Column size="200"/>
+                <Column size="120"/>
+                <Column size="120"/>
+                <Column size="90"/>
+                <Column size="60"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font:bold 9 dotum;" text="출장관리번호" expandsize="12"/>
+                <Cell col="1" style="font:bold 9 dotum;" text="출장명"/>
+                <Cell col="2" style="font:bold 9 dotum;" text="출장국가"/>
+                <Cell col="3" style="font:bold 9 dotum;" text="출장시작일"/>
+                <Cell col="4" style="font:bold 9 dotum;" text="출장종료일" combodataset="bind:f_Date"/>
+                <Cell col="5" style="font:bold 9 dotum;" text="승인자" combodataset="bind:ok_Emp_No"/>
+                <Cell col="6" style="font:bold 9 dotum;" text="승인여부" combodataset="bind:ok_Ascertain"/>
+                <Cell col="7" displaytype="normal" edittype="normal" style="font:bold 9 dotumbold 9 dotum;" text="출장관리내역보기" expandshow="hide"/>
+              </Band>
+              <Band id="body">
+                <Cell edittype="none" style="align:center;" text="bind:btrip_No" editlimit="30"/>
+                <Cell col="1" edittype="none" style="align:center;" text="bind:btrip_Name" editlimit="15"/>
+                <Cell col="2" edittype="none" style="align:center;" text="bind:country" editlimit="15"/>
+                <Cell col="3" edittype="none" style="align:center;" text="bind:s_Date" editlimit="15"/>
+                <Cell col="4" edittype="none" style="align:center;" text="bind:f_Date" editlimit="11"/>
+                <Cell col="5" edittype="none" style="align:center;" text="bind:ok_Emp_No" editlimit="12"/>
+                <Cell col="6" edittype="none" style="align:center;" text="bind:ok_Ascertain" editlimit="11"/>
+                <Cell col="7" edittype="none" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="일정내용"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_10" taborder="51" onclick="sta_15_onclick" left="769" top="319" width="236" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <MaskEdit id="ok_emp_no" taborder="49" cssclass="essential" left="650" top="322" width="96" height="20" readonly="true" oneditclick="ok_emp_no_oneditclick"/>
+        <Button id="button09" taborder="50" cssclass="btn_WF_SearchSmall" left="746" top="322" width="22" height="20" onclick="button09_onclick"/>
+        <Button id="button05" taborder="52" cssclass="btn_WF_SearchSmall" left="746" top="297" width="22" height="20" onclick="button05_onclick"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_user" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="btrip_No" type="STRING" size="12"/>
+          <Column id="btrip_Name" type="STRING" size="20"/>
+          <Column id="country" type="STRING" size="50"/>
+          <Column id="area" type="STRING" size="50"/>
+          <Column id="purpose" type="STRING" size="256"/>
+          <Column id="s_Date" type="DATE" size="256"/>
+          <Column id="f_Date" type="DATE" size="256"/>
+          <Column id="ex_Expenses" type="INT" size="10"/>
+          <Column id="re_Emp_No" type="STRING" size="12"/>
+          <Column id="ok_Date" type="DATE" size="256"/>
+          <Column id="ok_Emp_No" type="STRING" size="12"/>
+          <Column id="ok_Ascertain" type="STRING" size="1"/>
+          <Column id="emp_No" type="STRING" size="12"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_confirm">
+        <ColumnInfo>
+          <Column id="btrip_Dno" type="STRING" size="256"/>
+          <Column id="btrip_Dda" type="STRING" size="256"/>
+          <Column id="detail" type="STRING" size="256"/>
+          <Column id="ws_Date" type="DATE" size="256"/>
+          <Column id="wf_Date" type="DATE" size="256"/>
+          <Column id="hotel" type="STRING" size="256"/>
+          <Column id="trans" type="STRING" size="256"/>
+          <Column id="visiter" type="STRING" size="256"/>
+          <Column id="tex_Expenses" type="INT" size="256"/>
+          <Column id="remark" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <!--
+<Parameters>
+      <Parameter id="test_data" type="string" value="edt_btr_no2"/>
+    </Parameters>
+-->
+    <Bind>
+      <BindItem id="item15" compid="edt_searchKeyword" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item13" compid="edt_searchKeyword" propid="value" datasetid="gds_empno" columnid="emp_no"/>
+      <BindItem id="item0" compid="edt_btr_no2" propid="value" datasetid="ds_user" columnid="btrip_No"/>
+      <BindItem id="item1" compid="btr_name" propid="value" datasetid="ds_user" columnid="btrip_Name"/>
+      <BindItem id="item2" compid="nation" propid="value" datasetid="ds_user" columnid="country"/>
+      <BindItem id="item3" compid="area" propid="value" datasetid="ds_user" columnid="area"/>
+      <BindItem id="item4" compid="purpose" propid="value" datasetid="ds_user" columnid="purpose"/>
+      <BindItem id="item5" compid="s_date" propid="value" datasetid="ds_user" columnid="s_Date"/>
+      <BindItem id="item6" compid="f_date" propid="value" datasetid="ds_user" columnid="f_Date"/>
+      <BindItem id="item7" compid="ex_expenses" propid="value" datasetid="ds_user" columnid="ex_Expenses"/>
+      <BindItem id="item9" compid="ok_date" propid="value" datasetid="ds_user" columnid="ok_Date"/>
+      <BindItem id="item11" compid="ok_Ascertain" propid="value" datasetid="ds_user" columnid="ok_Ascertain"/>
+      <BindItem id="item12" compid="emp_no" propid="value" datasetid="ds_user" columnid="emp_No"/>
+      <!---->
+      <BindItem id="item14" compid="ok_emp_no" propid="value" datasetid="gds_okempno" columnid="ok_empno"/>
+      <BindItem id="item19" compid="ok_emp_no" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <!---->
+      <BindItem id="item18" compid="re_emp_no" propid="value" datasetid="gds_reempno" columnid="re_empno"/>
+      <BindItem id="item8" compid="re_emp_no" propid="value" datasetid="ds_user" columnid="re_Emp_No"/>
+      <!--<BindItem id="item13" compid="div_Detail.emp_no" propid="value" datasetid="gds_empno" columnid="emp_no"/>-->
+      <BindItem id="item17" compid="btrgrid" propid="binddataset" datasetid="ds_user" columnid=""/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+var imsisave = "";
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+    //this.fn_search();
+//     
+// var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_no");	
+//  		application.gds_btripno.addRow();
+//  		application.gds_btripno.setColumn(application.gds_btripno.rowposition, "btrip_no", btrip_no);
+// 	
+//  	var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_No");	
+//   		application.gds_btripno.addRow();
+//   		application.gds_btripno.setColumn(0, "btrip_no", btrip_no);
+
+} 
+
+//조회
+this.fn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+  
+   var searchCondition =  "NAME";
+   var searchKeyword = this.edt_searchKeyword.value;       
+ 	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+ /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "btrSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_user=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_user : " + pThis.ds_user.saveXML());
+	});
+	
+		var imsi = this.edt_searchKeyword.value;
+	   this.edt_btrip_dno.set_value(imsi);
+	
+	
+	
+	 
+}
+
+
+
+
+
+
+//추가
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	//var imsi = this.emp_no.value;
+	var imsi1 = this.edt_searchKeyword.value;
+	var nRow = this.ds_user.addRow();
+	this.emp_no.set_value(imsi1);
+// 	this.ok_date.readonly("false");
+// 	this.ok_emp_no.readonly(true);
+/*	this.ok_date.visible(false);*/
+	/*this.ok_Ascertain.readonly(true);*/
+	
+}
+
+
+
+
+
+//삭제
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+//  	var searchCondition =  "NAME";
+//     var searchKeyword = this.edt_searchKeyword.value;       
+//   	this.ds_search.setColumn(0, "searchCondition", "NAME");
+//  	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+//  	
+//  	var oDatas =  {
+//  			  svcid : "confirm",
+//  			  sController : "btrDetailconfirmVO.do",			 
+//  			  inds :["ds_search=ds_search"],
+//  			  outds :[
+//  				 "ds_confirm=output1"
+//  			     ],			     
+//  			  args  : [				
+//  			  ],
+//  			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+//  			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+//  			  bCompress :false,	 //			  
+//  			}; 
+//  	 trace(" this.ds_search : " + this.ds_search.saveXML());
+//  	 
+//  	 
+//      //공통 transaction 함수 호츨   //function callback 
+//      
+//     // this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+//  	Iject.transaction(this,oDatas,function(){   
+//  		if(this.errorcode < 0)
+//  		{
+//  		   Iject.alert(this.errorMsg);			
+//  		   return;
+//  		} 
+//  	      
+//  	       var pThis = this.fobj;   //form object	      
+//  	       trace("ds_confirm : " + this.ds_confirm.saveXML());
+//  	});
+//  	
+ 	
+	var nRow = this.ds_user.rowposition;
+	this.ds_user.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+// 	
+//  	
+//  	var confirm = this.ds_confirm.getColumn();
+//  	
+//  	if(this.confirm != null){
+//  		this.alert("출장일정내용을 확인하세요");
+//  	}else 
+	if(rtnValue){  
+		this.fn_save("delete");
+	}else{
+		this.fn_search();
+	}
+}
+
+
+
+
+//리셋
+this.fn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_user.reset();
+}
+
+
+//저장
+this.fn_save = function(strid)
+{
+	this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);
+	this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.re_emp_no.value);
+
+	
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "btrModifyVO.do",			 
+			  inds :["input1=ds_user:U"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+	});
+/*	this.fn_search();*/
+	var imsi3 = this.edt_searchKeyword.value;
+	this.edt_searchKeyword.set_value(imsi3);
+	
+}
+
+
+//저장버튼 클릭시 
+this.div_Detail_insert_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+var imsi4 = this.edt_searchKeyword.value;
+
+	this.fn_save("save");
+		this.edt_searchKeyword.set_value(imsi4);
+}
+
+
+// //검색  Enter키
+// this.div_search_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+// {
+// 	if ( e.keycode == 13 )
+// 	{
+// 		this.fn_search();
+// 	}
+// }
+
+
+
+
+//사원찾기
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+}
+
+
+//승인자사번찾기
+this.button09_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::ok_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	
+}
+
+
+///////////////////////////////////////출장관리내역 처리////////////////////////////////////////////
+this.btrgrid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	
+ 	
+ 	//var btrip_no= this.edt_btr_no2.value;
+// 		
+ 	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var Business_Trip = new ChildFrame();
+ 	
+ 	Business_Trip.init("Business_Trip"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "Btrip::PD_IN_COM_BTRDETAIL.xfdl");
+ 	
+ 	
+ 	
+ 	Business_Trip.set_openalign("center middle");
+ 	Business_Trip.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_btr_no2.value
+						,param2:this.btr_name.value
+  					 	};
+						
+  	
+    //ChildFrame.showModal(strID, objParentFrame, [{objArgumentList}[, objOpener[,  callbackFunc]]]);
+          
+    	  Business_Trip.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+   			  
+//     	system.showModalWindow(Business_Trip, 
+//    							"btripModal",
+//     							this.getOwnerFrame(),
+//     							"mode:'showModalWindow', this.objParam",
+//    							this);
+//   							
+  							
+   
+/*	  trace("param value" + this.objParam);*/
+			  
+// 					
+//  	var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_No");	
+//  	application.gds_btripno.addRow();
+//  	application.gds_btripno.setColumn(application.gds_btripno.rowposition, "btrip_no", btrip_No)	
+	//test
+// 	var btrip_no = this.edt_btr_no2.value;
+// 	 var oData ={
+//          sId  : "btrip",             //callback id
+//          sUrl : "Btrip::PD_IN_COM_BTRDETAIL.xfdl",   //url
+//          bshowtitlebar : true,     //title bar
+//          bAutoSize  : true,       //autosize
+//          bResize    : false,       //resize
+//          bShowtatusbar : false,     //statusbar
+//          sOpenalign    : "center middle",  //align
+//         oArgs :  {arg1: this.btrip_no,
+//                   arg2:'2222222222222222222222222'         
+//                }    
+//      };
+//      
+//      
+//       Iject.showModal(this,oData,function(){
+//    
+//               /* 
+//               * popup calllback
+//               *@param {object}this.fobj
+//               *@param {string} this.svcid 
+//               *@param {string} this.variant
+//               */             
+//              var pThis= this.fobj;             
+//              trace(" pThis.name : " + pThis.name);
+//              trace(" pThis.svcid : " + this.svcid);
+//              trace(" pThis.variant : " + this.variant);
+//              
+//              var sPerson = JSON.stringify(this.variant);
+          //  var oPerson = JSON.parse(sPerson);
+
+      
+      //});
+		
+}
+
+// 
+ //출장내역관리 콜백함수
+  this.fn_popupCallback = function(strPopupID, strReturn)
+  {
+      if(strReturn == undefined){
+          return;
+      }
+  
+      if(strPopupID == "Business_Trip"){
+          this.alert("Return Value: " + strReturn);
+      }
+ };
+
+ //object 인자 생성함수
+ this.fn_parent = function(pObj)
+ {
+     this.ds_parent.copyData(pObj);
+};
+
+// //조회시 승인자사번 노출
+// this.btrgrid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+// {
+// 	this.ok_emp_no.value(this.btrgrid.se);
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//대체업무사원
+this.button05_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::re_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+}
+]]></Script>
+  </Form>
+</FDL>
