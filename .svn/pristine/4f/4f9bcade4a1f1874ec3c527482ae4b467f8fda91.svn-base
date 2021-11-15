@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="s_book">
+
+	<typeAlias alias="s_bookcodeVO" type="nexacro.sample.vo.s_bookVO.S_bookCodeVO" />
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+
+	<resultMap id="s_code" class="s_bookCodeVO">
+		<result property="attitude_book_id" column="ATTITUDE_BOOK_ID" />
+		<result property="attitude_book_nm" column="ATTITUDE_BOOK_NM" />
+	</resultMap>
+
+	
+	<select id="selects_bookSearchCodeVO" resultMap="s_code" parameterClass="s_bookCodeVO">
+		<![CDATA[
+		SELECT
+		
+		ATTITUDE_BOOK_ID,
+		ATTITUDE_BOOK_NM
+		FROM ATTITUDE_BOOK
+		WHERE 1=1
+		]]>
+		
+	
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="attitude_book_id">
+						ATTITUDE_BOOK_ID LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="attitude_book_nm">
+						ATTITUDE_BOOK_NM LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="total">
+						ATTITUDE_BOOK_ID LIKE '%' || #keyword# || '%'
+						OR ATTITUDE_BOOK_NM LIKE '%' || #keyword# || '%'
+						
+				</isEqual>
+			</dynamic>
+	</select>
+
+
+
+
+<!-- 	<select id="selects_bookSearchCodeVO" parameterClass="s_bookCodeVO"
+		resultMap="s_code">
+		
+		SELECT
+		ATTITUDE_BOOK_ID,
+		ATTITUDE_BOOK_NM
+		FROM ATTITUDE_BOOK
+		WHERE ATTITUDE_BOOK_NM LIKE #searchCondition#||'%'
+		
+
+	
+	</select> -->
+
+	
+</sqlMap>
+

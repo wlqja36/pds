@@ -1,0 +1,350 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Salary_Book" classname="Temp01_SingleDetail" left="0" top="0" width="524" height="332" titletext="New Form" onload="form_onload" enableevent="true">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img_titlebg" taborder="3" left="14" top="7" width="494" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="4" text="성과평가" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <!--<Edit id="edt_btrip_dno2" taborder="99" readonly="true" cssclass="edt_WF_Search" left="139" top="107" width="391" height="20"/>-->
+        <Button id="reset" taborder="43" text="초기화" onclick="fn_reset" left="457" top="184" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="Button01" taborder="46" text="추가" left="283" top="184" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button01_onclick"/>
+        <Button id="insert00" taborder="47" text="등록" left="341" top="184" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="div_Detail_insert_onclick"/>
+        <Button id="Button02" taborder="48" text="삭제" left="399" top="184" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button02_onclick"/>
+        <Grid id="Grid00" taborder="117" binddataset="ds_R_standard" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="14" top="80" width="494" height="92">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+                <Column size="80"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="급여대장번호"/>
+                <Cell col="1" text="성과코드"/>
+                <Cell col="2" text="성과점수"/>
+                <Cell col="3" text="성과금액"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:salary_book_no"/>
+                <Cell col="1" displaytype="combo" edittype="combo" text="bind:record_code" combodataset="ds_combo_03" combocodecol="cd" combodatacol="txt" combodisplay="display"/>
+                <Cell col="2" displaytype="text" edittype="text" text="bind:record_score"/>
+                <Cell col="3" text="bind:record_money"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <ImageViewer id="img02" taborder="118" left="18" top="240" width="493" height="63" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_02" taborder="119" left="29" top="246" width="477" height="26" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_00" taborder="120" text="성과평가기준" left="19" top="222" width="90" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Static id="sta_15" taborder="122" text="급여대장번호" onclick="sta_15_onclick" left="23" top="246" width="86" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_btrip_dno" taborder="123" readonly="true" cssclass="edt_WF_Search" left="111" top="248" width="156" height="22"/>
+        <Static id="sta_01" taborder="124" text="성과코드" onclick="sta_15_onclick" left="267" top="246" width="72" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="Combo00" taborder="125" left="339" top="247" height="23" innerdataset="@ds_combo_03" codecolumn="cd" datacolumn="txt" width="162" onitemchanged="Combo00_onitemchanged"/>
+        <ImageViewer id="img_00" taborder="126" left="29" top="272" width="477" height="26" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_02" taborder="127" text="성과점수" onclick="sta_15_onclick" left="23" top="272" width="86" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_03" taborder="129" text="성과금액" onclick="sta_15_onclick" left="267" top="271" width="72" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="Edit00" taborder="130" left="110" top="273" height="23" width="156"/>
+        <MaskEdit id="MaskEdit00" taborder="131" readonly="true" left="340" top="273" height="24" mask="###,###,###,#" style="align:left middle;" clipmode="excludespace" width="162" value="0"/>
+        <Static id="Static00" taborder="132" text="*" left="269" top="246" width="9" height="24" style="color:red;font:arial,18;" onclick="star_onclick" enable="false"/>
+        <Static id="Static01" taborder="133" text="*" left="26" top="272" width="9" height="24" style="color:red;font:arial,18;" onclick="star_onclick" enable="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_R_standard">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="record_code" type="STRING" size="256"/>
+          <Column id="record_score" type="STRING" size="256"/>
+          <Column id="record_money" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_combo_03">
+        <ColumnInfo>
+          <Column id="cd" type="STRING" size="256"/>
+          <Column id="txt" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="cd">3600</Col>
+            <Col id="txt">0%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3610</Col>
+            <Col id="txt">10%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3620</Col>
+            <Col id="txt">20%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3630</Col>
+            <Col id="txt">30%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3640</Col>
+            <Col id="txt">40%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3650</Col>
+            <Col id="txt">50%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3660</Col>
+            <Col id="txt">60%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3670</Col>
+            <Col id="txt">70%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3680</Col>
+            <Col id="txt">80%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3690</Col>
+            <Col id="txt">90%</Col>
+          </Row>
+          <Row>
+            <Col id="cd">3699</Col>
+            <Col id="txt">100%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="Grid00" propid="binddataset" datasetid="ds_R_standard" columnid=""/>
+      <BindItem id="item3" compid="Combo00" propid="value" datasetid="ds_R_standard" columnid="record_code"/>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_R_standard" columnid="record_score"/>
+      <BindItem id="item2" compid="MaskEdit00" propid="value" datasetid="ds_R_standard" columnid="record_money"/>
+      <BindItem id="item5" compid="edt_btrip_dno" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+    </Bind>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);
+		
+		//파람넘길때보기
+ 		var strParam1 = this.parent.param1;
+ 		this.edt_btrip_dno.set_value(strParam1);
+ 		this.Static00.set_enable("false");
+		this.Static01.set_enable("false");
+		this.fn_search_onclick();
+		
+		
+		
+
+} 
+//조회처리
+this.fn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var searchCondition =  "NAME";
+    var searchKeyword = this.edt_btrip_dno.value;       
+	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "rsSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_R_standard=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	 
+	 
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_R_standard : " + this.ds_R_standard.saveXML());
+	});
+}
+
+
+//추가
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	this.Static00.set_enable("true");
+	this.Static01.set_enable("true");
+	var imsi = this.edt_btrip_dno.value;
+	var nRow = this.ds_R_standard.addRow();
+	this.edt_btrip_dno.set_value(imsi);
+	
+	
+	
+	
+	
+
+	
+}
+
+
+ //저장버튼 누를시
+ this.div_Detail_insert_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+ {	
+	var money = 50000;
+	if(this.Edit00.value <= 60){
+		money = 0;
+	}else if(this.Edit00.value <=70){
+		money = 10000;
+	}else if(this.Edit00.value <=80){
+		money = 20000;
+	}else if(this.Edit00.value <=90){
+		moeny = 30000;
+	}else if(this.Edit00.value < 100){
+		money = 40000;
+	}else if(this.Edit00.value = 100){
+		money = 50000;
+	}
+	alert("점수의돈은"+money);
+	
+	var total = 0;
+	if(this.Combo00.value == 3600){
+		total = money*1
+	}else if(this.Combo00.value == 3610){
+		total = money + 5000;
+	}else if(this.Combo00.value == 3620){
+		total = money + 6000;
+	}else if(this.Combo00.value == 3630){
+		total = money + 7000;
+	}else if(this.Combo00.value == 3640){
+		total = money + 8000;
+	}else if(this.Combo00.value == 3650){
+		total = money + 9000;
+	}else if(this.Combo00.value == 3660){
+		total = money + 10000;
+	}else if(this.Combo00.value == 3670){
+		total = money + 20000;
+	}else if(this.Combo00.value == 3680){
+		total = money + 30000;
+	}else if(this.Combo00.value == 3690){
+		total = money + 40000;
+	}else if(this.Combo00.value == 3699){
+		total = money + 50000;
+	}
+
+	alert("합친금액은"+total);
+	this.ds_R_standard.setColumn(this.ds_R_standard.rowposition, "record_money",total);
+ 	this.fn_save("save");
+ }
+
+
+//저장
+this.fn_save = function(strid)
+{
+	
+	
+	
+	this.ds_R_standard.setColumn(this.ds_R_standard.rowposition, "salary_book_no", this.edt_btrip_dno.value);
+   
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "rsModifyVO.do",			 
+			  inds :["input=ds_R_standard:U"],
+			  outds :[
+				 "ds_R_standard=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	       trace(this.svcid);
+		    switch(this.svcid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	    
+	});
+}
+
+
+
+//삭제
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+ 
+	var nRow = this.ds_R_standard.rowposition;
+	this.ds_R_standard.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+// 	
+// 	  var searchCondition =  "NAME";
+//     var searchKeyword = this.edt_btrip_dno.value;       
+// 	this.ds_search.setColumn(0, "searchCondition", "NAME");
+// 	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+//    
+  
+	
+	if(rtnValue){
+		this.fn_save("delete");
+	}else{
+		this.fn_search();
+	}
+}
+
+ 
+//초기화
+this.fn_reset = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_R_standard.reset();
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

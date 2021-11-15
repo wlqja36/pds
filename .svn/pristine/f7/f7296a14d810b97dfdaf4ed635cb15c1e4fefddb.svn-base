@@ -1,0 +1,511 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("PD_IN_COM_ATTENDANCE_INFO");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,791,577);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_atti_info", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"ATTEND_DATE\" type=\"TIME\" size=\"256\"/><Column id=\"ATTITUDE_BOOK_ID\" type=\"STRING\" size=\"12\"/><Column id=\"START_TIME\" type=\"STRING\" size=\"256\"/><Column id=\"END_TIME\" type=\"STRING\" size=\"256\"/><Column id=\"HOLIDAYYN\" type=\"STRING\" size=\"1\"/><Column id=\"ATTEND_CODE\" type=\"STRING\" size=\"4\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_atti_summury", this);
+            obj._setContents("<ColumnInfo><Column id=\"NOMAL_WORK_HOURS\" type=\"INT\" size=\"3\"/><Column id=\"NIGHT_WORK_HOURS\" type=\"INT\" size=\"3\"/><Column id=\"OVERTIME_HOURS\" type=\"INT\" size=\"3\"/><Column id=\"HOLIDAY_WORK_HOURS\" type=\"INT\" size=\"3\"/><Column id=\"WORK_DAY_CNT\" type=\"INT\" size=\"2\"/><Column id=\"LATE_CNT\" type=\"INT\" size=\"2\"/><Column id=\"ABSENT_CNT\" type=\"INT\" size=\"2\"/><Column id=\"EARLY_LEAVE_CNT\" type=\"INT\" size=\"2\"/><Column id=\"HOLIDAY_CNT\" type=\"INT\" size=\"2\"/></ColumnInfo><Rows><Row><Col id=\"WORK_DAY_CNT\"/><Col id=\"LATE_CNT\"/><Col id=\"ABSENT_CNT\"/><Col id=\"EARLY_LEAVE_CNT\"/><Col id=\"HOLIDAY_CNT\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search_info", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"12\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/><Column id=\"searchDateFrom\" type=\"DATE\" size=\"256\"/><Column id=\"searchDateTo\" type=\"DATE\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_attitude_book", this);
+            obj._setContents("<ColumnInfo><Column id=\"attitudeBookId\" type=\"STRING\" size=\"12\"/><Column id=\"attitudeBookName\" type=\"STRING\" size=\"256\"/><Column id=\"startDate\" type=\"DATE\" size=\"256\"/><Column id=\"endDate\" type=\"DATE\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_EmpList", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"100\"/><Column id=\"Column0\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("div_title", "absolute", "1.08%", "9", null, "73", "1.43%", null, this);
+            obj.set_taborder("0");
+            obj.set_text("div_title");
+            this.addChild(obj.name, obj);
+            obj = new ImageViewer("img_titlebg", "absolute", "0.26%", "7", null, "50", "0.13%", null, this.div_title);
+            obj.set_taborder("0");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            this.div_title.addChild(obj.name, obj);
+            obj = new Static("sta_title", "absolute", "26", "18", "168", "29", null, null, this.div_title);
+            obj.set_taborder("1");
+            obj.set_text("근태정보");
+            obj.style.set_color("whitesmoke");
+            obj.style.set_align("left middle");
+            obj.style.set_font("굴림,12,bold");
+            this.div_title.addChild(obj.name, obj);
+
+            obj = new Div("div_search", "absolute", "0.25%", "78", null, "137", "0%", null, this);
+            obj.set_taborder("1");
+            this.addChild(obj.name, obj);
+            obj = new ImageViewer("img_05", "absolute", "1.14%", "8", null, "87", "1.39%", null, this.div_search);
+            obj.set_taborder("0");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Static("sta_00", "absolute", "51.84%", "20", null, "31", "33.71%", null, this.div_search);
+            obj.set_taborder("1");
+            obj.set_text("사원검색");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Button("btn_z_emp", "absolute", "93.66%", "20", null, "31", "3.3%", null, this.div_search);
+            obj.set_taborder("2");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Edit("edt_att_book_name02", "absolute", "66.16%", "20", null, "31", "6.21%", null, this.div_search);
+            obj.set_taborder("3");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Static("sta_15", "absolute", "2.53%", "20", null, "31", "82.89%", null, this.div_search);
+            obj.set_taborder("4");
+            obj.set_text("대장검색");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Edit("edt_attt_book", "absolute", "16.98%", "20", null, "31", "55.39%", null, this.div_search);
+            obj.set_taborder("5");
+            obj.set_enable("true");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Button("btn_z_attiBook", "absolute", "44.49%", "20", null, "31", "52.47%", null, this.div_search);
+            obj.set_taborder("12");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Button("btn_search", "absolute", "88.09%", "61", null, "23", "3.17%", null, this.div_search);
+            obj.set_taborder("13");
+            obj.set_text("조회");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.div_search.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "1.39%", "213", null, "194", "1.64%", null, this);
+            obj.set_taborder("3");
+            obj.set_binddataset("ds_atti_info");
+            obj.set_autofittype("col");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj.set_enable("true");
+            obj.set_autoenter("select");
+            obj.set_autosizingtype("col");
+            obj.set_cellsizingtype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"사원정보\"/><Cell col=\"1\" text=\"관리일자\"/><Cell col=\"2\" text=\"대장번호\"/><Cell col=\"3\" text=\"출근시간\"/><Cell col=\"4\" text=\"퇴근시간\"/><Cell col=\"5\" text=\"휴일여부\"/><Cell col=\"6\" text=\"출결상태코드\"/></Band><Band id=\"body\"><Cell text=\"bind:EMP_NO\" expandshow=\"hide\" expandimage=\"URL('img::btn_WF_SearchSmall_D.png')\"/><Cell col=\"1\" displaytype=\"date\" edittype=\"none\" text=\"bind:ATTEND_DATE\" mask=\"yyyy-MM-dd ddd\" calendardisplaynulltext=\"bind:ATTEND_DATE\"/><Cell col=\"2\" edittype=\"none\" text=\"bind:ATTITUDE_BOOK_ID\" expandshow=\"hide\" expandimage=\"URL('img::btn_WF_SearchSmall_D.png')\"/><Cell col=\"3\" displaytype=\"normal\" edittype=\"none\" text=\"bind:START_TIME\" mask=\"HH:mm:ss\"/><Cell col=\"4\" displaytype=\"normal\" edittype=\"none\" text=\"bind:END_TIME\" mask=\"HH:mm:ss\"/><Cell col=\"5\" text=\"bind:HOLIDAYYN\"/><Cell col=\"6\" text=\"bind:ATTEND_CODE\" expandshow=\"hide\" expandimage=\"URL('img::btn_WF_SearchSmall_D.png')\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid01", "absolute", "1.39%", "449", null, "112", "2.28%", null, this);
+            obj.set_taborder("4");
+            obj.set_binddataset("ds_atti_summury");
+            obj.set_autofittype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"기본근무시간\"/><Cell col=\"1\" text=\"야간근무시간\"/><Cell col=\"2\" text=\"연장근무시간\"/><Cell col=\"3\" text=\"휴일근무시간\"/><Cell col=\"4\" text=\"정근수\"/><Cell col=\"5\" text=\"지각수\"/><Cell col=\"6\" text=\"결근수\"/><Cell col=\"7\" text=\"조퇴수\"/><Cell col=\"8\" text=\"휴일수\"/></Band><Band id=\"body\"><Cell text=\"bind:NOMAL_WORK_HOURS\"/><Cell col=\"1\" text=\"bind:NIGHT_WORK_HOURS\"/><Cell col=\"2\" text=\"bind:OVERTIME_HOURS\"/><Cell col=\"3\" text=\"bind:HOLIDAY_WORK_HOURS\"/><Cell col=\"4\" text=\"bind:WORK_DAY_CNT\"/><Cell col=\"5\" text=\"bind:LATE_CNT\"/><Cell col=\"6\" text=\"bind:ABSENT_CNT\"/><Cell col=\"7\" text=\"bind:EARLY_LEAVE_CNT\"/><Cell col=\"8\" text=\"bind:HOLIDAY_CNT\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_33", "absolute", "17", "195", "120", "13", null, null, this);
+            obj.set_taborder("5");
+            obj.set_text("일자별 근태정보");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_00", "absolute", "17", "427", "120", "13", null, null, this);
+            obj.set_taborder("6");
+            obj.set_text("월별 근태정보");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 73, this.div_title,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("0");
+            		p.set_text("div_title");
+
+            	}
+            );
+            this.div_title.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 137, this.div_search,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("1");
+
+            	}
+            );
+            this.div_search.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 791, 577, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item1","Div01.edt_att_book_no00","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","Div01.edt_att_book_no01","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Div01.edt_att_book_no02","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","Div01.edt_att_book_no03","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","Div01.edt_att_book_no04","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","Div01.edt_att_book_no05","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","Div01.edt_att_book_no06","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","Div01.edt_att_book_no07","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","Div01.edt_att_book_no08","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("PD_IN_COM_ATTITUDE_INFO.xfdl", "Lib::Comm.xjs");
+        this.registerScript("PD_IN_COM_ATTITUDE_INFO.xfdl", function() {
+        /***********************************************************************************
+        * Common Library
+        ***********************************************************************************/
+        //include "Lib::Comm.xjs";
+
+        /***********************************************************************************
+        * Form Event
+        ***********************************************************************************/
+        /**
+         * form onload 함수
+         * @return 
+         * @example
+         *
+         * @memberOf this
+         */
+        this.form_onload = function(obj,e)
+        {
+        	//기본 공통  함수 초기화
+        	Iject.formOnload(obj);	
+        	trace("폼 로딩됨!"); 
+
+        	this.loadAttiBook();
+        	this.load_wholeEmpList();
+        	
+        }
+
+        //대장번호 로딩
+        this.loadAttiBook = function(){
+        	trace("로드함수 읽음: 대장번호 로딩");	
+        	
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadAttendBookNo.do",
+        		inds :[""], 
+        		outds :["ds_attitude_book=ds_attitude_book"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0){
+        			Iject.alert(this.errorMsg);			
+        		    return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		trace("ds_attitude_book : " + pThis.ds_attitude_book.saveXML());
+        		trace("==여기까지 로딩완료 : 근태대장번호==");
+        	});
+        }
+
+        
+        //출결정보 로딩
+        this.loadAttendInfo= function(){
+        	trace("로드함수 읽음: 출결정보");
+        		
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadAttendInfo.do",
+        		inds :["ds_search_info=ds_search_info"], 
+        		outds :["ds_atti_info=ds_atti_info"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		//trace("ds_atti_info : " + pThis.ds_atti_info.saveXML());
+        		trace("==여기까지 로딩완료 : 출결정보==");
+        	});
+        	
+        	
+        	trace("로드함수 읽음-2번째: 근태정보생성");
+        		
+        	var oDatas1 =  {
+        		svcid : "search",
+        		sController : "loadAttitudeInfo.do",
+        		inds :["ds_search_info=ds_search_info"], 
+        		outds :["ds_atti_summury=ds_atti_summury"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas1,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		//trace("ds_atti_info : " + pThis.ds_atti_info.saveXML());
+        		trace("==여기까지 로딩완료 : 출결정보==");
+        	});
+        	
+        	
+        }
+
+        
+        //근태정보 로딩 
+
+        
+        //로드 전체 사원리스트  
+        this.load_wholeEmpList = function(){
+        	trace("로드함수 읽음: 전체 사원 리스트");
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadWholeEmpList.do",
+        		inds :[], 
+        		outds :["ds_EmpList=ds_EmpList"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		//trace("ds_EmpList : " + pThis.ds_EmpList.saveXML());
+        		trace("==여기까지 로딩완료 : 로드 전체 사원리스트==");
+        	});
+        }
+
+        //조건검색 
+        this.btn_search_onclick = function(obj,e){
+        	
+        // 	var searchDateFrom = this.cal_start_date.value;
+        // 	var searchDateTo = this.cal_end_date.value;
+        	
+        	var searchCondition = this.div_search.edt_attt_book.value;
+        	var searchKeyword = this.div_search.edt_att_book_name02.value;
+        	this.ds_search_info.setColumn(0, "searchKeyword", searchKeyword); //조회할 사원번호 <----- 로그인한 사원번호!!! 
+        	this.ds_search_info.setColumn(0, "searchCondition", searchCondition); //조회할 근태대장번호  
+        	
+        // 	if (searchDateFrom != null && searchDateTo != null){
+        // 		trace("searchDateFrom: ", searchDateFrom);
+        // 		trace("searchDateTo: ", searchDateTo);
+        // 		this.ds_search_info.setColumn(0, "searchDateFrom", searchDateFrom);
+        // 		this.ds_search_info.setColumn(0, "searchDateTo", searchDateTo);
+        // 	}
+        // 	
+        	if (searchKeyword == null || searchCondition == null) 
+        		{
+        			Iject.alert("조건을 입력하세요.");
+        			return ;
+        		}
+        	else {
+        		this.loadAttendInfo();
+        	}
+        }
+
+        
+        //근태대장 검색 -  모달창 
+        this.btn_z_attiBook_onclick = function(obj,e)
+        {
+        	//모달창 생성 
+        	var objChildFrame = new ChildFrame();  
+        	objChildFrame.init("AttitudeBook", "absolute", 30, 30, 424, 340, null, null, "Attitude::Search_AttiBook.xfdl");
+        	objChildFrame.set_dragmovetype("all");
+        	
+        	var objParam = {param1: this.ds_attitude_book}
+        	trace("==메인 : ds_attitude_book 데이터 넘기는중! ");
+        	
+        	objChildFrame.showModal(this.getOwnerFrame()
+                                  , objParam
+                                  , this
+                                  , "fn_attitude_book_popupCallback");
+        }
+
+        
+        //모달 콜백함수 
+        this.fn_attitude_book_popupCallback = function(strPopupID,strReturn)
+        {
+            if(strReturn == undefined){
+                trace("return 값 - undefined");
+                return;
+            }
+
+            if(strPopupID == "AttitudeBook"){
+        		//this.alert("Return Value: " + strReturn);
+        		trace("값 가져옴: ", strReturn);
+        		this.div_search.edt_attt_book.set_value(strReturn);
+            }
+        };
+
+        
+
+        //사원검색 - 모달창
+        this.btn_z_emp_onclick = function(obj,e)
+        {
+        	//모달창 생성 
+        	var objChildFrame = new ChildFrame();  
+        	objChildFrame.init("EmpList", "absolute", 30, 30, 424, 340, null, null, "Attitude::Search_Emp_Book.xfdl");
+        	objChildFrame.set_dragmovetype("all");
+        	
+        	var objParam = {param1: this.ds_EmpList}
+        	trace("==메인 : ds_emp_info 데이터 넘기는중! ");
+        	
+        	objChildFrame.showModal(this.getOwnerFrame()
+                                  , objParam
+                                  , this
+                                  , "fn_empList_popupCallback");
+        }
+
+        
+        //전체 사원리스트 모달창 콜백함수 
+        this.fn_empList_popupCallback = function(strPopupID,strReturn)
+        {
+            if(strReturn == undefined){
+                trace("return 값 - undefined");
+                return;
+            }
+
+            if(strPopupID == "EmpList"){
+        		trace("값 가져옴: ", strReturn);
+        		this.div_search.edt_att_book_name02.set_value(strReturn);
+            }
+            
+        };
+
+        
+        //추가
+        this.btn_add_onclick = function(obj,e)
+        {
+        	var yn =Iject.confirm("근태정보를 추가 하시겠습니까?");
+        	if (yn) {
+         		//현재시간		
+         		var today = new Date();
+         		var nToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+""+(""+today.getDate()).padLeft(2,'0');
+        		
+        		var nRow = this.ds_atti_info.addRow();
+        		trace("nRow", nRow);
+        		this.ds_atti_info.setColumn(nRow, "ATTEND_DATE", today);
+        		
+        	}
+        }
+
+        
+        //수정 
+        this.btn_modify_onclick = function(obj,e)
+        {
+        	this.Grid00.set_enable(true);
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.div_title.sta_title.addEventHandler("onclick", this.sta_title_onclick, this);
+            this.div_search.img_05.addEventHandler("onclick", this.div_search_img_05_onclick, this);
+            this.div_search.sta_00.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.div_search.btn_z_emp.addEventHandler("onclick", this.btn_z_emp_onclick, this);
+            this.div_search.sta_15.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.div_search.edt_attt_book.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.div_search.btn_z_attiBook.addEventHandler("onclick", this.btn_z_attiBook_onclick, this);
+            this.div_search.btn_search.addEventHandler("onclick", this.btn_search_onclick, this);
+
+        };
+
+        this.loadIncludeScript("PD_IN_COM_ATTITUDE_INFO.xfdl");
+
+       
+    };
+}
+)();

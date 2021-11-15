@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_aa" classname="PD_IN_COM_MM001" inheritanceid="" position="absolute" titletext=" 인사평가" onload="PD_IN_COM_MM001_onload" left="0" top="0" width="771" height="230">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="1" style="background:#3366ffff;color:#ffffffff;" position="absolute" left="0" top="7" height="50" width="768" onclick="img_titlebg_onclick" stretch="none"/>
+        <Static id="sta_title" text="성과" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29" onclick="sta_title_onclick"/>
+        <!--
+        <Button id="btn_mody00" taborder="9" text="수정활성화" top="112" right="224" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="true" onclick="btn_mody00_onclick"/>
+        <Button id="btn_mody01" taborder="9" text="수정비활성화" top="112" right="225" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="false" onclick="btn_mody01_onclick"/>
+        -->
+        <ImageViewer id="img02" taborder="5" left="88" top="79" width="604" height="93" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_02" taborder="6" left="98" top="112" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_00" taborder="7" left="98" top="88" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_17" taborder="8" text="급여대장번호" onclick="sta_17_onclick" left="98" top="88" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_05" taborder="9" left="98" top="136" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Edit id="Edit01" taborder="10" maxlength="30" left="211" top="91" width="130" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_03" taborder="11" text="성과코드" left="348" top="88" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_09" taborder="12" text="성과금액" onclick="sta_09_onclick" left="348" top="112" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_04" taborder="14" text="사원번호" onclick="sta_17_onclick" left="98" top="113" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_22" taborder="16" text="인사평가대장번호" onclick="sta_19_onclick" left="98" top="136" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="Edit09" taborder="17" maxlength="10" enable="false" left="211" top="139" width="130" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Edit id="Edit02" taborder="18" maxlength="30" left="475" top="115" width="130" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Edit id="Edit03" taborder="19" maxlength="30" left="211" top="115" width="130" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Combo id="Combo02" taborder="20" displaynulltext="선택" innerdataset="@ds_recode_code" codecolumn="code" datacolumn="name" left="475" top="91" width="130" height="19"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item8" compid="EMP_EVAL_BOOK" propid="font" datasetid="ds_search" columnid=""/>
+      <BindItem id="item10" compid="Edit01" propid="value" datasetid="ds_masterCodeList" columnid="className"/>
+      <BindItem id="item4" compid="Edit01" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+      <BindItem id="item11" compid="Edit09" propid="value" datasetid="ds_detailCodeList" columnid="codeName"/>
+      <BindItem id="item5" compid="Edit09" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_SUM"/>
+      <BindItem id="item1" compid="Edit02" propid="value" datasetid="ds_masterCodeList" columnid="mainColumn"/>
+      <BindItem id="item2" compid="Edit03" propid="value" datasetid="ds_masterCodeList" columnid="className"/>
+      <BindItem id="item3" compid="Edit03" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_recode_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">3600</Col>
+            <Col id="name">0%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3610</Col>
+            <Col id="name">10%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3620</Col>
+            <Col id="name">20%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3630</Col>
+            <Col id="name">30%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3640</Col>
+            <Col id="name">40%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3650</Col>
+            <Col id="name">50%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3660</Col>
+            <Col id="name">60%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3670</Col>
+            <Col id="name">70%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3680</Col>
+            <Col id="name">80%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3690</Col>
+            <Col id="name">90%</Col>
+          </Row>
+          <Row>
+            <Col id="code">3699</Col>
+            <Col id="name">100%</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_recode">
+        <ColumnInfo>
+          <Column id="SALARY_BOOK_NO" type="STRING" size="256"/>
+          <Column id="Column1" type="STRING" size="256"/>
+          <Column id="Column2" type="STRING" size="256"/>
+          <Column id="Column3" type="STRING" size="256"/>
+          <Column id="Column4" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.PD_IN_COM_aa_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	alert("hi");
+}
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	this.go("Pattern::EMP_EVAL_STD.xfdl");
+}
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	this.go("Pattern::EMP_EVAL_HEAD.xfdl");
+}]]></Script>
+  </Form>
+</FDL>

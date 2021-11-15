@@ -1,0 +1,180 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="empSearch" classname="member002" inheritanceid="" position="absolute" titletext="사원찾기" left="0" top="0" width="558" height="477" onload="empSearch_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg1" taborder="24" position="absolute" left="9" width="544" top="64" height="428" style="background:lavenderblush;"/>
+        <Button id="Button01" taborder="26" text="취소" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" position="absolute" left="307" width="55" top="450" height="23" onclick="Button01_onclick" titletext="회원가입창"/>
+        <Div id="joinTitle" taborder="27" text="근태대장번호검색" left="9" top="6" width="544" height="50" style="align:center;background:#3366ffff;color:#ffffffff;font:bold 12 Dotum;"/>
+        <ImageViewer id="img00" taborder="28" left="14" top="121" width="530" height="284" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Grid id="grd_plaintiff" taborder="29" binddataset="ds_emp" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="19" top="127" width="520" height="272">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="247"/>
+                <Column size="271"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font:bold 9 dotum;" text="대장번호"/>
+                <Cell col="1" style="font:bold 9 dotum;" text="대장명"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center;" text="bind:attitude_book_id"/>
+                <Cell col="1" edittype="none" style="align:center;" text="bind:attitude_book_nm" editlimit="30"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_09" taborder="30" left="14" top="73" width="530" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_01" taborder="31" left="60" top="78" width="480" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_no" taborder="32" text="검색어" left="219" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Button id="btn_sc" taborder="33" text="검색" onclick="btn_sc_onclick" left="416" top="79" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Button id="btn_reset" taborder="34" text="초기화" onclick="btn_reset_onclick" left="476" top="79" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Static id="sta_no00" taborder="35" text="검색종류" left="20" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Combo id="Combo00" taborder="36" codecolumn="codecolumn" datacolumn="datacolumn" left="18.83%" top="81" width="100" height="19" text="전체">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">attitude_book_id</Col>
+                <Col id="datacolumn">대장번호</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">attitude_book_nm</Col>
+                <Col id="datacolumn">대장명</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="Edit05" taborder="37" maxlength="10" left="306" top="81" width="100" height="19"/>
+        <Button id="Button00" taborder="38" text="선택" onclick="Button00_onclick" left="203" top="450" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" titletext="회원가입창"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="attitude_book_id" type="STRING" size="256"/>
+          <Column id="attitude_book_nm" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="keyword" type="STRING" size="256"/>
+          <Column id="search_condition" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Edit7" propid="value" datasetid="ds_insa" columnid="address1"/>
+    </Bind>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+
+//취소버튼
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+//폼온로드
+this.empSearch_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.btn_sc_onclick();
+}
+
+//리로드
+this.btn_reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+
+//트랜잭션
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+}
+
+//보낼부분
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{		
+		
+		var attitude_book_id = this.ds_emp.getColumn(this.ds_emp.rowposition, "attitude_book_id");	
+		
+			var strReturn = attitude_book_id
+			
+		this.opener.edt_btr_no03.set_value(strReturn);
+		this.close(strReturn);
+		
+}
+
+
+
+this.btn_sc_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_search.setColumn(0,"keyword",this.Edit05.value);
+	this.ds_search.setColumn(0,"search_condition",this.Combo00.value);
+	
+		
+	this.gfn_transaction(this,
+ 						"attitude_id",
+ 						"s_bookSelectSearchVO.do",
+ 						"ds_search=ds_search",
+ 						"ds_emp=ds_output",
+ 						"",
+ 						"transaction_callback"
+ 						);
+ 						
+ 	
+ 	if(this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")==null ||
+		this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")=="")
+		{
+			this.ds_search.setColumn(0,"search_condition","total");
+		}
+ 	
+	
+}
+
+
+
+
+
+
+
+
+
+this.fn_popupCallback = function(strPopupID, strRetukrn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "attitude_id"){
+        this.alert("Return Value: " + strReturn);
+        this.edt_btr_no03.set_value(strReturn);
+    }
+};]]></Script>
+  </Form>
+</FDL>

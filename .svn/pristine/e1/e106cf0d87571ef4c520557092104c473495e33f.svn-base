@@ -1,0 +1,18 @@
+package nexacro.sample.service.dao.mybatis.Oct_SalaryTest;
+
+import java.util.List;
+
+import nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO;
+
+public interface Oct_SalaryTestDAO {
+
+	List<nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO> selectOctSalaryTestVOList(
+			Oct_SalaryTestVO oct_SalaryTestVO);
+
+	int insertOctSalaryTestVO(Oct_SalaryTestVO rs);
+
+	int updateOctSalaryTestVO(Oct_SalaryTestVO rs);
+
+	int deleteOctSalaryTestVO(Oct_SalaryTestVO rs);
+
+}

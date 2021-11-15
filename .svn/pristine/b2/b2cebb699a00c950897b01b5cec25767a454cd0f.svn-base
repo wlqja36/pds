@@ -1,0 +1,634 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_01" classname="Work" inheritanceid="" position="absolute" titletext="SingleDetail" left="0" width="800" top="0" height="567" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <Div id="div_search" taborder="16" left="0" top="0" right="0" height="41" scrollbars="none" cssclass="div_WF_searchBg">
+          <Layouts>
+            <Layout>
+              <Static id="st_searchCondition" taborder="24" text="사용자" cssclass="sta_WF_schTitle" left="20" top="0" width="64" height="41" domainId="nexa.s_condition"/>
+              <Edit id="edt_searchKeyword" taborder="29" onkeyup="div_search_btn_search_onclick" left="9.52%" top="10" right="57.89%" height="20" value="홍길동" oneditclick="div_search_edt_searchKeyword_oneditclick"/>
+              <Button id="Button05" taborder="30" text="조회" onclick="fn_search" cssclass="btn_WF_Search" top="3" right="4" width="58" height="25"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_grid_top" taborder="17" left="0" top="31" right="0" height="23" scrollbars="none">
+          <Layouts>
+            <Layout>
+              <Button id="btn_add" taborder="27" text="추가" cssclass="btn_WF_CRUD" top="0" right="160" width="50" height="23" domainId="nexa.add" onclick="fn_add"/>
+              <Button id="btn_delete" taborder="28" text="삭제" cssclass="btn_WF_CRUD" top="0" right="107" width="50" height="23" domainId="nexa.delete" onclick="fn_delete"/>
+              <Button id="btn_save" taborder="29" text="저장" cssclass="btn_WF_CRUD" top="0" right="1" width="50" height="23" domainId="nexa.save" onclick="div_grid_top_btn_save_onclick"/>
+              <Button id="btn_reset" taborder="30" text="리셋" cssclass="btn_WF_CRUD" top="0" right="54" height="23" domainId="nexa.reset" width="50" onclick="fn_reset"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divInput" taborder="18" left="0" top="63" right="0" style="border:1 solid #808080ff ;" bottom="-401">
+          <Layouts>
+            <Layout>
+              <Static id="stc_EMP_NO" taborder="25" text="사원번호" left="27" top="16" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title" width="100" onclick="divInput_stc_EMP_NO_onclick"/>
+              <Edit id="edt_EMP_NO" taborder="33" left="142" top="16" height="30" oneditclick="divInput_edt_id_oneditclick" width="100"/>
+              <Static id="stc_EMP_NAME" taborder="34" text="성명" left="257" top="16" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title" onclick="divInput_stc_id00_onclick"/>
+              <Edit id="edt_EMP_NAME" taborder="35" oneditclick="divInput_edt_id_oneditclick" left="372" top="16" width="100" height="30"/>
+              <Static id="stc_MGR_NO" taborder="36" text="관리자번호" left="487" top="16" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_MGR_NO" taborder="37" oneditclick="divInput_edt_id_oneditclick" left="602" top="16" width="100" height="30"/>
+              <Edit id="edt_CURRENT_CLASS_CODE" taborder="39" oneditclick="divInput_edt_id_oneditclick" left="142" top="64" width="100" height="30"/>
+              <Static id="stc_CURRENT_CODE" taborder="40" text="재직코드" left="257" top="64" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_CURRENT_CODE" taborder="41" oneditclick="divInput_edt_id_oneditclick" left="372" top="64" width="100" height="30"/>
+              <Static id="stc_GRADE_CLASS_CODE" taborder="42" text="직급클래스코드" left="487" top="64" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_GRADE_CLASS_CODE" taborder="43" oneditclick="divInput_edt_id_oneditclick" left="602" top="64" width="100" height="30"/>
+              <Static id="stc_GRADE_CODE" taborder="44" text="직급코드" left="27" top="107" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_GRADE_CODE" taborder="45" oneditclick="divInput_edt_id_oneditclick" left="142" top="107" width="100" height="30"/>
+              <Static id="stc_DEPT_CLASS_CODE" taborder="46" text="부서클래스코드" left="257" top="107" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_DEPT_CLASS_CODE" taborder="47" oneditclick="divInput_edt_id_oneditclick" left="372" top="107" width="100" height="30"/>
+              <Static id="stc_DEPT_CODE" taborder="48" text="부서코드" left="487" top="107" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_DEPT_CODE" taborder="49" oneditclick="divInput_edt_id_oneditclick" left="602" top="107" width="100" height="30"/>
+              <Static id="stc_EMP_ID" taborder="50" text="사원 ID" left="27" top="155" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_EMP_ID" taborder="51" oneditclick="divInput_edt_id_oneditclick" left="142" top="155" width="100" height="30"/>
+              <Static id="stc_EMP_PW" taborder="52" text="사원PW" left="257" top="155" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_EMP_PW" taborder="53" oneditclick="divInput_edt_id_oneditclick" left="372" top="155" width="100" height="30"/>
+              <Static id="stc_LAST_LOGIN" taborder="54" text="최종접속시간" left="487" top="155" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Static id="stc_ENG_NAME" taborder="56" text="영문성명" left="23" top="199" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_ENG_NAME" taborder="57" oneditclick="divInput_edt_id_oneditclick" left="138" top="199" width="100" height="30"/>
+              <Static id="stc_RESIDENT_NO" taborder="58" text="주민등록번호" left="253" top="199" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_RESIDENT_NO" taborder="59" oneditclick="divInput_edt_id_oneditclick" left="368" top="199" width="100" height="30"/>
+              <Static id="stc_HOUSEHOLDER" taborder="60" text="세대주여부" left="483" top="199" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_HOUSEHOLDER" taborder="61" oneditclick="divInput_edt_id_oneditclick" left="598" top="199" width="100" height="30" value="##,###,###"/>
+              <Static id="stc_JOIN_DATE" taborder="62" text="입사일자" left="23" top="247" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Static id="stc_PHONE" taborder="64" text="전화번호" left="253" top="247" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_PHONE" taborder="65" oneditclick="divInput_edt_id_oneditclick" left="368" top="247" width="100" height="30"/>
+              <Static id="stc_CELL_PHONE" taborder="66" text="휴대폰번호" left="483" top="247" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_CELL_PHONE" taborder="67" oneditclick="divInput_edt_id_oneditclick" left="598" top="247" width="100" height="30"/>
+              <Static id="stc_EMAIL" taborder="68" text="이메일" left="23" top="290" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_EMAIL" taborder="69" oneditclick="divInput_edt_id_oneditclick" left="138" top="290" width="100" height="30"/>
+              <Static id="stc_ADDRESS" taborder="70" text="주소" left="253" top="290" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_ADDRESS" taborder="71" oneditclick="divInput_edt_id_oneditclick" left="368" top="290" width="100" height="30"/>
+              <Static id="stc_RELIGION" taborder="72" text="종교" left="483" top="290" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_RELIGION" taborder="73" oneditclick="divInput_edt_id_oneditclick" left="598" top="290" width="100" height="30"/>
+              <Static id="stc_IMAGE" taborder="74" text="사진" left="23" top="338" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_IMAGE" taborder="75" oneditclick="divInput_edt_id_oneditclick" left="138" top="338" width="100" height="30"/>
+              <Static id="stc_JOIN_CLASS_CODE" taborder="76" text="입사구분클래스코드" left="253" top="338" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_JOIN_CLASS_CODE" taborder="77" oneditclick="divInput_edt_id_oneditclick" left="368" top="338" width="100" height="30"/>
+              <Static id="stc_JOIN_CODE" taborder="78" text="입사구분코드" left="483" top="338" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_JOIN_CODE" taborder="79" oneditclick="divInput_edt_id_oneditclick" left="598" top="338" width="100" height="30"/>
+              <Static id="stc_HOUSEHOLDER_NAME" taborder="80" text="세대주성명" left="23" top="378" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_HOUSEHOLDER_NAME" taborder="81" oneditclick="divInput_edt_id_oneditclick" left="138" top="378" width="100" height="30"/>
+              <Static id="stc_HOUSEHOLDER_RELATION" taborder="82" text="세대주와의 관계" left="253" top="378" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_HOUSEHOLDER_RELATION" taborder="83" oneditclick="divInput_edt_id_oneditclick" left="368" top="378" width="100" height="30"/>
+              <Static id="stc_REGISTRATION_ADDRESS" taborder="84" text="주민등록상 주소" left="483" top="378" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_REGISTRATION_ADDRESS" taborder="85" oneditclick="divInput_edt_id_oneditclick" left="598" top="378" width="100" height="30"/>
+              <Static id="stc_BIRTH" taborder="86" text="생년월일" left="23" top="426" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Static id="stc_MARRIAGE" taborder="88" text="결혼여부" left="253" top="426" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_MARRIAGE" taborder="89" oneditclick="divInput_edt_id_oneditclick" left="368" top="426" width="100" height="30"/>
+              <Static id="stc_MARRIAGE_DATE" taborder="90" text="결혼기념일" left="483" top="426" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Static id="stc_CURRENT_CLASS_CODE" taborder="93" text="재직클래스코드" left="27" top="64" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Static id="stc_DISABILITY" taborder="94" text="장애여부" left="24" top="472" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_DISABILITY" taborder="95" oneditclick="divInput_edt_id_oneditclick" left="139" top="472" width="100" height="30"/>
+              <Calendar id="edt_BIRTH" taborder="97" displaynulltext="2015-00-00" left="135" top="431" width="103" height="21"/>
+              <Calendar id="edt_LAST_LOGIN" taborder="98" displaynulltext="2015-00-00" left="599" top="163" width="103" height="21"/>
+              <Calendar id="edt_MARRIAGE_DATE" taborder="99" displaynulltext="2015-00-00" left="599" top="430" width="103" height="21"/>
+              <Calendar id="edt_JOIN_DATE" taborder="100" displaynulltext="2015-00-00" left="138" top="252" width="103" height="21" oneditclick="divInput_edt_JOIN_DATE_oneditclick"/>
+              <Tab id="Tab00" taborder="101" left="2" top="500" right="18" bottom="-395" tabindex="0" scrollbars="autoboth">
+                <Tabpages>
+                  <Tabpage id="tabpage2" text="경력관리">
+                    <Layouts>
+                      <Layout>
+                        <Div id="div_Detail" taborder="0" left="0" top="9" right="0" height="372" scrollbars="none">
+                          <Layouts>
+                            <Layout>
+                              <Static id="Static00" taborder="236" cssclass="sta_WF_DetailLabel02" left="0" top="1" right="0" height="29"/>
+                              <Static id="Static01" taborder="237" cssclass="sta_WF_DetailLabel02" left="0" top="29" right="0" height="29"/>
+                              <Static id="Static02" taborder="238" cssclass="sta_WF_DetailLabel02" left="0" top="33" right="0" height="29"/>
+                              <Static id="str_JOIN_DATE" taborder="239" text="입사일자" cssclass="sta_WF_DetailLabel01" left="0" top="33" width="107" height="29"/>
+                              <Static id="Static12" taborder="240" cssclass="sta_WF_DetailLabel02" left="0" top="284" right="0" height="88"/>
+                              <Static id="Static13" taborder="241" cssclass="sta_WF_DetailLabel02" left="0" top="197" right="0" height="88"/>
+                              <Static id="str_RETIRE_REASON" taborder="242" text="퇴사사유" cssclass="sta_WF_DetailLabel01" left="0" top="69" width="107" height="88"/>
+                              <Static id="str_RETIRE_DATE" taborder="243" text="퇴사일자" cssclass="sta_WF_DetailLabel01" left="254" top="33" width="107" height="29"/>
+                              <Calendar id="edit_JOIN_DATE" taborder="244" displaynulltext="2015-00-00" left="110" top="37" width="141" height="21"/>
+                              <Calendar id="edit_RETIRE_DATE" taborder="245" displaynulltext="2015-00-00" cssclass="essential" left="364" top="37" width="141" height="21"/>
+                              <MaskEdit id="MaskEdit03" taborder="246" displaynulltext="123,456,789" enable="false" left="872" top="145" width="134" height="21"/>
+                              <Radio id="Radio03" taborder="247" index="1" codecolumn="codecolumn" datacolumn="datacolumn" value="2" direction="vertical" enable="false" left="872" top="173" width="134" height="21">
+                                <Dataset id="innerdataset">
+                                  <ColumnInfo>
+                                    <Column id="codecolumn" size="256"/>
+                                    <Column id="datacolumn" size="256"/>
+                                  </ColumnInfo>
+                                  <Rows>
+                                    <Row>
+                                      <Col id="codecolumn">1</Col>
+                                      <Col id="datacolumn">선택01</Col>
+                                    </Row>
+                                    <Row>
+                                      <Col id="codecolumn">2</Col>
+                                      <Col id="datacolumn">선택02</Col>
+                                    </Row>
+                                  </Rows>
+                                </Dataset>
+                              </Radio>
+                              <Spin id="Spin03" taborder="248" value="987" enable="false" left="872" top="89" width="134" height="21"/>
+                              <Calendar id="Calendar03" taborder="249" displaynulltext="2015-00-00" enable="false" left="872" top="61" width="134" height="21"/>
+                              <Combo id="Combo03" taborder="250" text="전체선택" enable="false" left="872" top="33" width="134" height="21"/>
+                              <Edit id="Edit03" taborder="251" displaynulltext="Enabled" enable="false" left="872" top="5" width="134" height="21"/>
+                              <CheckBox id="CheckBox06" taborder="252" text="체크02" enable="false" left="936" top="118" width="70" height="20"/>
+                              <CheckBox id="CheckBox07" taborder="253" text="체크01" value="true" enable="false" left="872" top="118" width="65" height="20"/>
+                              <TextArea id="edit_RETIRE_REASON" taborder="254" displaynulltext="퇴사" left="110" top="73" width="395" height="80" oneditclick="divInput_Tab00_tabpage2_div_Detail_edit_RETIRE_REASON_oneditclick"/>
+                              <Static id="Static42" taborder="255" cssclass="sta_WF_DetailLine" left="0" top="0" right="0" height="2"/>
+                              <Edit id="edit_COMPANY_NAME" taborder="256" cssclass="readonly" left="618" top="5" width="141" height="21" oneditclick="divInput_Tab00_tabpage2_div_Detail_edit_COMPANY_NAME_oneditclick"/>
+                              <Static id="str_COMPANY_NAME" taborder="257" text="회사명" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                              <Edit id="edit_DEPT_NAME" taborder="258" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                              <Static id="str_DEPT_NAME" taborder="259" text="담당업무&lt;부서&gt;" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                              <Edit id="edit_POSITION" taborder="260" left="110" top="5" width="141" height="21" oneditclick="divInput_Tab00_tabpage2_div_Detail_Edit00_oneditclick"/>
+                              <Static id="str_POSITION" taborder="261" text="직책" cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                            </Layout>
+                          </Layouts>
+                        </Div>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tabpage3" text="학력관리">
+                    <Layouts>
+                      <Layout>
+                        <Div id="div_Detail" taborder="0" left="0" top="9" right="0" height="372" scrollbars="none">
+                          <Layouts>
+                            <Layout>
+                              <Static id="Static00" taborder="320" cssclass="sta_WF_DetailLabel02" left="0" top="1" right="0" height="29"/>
+                              <Static id="str_EDUCATION_NAME" taborder="321" text="교육기관명" cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                              <Static id="str_EDU_CATEGORY_CODE" taborder="322" text="학력구분코드" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                              <Edit id="edit_EDUCATION_NAME" taborder="323" left="110" top="5" width="141" height="21"/>
+                              <Edit id="edit_EDU_CATEGORY_CODE" taborder="324" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                              <Edit id="edit_MAJOR_NAME" taborder="325" cssclass="readonly" left="618" top="5" width="141" height="21"/>
+                              <Static id="str_MAJOR_NAME" taborder="326" text="전공명" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                              <MaskEdit id="MaskEdit03" taborder="327" displaynulltext="123,456,789" enable="false" left="872" top="145" width="134" height="21"/>
+                              <Spin id="Spin03" taborder="328" value="987" enable="false" left="872" top="89" width="134" height="21"/>
+                              <Calendar id="Calendar03" taborder="329" displaynulltext="2015-00-00" enable="false" left="872" top="61" width="134" height="21"/>
+                              <Combo id="Combo03" taborder="330" text="전체선택" enable="false" left="872" top="33" width="134" height="21"/>
+                              <Edit id="Edit03" taborder="331" displaynulltext="Enabled" enable="false" left="872" top="5" width="134" height="21"/>
+                              <CheckBox id="CheckBox06" taborder="332" text="체크02" enable="false" left="936" top="118" width="70" height="20"/>
+                              <CheckBox id="CheckBox07" taborder="333" text="체크01" value="true" enable="false" left="872" top="118" width="65" height="20"/>
+                              <Static id="Static42" taborder="334" cssclass="sta_WF_DetailLine" left="0" top="0" right="0" height="2"/>
+                              <Static id="str_GRADUATE_CATEGORY" taborder="335" text="졸업구분코드" cssclass="sta_WF_DetailLabel01" left="0" top="33" width="107" height="29"/>
+                              <Edit id="edit_GRADUATE_CATEGORY" taborder="336" left="110" top="33" width="141" height="21"/>
+                              <Static id="str_START_DATE" taborder="339" text="입학년월" cssclass="sta_WF_DetailLabel01" left="252" top="33" width="107" height="29"/>
+                              <Static id="str_GRADUATE_DATE" taborder="340" text="졸업년월" cssclass="sta_WF_DetailLabel01" left="504" top="33" width="107" height="29"/>
+                              <Static id="str_DAYYN" taborder="341" text="주간여부" cssclass="sta_WF_DetailLabel01" left="-2" top="65" width="107" height="29"/>
+                              <Edit id="edit_DAYYN" taborder="342" cssclass="essential" left="108" top="69" width="141" height="21"/>
+                              <Calendar id="edit_GRADUATE_DATE" taborder="343" displaynulltext="2015-00-00" left="614" top="33" width="141" height="21"/>
+                              <Calendar id="edit_START_DATE" taborder="344" displaynulltext="2015-00-00" left="362" top="33" width="141" height="21"/>
+                            </Layout>
+                          </Layouts>
+                        </Div>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tabpage5" text="가족관리">
+                    <Layouts>
+                      <Layout>
+                        <Div id="div_Detail" taborder="0" left="0" top="9" right="0" height="372" scrollbars="none">
+                          <Layouts>
+                            <Layout>
+                              <Static id="Static00" taborder="320" cssclass="sta_WF_DetailLabel02" left="0" top="1" right="0" height="29"/>
+                              <Static id="Static06" taborder="321" text="주민등록번호" cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                              <Static id="Static19" taborder="322" text="성명" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                              <Edit id="Edit00" taborder="323" left="110" top="5" width="141" height="21"/>
+                              <Edit id="Edit01" taborder="324" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                              <Edit id="Edit02" taborder="325" cssclass="readonly" left="618" top="5" width="141" height="21"/>
+                              <Static id="Static18" taborder="326" text="최종학력" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                              <MaskEdit id="MaskEdit03" taborder="327" displaynulltext="123,456,789" enable="false" left="872" top="145" width="134" height="21"/>
+                              <Spin id="Spin03" taborder="328" value="987" enable="false" left="872" top="89" width="134" height="21"/>
+                              <Calendar id="Calendar03" taborder="329" displaynulltext="2015-00-00" enable="false" left="872" top="61" width="134" height="21"/>
+                              <Combo id="Combo03" taborder="330" text="전체선택" enable="false" left="872" top="33" width="134" height="21"/>
+                              <Edit id="Edit03" taborder="331" displaynulltext="Enabled" enable="false" left="872" top="5" width="134" height="21"/>
+                              <CheckBox id="CheckBox06" taborder="332" text="체크02" enable="false" left="936" top="118" width="70" height="20"/>
+                              <CheckBox id="CheckBox07" taborder="333" text="체크01" value="true" enable="false" left="872" top="118" width="65" height="20"/>
+                              <Static id="Static42" taborder="334" cssclass="sta_WF_DetailLine" left="0" top="0" right="0" height="2"/>
+                              <Static id="Static01" taborder="335" text="직업" cssclass="sta_WF_DetailLabel01" left="0" top="33" width="107" height="29"/>
+                              <Edit id="Edit04" taborder="336" left="110" top="37" width="141" height="21"/>
+                              <Static id="Static02" taborder="337" text="회사명" cssclass="sta_WF_DetailLabel01" left="254" top="33" width="107" height="29"/>
+                              <Edit id="Edit05" taborder="338" cssclass="essential" left="364" top="37" width="141" height="21"/>
+                              <Static id="Static03" taborder="339" text="직위" cssclass="sta_WF_DetailLabel01" left="508" top="33" width="107" height="29"/>
+                              <Static id="Static04" taborder="340" text="동거여부" cssclass="sta_WF_DetailLabel01" left="0" top="65" width="107" height="29"/>
+                              <Static id="Static05" taborder="341" text="부양여부" cssclass="sta_WF_DetailLabel01" left="254" top="65" width="107" height="29"/>
+                              <Edit id="Edit08" taborder="342" cssclass="essential" left="364" top="69" width="141" height="21"/>
+                              <Edit id="Edit06" taborder="345" left="110" top="69" width="141" height="21"/>
+                              <Edit id="Edit07" taborder="346" cssclass="readonly" left="618" top="37" width="141" height="21"/>
+                            </Layout>
+                          </Layouts>
+                        </Div>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tabpage4" text="병역관리">
+                    <Layouts>
+                      <Layout>
+                        <Static id="Static06" taborder="0" text="병역여부 " cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                        <Edit id="Edit00" taborder="1" left="110" top="5" width="141" height="21"/>
+                        <Static id="Static19" taborder="2" text="군별코드" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                        <Edit id="Edit01" taborder="3" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                        <Static id="Static18" taborder="4" text="미필사유" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                        <Edit id="Edit02" taborder="5" cssclass="readonly" left="618" top="5" width="141" height="21"/>
+                        <Static id="Static00" taborder="6" text="계급코드" cssclass="sta_WF_DetailLabel01" left="0" top="36" width="107" height="29"/>
+                        <Edit id="Edit03" taborder="7" left="110" top="40" width="141" height="21"/>
+                        <Static id="Static01" taborder="8" text="입대일자" cssclass="sta_WF_DetailLabel01" left="254" top="36" width="107" height="29"/>
+                        <Static id="Static02" taborder="10" text="제대일자" cssclass="sta_WF_DetailLabel01" left="508" top="36" width="107" height="29"/>
+                        <Static id="Static03" taborder="12" text="군별클래스코드" cssclass="sta_WF_DetailLabel01" left="0" top="68" width="107" height="29"/>
+                        <Edit id="Edit06" taborder="13" left="110" top="72" width="141" height="21"/>
+                        <Static id="Static04" taborder="14" text="계급클래스코드" cssclass="sta_WF_DetailLabel01" left="254" top="68" width="107" height="29"/>
+                        <Edit id="Edit07" taborder="15" cssclass="essential" left="364" top="72" width="141" height="21"/>
+                        <Static id="Static05" taborder="16" cssclass="sta_WF_DetailLabel01" left="508" top="68" width="107" height="29"/>
+                        <Edit id="Edit08" taborder="17" cssclass="readonly" left="618" top="72" width="141" height="21"/>
+                        <Calendar id="Calendar00" taborder="18" displaynulltext="2015-00-00" left="366" top="37" width="141" height="21"/>
+                        <Calendar id="Calendar01" taborder="19" displaynulltext="2015-00-00" left="622" top="37" width="141" height="21"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tabpage6" text="어학능력">
+                    <Layouts>
+                      <Layout>
+                        <Static id="Static06" taborder="0" text="지역명" cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                        <Edit id="Edit00" taborder="1" left="110" top="5" width="141" height="21"/>
+                        <Static id="Static19" taborder="2" text="자격증명" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                        <Edit id="Edit01" taborder="3" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                        <Static id="Static18" taborder="4" text="자격증번호" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                        <Edit id="Edit02" taborder="5" cssclass="readonly" left="618" top="5" width="141" height="21"/>
+                        <Static id="Static00" taborder="6" text="등급코드" cssclass="sta_WF_DetailLabel01" left="0" top="36" width="107" height="29"/>
+                        <Edit id="Edit03" taborder="7" left="110" top="40" width="141" height="21"/>
+                        <Static id="Static01" taborder="8" text="발행일자" cssclass="sta_WF_DetailLabel01" left="254" top="36" width="107" height="29"/>
+                        <Static id="Static02" taborder="10" text="유효일자" cssclass="sta_WF_DetailLabel01" left="508" top="36" width="107" height="29"/>
+                        <Static id="Static03" taborder="12" text="등급클래스코드" cssclass="sta_WF_DetailLabel01" left="0" top="68" width="107" height="29"/>
+                        <Edit id="Edit06" taborder="13" left="110" top="72" width="141" height="21"/>
+                        <Static id="Static04" taborder="14" cssclass="sta_WF_DetailLabel01" left="254" top="68" width="107" height="29"/>
+                        <Edit id="Edit07" taborder="15" cssclass="essential" left="364" top="72" width="141" height="21"/>
+                        <Static id="Static05" taborder="16" cssclass="sta_WF_DetailLabel01" left="508" top="68" width="107" height="29"/>
+                        <Edit id="Edit08" taborder="17" cssclass="readonly" left="618" top="72" width="141" height="21"/>
+                        <Calendar id="Calendar00" taborder="18" displaynulltext="2015-00-00" left="366" top="37" width="141" height="21"/>
+                        <Calendar id="Calendar01" taborder="19" displaynulltext="2015-00-00" left="622" top="37" width="141" height="21"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tabpage7" text="자격증관리">
+                    <Layouts>
+                      <Layout>
+                        <Static id="Static06" taborder="0" text="자격증번호" cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                        <Edit id="Edit00" taborder="1" left="110" top="5" width="141" height="21"/>
+                        <Static id="Static19" taborder="2" text="자격증명" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                        <Edit id="Edit01" taborder="3" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                        <Static id="Static18" taborder="4" text="등급코드" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                        <Edit id="Edit02" taborder="5" cssclass="readonly" left="618" top="5" width="141" height="21"/>
+                        <Static id="Static00" taborder="6" text="발행일자" cssclass="sta_WF_DetailLabel01" left="0" top="36" width="107" height="29"/>
+                        <Static id="Static01" taborder="8" text="유효일자" cssclass="sta_WF_DetailLabel01" left="254" top="36" width="107" height="29"/>
+                        <Static id="Static02" taborder="10" text="등급클래스코드" cssclass="sta_WF_DetailLabel01" left="508" top="36" width="107" height="29"/>
+                        <Calendar id="Calendar00" taborder="18" displaynulltext="2015-00-00" left="366" top="37" width="141" height="21"/>
+                        <Calendar id="Calendar02" taborder="20" displaynulltext="2015-00-00" left="110" top="37" width="141" height="21"/>
+                        <Edit id="Edit03" taborder="21" cssclass="readonly" left="618" top="37" width="141" height="21"/>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                </Tabpages>
+              </Tab>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="stc_detail" taborder="21" text="상세정보" left="2.13%" top="36" right="77%" height="20" cssclass="sta_WF_title"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <ConstColumn id="PageIndex" type="INT" size="30" value="1"/>
+          <ConstColumn id="PageSize" type="INT" size="30" value="5"/>
+          <ConstColumn id="PageUnit" type="INT" size="30" value="5"/>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword">홍길동</Col>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_user" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="userId" type="STRING" size="256"/>
+          <Column id="password" type="STRING" size="256"/>
+          <Column id="userName" type="STRING" size="256"/>
+          <Column id="enName" type="STRING" size="256"/>
+          <Column id="email" type="STRING" size="256"/>
+          <Column id="phone" type="DATE" size="256"/>
+          <Column id="cellPhone" type="STRING" size="256"/>
+          <Column id="zipCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item18" compid="div_search.       " propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item0" compid="divInput.edt_EMP_NO" propid="value" datasetid="ds_user" columnid="EMP_NO"/>
+      <BindItem id="item1" compid="divInput.edt_EMP_NAME" propid="value" datasetid="ds_user" columnid="EMP_NAME"/>
+      <BindItem id="item2" compid="divInput.edt_MGR_NO" propid="value" datasetid="ds_user" columnid="MGR_NO"/>
+      <BindItem id="item3" compid="divInput.edt_CURRENT_CLASS_CODE" propid="value" datasetid="ds_user" columnid="CURRENT_CLASS_CODE"/>
+      <BindItem id="item4" compid="divInput.edt_CURRENT_CODE" propid="value" datasetid="ds_user" columnid="CURRENT_CODE"/>
+      <BindItem id="item5" compid="divInput.edt_GRADE_CLASS_CODE" propid="value" datasetid="ds_user" columnid="GRADE_CLASS_CODE"/>
+      <BindItem id="item6" compid="divInput.edt_GRADE_CODE" propid="value" datasetid="ds_user" columnid="GRADE_CODE"/>
+      <BindItem id="item7" compid="divInput.edt_DEPT_CLASS_CODE" propid="value" datasetid="ds_user" columnid="DEPT_CLASS_CODE"/>
+      <BindItem id="item8" compid="divInput.edt_DEPT_CODE" propid="value" datasetid="ds_user" columnid="DEPT_CODE"/>
+      <BindItem id="item9" compid="divInput.edt_EMP_ID" propid="value" datasetid="ds_user" columnid="EMP_ID"/>
+      <BindItem id="item10" compid="divInput.edt_EMP_PW" propid="value" datasetid="ds_user" columnid="EMP_PW"/>
+      <BindItem id="item11" compid="divInput.edt_JOIN_DATE" propid="value" datasetid="ds_user" columnid="JOIN_DATE"/>
+      <BindItem id="item12" compid="divInput.edt_ENG_NAME" propid="value" datasetid="ds_user" columnid="ENG_NAME"/>
+      <BindItem id="item13" compid="divInput.edt_RESIDENT_NO" propid="value" datasetid="ds_user" columnid="RESIDENT_NO"/>
+      <BindItem id="item14" compid="divInput.edt_HOUSEHOLDER" propid="value" datasetid="ds_user" columnid="HOUSEHOLDER"/>
+      <BindItem id="item16" compid="divInput.edt_PHONE" propid="value" datasetid="ds_user" columnid="PHONE"/>
+      <BindItem id="item17" compid="divInput.edt_CELL_PHONE" propid="value" datasetid="ds_user" columnid="CELL_PHONE"/>
+      <BindItem id="item19" compid="divInput.edt_EMAIL" propid="value" datasetid="ds_user" columnid="EMAIL"/>
+      <BindItem id="item20" compid="divInput.edt_ADDRESS" propid="value" datasetid="ds_user" columnid="ADDRESS"/>
+      <BindItem id="item21" compid="divInput.edt_RELIGION" propid="value" datasetid="ds_user" columnid="RELIGION"/>
+      <BindItem id="item22" compid="divInput.edt_IMAGE" propid="value" datasetid="ds_user" columnid="IMAGE"/>
+      <BindItem id="item23" compid="divInput.edt_JOIN_CLASS_CODE" propid="value" datasetid="ds_user" columnid="JOIN_CLASS_CODE"/>
+      <BindItem id="item24" compid="divInput.edt_JOIN_CODE" propid="value" datasetid="ds_user" columnid="JOIN_CODE"/>
+      <BindItem id="item25" compid="divInput.edt_HOUSEHOLDER_NAME" propid="value" datasetid="ds_user" columnid="HOUSEHOLDER_NAME"/>
+      <BindItem id="item26" compid="divInput.edt_HOUSEHOLDER_RELATION" propid="value" datasetid="ds_user" columnid="HOUSEHOLDER_RELATION"/>
+      <BindItem id="item27" compid="divInput.edt_REGISTRATION_ADDRESS" propid="value" datasetid="ds_user" columnid="REGISTRATION_ADDRESS"/>
+      <BindItem id="item29" compid="divInput.edt_MARRIAGE" propid="value" datasetid="ds_user" columnid="MARRIAGE"/>
+      <BindItem id="item31" compid="divInput.edt_DISABILITY" propid="value" datasetid="ds_user" columnid="DISABILITY"/>
+      <BindItem id="item32" compid="divInput.edt_BIRTH" propid="value" datasetid="ds_user" columnid="BIRTH"/>
+      <BindItem id="item33" compid="divInput.edt_RETIRE_DATE" propid="value" datasetid="ds_user" columnid="RETIRE_DATE"/>
+      <BindItem id="item34" compid="divInput.Tab00.tabpage2.div_Detail.edit_COMPANY_NAME" propid="value" datasetid="ds_user" columnid="COMPANY_NAME"/>
+      <BindItem id="item35" compid="divInput.edt_POSITION" propid="value" datasetid="ds_user" columnid="POSITION"/>
+      <BindItem id="item36" compid="divInput.edt_DEPT_NAME" propid="value" datasetid="ds_user" columnid="DEPT_NAME"/>
+      <BindItem id="item37" compid="divInput.edt_RETIRE_REASON" propid="value" datasetid="ds_user" columnid="RETIRE_REASON"/>
+      <BindItem id="item15" compid="divInput.Tab00.tabpage2.div_Detail.edit_POSITION" propid="value" datasetid="ds_user" columnid="POSITION"/>
+      <BindItem id="item30" compid="divInput.Tab00.tabpage2.div_Detail.edit_DEPT_NAME" propid="value" datasetid="ds_user" columnid="DEPT_NAME"/>
+      <BindItem id="item38" compid="divInput.edt_MARRIAGE_DATE" propid="value" datasetid="ds_user" columnid="MARRIAGE_DATE"/>
+      <BindItem id="item39" compid="divInput.edt_EDUCATION_NAME" propid="value" datasetid="ds_user" columnid="EDUCATION_NAME"/>
+      <BindItem id="item40" compid="divInput.edt_EDU_CATEGORY_CODE" propid="value" datasetid="ds_user" columnid="EDU_CATEGORY_CODE"/>
+      <BindItem id="item41" compid="divInput.edt_MAJOR_NAME" propid="value" datasetid="ds_user" columnid="MAJOR_NAME"/>
+      <BindItem id="item42" compid="divInput.edt_GRADUATE_CATEGORY" propid="value" datasetid="ds_user" columnid="GRADUATE_CATEGORY"/>
+      <BindItem id="item43" compid="divInput.edt_START_DATE" propid="value" datasetid="ds_user" columnid="START_DATE"/>
+      <BindItem id="item44" compid="divInput.edt_GRADUATE_DATE" propid="value" datasetid="ds_user" columnid="GRADUATE_DATE"/>
+      <BindItem id="item28" compid="divInput.Tab00.tabpage2.div_Detail.edit_COMPANY_NAME" propid="" datasetid="ds_user" columnid=""/>
+      <BindItem id="item45" compid="divInput.Tab00.tabpage3.div_Detail.edit_EDUCATION_NAME" propid="value" datasetid="ds_user" columnid="EDUCATION_NAME"/>
+      <BindItem id="item46" compid="divInput.Tab00.tabpage2.div_Detail.edit_JOIN_DATE" propid="value" datasetid="ds_user" columnid="JOIN_DATE"/>
+      <BindItem id="item47" compid="divInput.Tab00.tabpage2.div_Detail.edit_RETIRE_DATE" propid="value" datasetid="ds_user" columnid="RETIRE_DATE"/>
+      <BindItem id="item48" compid="divInput.Tab00.tabpage3.div_Detail.edit_EDU_CATEGORY_CODE" propid="value" datasetid="ds_user" columnid="EDU_CATEGORY_CODE"/>
+      <BindItem id="item49" compid="divInput.Tab00.tabpage3.div_Detail.edit_MAJOR_NAME" propid="value" datasetid="ds_user" columnid="MAJOR_NAME"/>
+      <BindItem id="item50" compid="divInput.Tab00.tabpage3.div_Detail.edit_GRADUATE_CATEGORY" propid="value" datasetid="ds_user" columnid="GRADUATE_CATEGORY"/>
+      <BindItem id="item51" compid="divInput.Tab00.tabpage3.div_Detail.edit_START_DATE" propid="value" datasetid="ds_user" columnid="START_DATE"/>
+      <BindItem id="item52" compid="divInput.Tab00.tabpage3.div_Detail.edit_GRADUATE_DATE" propid="value" datasetid="ds_user" columnid="GRADUATE_CATEGORY"/>
+      <BindItem id="item53" compid="divInput.Tab00.tabpage3.div_Detail.edit_DAYYN" propid="value" datasetid="ds_user" columnid="DAYYN"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : Pattern_01
+* PROGRAMMER  : 
+* DATE        : 
+* DESCRIPTION : SingleDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+
+/***********************************************************************************
+* Global/Local Variable
+***********************************************************************************/
+
+
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+/**
+ * form onload 함수
+ * @return 
+ * @example
+ *
+ * @memberOf this
+ */
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+    //this.fn_search();
+   
+} 
+
+
+/**
+ * 조회처리
+ * @return 
+ * @example
+ *
+ * @memberOf Iject
+ */
+this.fn_search = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+  
+   var searchCondition =  "NAME";
+    var searchKeyword = this.div_search.edt_searchKeyword.value;       
+    
+
+	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "empSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		//alert(" this.errorcode : " + this.errorcode);
+		
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid      : 서비스 ID
+		*   @param : {object}    this.fobj       : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_user : " + pThis.ds_user.saveXML());
+	});
+}
+
+
+
+//추가
+this.fn_add = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_user.addRow();
+	this.div_search.edt_searchKeyword.set_value("");
+}
+
+//삭제
+this.fn_delete = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_user.rowposition;
+	this.ds_user.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+	
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.fn_search();
+	}
+}
+
+//리셋
+this.fn_reset = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_user.reset();
+}
+
+
+//저장
+this.fn_save = function(strid)
+{
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "empModifyVO.do",			 
+			  inds :["input1=ds_user:U"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search();
+	});
+}
+
+
+/**********************************************************************
+* User Function
+***********************************************************************/
+
+//저장버튼 클릭시 
+this.div_grid_top_btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+//검색  Enter키
+this.div_search_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if ( e.keycode == 13 )
+	{
+		this.fn_search();
+	}
+}
+
+this.divInput_stc_id00_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.divInput_stc_EMP_NO_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.divInput_Tab00_tabpage1_div_Detail_Combo00_onitemchanged = function(obj:Combo, e:nexacro.ItemChangeEventInfo)
+{
+	
+}
+
+this.divInput_Tab00_tabpage1_div_Detail_Static06_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.divInput_Tab00_tabpage1_div_Detail_Edit00_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+this.divInput_edt_JOIN_DATE_oneditclick = function(obj:Calendar, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+this.divInput_Tab00_tabpage2_div_Detail_Edit00_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+this.divInput_Tab00_tabpage2_div_Detail_edit_RETIRE_REASON_oneditclick = function(obj:TextArea, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+this.divInput_Tab00_tabpage2_div_Detail_edit_COMPANY_NAME_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+
+this.div_search_edt_searchKeyword_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

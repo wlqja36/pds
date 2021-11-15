@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="searchTest" left="0" top="0" width="1024" height="768" titletext="New Form">
+    <Layouts>
+      <Layout>
+        <Button id="Button00" taborder="0" text="검색" left="37.7%" top="87" right="51.17%" height="51" onclick="Button00_onclick"/>
+        <Edit id="Edit00" taborder="1" left="10.25%" top="100" right="64.55%" height="32"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="gds_empno" columnid="emp_no"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+}
+]]></Script>
+  </Form>
+</FDL>

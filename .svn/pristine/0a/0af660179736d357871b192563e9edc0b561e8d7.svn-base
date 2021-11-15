@@ -1,0 +1,915 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("YJB_BTRIPMANAGER");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1280,677);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"searchKeyword\"/><Col id=\"searchCondition\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_yn", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"data\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">Y</Col><Col id=\"data\">Y</Col></Row><Row><Col id=\"code\">N</Col><Col id=\"data\">N</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_user", this);
+            obj.set_firefirstcount("0");
+            obj.getSetter("firenextcount").set("0");
+            obj.set_useclientlayout("false");
+            obj.set_updatecontrol("true");
+            obj.set_enableevent("true");
+            obj.set_loadkeymode("keep");
+            obj.set_loadfiltermode("keep");
+            obj.set_reversesubsum("false");
+            obj._setContents("<ColumnInfo><Column id=\"btrip_No\" type=\"STRING\" size=\"12\"/><Column id=\"btrip_Name\" type=\"STRING\" size=\"20\"/><Column id=\"country\" type=\"STRING\" size=\"50\"/><Column id=\"area\" type=\"STRING\" size=\"50\"/><Column id=\"purpose\" type=\"STRING\" size=\"256\"/><Column id=\"s_Date\" type=\"DATE\" size=\"256\"/><Column id=\"f_Date\" type=\"DATE\" size=\"256\"/><Column id=\"ex_Expenses\" type=\"INT\" size=\"10\"/><Column id=\"re_Emp_No\" type=\"STRING\" size=\"12\"/><Column id=\"ok_Date\" type=\"DATE\" size=\"256\"/><Column id=\"ok_Emp_No\" type=\"STRING\" size=\"12\"/><Column id=\"ok_Ascertain\" type=\"STRING\" size=\"1\"/><Column id=\"emp_No\" type=\"STRING\" size=\"12\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_confirm", this);
+            obj._setContents("<ColumnInfo><Column id=\"btrip_Dno\" type=\"STRING\" size=\"256\"/><Column id=\"btrip_Dda\" type=\"STRING\" size=\"256\"/><Column id=\"detail\" type=\"STRING\" size=\"256\"/><Column id=\"ws_Date\" type=\"DATE\" size=\"256\"/><Column id=\"wf_Date\" type=\"DATE\" size=\"256\"/><Column id=\"hotel\" type=\"STRING\" size=\"256\"/><Column id=\"trans\" type=\"STRING\" size=\"256\"/><Column id=\"visiter\" type=\"STRING\" size=\"256\"/><Column id=\"tex_Expenses\" type=\"INT\" size=\"256\"/><Column id=\"remark\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("ImageViewer03", "absolute", "20", "427", "1235", "237", null, null, this);
+            obj.set_taborder("84");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer01", "absolute", "20", "136", "1235", "246", null, null, this);
+            obj.set_taborder("83");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer00", "absolute", "7", "8", "1265", "45", null, null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("#165fa6ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm", "absolute", "16", "11", "352", "40", null, null, this);
+            obj.set_taborder("1");
+            obj.set_text("출장관리");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Arial Black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static21", "absolute", "24", "64", "276", "36", null, null, this);
+            obj.set_taborder("3");
+            obj.set_wordwrap("char");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_Ename", "absolute", "27", "66", "90", "33", null, null, this);
+            obj.set_taborder("4");
+            obj.set_text("사원이름");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_Ename", "absolute", "90", "72", "124", "21", null, null, this);
+            obj.set_taborder("5");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_btrm_Enamed", "absolute", "219", "69", "76", "27", null, null, this);
+            obj.set_taborder("6");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            obj.set_visible("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static23", "absolute", "23", "595", "1228", "33", null, null, this);
+            obj.set_taborder("8");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static19", "absolute", "23", "496", "1228", "100", null, null, this);
+            obj.set_taborder("9");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "23", "464", "1228", "33", null, null, this);
+            obj.set_taborder("10");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "absolute", "23", "432", "1228", "33", null, null, this);
+            obj.set_taborder("11");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_num", "absolute", "23", "432", "139", "33", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("출장관리번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_btrName", "absolute", "23", "464", "139", "33", null, null, this);
+            obj.set_taborder("19");
+            obj.set_text("출장명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_btrcontry", "absolute", "333", "464", "139", "33", null, null, this);
+            obj.set_taborder("20");
+            obj.set_text("출장국가");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_btrcontry", "absolute", "478", "470", "151", "21", null, null, this);
+            obj.set_taborder("21");
+            obj.style.set_font("9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_btrArea", "absolute", "640", "464", "139", "33", null, null, this);
+            obj.set_taborder("22");
+            obj.set_text("출장지역");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_btrArea", "absolute", "785", "470", "151", "21", null, null, this);
+            obj.set_taborder("23");
+            obj.style.set_font("9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("str_btrm_Enum", "absolute", "945", "464", "139", "33", null, null, this);
+            obj.set_taborder("24");
+            obj.set_text("사원번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_btrName", "absolute", "173", "470", "151", "21", null, null, this);
+            obj.set_taborder("25");
+            obj.style.set_font("9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "43", "425", "16", "47", null, null, this);
+            obj.set_taborder("26");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_mainSc", "absolute", "23", "496", "139", "100", null, null, this);
+            obj.set_taborder("31");
+            obj.set_text("주요일정내용");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_startDate", "absolute", "23", "595", "139", "33", null, null, this);
+            obj.set_taborder("34");
+            obj.set_text("출장시작일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_endDate", "absolute", "333", "595", "139", "33", null, null, this);
+            obj.set_taborder("35");
+            obj.set_text("출장종료일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_alterEname", "absolute", "640", "595", "139", "33", null, null, this);
+            obj.set_taborder("37");
+            obj.set_text("대체업무사원");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_alterEname", "absolute", "785", "601", "151", "21", null, null, this);
+            obj.set_taborder("38");
+            obj.style.set_font("9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_expenseAll", "absolute", "945", "595", "139", "33", null, null, this);
+            obj.set_taborder("39");
+            obj.set_text("총예상경비");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_expenseAll", "absolute", "1093", "601", "151", "21", null, null, this);
+            obj.set_taborder("40");
+            obj.style.set_font("9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_list", "absolute", "25", "103", "255", "38", null, null, this);
+            obj.set_taborder("44");
+            obj.set_text("출장관리내역");
+            obj.style.set_font("bold 14 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_num", "absolute", "176", "438", "418", "21", null, null, this);
+            obj.set_taborder("46");
+            obj.set_enable("true");
+            obj.style.set_font("9 Dotum");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_btrm_num", "absolute", "567", "436", "26", "25", null, null, this);
+            obj.set_taborder("48");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_Enum", "absolute", "1093", "470", "149", "21", null, null, this);
+            obj.set_taborder("49");
+            obj.set_enable("true");
+            obj.style.set_font("9 Dotum");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "23", "627", "1228", "33", null, null, this);
+            obj.set_taborder("50");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_permitDate", "absolute", "23", "627", "139", "33", null, null, this);
+            obj.set_taborder("51");
+            obj.set_text("승인일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_permit", "absolute", "333", "627", "139", "33", null, null, this);
+            obj.set_taborder("52");
+            obj.set_text("승인여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_btrm_permitEname", "absolute", "640", "627", "139", "33", null, null, this);
+            obj.set_taborder("54");
+            obj.set_text("승인자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrm_permitEname", "absolute", "785", "633", "151", "21", null, null, this);
+            obj.set_taborder("55");
+            obj.style.set_font("9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new TextArea("textArea_btrm_mainSc", "absolute", "173", "500", "1070", "93", null, null, this);
+            obj.set_taborder("59");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "945", "627", "306", "33", null, null, this);
+            obj.set_taborder("61");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("cal_btrm_startDate", "absolute", "173", "601", "150", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("62");
+            obj.set_displaynulltext("2021-00-00");
+
+            obj = new Calendar("cal_btrm_permitDate", "absolute", "173", "633", "150", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("63");
+            obj.set_displaynulltext("2021-00-00");
+            obj.set_readonly("true");
+
+            obj = new Calendar("cal_btrm_endDate", "absolute", "481", "601", "150", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("64");
+            obj.set_displaynulltext("2021-00-00");
+
+            obj = new Button("btn_btrm_alterEname", "absolute", "906", "601", "31", "21", null, null, this);
+            obj.set_taborder("65");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_btrm_permitEname", "absolute", "906", "633", "31", "21", null, null, this);
+            obj.set_taborder("66");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_btrm_permit", "absolute", "481", "633", "150", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            var combo_btrm_permit_innerdataset = new Dataset("combo_btrm_permit_innerdataset", this.combo_btrm_permit);
+            combo_btrm_permit_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">Y</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">N</Col></Row></Rows>");
+            obj.set_innerdataset(combo_btrm_permit_innerdataset);
+            obj.set_taborder("67");
+            obj.set_value("Y");
+            obj.set_text("Y");
+            obj.set_codecolumn("code");
+            obj.set_datacolumn("data");
+            obj.style.set_font("9 Dotum");
+            obj.set_innerdataset("@ds_yn");
+            obj.set_index("0");
+
+            obj = new Button("Button01", "absolute", "1097", "392", "76", "27", null, null, this);
+            obj.set_taborder("70");
+            obj.set_text("등록");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button03", "absolute", "1181", "392", "76", "27", null, null, this);
+            obj.set_taborder("72");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "1011", "392", "76", "27", null, null, this);
+            obj.set_taborder("73");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid01", "absolute", "24", "140", "1228", "238", null, null, this);
+            obj.set_taborder("74");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj.style.set_font("bold 10 Dotum");
+            obj.set_binddataset("ds_user");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"122\"/><Column size=\"130\"/><Column size=\"276\"/><Column size=\"137\"/><Column size=\"137\"/><Column size=\"91\"/><Column size=\"105\"/><Column size=\"229\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell style=\"font:bold 10 dotum;\" text=\"출장관리번호\"/><Cell col=\"1\" style=\"font:bold 10 dotum;\" text=\"출장명\"/><Cell col=\"2\" style=\"font:bold 10 dotum;\" text=\"출장국가\"/><Cell col=\"3\" style=\"font:bold 10 dotum;\" text=\"출장시작일\"/><Cell col=\"4\" style=\"font:bold 10 dotum;\" text=\"출장종료일\"/><Cell col=\"5\" style=\"font:bold 10 dotum;\" text=\"승인자\"/><Cell col=\"6\" style=\"font:bold 10 dotum;\" text=\"승인여부\"/><Cell col=\"7\" style=\"font:bold 10 dotum;\" text=\"출장관리내역보기\"/></Band><Band id=\"body\"><Cell expr=\"bind:btrip_No\"/><Cell col=\"1\" expr=\"bind:btrip_Name\"/><Cell col=\"2\" expr=\"bind:country\"/><Cell col=\"3\" expr=\"bind:s_Date\"/><Cell col=\"4\" expr=\"bind:f_Date\"/><Cell col=\"5\" expr=\"bind:ok_Emp_No\"/><Cell col=\"6\" expr=\"bind:ok_Ascertain\"/><Cell col=\"7\" expandshow=\"show\" expandimage=\"URL('img::btn_WF_SearchSmall.png')\" tooltiptext=\"일정내용\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1280, 677, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","edt_btrm_Ename","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","edt_btrm_Ename","value","gds_empno","emp_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","edt_btrm_num","value","ds_user","btrip_No");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","edt_btrm_btrName","value","ds_user","btrip_Name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","edt_btrm_btrcontry","value","ds_user","country");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","edt_btrm_btrArea","value","ds_user","area");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","edt_btrm_Enum","value","ds_user","emp_No");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","textArea_btrm_mainSc","value","ds_user","purpose");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","cal_btrm_startDate","value","ds_user","s_Date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","cal_btrm_endDate","value","ds_user","f_Date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","edt_btrm_alterEname","value","ds_user","re_Emp_No");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","edt_btrm_expenseAll","value","ds_user","ex_Expenses");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","edt_btrm_permitEname","value","ds_user","ok_Emp_No");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","combo_btrm_permit","value","ds_user","ok_Ascertain");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","edt_btrm_alterEname","value","gds_reempno","re_empno");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item15","edt_btrm_permitEname","value","gds_okempno","ok_empno");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item16","cal_btrm_permitDate","value","ds_user","ok_Date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.registerScript("YJB_BTRIPMANAGER.xfdl", function() {
+
+        this.form_onload = function(obj,e)
+        {
+        	//기본 공통  함수 초기화
+        	Iject.formOnload(obj);	
+
+        } 
+
+        this.btn_btrm_Enamed_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        	empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        							
+           // var objArr = emp_noName.split(/,/g, 2);
+           var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_name"); 
+           var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_no"); 
+           this.edt_btrm_Ename.set_value(emp_no);
+           this.edt_btrm_Enum.set_value(emp_no);
+           this.fn_search_onclick();
+        }
+
+        
+
+        //조회
+        this.fn_search_onclick = function(obj,e)
+        {
+          
+           var searchCondition =  "NAME";
+           var searchKeyword = this.edt_btrm_Ename.value;       
+         	this.ds_search.setColumn(0, "searchCondition", "NAME");
+        	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+        	
+         /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+           
+           var oDatas =  {
+        			  svcid : "search",
+        			  sController : "YJB_btrSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_user=output1"
+        				 
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        	  
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		
+        	
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	      
+        	       var pThis = this.fobj;   //form object	      
+        	       trace(" ds_user : " + pThis.ds_user.saveXML());
+        	});
+        	
+        	//	var imsi = this.edt_btrm_Ename.value;
+        	  // this.edt_btrip_dno.set_value(imsi);
+        	
+        	
+        	
+        	 
+        }
+
+        
+        this.Button00_onclick = function(obj,e)
+        {
+        	//var imsi1 = this.edt_btrm_Ename.value;
+        	var nRow = this.ds_user.addRow();
+        	this.edt_btrm_Enum.set_value(application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_no"));
+        // 	this.ok_date.readonly("false");
+        // 	this.ok_emp_no.readonly(true);
+        /*	this.ok_date.visible(false);*/
+        	/*this.ok_Ascertain.readonly(true);*/
+        	
+        }
+
+        
+        //삭제
+        this.Button03_onclick = function(obj,e)
+        {
+         	
+        	var nRow = this.ds_user.rowposition;
+        	this.ds_user.deleteRow(nRow);
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+
+        	if(rtnValue){  
+        		this.fn_save("delete");
+        	}else{
+        		this.fn_search();
+        	}
+        }
+
+        //리셋
+        this.fn_reset_onclick = function(obj,e)
+        {
+        	this.ds_user.reset();
+        }
+
+        
+        //저장
+        this.fn_save = function(strid)
+        {
+        	this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.edt_btrm_permitEname.value);
+        	this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.edt_btrm_alterEname.value);
+
+        	
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "YJB_btrModifyVO.do",			 
+        			  inds :["input1=ds_user:U"],
+        			  outds :[
+        				 "ds_user=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg,"알림");			
+        		   return;
+        		}			
+        	      
+        // 	       var pThis = this.fobj;   //form object
+        // 		  pThis.fn_search();
+        	});
+        /*	this.fn_search();*/
+        	var imsi3 = this.edt_btrm_Ename.value;
+        	this.edt_btrm_Ename.set_value(imsi3);
+        	
+        }
+
+        
+        //저장버튼 클릭시 
+        this.Button01_onclick = function(obj,e)
+        {
+        	var imsi4 = this.edt_btrm_Ename.value;
+
+        	this.fn_save("save");
+        		this.edt_btrm_Ename.set_value(imsi4);
+        }
+
+        // 승인자 사번 찾기 
+        this.btn_btrm_permitEname_onclick = function(obj,e)
+        {
+        	
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        	empSearch.init("btrip"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::ok_empSearch.xfdl");
+        	
+        	
+        	
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var ok_empno = application.gds_okempno.getColumn(application.gds_okempno.rowposition, "ok_empno");
+        	//this.ds_user.setColumn();
+        	this.edt_btrm_permitEname.set_value(ok_empno);
+        }
+
+        
+
+        ///////////////////////////////////////출장관리내역 처리////////////////////////////////////////////
+        this.btrgrid_oncelldblclick = function(obj,e)
+        {
+        	
+         	
+         	//var btrip_no= this.edt_btr_no2.value;
+        // 		
+         	var nLeft = system.clientToScreenX(this, 10);
+         	var nTop = system.clientToScreenY(this, 10);
+         	
+         	 
+         	 
+         	var Business_Trip = new ChildFrame();
+         	
+         	Business_Trip.init("Business_Trip"
+         					, "absolute"
+         					, nLeft
+         					, nTop
+         					, 1000
+         					, 800
+         					, null
+         					, null
+         					, "Btrip::YJB_BTRIPDETAIL.xfdl");
+         	
+         	
+         	
+         	Business_Trip.set_openalign("center middle");
+         	Business_Trip.set_dragmovetype("all");
+          	
+          	
+           		var objParam = {param1:this.edt_btrm_num.value
+        						,param2:this.edt_btrm_btrName.value
+          					 	};
+        						
+          	
+            //ChildFrame.showModal(strID, objParentFrame, [{objArgumentList}[, objOpener[,  callbackFunc]]]);
+                  
+            	  Business_Trip.showModal(this.getOwnerFrame()
+             			  , objParam
+        				      , this
+             			  , "fn_popupCallback");
+           			  
+           
+        /*	  trace("param value" + this.objParam);*/
+        			  
+        // 					
+        //  	var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_No");	
+        //  	application.gds_btripno.addRow();
+        //  	application.gds_btripno.setColumn(application.gds_btripno.rowposition, "btrip_no", btrip_No)	
+        	//test
+        // 	var btrip_no = this.edt_btr_no2.value;
+        // 	 var oData ={
+        //          sId  : "btrip",             //callback id
+        //          sUrl : "Btrip::PD_IN_COM_BTRDETAIL.xfdl",   //url
+        //          bshowtitlebar : true,     //title bar
+        //          bAutoSize  : true,       //autosize
+        //          bResize    : false,       //resize
+        //          bShowtatusbar : false,     //statusbar
+        //          sOpenalign    : "center middle",  //align
+        //         oArgs :  {arg1: this.btrip_no,
+        //                   arg2:'2222222222222222222222222'         
+        //                }    
+        //      };
+        //      
+        //      
+        //       Iject.showModal(this,oData,function(){
+        //    
+        //               /* 
+        //               * popup calllback
+        //               *@param {object}this.fobj
+        //               *@param {string} this.svcid 
+        //               *@param {string} this.variant
+        //               */             
+        //              var pThis= this.fobj;             
+        //              trace(" pThis.name : " + pThis.name);
+        //              trace(" pThis.svcid : " + this.svcid);
+        //              trace(" pThis.variant : " + this.variant);
+        //              
+        //              var sPerson = JSON.stringify(this.variant);
+                  //  var oPerson = JSON.parse(sPerson);
+
+              
+              //});
+        		
+        }
+
+        // 
+         //출장내역관리 콜백함수
+          this.fn_popupCallback = function(strPopupID,strReturn)
+          {
+              if(strReturn == undefined){
+                  return;
+              }
+          
+              if(strPopupID == "Business_Trip"){
+                  this.alert("Return Value: " + strReturn);
+              }
+         };
+
+        // object 인자 생성함수
+        // this.fn_parent = function(pObj)
+        // {
+        //     this.ds_parent.copyData(pObj);
+        // };
+
+        // //조회시 승인자사번 노출
+        // this.btrgrid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+        // {
+        // 	this.ok_emp_no.value(this.btrgrid.se);
+        // }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        
+        //대체업무사원
+        this.btn_btrm_alterEname_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        	empSearch.init("btrip1"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::re_empSearch.xfdl");
+        	
+        	
+        	
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        							
+        	var re_empname = application.gds_reempno.getColumn(application.gds_reempno.rowposition, "re_empname");
+        	var re_empno = application.gds_reempno.getColumn(application.gds_reempno.rowposition, "re_empno");
+        	edt_btrm_alterEname.set_value(re_empno);
+        }
+
+        
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.sta_btrm.addEventHandler("onclick", this.Static00_onclick, this);
+            this.btn_btrm_Enamed.addEventHandler("onclick", this.btn_btrm_Enamed_onclick, this);
+            this.Static23.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static19.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static10.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static07.addEventHandler("onclick", this.Static05_onclick, this);
+            this.sta_btrm_num.addEventHandler("onclick", this.Static06_onclick, this);
+            this.sta_btrm_btrName.addEventHandler("onclick", this.Static06_onclick, this);
+            this.sta_btrm_mainSc.addEventHandler("onclick", this.Static06_onclick, this);
+            this.sta_btrm_startDate.addEventHandler("onclick", this.Static06_onclick, this);
+            this.sta_btrm_list.addEventHandler("onclick", this.Static02_onclick, this);
+            this.btn_btrm_num.addEventHandler("onclick", this.fn_search_onclick, this);
+            this.Static01.addEventHandler("onclick", this.Static05_onclick, this);
+            this.sta_btrm_permitDate.addEventHandler("onclick", this.Static06_onclick, this);
+            this.btn_btrm_alterEname.addEventHandler("onclick", this.btn_btrm_alterEname_onclick, this);
+            this.btn_btrm_permitEname.addEventHandler("onclick", this.btn_btrm_permitEname_onclick, this);
+            this.combo_btrm_permit.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+            this.Button03.addEventHandler("onclick", this.Button03_onclick, this);
+            this.Button00.addEventHandler("onclick", this.Button00_onclick, this);
+            this.Grid01.addEventHandler("oncelldblclick", this.btrgrid_oncelldblclick, this);
+            this.Grid01.addEventHandler("oncellclick", this.btrgrid_oncellclick, this);
+
+        };
+
+        this.loadIncludeScript("YJB_BTRIPMANAGER.xfdl");
+
+       
+    };
+}
+)();

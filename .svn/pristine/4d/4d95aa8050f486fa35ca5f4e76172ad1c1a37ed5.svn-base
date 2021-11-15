@@ -1,0 +1,1049 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("SPENDING_RESOLRUTION");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1036,700);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_spending", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"100\"/><Column id=\"REG_DATE\" type=\"DATE\" size=\"0\"/><Column id=\"ATTITUDE_BOOK_ID\" type=\"STRING\" size=\"12\"/><Column id=\"RESOLUTION_CODE\" type=\"STRING\" size=\"4\"/><Column id=\"TOTAL_COST\" type=\"INT\" size=\"10\"/><Column id=\"REG_EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"MODIFY_EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"MODIFY_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"CONFIRM_EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"CONFIRM_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"CONFIRM_YN\" type=\"STRING\" size=\"1\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_rescode", this);
+            obj._setContents("<ColumnInfo><Column id=\"CODE_NO\" type=\"STRING\" size=\"6\"/><Column id=\"CODE_NAME\" type=\"STRING\" size=\"200\"/></ColumnInfo><Rows><Row><Col id=\"CODE_NO\">null</Col><Col id=\"CODE_NAME\">전체보기</Col></Row><Row><Col id=\"CODE_NAME\">출장경비(5100)</Col><Col id=\"CODE_NO\">5100</Col></Row><Row><Col id=\"CODE_NAME\">교육경비(5200)</Col><Col id=\"CODE_NO\">5200</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search_info", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"12\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/><Column id=\"searchDateFrom\" type=\"STRING\" size=\"256\"/><Column id=\"searchDateTo\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_emp_info", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"100\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_S_BookCode", this);
+            obj._setContents("<ColumnInfo><Column id=\"salary_book_no\" type=\"STRING\" size=\"12\"/><Column id=\"salary_book_code\" type=\"STRING\" size=\"4\"/><Column id=\"salary_book_nm\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_EmpList", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"100\"/><Column id=\"JOIN_DATE\" type=\"DATE\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img_titlebg", "absolute", "1.38%", "7", null, "50", "0.89%", null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_title", "absolute", "26", "18", "168", "29", null, null, this);
+            obj.set_taborder("1");
+            obj.set_text("지출결의서");
+            obj.style.set_color("whitesmoke");
+            obj.style.set_align("left middle");
+            obj.style.set_font("굴림,12,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img02", "absolute", "1.54%", "65", null, "84", "1.06%", null, this);
+            obj.set_taborder("2");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_11", "absolute", "608", "75", "95", "27", null, null, this);
+            obj.set_taborder("3");
+            obj.set_text("기간");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("cal_start_date", "absolute", "702", "75", "145", "27", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("4");
+            obj.style.set_align("center middle");
+            obj.set_value("null");
+            obj.set_dateformat("yyyy-MM-dd ddd");
+
+            obj = new Static("Static00", "absolute", "845", "80", null, "20", "164", null, this);
+            obj.set_taborder("5");
+            obj.set_text("~");
+            obj.style.set_align("center");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("cal_end_date", "absolute", "869", "76", "145", "25", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("6");
+            obj.style.set_align("center middle");
+
+            obj = new Button("btn_search", "absolute", "946", "115", "71", "23", null, null, this);
+            obj.set_taborder("7");
+            obj.set_text("조회");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "16", "201", null, "191", "11", null, this);
+            obj.set_autoenter("select");
+            obj.set_taborder("8");
+            obj.set_binddataset("ds_spending");
+            obj.set_selecttype("row");
+            obj.set_autosizingtype("row");
+            obj.set_cellsizingtype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"등록일시\"/><Cell col=\"1\" text=\"급여대장번호\" expandshow=\"show\"/><Cell col=\"2\" text=\"지출유형코드\"/><Cell col=\"3\" text=\"총지출경비\"/><Cell col=\"4\" text=\"등록자사번\"/><Cell col=\"5\" text=\"수정자사번\"/><Cell col=\"6\" text=\"수정일시\"/><Cell col=\"7\" text=\"승인자사번\"/><Cell col=\"8\" text=\"승인일시\"/><Cell col=\"9\" text=\"승인여부\"/></Band><Band id=\"body\"><Cell displaytype=\"date\" edittype=\"date\" text=\"bind:REG_DATE\" wordwrap=\"none\" mask=\"yyyy-MM-dd ddd\" calendardisplay=\"edit\" calendardisplaynulltype=\"none\"/><Cell col=\"1\" edittype=\"text\" text=\"bind:ATTITUDE_BOOK_ID\" expandshow=\"show\" expandimage=\"URL('img::btn_WF_SearchSmall_D.png')\"/><Cell col=\"2\" displaytype=\"combo\" edittype=\"combo\" text=\"bind:RESOLUTION_CODE\" combodataset=\"ds_rescode\" combocodecol=\"CODE_NO\" combodatacol=\"CODE_NO\"/><Cell col=\"3\" edittype=\"text\" text=\"bind:TOTAL_COST\"/><Cell col=\"4\" edittype=\"none\" text=\"bind:REG_EMP_NO\"/><Cell col=\"5\" edittype=\"text\" text=\"bind:MODIFY_EMP_NO\"/><Cell col=\"6\" edittype=\"text\" text=\"bind:MODIFY_DATE\" calendardisplaynulltype=\"none\"/><Cell col=\"7\" edittype=\"text\" text=\"bind:CONFIRM_EMP_NO\"/><Cell col=\"8\" edittype=\"text\" text=\"bind:CONFIRM_DATE\" calendardisplaynulltype=\"none\"/><Cell col=\"9\" edittype=\"text\" text=\"bind:CONFIRM_YN\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_15", "absolute", "316", "76", "107", "25", null, null, this);
+            obj.set_taborder("9");
+            obj.set_text("지출유형코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_search_ResCode", "absolute", "422", "76", null, "25", "445", null, this);
+            this.addChild(obj.name, obj);
+            var combo_search_ResCode_innerdataset = new Dataset("combo_search_ResCode_innerdataset", this.combo_search_ResCode);
+            combo_search_ResCode_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\"/><Col id=\"datacolumn\">전체보기</Col></Row><Row><Col id=\"codecolumn\">출장경비(5100)</Col><Col id=\"datacolumn\">출장경비(5100)</Col></Row><Row><Col id=\"codecolumn\">교육경비(5200)</Col><Col id=\"datacolumn\">교육경비(5200)</Col></Row></Rows>");
+            obj.set_innerdataset(combo_search_ResCode_innerdataset);
+            obj.set_taborder("10");
+            obj.style.set_border("1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff");
+            obj.set_datacolumn("datacolumn");
+            obj.set_codecolumn("codecolumn");
+            obj.set_index("-1");
+
+            obj = new ImageViewer("img00", "absolute", "1.54%", "444", null, "243", "13", null, this);
+            obj.set_taborder("11");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_33", "absolute", "17", "427", "120", "13", null, null, this);
+            obj.set_taborder("12");
+            obj.set_text("지출결의서 상세");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_empNM", "absolute", "25", "459", "165", "35", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("품위자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_empNM", "absolute", "177", "459", "343", "35", null, null, this);
+            obj.set_taborder("14");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_res_date", "absolute", "560", "459", "167", "35", null, null, this);
+            obj.set_taborder("15");
+            obj.set_text("품위일자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_modify_empNM", "absolute", "25", "527", "165", "35", null, null, this);
+            obj.set_taborder("16");
+            obj.set_text("수정자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_modify_empNM", "absolute", "177", "527", "342", "35", null, null, this);
+            obj.set_taborder("17");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_modify_date", "absolute", "560", "527", "167", "35", null, null, this);
+            obj.set_taborder("18");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_confim_empNM", "absolute", "25", "561", "165", "35", null, null, this);
+            obj.set_taborder("19");
+            obj.set_text("승인자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_confim_empNM", "absolute", "177", "561", "342", "35", null, null, this);
+            obj.set_taborder("20");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_confirm_date", "absolute", "560", "561", "167", "35", null, null, this);
+            obj.set_taborder("21");
+            obj.set_text("승인일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_totalCost", "absolute", "26", "595", "158", "35", null, null, this);
+            obj.set_taborder("22");
+            obj.set_text("총지출경비");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_add", "absolute", "765", "648", "55", "23", null, null, this);
+            obj.set_taborder("23");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_modify", "absolute", "827", "648", "55", "23", null, null, this);
+            obj.set_taborder("24");
+            obj.set_text("수정");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_delete", "absolute", "889", "648", "55", "23", null, null, this);
+            obj.set_taborder("25");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_save", "absolute", "951", "648", "55", "23", null, null, this);
+            obj.set_taborder("26");
+            obj.set_text("저장");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_10", "absolute", "17", "181", "120", "13", null, null, this);
+            obj.set_taborder("27");
+            obj.set_text("지출결의서 리스트");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_empnm", "absolute", "24", "74", "95", "27", null, null, this);
+            obj.set_taborder("28");
+            obj.set_text("사원명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_empnm", "absolute", "118", "74", "157", "27", null, null, this);
+            obj.set_taborder("29");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_z_modify_empNM", "absolute", "518", "526", "37", "40", null, null, this);
+            obj.set_taborder("31");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            obj.set_enable("false");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_z_confim_empNM", "absolute", "518", "561", "37", "34", null, null, this);
+            obj.set_taborder("32");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            obj.set_enable("false");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("cal_res_date", "absolute", "726", "460", "283", "35", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("33");
+            obj.style.set_align("center middle");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            obj.set_enable("false");
+            obj.set_editformat("yyyy-MM-dd hh:mm:ss");
+            obj.set_dateformat("yyyy-MM-dd ddd");
+            obj.set_value("null");
+
+            obj = new Calendar("cal_modify_date", "absolute", "726", "527", "283", "35", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("34");
+            obj.style.set_align("center middle");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            obj.set_enable("false");
+
+            obj = new Calendar("cal_confirm_date", "absolute", "726", "561", "283", "35", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("35");
+            obj.style.set_align("center middle");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            obj.set_enable("false");
+
+            obj = new MaskEdit("edt_totalCost", "absolute", "178", "595", "831", "35", null, null, this);
+            obj.set_taborder("36");
+            obj.set_enable("false");
+            obj.set_mask("###,###,###,###");
+            obj.set_trimtype("both");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_search00", "absolute", "870", "115", "71", "23", null, null, this);
+            obj.set_taborder("37");
+            obj.set_text("전체보기");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "57", "601", "17", "20", null, null, this);
+            obj.set_taborder("38");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "596", "470", "17", "20", null, null, this);
+            obj.set_taborder("39");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_sbookNo", "absolute", "25", "493", "165", "35", null, null, this);
+            obj.set_taborder("40");
+            obj.set_text("급여대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "48", "501", "17", "20", null, null, this);
+            obj.set_taborder("41");
+            obj.set_text("*");
+            obj.set_visible("false");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_sbookNo", "absolute", "177", "493", "342", "35", null, null, this);
+            obj.set_taborder("42");
+            obj.set_enable("false");
+            obj.style.setStyleValue("font", "disabled", "8 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_z_sbookNo", "absolute", "518", "493", "37", "36", null, null, this);
+            obj.set_taborder("43");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            obj.set_enable("false");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("st_resCode", "absolute", "560", "493", "167", "35", null, null, this);
+            obj.set_taborder("44");
+            obj.set_text("지출유형코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_resCode", "absolute", "725", "493", "283", "35", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("30");
+            obj.set_innerdataset("@ds_rescode");
+            obj.set_codecolumn("CODE_NO");
+            obj.set_datacolumn("CODE_NO");
+            obj.set_enable("false");
+            obj.style.set_border("1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            obj.style.setStyleValue("align", "disabled", "center");
+
+            obj = new Static("Static03", "absolute", "580", "501", "17", "20", null, null, this);
+            obj.set_taborder("45");
+            obj.set_text("*");
+            obj.set_visible("false");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_z_modify_empNM00", "absolute", "274", "74", "27", "27", null, null, this);
+            obj.set_taborder("46");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_z_reg_empNM", "absolute", "518", "459", "37", "36", null, null, this);
+            obj.set_taborder("47");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            obj.set_enable("false");
+            obj.style.setStyleValue("border", "disabled", "1 solid #d5d5d5ff");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1036, 700, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item5","edt_empNM","value","ds_spending","REG_EMP_NO");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","cal_res_date","value","ds_spending","REG_DATE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","edt_modify_empNM","value","ds_spending","MODIFY_EMP_NO");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","cal_modify_date","value","ds_spending","MODIFY_DATE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","edt_confim_empNM","value","ds_spending","CONFIRM_EMP_NO");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","cal_confirm_date","value","ds_spending","CONFIRM_DATE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","edt_totalCost","value","ds_spending","TOTAL_COST");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","combo_search_ResCode","innerdataset","ds_spending","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","edt_sbookNo","value","ds_spending","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","combo_resCode","value","ds_spending","RESOLUTION_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","combo_resCode","innerdataset","ds_spending","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("SPENDING_RESOLRUTION.xfdl", "Lib::Comm.xjs");
+        this.registerScript("SPENDING_RESOLRUTION.xfdl", function() {
+        /***********************************************************************************
+        * Common Library
+        ***********************************************************************************/
+        //include "Lib::Comm.xjs";
+
+        /***********************************************************************************
+        * Form Event
+        ***********************************************************************************/
+        /**
+         * form onload 함수
+         * @return 
+         * @example
+         *
+         * @memberOf this
+         */
+        this.form_onload = function(obj,e)
+        {
+        	//기본 공통  함수 초기화
+        	Iject.formOnload(obj);	
+        	trace("폼 로딩됨!"); 
+        	
+        	//날짜
+        	var today = new Date();
+        	var nToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+""+(""+today.getDate()).padLeft(2,'0');
+        	var startToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+"01";
+        	this.cal_start_date.set_value(startToday); //시작날짜 해당 월의 첫째날로 셋팅 
+        	this.cal_end_date.set_value(nToday);
+        	this.cal_res_date.set_value(nToday);
+        	
+        	this.load_empInfo(); 
+        	this.load_wholeResList(); 
+        	this.load_S_Book();
+        	this.load_wholeEmpList();
+        	this.load_wholeResCode();
+        	
+        } 
+
+        //로드 로그인한 사원정보 
+        this.load_empInfo = function(){
+        	trace("로드함수 읽음: 사원정보");
+        	//this.ds_search_info.setColumn(0, "searchKeyword", '202105160042'); //조회할 사원번호 <----- 로그인한 사원번호!!! 
+        	
+        	
+        	//사원정보 
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadEmpInfo.do",
+        		inds :["ds_search_info=ds_search_info"], 
+        		outds :["ds_emp_info=ds_emp_info"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		trace("ds_emp_info : " + pThis.ds_emp_info.saveXML());
+        		trace("==여기까지 로딩완료 : 로그인 사원==");
+        	});
+        }
+
+        
+        //로드 지출결의서 전체 리스트  
+        this.load_wholeResList = function(obj,e){
+        	trace("로드함수 읽음: 지출결의서 리스트");
+        		
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadResList.do",
+        		inds :["ds_search_info=ds_search_info"], 
+        		outds :["ds_spending=ds_spending"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		//trace(" ds_spending : " + pThis.ds_spending.saveXML());
+        		trace("==여기까지 로딩완료 :지출결의서 리스트==");
+        	});
+        }
+
+        
+        //로드 전체 사원리스트  
+        this.load_wholeEmpList = function(){
+        	trace("로드함수 읽음: 전체 사원 리스트");
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadWholeEmpList.do",
+        		inds :[], 
+        		outds :["ds_EmpList=ds_EmpList"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		//trace("ds_EmpList : " + pThis.ds_EmpList.saveXML());
+        		trace("==여기까지 로딩완료 : 로드 전체 사원리스트==");
+        	});
+        }
+
+        //로드 지출유형 코드  
+        this.load_wholeResCode = function(){
+        	trace("로드함수 읽음: 지출유형 코드 ");
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadResCode.do",
+        		inds :[], 
+        		outds :["ds_rescode=ds_rescode"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		trace("ds_rescode : " + pThis.ds_rescode.saveXML());
+        		trace("==여기까지 로딩완료 : 지출유형 코드==");
+        	});
+        	
+        	this.ds_rescode.setColumn(0, "CODE_NO", '전체보기');
+        }
+
+        
+        //조회
+        this.btn_search_onclick = function(obj,e){
+        	var dateFrom =this.cal_start_date.value;
+        	var dateTo =this.cal_end_date.value;
+        	var resCode =this.combo_search_ResCode.value;
+        	var empInfo = this.edt_empnm.value;
+            trace("==dateFrom : ", dateFrom );
+            trace("==dateTo : ", dateTo );
+            
+            this.ds_search_info.setColumn(0, "searchDateFrom", dateFrom); 
+            this.ds_search_info.setColumn(0, "searchDateTo", dateTo);
+            this.ds_search_info.setColumn(0, "searchCondition", resCode);
+            this.ds_search_info.setColumn(0, "searchKeyword", empInfo); //조회할 사원번호 <----- 로그인한 사원번호!!! 
+        	
+        	//급여대장 선택조회 
+        	var oDatas1 =  {
+        		svcid : "search",
+        		sController : "selectResList.do",
+        		inds :["ds_search_info=ds_search_info"], 
+        		outds :["ds_spending=ds_spending"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+        	Iject.transaction(this,oDatas1,function(){
+        		if(this.errorcode < 0) //0:정상, this.errorcode<0:오류, this.errorcode>0:경고 
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;   //form object	      
+        		//trace(" selectResList : " + pThis.ds_spending.saveXML());
+        		trace("==여기까지 조회완료 :급여대장 선택조회==");
+        		
+        		//this.reload();
+        	});
+        	
+        // 	//사원정보 입력
+        // 	var empNo =this.ds_emp_info.getColumn(0, "EMP_NO");
+        // 	var empName =this.ds_emp_info.getColumn(0, "EMP_NAME");
+        // 	trace("조회시 사원이름 : ",empName, "|| 사원번호: ", empNo );
+        // 	this.edt_empnm.set_value(empName);
+        // 	this.edt_empno.set_value(empNo);
+        }
+
+        
+        //추가
+        this.btn_add_onclick = function(obj,e)
+        {
+        	var yn =Iject.confirm("지출결의서를 작성 하시겠습니까?");
+        	if (yn) {
+        		//현재시간
+        		var today = new Date();
+        		var nToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+""+(""+today.getDate()).padLeft(2,'0');
+        		
+        // 		var empNo = this.ds_emp_info.getColumn(0, "EMP_NO");
+        // 		var empName = this.ds_emp_info.getColumn(0, "EMP_NAME");
+        // 		var empInfo = empName+'('+empNo+')';
+        		
+        		var nRow = this.ds_spending.addRow();
+        		
+        		//작성창 활성
+        		this.edt_empNM.set_enable(true);
+        		this.btn_z_reg_empNM.set_enable(true);
+        		this.edt_sbookNo.set_enable(true);
+        		this.btn_z_sbookNo.set_enable(true);
+        		this.combo_resCode.set_enable(true);
+        		//this.edt_empNM.set_value(empInfo);
+        		this.cal_res_date.set_value(nToday);
+        		this.edt_totalCost.set_enable(true);
+        		this.Static01.set_visible(true);
+        		this.Static02.set_visible(true);
+        		this.Static03.set_visible(true);
+        		this.Static04.set_visible(true);
+        	}
+        }
+
+        //수정 
+        this.btn_modify_onclick = function(obj,e)
+        {
+        	//작성창 활성
+        	this.edt_sbookNo.set_enable(true);
+        	this.btn_z_sbookNo.set_enable(true);
+        	this.combo_resCode.set_enable(true);
+        	this.edt_modify_empNM.set_enable(true);
+        	this.btn_z_modify_empNM.set_enable(true);
+        	this.cal_modify_date.set_enable(true);
+        	this.edt_confim_empNM.set_enable(true);
+        	this.btn_z_confim_empNM.set_enable(true);
+        	this.cal_confirm_date.set_enable(true);
+        	this.edt_totalCost.set_enable(true);
+        	this.Static01.set_visible(true);
+        	this.Static02.set_visible(true);
+        	this.Static03.set_visible(true);
+        	this.Static04.set_visible(true);
+        }
+
+        
+        //저장버튼 클릭시  
+        this.btn_save_onclick = function(obj,e)
+        {
+        	this.alert("변경사항을 저장하시겠습니까?");
+        	this.fn_save("save");
+        }
+
+        //저장
+        this.fn_save = function(strid)
+        {	
+        	var curRowPos =this.ds_spending.rowposition;
+        	trace("curRowPos", curRowPos);
+        	
+            if (this.ds_spending.getColumn(curRowPos, "ATTITUDE_BOOK_ID") ==null|| 
+            this.ds_spending.getColumn(curRowPos, "RESOLUTION_CODE")==null||
+            this.ds_spending.getColumn(curRowPos, "TOTAL_COST")==null
+            ){
+        		alert("필수 기입창을 입력하세요.");
+        		return; 
+            } 
+            
+            var v = strid; 
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "modifyResList.do",			 
+        			  inds :["ds_spending=ds_spending:U", "empInfo="],
+        			  outds :[],			     
+        			  args  : [ ],
+        			  bAsync : true,  
+        			  nDataType : 0,   
+        			  bCompress :false,			  
+        			}; 
+        			
+        	Iject.transaction(this,oDatas,function(){   
+          
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg,"알림");			
+        		   return;
+        		}
+        		var pThis = this.fobj; 
+        		switch(v){
+        			case "save" : Iject.alert("저장완료");
+        			break;
+        			case "delete" : Iject.alert("삭제완료");
+        			break; 
+        	    }
+        	});
+        }
+
+        //삭제 
+        this.btn_delete_onclick = function(obj,e)
+        {
+        	rtnValue=this.confirm("삭제하시겠습니까?");
+        	var nRow = this.ds_spending.rowposition;
+        	this.ds_spending.deleteRow(nRow);
+        	
+        	if(rtnValue)
+        	{
+        		this.fn_save("delete");
+        	}
+        	else
+        	{
+        		this.load_atticode();
+        	}
+        }
+
+        
+        //급여대장번호 리스트  가져오기 
+        this.load_S_Book = function(){
+        	
+        	var searchKeyword = "";
+        	this.ds_search_info.setColumn(0, "searchKeyword", searchKeyword);
+        	this.ds_search_info.setColumn(0, "searchCondition", "NAME");	
+        	var oDatas =  {
+        		svcid : "search",
+        		sController : "loadSbookList.do",
+        		inds :["ds_search_info=ds_search_info"], 
+        		outds :["ds_S_BookCode=ds_S_BookCode"], 	     
+        		args  : [],
+        		bAsync : true,    
+        		nDataType : 0,   
+        		bCompress :false,	 		  
+        	}; 
+            
+        	Iject.transaction(this,oDatas,function(){
+         
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        		
+        		var pThis = this.fobj;      
+        		//trace("==메인: ds_S_BookCode : " + pThis.ds_S_BookCode.saveXML());
+        		trace("==여기까지 로딩완료: 급여대장번호리스트 가져오기 ==");
+        	});
+        };
+
+        
+        //지출결의서 리스트 전체보기 클릭시 
+        this.btn_wholeList_onclick = function(obj,e)
+        {
+        	this.load_wholeResList();
+        };
+
+        
+        //급여대장번호 모달창 콜백함수 
+        this.fn_sBook_popupCallback = function(strPopupID,strReturn)
+        {
+            if(strReturn == undefined){
+                trace("return 값 - undefined");
+                return;
+            }
+
+            if(strPopupID == "SALARY"){
+        		//this.alert("Return Value: " + strReturn);
+        		this.edt_sbookNo.set_value(strReturn);
+            }
+        };
+
+        
+
+        //급여대장번호 조회 버튼 클릭시 (모달창 띄우기) 
+        this.btn_z_sbookNo_onclick = function(obj,e){	
+        	
+        	
+        	//모달창 생성 
+        	var objChildFrame = new ChildFrame();  
+        	objChildFrame.init("SALARY", "absolute", 30, 30, 424, 340, null, null, "SALARY::Search_S_Book.xfdl");
+        	objChildFrame.set_dragmovetype("all");
+        	
+        	var objParam = {param1: this.ds_S_BookCode}
+        	trace("==메인 : ds_S_BookCode 데이터 넘기는중! ");
+        	
+        	objChildFrame.showModal(this.getOwnerFrame()
+                                  , objParam
+                                  , this
+                                  , "fn_sBook_popupCallback");
+
+        };
+
+        
+        //그리드 돋보기 클릭시 
+        this.Grid00_onexpandup = function(obj,e)
+        {
+        	this.btn_z_sbookNo_onclick();
+        }
+
+        
+        //사원 조회 버튼 클릭시
+        this.modal_empList = function(selStr){
+        	//모달창 생성 
+        	var objChildFrame = new ChildFrame();  
+        	objChildFrame.init(selStr, "absolute", 30, 30, 424, 340, null, null, "SALARY::Search_Emp_Book.xfdl");
+        	objChildFrame.set_dragmovetype("all");
+        	
+        	var objParam = {param1: this.ds_EmpList}
+        	trace("==메인 : ds_Emp_BookCode 데이터 넘기는중! ");
+        	
+        	objChildFrame.showModal(this.getOwnerFrame()
+                                  , objParam
+                                  , this
+                                  , "fn_empList_popupCallback");
+        }
+
+        //전체 사원리스트 모달창 콜백함수 
+        this.fn_empList_popupCallback = function(strPopupID,strReturn)
+        {
+            if(strReturn == undefined){
+                trace("return 값 - undefined");
+                return;
+            }
+        	
+        	if(strPopupID == "search"){
+        // 		var startIndex = strReturn.indexOf('(');
+        // 		trace("startIndex", startIndex);
+        // 		var endIndex = strReturn.indexOf(')');
+        // 		trace("endIndex", endIndex);
+        		this.edt_empnm.set_value(strReturn);
+            }
+        	
+        	
+            if(strPopupID == "modify"){
+        		this.edt_modify_empNM.set_value(strReturn);
+            }
+            
+            if(strPopupID == "reg"){
+        		this.edt_empNM.set_value(strReturn);
+            }
+            
+            if(strPopupID == "confirm1"){
+        		this.edt_confim_empNM.set_value(strReturn);
+            }
+        };
+
+        
+        //각 버튼 클릭시 사원조회 모달창 
+        this.btn_z_modify_empNM_onclick = function(obj,e)
+        {
+        	this.modal_empList("modify");
+        }
+
+        this.btn_z_confim_empNM_onclick = function(obj,e)
+        {
+        	this.modal_empList("confirm1");
+        }
+
+        this.btn_z_modify_empNM00_onclick = function(obj,e)
+        {
+        	this.modal_empList("search");
+        }
+
+        this.btn_z_reg_empNM_onclick = function(obj,e)
+        {
+        	this.modal_empList("reg");
+        }
+
+        this.edt_totalCost_oneditclick = function(obj,e)
+        {
+        	
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.sta_title.addEventHandler("onclick", this.sta_title_onclick, this);
+            this.sta_11.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.btn_search.addEventHandler("onclick", this.btn_search_onclick, this);
+            this.Grid00.addEventHandler("onexpandup", this.Grid00_onexpandup, this);
+            this.sta_15.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_33.addEventHandler("onclick", this.sta_33_onclick, this);
+            this.st_empNM.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_empNM.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.st_res_date.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.st_modify_empNM.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_modify_empNM.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.st_modify_date.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.st_confim_empNM.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_confim_empNM.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.st_confirm_date.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.st_totalCost.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.btn_add.addEventHandler("onclick", this.btn_add_onclick, this);
+            this.btn_modify.addEventHandler("onclick", this.btn_modify_onclick, this);
+            this.btn_delete.addEventHandler("onclick", this.btn_delete_onclick, this);
+            this.btn_save.addEventHandler("onclick", this.btn_save_onclick, this);
+            this.sta_10.addEventHandler("onclick", this.sta_33_onclick, this);
+            this.st_empnm.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_empnm.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.btn_z_modify_empNM.addEventHandler("onclick", this.btn_z_modify_empNM_onclick, this);
+            this.btn_z_confim_empNM.addEventHandler("onclick", this.btn_z_confim_empNM_onclick, this);
+            this.edt_totalCost.addEventHandler("oneditclick", this.edt_totalCost_oneditclick, this);
+            this.btn_search00.addEventHandler("onclick", this.btn_wholeList_onclick, this);
+            this.st_sbookNo.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_sbookNo.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.btn_z_sbookNo.addEventHandler("onclick", this.btn_z_sbookNo_onclick, this);
+            this.st_resCode.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.combo_resCode.addEventHandler("onitemchanged", this.Combo01_onitemchanged, this);
+            this.btn_z_modify_empNM00.addEventHandler("onclick", this.btn_z_modify_empNM00_onclick, this);
+            this.btn_z_reg_empNM.addEventHandler("onclick", this.btn_z_reg_empNM_onclick, this);
+
+        };
+
+        this.loadIncludeScript("SPENDING_RESOLRUTION.xfdl");
+
+       
+    };
+}
+)();

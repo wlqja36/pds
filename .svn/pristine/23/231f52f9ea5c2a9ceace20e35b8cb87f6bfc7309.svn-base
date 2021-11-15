@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+
+
+<mapper namespace="yjb_empMapper">
+	 <resultMap id="emp_yjb" type="nexacro.sample.vo.Oct_emp.YJB_EmpVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="emp_no" column="EMP_NO" />
+		<result property="emp_name" column="EMP_NAME" />
+		<result property="grade" column="GRADE" />
+		<result property="dept" column="DEPT" />
+		<result property="birth" column="BIRTH" />
+	</resultMap>
+	
+    <select id="yjb_selectEmpVoList" resultMap="emp_yjb" parameterType="nexacro.sample.vo.Oct_emp.YJB_EmpVO">
+		
+		SELECT ROWNUM, EMP_NO, EMP_NAME, GRADE, DEPT, BIRTH 
+		FROM (SELECT EMP_NO, EMP_NAME, TO_CHAR(BIRTH,'YY-MM-DD') BIRTH,
+		(SELECT CODE_NAME FROM COMMON_CODE_DETAIL WHERE GRADE_CODE=CODE_NO) GRADE,
+		(SELECT CODE_NAME FROM COMMON_CODE_DETAIL WHERE DEPT_CODE=CODE_NO) DEPT
+		FROM EMP ORDER BY EMP_NO DESC)
+		WHERE 1=1
+		<if test="searchCondition=='name'">
+			AND EMP_NAME LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition=='dept'">
+			AND DEPT LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition=='grade'">
+			AND GRADE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		<if test="searchCondition=='total'">
+			AND EMP_NAME LIKE '%' || #{searchKeyword} || '%'
+			OR DEPT LIKE '%' || #{searchKeyword} || '%'
+			OR GRADE LIKE '%' || #{searchKeyword} || '%'
+		</if>
+		ORDER BY EMP_NAME ASC
+		
+		
+		
+		
+		
+	</select>
+</mapper>

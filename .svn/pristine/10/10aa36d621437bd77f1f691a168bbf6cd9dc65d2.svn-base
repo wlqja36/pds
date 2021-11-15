@@ -1,0 +1,988 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+
+<sqlMap namespace="salary_detail">
+<!-- 
+	<typeAlias alias="salaryVO" type="nexacro.sample.vo.salary.salary_detailVO" />
+	<typeAlias alias="salEmpVO" type="nexacro.sample.vo.salary.EmpEmpVo" />
+	<typeAlias alias="salSalBookVO" type="nexacro.sample.vo.salary.SalSalaryBookVO" />
+	
+	<typeAlias alias="salEmpVO" type="nexacro.sample.vo.salary.EmpEmpVo" />
+ -->
+ 	<!-- 검색 -->
+	<typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>	
+	
+	<!-- 급여 테이블 -->
+	<typeAlias alias="salPopVO" type="nexacro.sample.vo.salary.SalaryVO" />	
+	
+	<!-- 탭 영역 세부 급여 -->
+	<typeAlias alias="bonusVO" type="nexacro.sample.vo.salary.BonusSalVo" />
+	<typeAlias alias="costVO" type="nexacro.sample.vo.salary.CostSalVO" />
+	<typeAlias alias="taxVO" type="nexacro.sample.vo.salary.TaxSalVo" />
+		
+	<!-- join 필요하다고 함 -->
+	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap" />
+		
+	<!-- empSearch 건드려보자 -->
+	
+
+	<!-- salary /// 조인문 때문에 급하게 vo 수정 중 hasmap은 도대체 vo가 어떻게 들어가는 거야1!!!-->
+	<resultMap id="sList" class="salPopVO">
+		<result property="salaryBookNo"   column="SALARY_BOOK_NO" />	
+		<result property="empNo"	  column="EMP_NO" />
+		<result property="basicMoney"   column="BASIC_MONEY" />
+		<result property="bonusSum"   column="BONUS_SUM" />
+		<result property="costSum"   column="COST_SUM" />
+		<result property="taxSum"   column="TAX_SUM" />
+		<result property="minusTax"   column="MINUS_TAX" />
+	</resultMap>
+
+	
+	
+	<resultMap id="bon" class="bonusVO">
+		<result property="salary_book_no" column="SALARY_BOOK_NO" />	
+		<result property="emp_no" column="EMP_NO" />
+		<result property="bonus_code" column="BONUS_CODE" />
+		<result property="bonus_money" column="BONUS_MONEY" />
+	</resultMap>	
+	<resultMap id="cost" class="costVO">
+		<result property="salary_book_no" column="SALARY_BOOK_NO" />	
+		<result property="emp_no" column="EMP_NO" />
+		<result property="cost_no" column="COST_NO" />
+		<result property="cost_code" column="COST_CODE" />
+		<result property="cost_money" column="COST_MONEY" />
+	</resultMap>	
+	<resultMap id="tax" class="TaxVO">
+		<result property="salary_book_no" column="SALARY_BOOK_NO" />	
+		<result property="emp_no" column="EMP_NO" />
+		<result property="tax_code" column="TAX_CODE" />
+		<result property="tax_money" column="TAX_MONEY" />
+	</resultMap>	
+	
+		<!-- empSearch 건드려 보자 -->
+	<resultMap id="salEmp" class="salPopVO">
+		<result property="salary_book_no" column="SALARY_BOOK_NO" />
+		<result property="salary_book_nm" column="SALARY_BOOK_NM" />
+	</resultMap>
+	
+	
+	
+<!-- 
+
+SALARY
+select 부분
+
+ -->	
+  	
+   	<!-- 계산식 없이. 테이블에 있는 정보를 그대로 가져오는 SELECT-필요 없는 join 다 제거 -->
+   	<!-- 사원번호로 조인. SELECT 부분     	-->
+   	<!-- 이거 SELECT 부분을 다 찢어놨는데 합쳐서 급여부분 SELECT는 하나로 합칠 수 있음. 역동적인 뭔가를 하면 되는듯 
+	<select id="salaryVO.selectSalaryEmpMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                   
+		    B.SALARY_BOOK_NM,                                                                                                    
+		    C.EMP_NAME,                                                                                                          
+			A.SALARY_BOOK_NO,                                                                                                    
+			A.EMP_NO,                                                                                                            
+		    A.BASIC_MONEY,                                                                                                       
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS BONUS_SUM,  
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS COST_SUM,        
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS TAX_SUM,
+		    (A.BASIC_MONEY +
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) +
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) -
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO)) AS MINUS_TAX
+		FROM SALARY A                                                                                                            
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                 
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO        
+		WHERE                                                                                        
+			A.EMP_NO=#searchKeyword#                                                          
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO         
+   	</select>-->
+   	
+   	<!-- 사원은 발리데이션 추가하는 것만 아니면 위처럼 해도 되는데 // 급여대장은 직접 타이핑-처음 띄우자마자 동작 되야해서 /// 아니 유저 저것도 같은 문제가 있었네!!! -->
+   	<!-- 급여대장번호로 조인. SELECT 부분     	
+	<select id="salaryVO.selectSalarySalBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                   
+		    B.SALARY_BOOK_NM,                                                                                                    
+		    C.EMP_NAME,                                                                                                          
+			A.SALARY_BOOK_NO,                                                                                                    
+			A.EMP_NO,                                                                                                            
+		    A.BASIC_MONEY,                                                                                                       
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS BONUS_SUM,  
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS COST_SUM,        
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS TAX_SUM,
+		    (A.BASIC_MONEY +
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) +
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) -
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO)) AS MINUS_TAX
+		FROM SALARY A                                                                                                            
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                 
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO 
+		<isNotEmpty property="salaryBookNo">
+		WHERE 
+			A.SALARY_BOOK_NO = #salaryBookNo#
+		</isNotEmpty>
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO 
+   	</select>-->
+   	
+   	<!-- 계산식 없이. 테이블에 있는 정보를 그대로 가져오는 SELECT-필요 없는 join 다 제거 -->
+   	<!-- 사원번호로 조인. SELECT 부분     	-->
+   	<!-- 이거 SELECT 부분을 다 찢어놨는데 합쳐서 급여부분 SELECT는 하나로 합칠 수 있음. 역동적인 뭔가를 하면 되는듯 -->
+	<select id="salaryVO.selectSalaryEmpMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                   
+		    B.SALARY_BOOK_NM,                                                                                                    
+		    C.EMP_NAME,                                                                                                          
+			A.SALARY_BOOK_NO,                                                                                                    
+			A.EMP_NO,                                                                                                             
+		    A.BASIC_MONEY,                                                                                                       
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS BONUS_SUM,  
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS COST_SUM,        
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS TAX_SUM,
+		    (A.BASIC_MONEY +
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) +
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) -
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO)) AS MINUS_TAX,
+		    CONCAT(
+		        CONCAT(C.EMP_NAME,'('),
+		        CONCAT(A.EMP_NO,')')
+		         ) as EMP_USER
+		FROM SALARY A                                                                                                            
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                 
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO        
+		WHERE                                                                                        
+			A.EMP_NO=#searchKeyword#                                                          
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO         
+   	</select>
+   	
+   	
+   	
+   	<!-- 사원은 발리데이션 추가하는 것만 아니면 위처럼 해도 되는데 // 급여대장은 직접 타이핑-처음 띄우자마자 동작 되야해서 /// 아니에 유저 저것도 같은 문제가 있었네!!! -->
+   	<!-- 급여대장번호로 조인. SELECT 부분 -->    	
+	<select id="salaryVO.selectSalarySalBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                   
+		    B.SALARY_BOOK_NM,                                                                                                    
+		    C.EMP_NAME,                                                                                                          
+			A.SALARY_BOOK_NO,                                                                                                    
+			A.EMP_NO,                                                                                                            
+		    A.BASIC_MONEY,                                                                                                       
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS BONUS_SUM,  
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS COST_SUM,        
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS TAX_SUM,
+		    (A.BASIC_MONEY +
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) +
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) -
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO)) AS MINUS_TAX,
+		    CONCAT(
+		        CONCAT(C.EMP_NAME,'('),
+		        CONCAT(A.EMP_NO,')')
+		         ) as EMP_USER
+		FROM SALARY A                                                                                                            
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                 
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO 
+		<isNotEmpty property="salaryBookNo">
+		WHERE 
+			A.SALARY_BOOK_NO = #salaryBookNo#
+		</isNotEmpty>
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO 
+   	</select>
+
+
+
+<!-- 위에 두개 지울거임 -->
+
+
+	<!-- 조인-하단 그리드 변경시 급여 테이블에 변화 반영을 위한 급여대장번호+사원번호 SELECT -->
+	<!-- 급여 SELECT -->
+   	<!-- 급여대장번호+사원번호 SELECT   //// 나중에는 위의 세개의 SELECT 문을 하나로 합쳐서 쓸거임 -->
+	<select id="salaryVO.selectSalaryEmpBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                   
+		    B.SALARY_BOOK_NM,                                                                                                    
+		    C.EMP_NAME,                                                                                                          
+			A.SALARY_BOOK_NO,                                                                                                    
+			A.EMP_NO,                                                                                                            
+		    A.BASIC_MONEY,                                                                                                       
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS BONUS_SUM,  
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS COST_SUM,        
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS TAX_SUM,
+		    (A.BASIC_MONEY +
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) +
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) -
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO)) AS MINUS_TAX,
+		    CONCAT(
+		        CONCAT(C.EMP_NAME,'('),
+		        CONCAT(A.EMP_NO,')')
+		         ) as EMP_USER
+		FROM SALARY A                                                                                                            
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO 
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO   
+		<dynamic prepend="WHERE">
+			<isNotEmpty prepend="AND" property="salaryBookNo">
+				A.SALARY_BOOK_NO = #salaryBookNo#
+			</isNotEmpty>
+			<isNotEmpty prepend="AND" property="empNo">
+				A.EMP_NO = #empNo# 
+			</isNotEmpty>
+		</dynamic>                                                                                     
+		GROUP BY                                                                                                                   
+		    A.SALARY_BOOK_NO,                                                                                                      
+			A.EMP_NO,                                                                                                              
+		    B.SALARY_BOOK_NM,                                                                                                      
+		    C.EMP_NAME,                                                                                                            
+		    A.BASIC_MONEY                                                                                                          
+		ORDER BY A.SALARY_BOOK_NO	                                                                                     
+   	</select>	
+   	
+   	
+   	
+	<!-- 조인-하단 그리드 변경시 급여 테이블에 변화 반영을 위한 급여대장번호+사원번호 SELECT -->
+	<!-- 급여 SELECT -->
+   	<!-- 급여대장번호+사원번호 SELECT   //// 나중에는 위의 세개의 SELECT 문을 하나로 합쳐서 쓸거임 
+	<select id="salaryVO.selectSalaryEmpBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                   
+		    B.SALARY_BOOK_NM,                                                                                                    
+		    C.EMP_NAME,                                                                                                          
+			A.SALARY_BOOK_NO,                                                                                                    
+			A.EMP_NO,                                                                                                            
+		    A.BASIC_MONEY,                                                                                                       
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS BONUS_SUM,  
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS COST_SUM,        
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO) AS TAX_SUM,
+		    (A.BASIC_MONEY +
+		    (SELECT
+		        NVL(SUM(D.BONUS_MONEY),0)
+		    FROM
+		        SAL_BONUS D
+		    WHERE
+		        D.EMP_NO = A.EMP_NO
+		        AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO) +
+		    (SELECT
+		        NVL(SUM(E.COST_MONEY),0)
+		    FROM
+		        SAL_COST E
+		    WHERE
+		        E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO) -
+		    (SELECT
+		       NVL(SUM(F.TAX_MONEY),0)
+		    FROM
+		        SAL_TAX F
+		    WHERE
+		        F.EMP_NO = A.EMP_NO
+		        AND F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO)) AS MINUS_TAX
+		FROM SALARY A                                                                                                            
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO 
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO                               
+		WHERE                                                                                                                      
+			A.EMP_NO = #empNo# AND A.SALARY_BOOK_NO = #salaryBookNo#                                                                                      
+		GROUP BY                                                                                                                   
+		    A.SALARY_BOOK_NO,                                                                                                      
+			A.EMP_NO,                                                                                                              
+		    B.SALARY_BOOK_NM,                                                                                                      
+		    C.EMP_NAME,                                                                                                            
+		    A.BASIC_MONEY                                                                                                          
+		ORDER BY A.SALARY_BOOK_NO	                                                                                     
+   	</select>	-->
+	
+	<!-- 0530 -->
+	
+   	<!-- SUM이상하지만 뭔가 되긴 된거 서브쿼리 이상하면 지우고 이거 다시 쓸거임 -->
+   	<!-- 계산식 없이. 테이블에 있는 정보를 그대로 가져오는 SELECT-필요 없는 join 다 제거 -->
+   	<!-- 사원번호로 조인. SELECT 부분     	-->
+   	<!-- 이거 이너조인이라서 join 문의 on에 추가로 조건을 줘도 결과가 모두 있는 하나뿐이 가져오지 않음. 
+	<select id="salaryVO.selectSalaryEmpMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                       
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+			A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    A.BASIC_MONEY,                                                                           
+			NVL(SUM(D.BONUS_MONEY),0) AS BONUS_SUM,                                                         
+		    NVL(SUM(E.COST_MONEY),0) AS COST_SUM,                                                           
+		    NVL(SUM(F.TAX_MONEY),0) AS TAX_SUM,                                                             
+		    NVL((A.BASIC_MONEY + NVL(SUM(D.BONUS_MONEY),0) + NVL(SUM(E.COST_MONEY),0) - NVL(SUM(F.TAX_MONEY),0)),0) AS MINUS_TAX 
+		FROM SALARY A                                           
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO 
+		    LEFT OUTER JOIN SAL_BONUS D ON D.EMP_NO = A.EMP_NO AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                   
+		    LEFT OUTER JOIN SAL_COST E ON E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                    
+		    LEFT OUTER JOIN SAL_TAX F ON F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO        
+		WHERE                                                                                        
+			A.EMP_NO=#searchKeyword#                                                          
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO         
+   	</select>-->
+   	<!-- 급여대장번호로 조인. SELECT 부분     	
+	<select id="salaryVO.selectSalarySalBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                       
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+			A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    A.BASIC_MONEY,                                                                           
+			NVL(SUM(D.BONUS_MONEY),0) AS BONUS_SUM,                                                         
+		    NVL(SUM(E.COST_MONEY),0) AS COST_SUM,                                                           
+		    NVL(SUM(F.TAX_MONEY),0) AS TAX_SUM,                                                             
+		    NVL((A.BASIC_MONEY + NVL(SUM(D.BONUS_MONEY),0) + NVL(SUM(E.COST_MONEY),0) - NVL(SUM(F.TAX_MONEY),0)),0) AS MINUS_TAX 
+		FROM SALARY A                                           
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO 
+		    LEFT OUTER JOIN SAL_BONUS D ON D.EMP_NO = A.EMP_NO AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                   
+		    LEFT OUTER JOIN SAL_COST E ON E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                    
+		    LEFT OUTER JOIN SAL_TAX F ON F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO        
+		<isNotEmpty property="salaryBookNo">
+		WHERE 
+			A.SALARY_BOOK_NO = #salaryBookNo#
+		</isNotEmpty>
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO 
+   	</select>-->
+   	
+
+	<!-- 조인-하단 그리드 변경시 급여 테이블에 변화 반영을 위한 급여대장번호+사원번호 SELECT -->
+	<!-- 급여 SELECT -->
+   	<!-- 급여대장번호+사원번호 SELECT    	
+	<select id="salaryVO.selectSalaryEmpBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                                                     
+		    B.SALARY_BOOK_NM,                                                                                                      
+		    C.EMP_NAME,                                                                                                            
+			A.SALARY_BOOK_NO,                                                                                                      
+			A.EMP_NO,                                                                                                              
+		    A.BASIC_MONEY,                                                                                                         
+			NVL(SUM(D.BONUS_MONEY),0) AS BONUS_SUM,                                                                                
+		    NVL(SUM(E.COST_MONEY),0) AS COST_SUM,                                                                                  
+		    NVL(SUM(F.TAX_MONEY),0) AS TAX_SUM,                                                                                    
+		    NVL((A.BASIC_MONEY + NVL(SUM(D.BONUS_MONEY),0) + NVL(SUM(E.COST_MONEY),0) - NVL(SUM(F.TAX_MONEY),0)),0) AS MINUS_TAX   
+		FROM SALARY A                                                                                                              
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                   
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO                                                                           
+		    LEFT OUTER JOIN SAL_BONUS D ON D.EMP_NO = A.EMP_NO AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO                             
+		    LEFT OUTER JOIN SAL_COST E ON E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO                              
+		    LEFT OUTER JOIN SAL_TAX F ON F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO                               
+		WHERE                                                                                                                      
+			A.EMP_NO = #empNo# AND A.SALARY_BOOK_NO = #salaryBookNo#                                                                                      
+		GROUP BY                                                                                                                   
+		    A.SALARY_BOOK_NO,                                                                                                      
+			A.EMP_NO,                                                                                                              
+		    B.SALARY_BOOK_NM,                                                                                                      
+		    C.EMP_NAME,                                                                                                            
+		    A.BASIC_MONEY                                                                                                          
+		ORDER BY A.SALARY_BOOK_NO	                                                                                     
+   	</select>	-->
+	
+	
+   	
+   	
+   	
+   	<!-- 이거 필요 없는 부분 지울거야. -->
+   	<!-- 급여대장번호 전체 조회 추가. SELECT 부분   
+  		<isNotNull>
+		WHERE 
+			A.SALARY_BOOK_NO = #salaryBookNo#
+		</isNotNull>
+		
+		  			<isParameterPresent prepend="WHERE"> 
+          	A.SALARY_BOOK_NO = #salaryBookNo#
+		</isParameterPresent>
+	<select id="salaryVO.selectSalarySalBookMapList" parameterClass="java.util.HashMap" resultClass="egovMap" remapResults="true" >
+		SELECT                                                                                       
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+			A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    A.BASIC_MONEY,                                                                           
+			NVL(SUM(D.BONUS_MONEY),0) AS BONUS_SUM,                                                         
+		    NVL(SUM(E.COST_MONEY),0) AS COST_SUM,                                                           
+		    NVL(SUM(F.TAX_MONEY),0) AS TAX_SUM,                                                             
+		    NVL((A.BASIC_MONEY + NVL(SUM(D.BONUS_MONEY),0) + NVL(SUM(E.COST_MONEY),0) - NVL(SUM(F.TAX_MONEY),0)),0) AS MINUS_TAX 
+		FROM SALARY A                                           
+		    LEFT OUTER JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                
+		    LEFT OUTER JOIN EMP C ON C.EMP_NO = A.EMP_NO 
+		    LEFT OUTER JOIN SAL_BONUS D ON D.EMP_NO = A.EMP_NO AND D.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                   
+		    LEFT OUTER JOIN SAL_COST E ON E.EMP_NO = A.EMP_NO AND E.SALARY_BOOK_NO = A.SALARY_BOOK_NO                                                    
+		    LEFT OUTER JOIN SAL_TAX F ON F.EMP_NO = A.EMP_NO AND F.SALARY_BOOK_NO = A.SALARY_BOOK_NO        
+		WHERE                                                                                        
+			A.SALARY_BOOK_NO = #salaryBookNo#                                                          
+		GROUP BY                                                                                     
+		    A.SALARY_BOOK_NO,                                                                        
+			A.EMP_NO,                                                                                
+		    B.SALARY_BOOK_NM,                                                                        
+		    C.EMP_NAME,                                                                              
+		    A.BASIC_MONEY                                                                            
+		ORDER BY A.SALARY_BOOK_NO 
+   	</select>-->
+
+	
+
+
+
+
+
+	<!-- 하단 세부 -->
+	<!-- 조인 사원번호 수당, 경비, 세금 SELECT -->
+ 	<select id="bonusSalVo.selectBonusEmpMapList" parameterClass="java.util.HashMap"  resultClass="egovMap" remapResults="true">
+  			SELECT
+  				A.SALARY_BOOK_NO,
+				B.ATTITUDE_BOOK_ID,
+  				A.EMP_NO,
+  				C.EMP_NAME,
+  				A.BONUS_CODE,
+				A.BONUS_MONEY
+			FROM SAL_BONUS A
+			    JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO
+			    JOIN EMP C ON C.EMP_NO = A.EMP_NO
+            WHERE A.EMP_NO = #searchKeyword#     
+            ORDER BY A.SALARY_BOOK_NO, A.BONUS_CODE
+    </select>	
+   <select id="costSalVO.selectCostEmpMapList" parameterClass="java.util.HashMap"  resultClass="egovMap" remapResults="true">
+  			SELECT
+  				A.SALARY_BOOK_NO,
+				B.ATTITUDE_BOOK_ID,
+  				A.EMP_NO,
+  				C.EMP_NAME,
+  				A.COST_NO,
+  				A.COST_CODE,
+				A.COST_MONEY
+			FROM SAL_COST A
+			    JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO
+			    JOIN EMP C ON C.EMP_NO = A.EMP_NO
+            WHERE A.EMP_NO = #searchKeyword#  
+            ORDER BY A.SALARY_BOOK_NO, A.COST_NO
+    </select>	
+   <select id="taxSalVo.selectTaxEmpMapList" parameterClass="java.util.HashMap"  resultClass="egovMap" remapResults="true">
+  			SELECT
+  				A.SALARY_BOOK_NO,
+				B.ATTITUDE_BOOK_ID,
+  				A.EMP_NO,
+  				C.EMP_NAME,
+  				A.TAX_CODE,
+				A.TAX_MONEY
+			FROM SAL_TAX A
+			    JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO
+			    JOIN EMP C ON C.EMP_NO = A.EMP_NO
+            WHERE A.EMP_NO = #searchKeyword#   
+            ORDER BY A.SALARY_BOOK_NO, A.TAX_CODE
+    </select>	
+    
+    
+    
+	<!-- 조인-그리드 클릭시 수당, 경비, 세금 SELECT -->
+	<!-- 하단 세부 -->
+
+ 	<select id="bonusSalVo.selectBonusEmpBookMapList" parameterClass="java.util.HashMap"  resultClass="egovMap" remapResults="true">
+  			SELECT
+  				A.SALARY_BOOK_NO,
+				B.ATTITUDE_BOOK_ID,
+  				A.EMP_NO,
+  				C.EMP_NAME,
+  				A.BONUS_CODE,
+				A.BONUS_MONEY
+			FROM SAL_BONUS A
+			    JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO
+			    JOIN EMP C ON C.EMP_NO = A.EMP_NO
+            WHERE A.EMP_NO = #searchKeyword# AND A.SALARY_BOOK_NO = #searchCondition# 
+            ORDER BY A.BONUS_CODE       
+    </select>	
+   <select id="costSalVO.selectCostEmpBookMapList" parameterClass="java.util.HashMap"  resultClass="egovMap" remapResults="true">
+  			SELECT
+  				A.SALARY_BOOK_NO,
+				B.ATTITUDE_BOOK_ID,
+  				A.EMP_NO,
+  				C.EMP_NAME,
+  				A.COST_NO,
+  				A.COST_CODE,
+				A.COST_MONEY
+			FROM SAL_COST A
+			    JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO
+			    JOIN EMP C ON C.EMP_NO = A.EMP_NO
+            WHERE A.EMP_NO = #searchKeyword# AND A.SALARY_BOOK_NO = #searchCondition#  
+            ORDER BY A.COST_NO          
+    </select>	
+   <select id="taxSalVo.selectTaxEmpBookMapList" parameterClass="java.util.HashMap"  resultClass="egovMap" remapResults="true">
+  			SELECT
+  				A.SALARY_BOOK_NO,
+				B.ATTITUDE_BOOK_ID,
+  				A.EMP_NO,
+  				C.EMP_NAME,
+  				A.TAX_CODE,
+				A.TAX_MONEY
+			FROM SAL_TAX A
+			    JOIN SALARY_BOOK B ON B.SALARY_BOOK_NO = A.SALARY_BOOK_NO
+			    JOIN EMP C ON C.EMP_NO = A.EMP_NO
+            WHERE A.EMP_NO = #searchKeyword# AND A.SALARY_BOOK_NO = #searchCondition# 
+            ORDER BY A.TAX_CODE        
+    </select>	
+
+	
+	
+	
+<!-- 
+
+insert - delete - update 부분
+
+ -->	
+	
+	<!--  -->
+	<!-- SALARY 조인문 없는 salary list cud - modify -->
+	<!--  -->
+	 
+	 
+         <insert id="salary_detailVO.insertSalaryVOList" parameterClass="salPopVO" >
+  			INSERT INTO SALARY (
+  				SALARY_BOOK_NO,
+				EMP_NO,
+                BASIC_MONEY,
+  				BONUS_SUM,
+  				COST_SUM,
+  				TAX_SUM,
+  				MINUS_TAX
+            ) VALUES (
+                #salaryBookNo#,
+                #empNo#,
+                #basicMoney#,
+                #bonusSum#,
+                #costSum#,
+                #taxSum#,
+                #minusTax#
+            )    
+    	</insert>
+
+
+      <update id="salary_detailVO.updateSalaryVOList" parameterClass="salPopVO">
+        <![CDATA[
+            UPDATE SALARY 
+            SET 
+				SALARY_BOOK_NO = #salaryBookNo#,  
+				EMP_NO         = #empNo#,         
+				BASIC_MONEY    = #basicMoney#,    
+				BONUS_SUM      = #bonusSum#,      
+				COST_SUM       = #costSum#,       
+				TAX_SUM        = #taxSum#,        
+				MINUS_TAX      = #minusTax#       
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+        ]]>
+    </update>
+
+
+    <delete id="salary_detailVO.deleteSalaryVOList" parameterClass="salPopVO">
+        <![CDATA[
+	        DELETE
+			FROM
+				SALARY
+			WHERE
+				EMP_NO = #empNo#
+			AND
+				SALARY_BOOK_NO = #salaryBookNo#
+        ]]>
+	</delete> 
+
+	<!--  -->
+	<!-- SALARY 조인문 없는 salary list cud - modify  -->
+	<!--  -->
+
+
+	<!--  -->
+	<!-- BONUS 조인문 없는 하단 list cud - modify -->
+	<!--  -->
+	
+	 
+         <insert id="salary_bonusVO.insertBonusVOList" parameterClass="bonusVO" >
+  			INSERT INTO SAL_BONUS (
+  				SALARY_BOOK_NO,
+				EMP_NO,
+                BONUS_CODE,
+  				BONUS_MONEY			  				
+            ) VALUES (
+                #salaryBookNo#,
+                #empNo#,
+                #bonusCode#,
+                #bonusMoney#
+            )    
+    	</insert>
+
+	<!-- 코드 중복 방지를 위해  pk 코드를 잡아 놓은 것도 있고 이미 있는 코드면 거기서 금액만 바꿀 수 있도록 함. -->
+      <update id="salary_bonusVO.updateBonusVOList" parameterClass="bonusVO">
+        <![CDATA[
+            UPDATE SAL_BONUS 
+            SET 
+				BONUS_MONEY=#bonusMoney#
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+			AND
+				BONUS_CODE=#bonusCode#
+        ]]>
+    </update>
+
+
+    <delete id="salary_bonusVO.deleteBonusVOList" parameterClass="bonusVO">
+        <![CDATA[
+            DELETE FROM SAL_BONUS 
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+			AND
+				BONUS_CODE=#bonusCode#
+        ]]>
+	</delete> 
+	
+	<!--  -->
+	<!-- BOUNS 조인문 없는 하단 list cud - modify -->
+	<!--  -->
+	
+	
+	<!--  -->
+	<!-- COST 조인문 없는 하단 list cud - modify -->
+	<!--  -->
+	
+	 <!-- 순번은 시퀀스로 자동으로 들어감 들어감. -->
+         <insert id="salary_costVO.insertCostVOList" parameterClass="costVO" >
+  			INSERT INTO SAL_COST (
+  				SALARY_BOOK_NO,
+				EMP_NO,
+                COST_NO,
+  				COST_CODE,
+  				COST_MONEY  				
+            ) VALUES (
+                #salaryBookNo#,
+                #empNo#,
+                cost_no_seq.nextval,
+                #costCode#,
+                #costMoney#
+            )    
+    	</insert>
+
+	<!-- 경비는 내역까지 중복 가능하니 코드도 수정할 수 있음 -->
+      <update id="salary_costVO.updateCostVOList" parameterClass="costVO">
+        <![CDATA[
+            UPDATE SAL_COST 
+            SET
+				COST_CODE =#costCode#,
+				COST_MONEY =#costMoney#
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+			AND
+				COST_NO =#costNo#
+        ]]>
+    </update>
+
+
+    <delete id="salary_costVO.deleteCostVOList" parameterClass="costVO">
+        <![CDATA[
+            DELETE FROM SAL_COST 
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+			AND
+				COST_NO =#costNo#
+        ]]>
+	</delete> 
+
+	
+	<!--  -->
+	<!-- COST 조인문 없는 하단 list cud - modify -->
+	<!--  -->
+	
+	
+	<!--  -->
+	<!-- TAX 조인문 없는 하단 list cud - modify -->
+	<!--  -->
+		 
+        <insert id="salary_taxVO.insertTaxVOList" parameterClass="taxVO" >
+  			INSERT INTO SAL_TAX (
+  				SALARY_BOOK_NO,
+				EMP_NO,
+                TAX_CODE,
+  				TAX_MONEY
+            ) VALUES (
+                #salaryBookNo#,
+                #empNo#,
+                #taxCode#,
+                #taxMoney#
+            )    
+    	</insert>
+
+
+      <update id="salary_taxVO.updateTaxVOList" parameterClass="taxVO">
+        <![CDATA[
+            UPDATE SAL_TAX 
+            SET 
+				TAX_MONEY = #taxMoney#
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+			AND
+				TAX_CODE = #taxCode#
+        ]]>
+    </update>
+
+	<delete id="salary_taxVO.deleteTaxVOList" parameterClass="taxVO">
+        <![CDATA[
+            DELETE FROM SAL_TAX 
+            WHERE EMP_NO=#empNo#
+            AND
+				SALARY_BOOK_NO = #salaryBookNo#
+			AND
+				TAX_CODE = #taxCode#
+        ]]>
+	</delete>
+	
+	
+	<!--  -->
+	<!-- TAX 조인문 없는 하단 list cud - modify -->
+	<!--  -->
+	
+
+
+	<!-- emp 건드려 보자 -->
+	<!-- 이거 그대로 급여대장 검색으로 바꾸자 -->
+	<select id="salary.selectEmpList" resultMap="salEmp" parameterClass="salPopVO">
+		SELECT ROWNUM, SALARY_BOOK_NO, SALARY_BOOK_NM		
+		FROM SALARY_BOOK  
+		WHERE 1=1
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="salary_book_nm">
+						SALARY_BOOK_NM LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="salary_book_no">
+						SALARY_BOOK_NO LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+			<dynamic>
+				<isEqual prepend=" AND " property="search_condition" compareValue="total">
+						SALARY_BOOK_NO LIKE '%' || #keyword# || '%' 
+						OR SALARY_BOOK_NM LIKE '%' || #keyword# || '%'
+				</isEqual>
+			</dynamic>
+		ORDER BY SALARY_BOOK_NO DESC
+	</select>
+	
+	
+	
+
+</sqlMap>
+    

@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="idSearch" left="0" top="0" width="300" height="270" titletext="아이디 찾기" onload="idSearch_onload">
+    <Layouts>
+      <Layout>
+        <Div id="joinTitle" taborder="0" text="  아이디 찾기" left="9" top="6" width="285" height="50" style="align:left;background:#3366ffff;color:#ffffffff;font:bold 12 Dotum;" titletext="비밀번호 변경">
+          <Layouts>
+            <Layout width="285" height="50"/>
+          </Layouts>
+        </Div>
+        <ImageViewer id="img_titlebg1" taborder="4" left="9" top="64" width="285" height="200" style="background:lavenderblush;"/>
+        <Static id="Static29" taborder="5" text="이름, 휴대전화번호, 이메일을 입력해주세요" left="14" top="75" width="270" height="25" style="font:bold 9 Dotum,굴림;"/>
+        <Static id="Static02" taborder="6" left="11" top="112" width="280" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="Static00" taborder="7" left="11" top="136" width="280" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="Static01" taborder="8" left="11" top="160" width="280" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="Static03" taborder="9" text="이름" left="11" top="112" width="95" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 dotum;"/>
+        <Static id="Static04" taborder="10" text="휴대전화번호" left="11" top="136" width="95" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 dotum;"/>
+        <Static id="Static05" taborder="11" text="이메일" left="11" top="160" width="95" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 dotum;"/>
+        <Button id="Button00" taborder="12" text="찾기" left="86" top="208" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="13" text="닫기" left="171" top="208" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" titletext="회원가입창" onclick="Button01_onclick"/>
+        <MaskEdit id="MaskEdit00" taborder="2" displaynulltext="'-' 제외 숫자만 입력" type="string" mask="###-####-####" autoselect="true" left="113" top="139" width="170" height="19" style="align:left middle;"/>
+        <Edit id="Edit02" taborder="3" inputtype="number,english,dot,symbol" displaynulltext="예) test@test.com" left="113" top="163" width="170" height="19"/>
+        <Edit id="Edit01" taborder="1" left="113" top="116" width="170" height="19" enableevent="true"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item0" compid="Edit01" propid="value" datasetid="ds_search" columnid="emp_name"/>
+      <BindItem id="item1" compid="MaskEdit00" propid="value" datasetid="ds_search" columnid="cell_phone"/>
+      <BindItem id="item2" compid="Edit02" propid="value" datasetid="ds_search" columnid="email"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="emp_name" type="STRING" size="256"/>
+          <Column id="cell_phone" type="STRING" size="256"/>
+          <Column id="email" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_result">
+        <ColumnInfo>
+          <Column id="emp_id" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	if(this.Edit01.value == null){
+		this.alert("이름을 입력해주세요");
+		this.Edit01.setFocus();
+		return;
+	}else if(this.MaskEdit00.value == null){
+		this.alert("휴대전화번호를 입력해주세요");
+		this.MaskEdit00.setFocus();
+		return;
+	}else if(this.Edit02.value == null){
+		this.alert("이메일 주소를 입력해주세요");
+		this.Edit02.setFocus();
+		return;
+	}
+	
+	this.gfn_transaction(this,
+					"searchId",
+					"administrator/searchId.do",
+					"ds_search=ds_search",
+					"ds_result=ds_output",
+					"",
+					"transaction_callback"
+					);
+}
+
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		this.alert("오류입니다. 관리자에게 문의하십시오");
+		return;
+	}
+	
+	if(this.ds_result.getColumn(this.ds_result.rowposition,"emp_id")=="NONE")
+	{
+		alert("아이디를 찾을 수 없습니다. 입력 정보를 다시 확인해주세요");
+		this.ds_result.clear();
+	}
+	else
+	{
+		alert("회원님의 아이디는 " + this.ds_result.getColumn(this.ds_result.rowposition,"emp_id") + " 입니다.");
+		this.ds_result.clear();
+	}
+
+}
+
+]]></Script>
+  </Form>
+</FDL>

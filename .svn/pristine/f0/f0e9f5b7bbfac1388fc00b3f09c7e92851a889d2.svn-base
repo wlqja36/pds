@@ -1,0 +1,262 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("empSearch");
+                this.set_titletext("사원찾기");
+                this._setFormPosition(0,0,558,477);
+            }
+            this.getSetter("inheritanceid").set("");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"search_name\" type=\"STRING\" size=\"256\"/><Column id=\"search_code\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_edu", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"256\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"EDUCATION_NAME\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img_titlebg1", "absolute", "9", "64", "544", "400", null, null, this);
+            obj.set_taborder("24");
+            obj.style.set_background("lavenderblush");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "315", "424", "55", "23", null, null, this);
+            obj.set_taborder("26");
+            obj.set_text("취소");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            obj.getSetter("titletext").set("회원가입창");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("joinTitle", "absolute", "9", "6", "544", "50", null, null, this);
+            obj.set_taborder("27");
+            obj.set_text("교육기관검색");
+            obj.style.set_align("left");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 12 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img00", "absolute", "14", "121", "530", "284", null, null, this);
+            obj.set_taborder("28");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_plaintiff", "absolute", "19", "127", "520", "272", null, null, this);
+            obj.set_taborder("29");
+            obj.set_binddataset("ds_edu");
+            obj.set_scrollbars("autovert");
+            obj.set_autofittype("col");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"사원번호\"/><Cell col=\"1\" text=\"사원명\"/><Cell col=\"2\" text=\"교육기관\"/></Band><Band id=\"body\"><Cell text=\"bind:EMP_NO\"/><Cell col=\"1\" text=\"bind:EMP_NAME\"/><Cell col=\"2\" text=\"bind:EDUCATION_NAME\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_09", "absolute", "14", "73", "530", "35", null, null, this);
+            obj.set_taborder("30");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_no", "absolute", "19", "77", "80", "25", null, null, this);
+            obj.set_taborder("32");
+            obj.set_text("사원명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_sc", "absolute", "416", "79", "55", "23", null, null, this);
+            obj.set_taborder("33");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_reset", "absolute", "476", "79", "55", "23", null, null, this);
+            obj.set_taborder("34");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit05", "absolute", "248", "79", "158", "19", null, null, this);
+            obj.set_taborder("37");
+            obj.set_maxlength("12");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "211", "424", "55", "23", null, null, this);
+            obj.set_taborder("38");
+            obj.set_text("입력");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            obj.getSetter("titletext").set("회원가입창");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo00", "absolute", "18.64%", "79", null, "21", "58.6%", null, this);
+            this.addChild(obj.name, obj);
+            var Combo00_innerdataset = new Dataset("Combo00_innerdataset", this.Combo00);
+            Combo00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\"/><Col id=\"datacolumn\">전체</Col></Row><Row><Col id=\"codecolumn\">emp_no</Col><Col id=\"datacolumn\">사원번호</Col></Row><Row><Col id=\"codecolumn\">emp_nm</Col><Col id=\"datacolumn\">사원명</Col></Row><Row><Col id=\"codecolumn\">edu_agency</Col><Col id=\"datacolumn\">교육기관</Col></Row></Rows>");
+            obj.set_innerdataset(Combo00_innerdataset);
+            obj.set_taborder("39");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 558, 477, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("member002");
+            		p.getSetter("inheritanceid").set("");
+            		p.set_titletext("사원찾기");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Edit7","value","ds_insa","address1");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("eduSearch.xfdl", "Lib::common.xjs");
+        this.registerScript("eduSearch.xfdl", function() {
+
+        //include "Lib::common.xjs";
+
+        
+        this.form_onload = function(obj,e)
+        {
+        	this.btn_sc_onclick();
+        }
+
+        
+        this.Button01_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+
+        
+
+        this.btn_reset_onclick = function(obj,e)
+        {
+        	this.reload();
+        }
+
+        this.btn_sc_onclick = function(obj,e)
+        {
+        	this.ds_search.setColumn(0,"search_name",this.Edit05.value);
+        	this.ds_search.setColumn(0,"search_code",this.Combo00.value);
+
+        	this.gfn_transaction(this,
+         						"eduSearch",
+         						"/selectEdu2.do",
+         						"ds_search=ds_search",
+         						"ds_edu=output",
+         						"",
+         						"transaction_callback"
+         						);
+        	
+        }
+
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		return;
+        	}
+        	
+        	trace("aaaaa : " + this.ds_edu.saveXML());
+        	
+        }
+
+        
+
+        this.Button00_onclick = function(obj,e)
+        {
+        		var education_name = this.ds_edu.getColumn(this.ds_edu.rowposition, "EDUCATION_NAME");	
+        		application.gds_education.addRow();
+        		application.gds_education.setColumn(application.gds_education.rowposition, "education_name", education_name);
+        		this.close();
+        		
+        // 		var vacation_code_id = this.ds_vacation.getColumn(this.ds_vacation.rowposition,"vacation_code_id");
+        // 		application.gds_vacationCodeId.addRow();
+        // 		application.gds_vacationCodeId.setColumn(application.gds_vacationCodeId.rowposition,"vacation_code_id",vacation_code_id);
+        // 		this.close();
+        }
+
+        
+        this.fn_popupCallback = function(strPopupID,strReturn)
+        {
+            if(strReturn == undefined){
+                return;
+            }
+
+            if(strPopupID == "chf_popup1"){
+                this.alert("Return Value: " + strReturn);
+            }
+        };
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.ds_search.addEventHandler("onload", this.form_onload, this);
+            this.addEventHandler("onload", this.empSearch_onload, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+            this.btn_sc.addEventHandler("onclick", this.btn_sc_onclick, this);
+            this.btn_reset.addEventHandler("onclick", this.btn_reset_onclick, this);
+            this.Button00.addEventHandler("onclick", this.Button00_onclick, this);
+
+        };
+
+        this.loadIncludeScript("eduSearch.xfdl");
+
+       
+    };
+}
+)();

@@ -1,0 +1,538 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Business_Trip");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1030,876);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_user", this);
+            obj.set_firefirstcount("0");
+            obj.getSetter("firenextcount").set("0");
+            obj.set_useclientlayout("false");
+            obj.set_updatecontrol("true");
+            obj.set_enableevent("true");
+            obj.set_loadkeymode("keep");
+            obj.set_loadfiltermode("keep");
+            obj.set_reversesubsum("false");
+            obj._setContents("<ColumnInfo><Column id=\"btrip_Dno\" type=\"STRING\" size=\"12\"/><Column id=\"btrip_Dda\" type=\"STRING\" size=\"12\"/><Column id=\"detail\" type=\"STRING\" size=\"255\"/><Column id=\"ws_Date\" type=\"DATE\" size=\"12\"/><Column id=\"wf_Date\" type=\"DATE\" size=\"12\"/><Column id=\"hotel\" type=\"STRING\" size=\"100\"/><Column id=\"trans\" type=\"STRING\" size=\"100\"/><Column id=\"visiter\" type=\"STRING\" size=\"100\"/><Column id=\"tex_Expenses\" type=\"INT\" size=\"10\"/><Column id=\"remark\" type=\"STRING\" size=\"255\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"searchKeyword\">201212121122</Col><Col id=\"searchCondition\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("div_Search", "absolute", "1.07%", "0", null, "4.91%", "1.94%", null, this);
+            obj.set_taborder("0");
+            obj.set_cssclass("div_WF_SearchBg");
+            this.addChild(obj.name, obj);
+            obj = new Static("st_searchCondition", "absolute", "1.1%", "24.39%", "85", "51.22%", null, null, this.div_Search);
+            obj.set_taborder("21");
+            obj.set_text("사원번호");
+            obj.set_cssclass("sta_WF_SearchLabel");
+            obj.getSetter("domainId").set("nexa.s_condition");
+            this.div_Search.addChild(obj.name, obj);
+            obj = new Edit("edt_searchKeyword", "absolute", "10.43%", "24.39%", "86.56%", "51.22%", null, null, this.div_Search);
+            obj.set_taborder("22");
+            obj.set_value("202104190001");
+            this.div_Search.addChild(obj.name, obj);
+            obj = new Button("fn_search", "absolute", "96.89%", "24.39%", "2.11%", "51.22%", null, null, this.div_Search);
+            obj.set_taborder("23");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.div_Search.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "0.19%", "6.85%", "24.27%", "2.4%", null, null, this);
+            obj.set_taborder("1");
+            obj.set_text("출장관리");
+            obj.set_cssclass("sta_WF_SubTitle1");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("div_Search00", "absolute", "0%", "10.5%", null, "0.23%", "2.14%", null, this);
+            obj.set_taborder("2");
+            obj.style.set_background("black");
+            obj.style.set_border("1 solid black");
+            obj.set_cssclass("div_WF_SearchBg");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("div_Detail", "absolute", "5", "104", null, "435", "25", null, this);
+            obj.set_taborder("3");
+            obj.set_scrollbars("none");
+            this.addChild(obj.name, obj);
+            obj = new Static("Static02", "absolute", "0%", "0", null, "6.67%", "0", null, this.div_Detail);
+            obj.set_taborder("39");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static03", "absolute", "-3", "0%", "10.7%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("40");
+            obj.set_text("출장관리번호");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Edit("edt_btrip_dno", "absolute", "10.8%", "0.92%", "39.4%", "4.83%", null, null, this.div_Detail);
+            obj.set_taborder("41");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static13", "absolute", "-2", "6.44%", null, "24.5%", "0%", null, this.div_Detail);
+            obj.set_taborder("52");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new TextArea("edt_detail", "absolute", "10.9%", "7.5%", "88.3%", "22.3%", null, null, this.div_Detail);
+            obj.set_taborder("53");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static16", "absolute", "-3", "6.44%", "10.7%", "24.5%", null, null, this.div_Detail);
+            obj.set_taborder("54");
+            obj.set_text("주요일정내용");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static00", "absolute", "-4", "55%", null, "6.67%", "0", null, this.div_Detail);
+            obj.set_taborder("55");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Calendar("wf_date", "absolute", "35.9%", "55.86%", "14.1%", "4.83%", null, null, this.div_Detail);
+            this.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("58");
+            obj.set_displaynulltext("2021-00-00");
+            obj.set_cssclass("essential");
+            obj = new Static("Static23", "absolute", "25.1%", "55%", "10.6%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("59");
+            obj.set_text("업무종료일자");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Calendar("ws_date", "absolute", "10.8%", "55.86%", "14.1%", "4.83%", null, null, this.div_Detail);
+            this.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("60");
+            obj.set_displaynulltext("2021-00-00");
+            obj = new Static("Static11", "absolute", "-3", "55%", "10.7%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("61");
+            obj.set_text("업무시작일자");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static41", "absolute", "-4", "61.4%", null, "6.67%", "0%", null, this.div_Detail);
+            obj.set_taborder("62");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static10", "absolute", "-3", "61.4%", "10.7%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("63");
+            obj.set_text("숙박");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static05", "absolute", "25.1%", "61.4%", "10.6%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("65");
+            obj.set_text("교통편");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("visiter", "absolute", "61.3%", "62.07%", "14.1%", "4.83%", null, null, this.div_Detail);
+            obj.set_taborder("66");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static29", "absolute", "50.6%", "61.4%", "10.6%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("67");
+            obj.set_text("방문처");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static24", "absolute", "50.6%", "55%", "48.9%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("68");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static37", "absolute", "75.8%", "61.4%", "10.1%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("69");
+            obj.set_text("예상경비");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("tex_expenses", "absolute", "86.1%", "62.07%", "13.4%", "4.83%", null, null, this.div_Detail);
+            obj.set_taborder("70");
+            obj.set_cssclass("essential");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Button("reset", "absolute", "92.2%", "71.72%", null, "6.9%", "1.3%", null, this.div_Detail);
+            obj.set_taborder("71");
+            obj.set_text("취소");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Button("delete", "absolute", "84.9%", "71.72%", null, "6.9%", "8.6%", null, this.div_Detail);
+            obj.set_taborder("72");
+            obj.set_text("삭제");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Button("insert00", "absolute", "69.7%", "71.72%", null, "6.9%", "23.8%", null, this.div_Detail);
+            obj.set_taborder("73");
+            obj.set_text("등록");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Button("update", "absolute", "77%", "71.72%", null, "6.9%", "16.5%", null, this.div_Detail);
+            obj.set_taborder("74");
+            obj.set_text("추가");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static09", "absolute", "-2", "30.91%", null, "24.6%", "0%", null, this.div_Detail);
+            obj.set_taborder("77");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static08", "absolute", "-3", "30.91%", "10.7%", "24.6%", null, null, this.div_Detail);
+            obj.set_taborder("78");
+            obj.set_text("비고");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new TextArea("edt_remark", "absolute", "10.8%", "31.95%", "88.3%", "22.3%", null, null, this.div_Detail);
+            obj.set_taborder("79");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static12", "absolute", "505", "-0.23%", "10.7%", "6.67%", null, null, this.div_Detail);
+            obj.set_taborder("80");
+            obj.set_text("출장일정번호");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new Edit("edt_btr_dda", "absolute", "61.5%", "0.92%", "37.7%", "4.83%", null, null, this.div_Detail);
+            obj.set_taborder("81");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("trans", "absolute", "35.9%", "62.07%", "14.3%", "4.83%", null, null, this.div_Detail);
+            obj.set_taborder("82");
+            obj.set_cssclass("essential");
+            this.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("hotel", "absolute", "10.5%", "62.07%", "14.1%", "4.83%", null, null, this.div_Detail);
+            obj.set_taborder("83");
+            obj.set_cssclass("essential");
+            this.div_Detail.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 0, this.div_Search,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("0");
+            		p.set_cssclass("div_WF_SearchBg");
+
+            	}
+            );
+            this.div_Search.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 1000, 418, this.div_Detail,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("3");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.div_Detail.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 1030, 876, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("Temp01_SingleDetail");
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item15","div_Search.edt_searchKeyword","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","div_Detail.edt_btrip_dno","value","ds_user","btrip_Dno");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","div_Detail.edt_detail","value","ds_user","detail");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","div_Detail.edt_btr_dda","value","ds_user","btrip_Dda");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","div_Detail.ws_date","value","ds_user","ws_Date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","div_Detail.wf_date","value","ds_user","wf_Date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","div_Detail.visiter","value","ds_user","visiter");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","div_Detail.hotel","value","ds_user","hotel");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","div_Detail.trans","value","ds_user","trans");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","div_Detail.tex_expenses","value","ds_user","tex_Expenses");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","div_Detail.edt_remark","value","ds_user","remark");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("PD_IN_COM_BTRDETAIL.xfdl", "Lib::Comm.xjs");
+        this.registerScript("PD_IN_COM_BTRDETAIL.xfdl", function() {
+        /***********************************************************************************
+        * SYSTEM      : 넥사크로플랫폼 PackageB
+        * BUSINESS    : 넥사크로플랫폼 PackageB
+        * FILE NAME   : Pattern_01
+        * PROGRAMMER  : 
+        * DATE        : 
+        * DESCRIPTION : SingleDetail
+        *------------------------------------------------------------------
+        * MODIFY DATE   PROGRAMMER			DESCRIPTION
+        *------------------------------------------------------------------
+        * 
+        *------------------------------------------------------------------
+        ***********************************************************************************/
+
+        /***********************************************************************************
+        * Common Library
+        ***********************************************************************************/
+        //include "Lib::Comm.xjs";
+
+        
+        /***********************************************************************************
+        * Global/Local Variable
+        ***********************************************************************************/
+
+        
+
+        /***********************************************************************************
+        * Form Event
+        ***********************************************************************************/
+        /**
+         * form onload 함수
+         * @return 
+         * @example
+         *
+         * @memberOf this
+         */
+        this.form_onload = function(obj,e)
+        {
+        	//기본 공통  함수 초기화
+        	Iject.formOnload(obj);	
+            //this.fn_search();
+           
+        } 
+
+        
+        /**
+         * 조회처리
+         * @return 
+         * @example
+         *
+         * @memberOf Iject
+         */
+        this.fn_search = function(obj,e)
+        {
+          
+           var searchCondition =  "NAME";
+            var searchKeyword = this.div_Search.edt_searchKeyword.value;       
+            
+        	this.alert(searchKeyword);
+        	this.ds_search.setColumn(0, "searchCondition", "NAME");
+        	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+           
+           var oDatas =  {
+        			  svcid : "search",
+        			  sController : "btrDetailSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_user=output"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		
+        		//alert(" this.errorcode : " + this.errorcode);
+        		
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid      : 서비스 ID
+        		*   @param : {object}    this.fobj       : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/   
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	      
+        	       var pThis = this.fobj;   //form object	      
+        	       trace(" ds_user : " + this.ds_user.saveXML());
+        	});
+        }
+
+        
+
+        //추가
+        this.fn_add = function(obj,e)
+        {
+        	var nRow = this.ds_user.addRow();
+        	this.div_search.edt_searchKeyword.set_value("");
+        }
+
+        //삭제
+        this.fn_delete = function(obj,e)
+        {
+        	var nRow = this.ds_user.rowposition;
+        	this.ds_user.deleteRow(nRow);
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	
+        	if(rtnValue)
+        	{
+        	
+        		this.fn_save("delete");
+        	}
+        	else
+        	{
+        		this.fn_search();
+        	}
+        }
+
+        //리셋
+        this.fn_reset = function(obj,e)
+        {
+        	this.ds_user.reset();
+        }
+
+        
+        //저장
+        this.fn_save = function(strid)
+        {
+             
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "btrDetailModifyVO.do",			 
+        			  inds :["input=ds_user:U"],
+        			  outds :[
+        				 "ds_user=output"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/    
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg,"알림");			
+        		   return;
+        		}			
+        	      
+        	       var pThis = this.fobj;   //form object
+        	       
+        	      switch(this.svcid)
+        	      {
+        	         case "save" : 
+        				Iject.alert("저장완료");
+        				break;
+        				
+        	         case "dlete" : 
+        	            Iject.alert("삭제완료");
+        				break; 
+        	      }
+        	      
+        	      pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+        		  pThis.fn_search();
+        	});
+        }
+
+        
+        /**********************************************************************
+        * User Function
+        ***********************************************************************/
+
+        //저장버튼 클릭시 
+        this.div_grid_top_btn_save_onclick = function(obj,e)
+        {
+        	this.fn_save("save");
+        }
+
+        //검색  Enter키
+        this.div_search_btn_search_onclick = function(obj,e)
+        {
+        	if ( e.keycode == 13 )
+        	{
+        		this.fn_search();
+        	}
+        }
+
+        
+        /*
+        this.div_Search_Button06_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	 var newChild = new ChildFrame;
+        	 newChild.init("member"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "Pattern::Btdpopup.xfdl");
+        					
+        	newChild.set_openalign("center middle");
+        	newChild.set_dragmovetype("all");
+        	
+        	system.showModalWindow(newChild, 
+        							"memberModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+        */
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.div_Search.edt_searchKeyword.addEventHandler("onkeyup", this.div_search_btn_search_onclick, this);
+            this.div_Search.fn_search.addEventHandler("onclick", this.fn_search, this);
+            this.div_Detail.delete.addEventHandler("onclick", this.div_Detail_delete_onclick, this);
+            this.div_Detail.insert00.addEventHandler("onclick", this.div_Detail_insert_onclick, this);
+            this.div_Detail.update.addEventHandler("onclick", this.div_Detail_update_onclick, this);
+
+        };
+
+        this.loadIncludeScript("PD_IN_COM_BTRDETAIL.xfdl");
+
+       
+    };
+}
+)();

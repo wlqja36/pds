@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="yjb_comCode">
+
+	
+
+	<resultMap id="yjb_comCodeVO" type="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		<result property="rownum" column="ROWNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="use" column="USE_YN" />
+		<result property="mainTable" column="MAIN_TABLE" />
+		<result property="useCol" column="MAIN_COLUMN" />
+		<result property="classCodeInfo" column="CLASS_DESC" />
+		<result property="addDate" column="REGIST_TIME" />
+		<result property="addEnum" column="REGIST_ID" />
+		<result property="updateEnum" column="MODIFY_ID" />
+		<result property="updateDate" column="MODIFY_TIME" />
+	</resultMap>
+<!-- 
+	<resultMap id="yjb_detailCode" type="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		<result property="detailCode" column="DETAIL_CODE" />
+	</resultMap>
+	 -->
+	
+	<resultMap id="yjb_detailClassCode" type="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="codeFull" column="CODE_FULL" />
+	</resultMap>
+	
+
+
+	
+	<resultMap id="yjb_Mcode" type="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		<result property="classCode" column="CLASS_CODE"/>
+	</resultMap>
+	 <resultMap id="yjb_Dcode" type="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+		<result property="detailCode" column="CODE_NO"/>
+	</resultMap>
+
+	
+	<resultMap id="yjb_detailCodeList" type="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+		<result property="rowNum" column="ROWNUM" />
+		<result property="classCode" column="CLASS_CODE" />
+		<result property="className" column="CLASS_NAME" />
+		<result property="detailCode" column="CODE_NO" />
+		<result property="detailCodeName" column="CODE_NAME" />
+		<result property="codeNameEng" column="CODE_ENG_NAME" />
+		<result property="etcCode" column="ETC_CODE1" />
+		<result property="etcCode2" column="ETC_CODE2" />
+		<result property="detailCodeInfo" column="CODE_DESC" />
+		<result property="use" column="USE_YN" />
+		<result property="sortOrder" column="SORT" />
+		<result property="regDate" column="REGIST_TIME" />
+		<result property="regId" column="REGIST_ID" />
+		<result property="updateDate" column="MODIFY_TIME" />
+		<result property="updateEnum" column="MODIFY_ID" />
+		<result property="lastUpdateDate" column="LAST_MODY_DATE" />
+		<result property="higherClassCode" column="HIGHER_CLASS_CODE" />
+		<result property="higherCodeNo" column="HIGHER_CODE_NO" />
+	</resultMap> 
+	
+	<resultMap id="yjb_idxDNum" type="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+		<result property="rnum" column="RNUM" />
+	</resultMap>
+	
+	<!-- 공통코드 전체내역 조회하기 -->
+	<select id="yjb_selectCode" resultMap="yjb_comCodeVO" parameterType="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		
+		SELECT ROWNUM, T1.* FROM
+			(
+			SELECT
+			CLASS_CODE,
+			CLASS_NAME,
+			USE_YN,
+			MAIN_TABLE,
+			MAIN_COLUMN,
+			CLASS_DESC,
+			REGIST_TIME,
+			CONCAT(
+				CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO = REGIST_ID),'('),
+				CONCAT(REGIST_ID,')')
+				) REGIST_ID,
+			TO_CHAR(MODIFY_TIME,'YYYY-MM-DD') MODIFY_TIME,
+			CONCAT(
+				CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO = MODIFY_ID),'('),
+				CONCAT(MODIFY_ID,')')
+				) MODIFY_ID
+		FROM 
+			COMMON_CODE_MASTER
+		WHERE 1=1
+		ORDER BY CLASS_CODE) T1
+		WHERE CLASS_CODE LIKE '%'||#{searchKeyword, jdbcType = VARCHAR}||'%'
+		OR CLASS_NAME LIKE '%'||#{searchKeyword, jdbcType = VARCHAR}||'%'
+		OR USE_YN LIKE '%'||#{searchKeyword, jdbcType = VARCHAR}||'%'
+		OR MAIN_TABLE LIKE '%'||#{searchKeyword, jdbcType = VARCHAR}||'%'
+		OR MAIN_COLUMN LIKE '%'||#{searchKeyword, jdbcType = VARCHAR}||'%'
+		OR CLASS_DESC LIKE '%'||#{searchKeyword, jdbcType = VARCHAR}||'%'
+		
+		
+	</select>
+	
+	<!-- 코드마스터 등록 -->
+	<insert id="yjb_insertCode" parameterType="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		INSERT INTO 
+			COMMON_CODE_MASTER
+		(
+			CLASS_CODE,
+			CLASS_NAME,
+			USE_YN,
+			MAIN_TABLE,
+			MAIN_COLUMN,
+			CLASS_DESC,
+			REGIST_TIME,
+			REGIST_ID
+		)	
+		VALUES
+		(
+			#{classCode},
+			#{className},
+			#{use},
+			#{mainTable},
+			#{useCol},
+			#{classCodeInfo},
+			SYSDATE,
+			#{addEnum}
+		)
+	</insert> 
+	<!-- 코드마스터 업데이트 -->
+	 <update id="yjb_updateCode" parameterType="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		UPDATE
+			COMMON_CODE_MASTER
+		SET
+			CLASS_NAME = #{className, jdbcType = VARCHAR},
+			USE_YN = #{use, jdbcType = VARCHAR},
+			MAIN_TABLE = #{mainTable, jdbcType = VARCHAR},
+			MAIN_COLUMN = #{useCol, jdbcType = VARCHAR},
+			CLASS_DESC = #{classCodeInfo, jdbcType = VARCHAR},
+			MODIFY_ID = #{addEnum, jdbcType = VARCHAR},
+			MODIFY_TIME = SYSDATE
+		WHERE
+			CLASS_CODE = #{classCode, jdbcType = VARCHAR}
+	</update>
+	
+	<!-- 코드마스터 삭제 -->
+	 <delete id="yjb_deleteCode" parameterType="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		DELETE
+		FROM
+			COMMON_CODE_MASTER
+		WHERE
+			CLASS_CODE = #{classCode}
+	</delete>
+	
+	<!-- 코드마스터 중복검사 -->
+	 <select id="yjb_searchCode" resultMap="yjb_Mcode"
+	parameterType="java.lang.String">
+	SELECT
+		NVL(MAX(CLASS_CODE), 'NONE') AS CLASS_CODE 
+	FROM
+		COMMON_CODE_MASTER
+	WHERE
+		CLASS_CODE = #{classCode}
+	</select> 
+	
+	<!-- 상세코드 분류코드 가져오기 -->
+	<select id="yjb_selectDetailCode" resultMap="yjb_detailClassCode">
+	SELECT
+		' ' AS CLASS_CODE
+		,'' AS CLASS_NAME
+		,'전체' AS CODE_FULL
+	FROM
+		DUAL
+	UNION
+	SELECT
+		D.CLASS_CODE
+		,M.CLASS_NAME
+		,D.CLASS_CODE || ' / ' || M.CLASS_NAME AS CODE_FULL
+	FROM 
+		COMMON_CODE_DETAIL D , COMMON_CODE_MASTER M
+	WHERE 
+		D.CLASS_CODE = M.CLASS_CODE
+	AND D.USE_YN = 'Y'
+	AND M.USE_YN = 'Y'
+	ORDER BY CLASS_CODE ASC
+	</select>
+	
+	<!-- 분류코드에 따른 상세코드 가져오기 -->
+	<select id="yjb_selectDetailList" resultMap="yjb_detailCodeList"
+	parameterType="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+	
+	SELECT ROWNUM, T1.* FROM
+		(
+		SELECT
+		ROWNUM,
+		D.CLASS_CODE,
+		D.CODE_NO,
+		D.CODE_NAME,
+		D.CODE_NAME2,
+		D.CODE_ENG_NAME,
+		D.ETC_CODE1,
+		D.ETC_CODE2,
+		D.CODE_DESC,
+		D.USE_YN,
+		D.SORT,
+		to_char(D.REGIST_TIME,'yyyy-mm-dd') REGIST_TIME,
+		CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO=D.REGIST_ID),CONCAT('(',CONCAT(D.REGIST_ID,')'))) REGIST_ID,
+		to_char(D.MODIFY_TIME,'yyyy-mm-dd') MODIFY_TIME,
+		CONCAT((SELECT EMP_NAME FROM EMP WHERE EMP_NO=D.MODIFY_ID),CONCAT('(',CONCAT(D.MODIFY_ID,')'))) MODIFY_ID,
+		to_char(D.LAST_MODY_DATE,'yyyy-mm-dd') LAST_MODY_DATE,
+		D.HIGHER_CLASS_CODE,
+		D.HIGHER_CODE_NO,
+		M.CLASS_NAME
+	FROM
+		COMMON_CODE_DETAIL D, COMMON_CODE_MASTER M
+	WHERE D.CLASS_CODE = M.CLASS_CODE
+	<if test="searchCondition!=null">
+		AND D.CLASS_CODE LIKE '%' || #{searchCondition} || '%'
+	</if>
+	<if test="searchKeyword!=null">
+	AND D.CODE_NO LIKE '%' || #{searchKeyword} || '%'
+	</if>
+	<if test="searchUseYn!=null">
+	AND D.CODE_NAME LIKE '%' || #{searchUseYn} || '%'
+	</if>
+	ORDER BY M.CLASS_CODE ASC, SORT ASC) T1
+	</select>
+	
+	<select id="yjb_selectDRnum" resultMap="yjb_idxDNum" parameterType="String">
+		SELECT T2.RNUM RNUM FROM(SELECT ROWNUM RNUM, T1.CODE_NO CODE_NO FROM
+			(
+			SELECT
+            
+            CLASS_CODE,
+			CODE_NO
+
+		FROM 
+			COMMON_CODE_DETAIL ORDER BY CLASS_CODE ASC, SORT ASC) T1) T2 WHERE T2.CODE_NO=#{deatilCode}
+	</select>
+	
+	
+	
+	<!-- 상세코드 입력 -->
+	<insert id="yjb_insertDetailCode" parameterType="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+	INSERT INTO
+	    COMMON_CODE_DETAIL
+	(
+	CLASS_CODE, 
+	CODE_NO, 
+	CODE_NAME, 
+	CODE_NAME2, 
+	CODE_ENG_NAME, 
+	ETC_CODE1, 
+	ETC_CODE2, 
+	CODE_DESC,
+	USE_YN, 
+	SORT, 
+	REGIST_TIME,
+	REGIST_ID
+	)
+	VALUES
+	(
+	#{classCode,jdbcType=VARCHAR},
+	#{detailCode,jdbcType=VARCHAR},
+	#{detailCodeName,jdbcType=VARCHAR},
+	#{detailCodeName,jdbcType=VARCHAR},
+	#{codeNameEng,jdbcType=VARCHAR},
+	#{etcCode,jdbcType=VARCHAR},
+	#{etcCode2,jdbcType=VARCHAR},
+	#{detailCodeInfo,jdbcType=VARCHAR},
+	#{use,jdbcType=VARCHAR},
+	#{sortOrder,jdbcType=VARCHAR},
+	<!-- #sortSeq#, -->
+	<!-- (SELECT NVL(MAX(SORT_SEQ), 0) + 1 FROM CMM_CODE_DETAIL WHERE CLASS_CODE = #classCode#), -->
+	SYSDATE,
+	#{regId}
+	)
+	</insert>
+	
+	<!-- 상세코드 수정 -->
+	<update id="yjb_updateDetailCode"
+	parameterType="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+	UPDATE COMMON_CODE_DETAIL
+	SET
+		CODE_NAME = #{detailCodeName},
+		CODE_ENG_NAME = #{codeNameEng},
+		ETC_CODE1 = #{etcCode},
+		ETC_CODE2 = #{etcCode2},
+		CODE_DESC = #{detailCodeInfo},
+		USE_YN = #{use},
+		SORT = #{sortOrder},
+		MODIFY_ID = #{regId},
+		MODIFY_TIME = SYSDATE,
+		LAST_MODY_DATE = SYSDATE
+	WHERE
+		CLASS_CODE = #{classCode}
+	AND
+		CODE_NO = #{detailCode}
+	</update>
+	
+	<!-- 상세코드 삭제 -->
+	<delete id="yjb_deleteDetailCode" parameterType="nexacro.sample.vo.Oct_com.YJB_DetailCodeVO">
+		DELETE
+		FROM
+			COMMON_CODE_DETAIL
+		WHERE
+			CLASS_CODE = #{classCode}
+		AND
+			CODE_NO = #{detailCode}
+	</delete>
+	
+	<!-- 상세코드 중복검사 -->
+	<select id="yjb_searchDetailCode" resultMap="yjb_Dcode"
+	parameterType="java.lang.String">
+	SELECT
+		NVL(MAX(CODE_NO), 'NONE') AS CODE_NO 
+	FROM
+		COMMON_CODE_DETAIL
+	WHERE
+		CODE_NO = #{detailCode}
+	</select>
+	<!-- 
+	
+	마스터코드 코드번호 또는 코드네임 가져오기
+	<select id="yjb_common.detailCode" resultMap="yjb_detailCode"
+		parameterType="java.util.HashMap">
+		<![CDATA[
+		SELECT
+		]]>
+		<dynamic>
+			<isEqual property="codeSwitch"
+				compareValue="CLASS_NAME">
+				CLASS_NAME AS DETAIL_CODE
+			</isEqual>
+			<isEqual property="codeSwitch"
+				compareValue="CLASS_CODE">
+				CLASS_CODE AS DETAIL_CODE
+			</isEqual>
+		</dynamic>
+		<![CDATA[
+		FROM COMMON_CODE_MASTER
+		ORDER BY DETAIL_CODE ASC
+		]]>
+	</select>
+	 -->
+	
+	<!-- 코드마스터 업데이트 -->
+	<!-- <update id="yjb_common.updateCode" parameterType="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		UPDATE
+			COMMON_CODE_MASTER
+		SET
+			CLASS_NAME = #className#,
+			USE_YN = #useYn#,
+			MAIN_TABLE = #mainTable#,
+			MAIN_COLUMN = #mainColumn#,
+			CLASS_DESC = #classDesc#,
+			MODIFY_ID = #registId#,
+			MODIFY_TIME = SYSDATE
+		WHERE
+			CLASS_CODE = #classCode#
+	</update> -->
+	
+	<!-- 코드마스터 삭제 -->
+	<!-- <delete id="yjb_common.deleteCode" parameterType="nexacro.sample.vo.Oct_com.YJB_ComCodeVO">
+		DELETE
+		FROM
+			COMMON_CODE_MASTER
+		WHERE
+			CLASS_CODE = #classCode#
+	</delete> -->
+	
+	<!-- 코드마스터 중복검사 -->
+	<!-- <select id="yjb_common.searchCode" resultMap="yjb_Mcode"
+	parameterType="java.lang.String">
+	SELECT
+		NVL(MAX(CLASS_CODE), 'NONE') AS CLASS_CODE 
+	FROM
+		COMMON_CODE_MASTER
+	WHERE
+		CLASS_CODE = #classCode#
+	</select> -->
+	
+</mapper>

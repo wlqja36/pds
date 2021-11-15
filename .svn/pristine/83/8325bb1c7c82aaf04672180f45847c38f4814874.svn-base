@@ -1,0 +1,493 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("SPENDING_RESOLRUTION");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,688,768);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_spending", this);
+            obj._setContents("<ColumnInfo><Column id=\"ATTITUDE_BOOK_ID\" type=\"STRING\" size=\"12\"/><Column id=\"RESOLUTION_CODE\" type=\"STRING\" size=\"4\"/><Column id=\"TOTAL_COST\" type=\"INT\" size=\"10\"/><Column id=\"REG_EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"MODIFY_EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"MODIFY_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"CONFIRM_EMP_NO\" type=\"STRING\" size=\"12\"/><Column id=\"CONFIRM_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"CONFIRM_YN\" type=\"STRING\" size=\"1\"/></ColumnInfo><Rows><Row><Col id=\"ATTITUDE_BOOK_ID\">200612200090</Col><Col id=\"RESOLUTION_CODE\">5100</Col><Col id=\"TOTAL_COST\">52000</Col><Col id=\"REG_EMP_NO\">202104160001</Col><Col id=\"MODIFY_EMP_NO\">202104160001</Col><Col id=\"MODIFY_DATE\">20210520</Col><Col id=\"CONFIRM_EMP_NO\">202104160001</Col><Col id=\"CONFIRM_DATE\">20210522</Col><Col id=\"CONFIRM_YN\">Y</Col></Row><Row><Col id=\"ATTITUDE_BOOK_ID\">200612200091</Col><Col id=\"RESOLUTION_CODE\">5100</Col><Col id=\"TOTAL_COST\">32000</Col><Col id=\"REG_EMP_NO\">202104160001</Col><Col id=\"MODIFY_EMP_NO\">202104160001</Col><Col id=\"MODIFY_DATE\">20210520</Col><Col id=\"CONFIRM_EMP_NO\">202104160001</Col><Col id=\"CONFIRM_DATE\">20210522</Col><Col id=\"CONFIRM_YN\">Y</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img_titlebg", "absolute", "14", "7", "664", "50", null, null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_title", "absolute", "26", "18", "168", "29", null, null, this);
+            obj.set_taborder("1");
+            obj.set_text("지출결의서");
+            obj.style.set_color("whitesmoke");
+            obj.style.set_align("left middle");
+            obj.style.set_font("굴림,12,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img02", "absolute", "16", "65", "662", "85", null, null, this);
+            obj.set_taborder("2");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_11", "absolute", "24", "69", "115", "25", null, null, this);
+            obj.set_taborder("3");
+            obj.set_text("기간");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("start_date", "absolute", "144", "72", "131", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("4");
+            obj.style.set_align("center middle");
+
+            obj = new Static("Static00", "absolute", "41.28%", "74", null, "20", "55.23%", null, this);
+            obj.set_taborder("5");
+            obj.set_text("~");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("start_date00", "absolute", "301", "72", "131", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("6");
+            obj.style.set_align("center middle");
+
+            obj = new Button("Button04", "absolute", "451", "69", "69", "23", null, null, this);
+            obj.set_taborder("7");
+            obj.set_text("조회");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "2.47%", "159", null, "135", "1.31%", null, this);
+            obj.set_taborder("8");
+            obj.set_binddataset("ds_spending");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/><Column size=\"130\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"급여대장번호\"/><Cell col=\"1\" text=\"지출유형코드\"/><Cell col=\"2\" text=\"총지출경비\"/><Cell col=\"3\" text=\"등록자사번\"/><Cell col=\"4\" text=\"수정자사번\"/><Cell col=\"5\" text=\"수정일시\"/><Cell col=\"6\" text=\"승인자사번\"/><Cell col=\"7\" text=\"승인일시\"/><Cell col=\"8\" text=\"승인여부\"/></Band><Band id=\"body\"><Cell text=\"bind:ATTITUDE_BOOK_ID\"/><Cell col=\"1\" text=\"bind:RESOLUTION_CODE\"/><Cell col=\"2\" text=\"bind:TOTAL_COST\"/><Cell col=\"3\" text=\"bind:REG_EMP_NO\"/><Cell col=\"4\" text=\"bind:MODIFY_EMP_NO\"/><Cell col=\"5\" text=\"bind:MODIFY_DATE\"/><Cell col=\"6\" text=\"bind:CONFIRM_EMP_NO\"/><Cell col=\"7\" text=\"bind:CONFIRM_DATE\"/><Cell col=\"8\" text=\"bind:CONFIRM_YN\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_15", "absolute", "24", "94", "115", "25", null, null, this);
+            obj.set_taborder("9");
+            obj.set_text("유형코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo00", "absolute", "20.93%", "94", null, "25", "60.03%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("11");
+            obj.set_text("Combo00");
+            obj.style.set_border("1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff");
+            obj.set_index("-1");
+
+            obj = new Edit("edt_att_book_no", "absolute", "144", "122", "159", "22", null, null, this);
+            obj.set_taborder("12");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_00", "absolute", "26", "119", "115", "25", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("사원번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("button00", "absolute", "304", "122", "24", "23", null, null, this);
+            obj.set_taborder("14");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img00", "absolute", "17", "324", "662", "394", null, null, this);
+            obj.set_taborder("17");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_33", "absolute", "17", "307", "120", "13", null, null, this);
+            obj.set_taborder("18");
+            obj.set_text("지출결의서 상세");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "2.62%", "323", null, "82", "43.46%", null, this);
+            obj.set_taborder("19");
+            obj.set_text("지출결의서");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("28 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "56.25%", "323", null, "82", "35.47%", null, this);
+            obj.set_taborder("20");
+            obj.set_text("결제");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "64.39%", "323", null, "29", "24.13%", null, this);
+            obj.set_taborder("21");
+            obj.set_text("담당");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "75.73%", "323", null, "29", "12.79%", null, this);
+            obj.set_taborder("22");
+            obj.set_text("부서장");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "87.06%", "323", null, "29", "1.45%", null, this);
+            obj.set_taborder("23");
+            obj.set_text("사장");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no00", "absolute", "443", "352", "79", "53", null, null, this);
+            obj.set_taborder("24");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no01", "absolute", "521", "352", "79", "53", null, null, this);
+            obj.set_taborder("25");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no02", "absolute", "600", "352", "79", "53", null, null, this);
+            obj.set_taborder("26");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "absolute", "2.62%", "431", null, "29", "79.94%", null, this);
+            obj.set_taborder("27");
+            obj.set_text("회계일자");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "absolute", "2.62%", "459", null, "29", "79.94%", null, this);
+            obj.set_taborder("28");
+            obj.set_text("품의자");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "2.62%", "487", null, "40", "80.09%", null, this);
+            obj.set_taborder("29");
+            obj.set_text("합계금액");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no03", "absolute", "137", "432", "215", "29", null, null, this);
+            obj.set_taborder("30");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no04", "absolute", "137", "461", "215", "27", null, null, this);
+            obj.set_taborder("31");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no05", "absolute", "138", "487", "540", "41", null, null, this);
+            obj.set_taborder("32");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "51.02%", "431", null, "29", "31.54%", null, this);
+            obj.set_taborder("33");
+            obj.set_text("품위일자");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "51.02%", "459", null, "29", "31.54%", null, this);
+            obj.set_taborder("34");
+            obj.set_text("품의부서");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no06", "absolute", "470", "432", "210", "29", null, null, this);
+            obj.set_taborder("35");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no07", "absolute", "470", "458", "210", "30", null, null, this);
+            obj.set_taborder("36");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static11", "absolute", "2.62%", "403", null, "29", "79.94%", null, this);
+            obj.set_taborder("37");
+            obj.set_text("급여대장번호");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no08", "absolute", "137", "403", "215", "30", null, null, this);
+            obj.set_taborder("38");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static12", "absolute", "51.02%", "403", null, "29", "31.54%", null, this);
+            obj.set_taborder("39");
+            obj.set_text("지출유형코드");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("11 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo01", "absolute", "67.59%", "532", null, "27", "1.45%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("40");
+            obj.set_text("Combo00");
+            obj.style.set_border("1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff");
+
+            obj = new Static("sta_01", "absolute", "19", "531", "115", "29", null, null, this);
+            obj.set_taborder("41");
+            obj.set_text("급여대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no09", "absolute", "134", "531", "215", "29", null, null, this);
+            obj.set_taborder("42");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_02", "absolute", "349", "531", "115", "29", null, null, this);
+            obj.set_taborder("43");
+            obj.set_text("지출유형코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_03", "absolute", "19", "560", "115", "29", null, null, this);
+            obj.set_taborder("45");
+            obj.set_text("품위자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no11", "absolute", "134", "560", "215", "29", null, null, this);
+            obj.set_taborder("46");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_04", "absolute", "349", "560", "115", "29", null, null, this);
+            obj.set_taborder("47");
+            obj.set_text("품위일자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no12", "absolute", "464", "560", "215", "29", null, null, this);
+            obj.set_taborder("48");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_05", "absolute", "19", "589", "115", "29", null, null, this);
+            obj.set_taborder("49");
+            obj.set_text("수정자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no13", "absolute", "134", "589", "215", "29", null, null, this);
+            obj.set_taborder("50");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_06", "absolute", "349", "589", "115", "29", null, null, this);
+            obj.set_taborder("51");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no14", "absolute", "464", "589", "215", "29", null, null, this);
+            obj.set_taborder("52");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_07", "absolute", "19", "617", "115", "29", null, null, this);
+            obj.set_taborder("53");
+            obj.set_text("승인자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no10", "absolute", "134", "617", "215", "29", null, null, this);
+            obj.set_taborder("54");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_08", "absolute", "349", "617", "115", "29", null, null, this);
+            obj.set_taborder("55");
+            obj.set_text("승인일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no15", "absolute", "464", "617", "215", "29", null, null, this);
+            obj.set_taborder("56");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_09", "absolute", "20", "646", "114", "49", null, null, this);
+            obj.set_taborder("57");
+            obj.set_text("총지출경비");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_att_book_no16", "absolute", "135", "646", "543", "49", null, null, this);
+            obj.set_taborder("58");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 688, 768, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","edt_empno","value","ds_attitude_book","ATTITUDE_BOOK_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.registerScript("SPENDING_RESOLRUTION_copy.xfdl", function() {
+
+        this.Static04_onclick = function(obj,e)
+        {
+        	
+        }
+
+        this.sta_33_onclick = function(obj,e)
+        {
+        	
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.sta_title.addEventHandler("onclick", this.sta_title_onclick, this);
+            this.sta_11.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.Button04.addEventHandler("onclick", this.Button04_onclick, this);
+            this.sta_15.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_00.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.button00.addEventHandler("onclick", this.button09_onclick, this);
+            this.sta_33.addEventHandler("onclick", this.sta_33_onclick, this);
+            this.Static04.addEventHandler("onclick", this.Static04_onclick, this);
+            this.edt_att_book_no00.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no01.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no02.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no03.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no04.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no05.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no06.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no07.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_att_book_no08.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_01.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no09.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_02.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_03.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no11.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_04.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no12.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_05.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no13.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_06.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no14.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_07.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no10.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_08.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no15.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_09.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_att_book_no16.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+
+        };
+
+        this.loadIncludeScript("SPENDING_RESOLRUTION_copy.xfdl");
+
+       
+    };
+}
+)();

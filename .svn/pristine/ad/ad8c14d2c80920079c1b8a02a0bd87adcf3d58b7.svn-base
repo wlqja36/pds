@@ -1,0 +1,1606 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Salary_Book");
+                this.set_titletext("New Form");
+                this.set_scrollbars("autoboth");
+                this.set_dragscrolltype("both");
+                this._setFormPosition(0,0,1030,876);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"searchCondition\"/><Col id=\"searchKeyword\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_confirm", this);
+            obj.set_useclientlayout("true");
+            obj._setContents("<ColumnInfo><Column id=\"salary_book_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_book_code\" type=\"STRING\" size=\"256\"/><Column id=\"salary_book_nm\" type=\"STRING\" size=\"256\"/><Column id=\"salary_book_reg_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_send_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_reg_user_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_mod_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_mod_user_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_acc_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_acc_user_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_acc_yn\" type=\"STRING\" size=\"256\"/><Column id=\"salary_cal_sta_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_cal_end_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_total\" type=\"STRING\" size=\"256\"/><Column id=\"attitude_book_id\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_combo_01", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"text\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">3010</Col><Col id=\"text\">정기급여</Col></Row><Row><Col id=\"cd\">3020</Col><Col id=\"text\">특별성과금</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_radio", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">0</Col><Col id=\"txt\">N</Col></Row><Row><Col id=\"cd\">1</Col><Col id=\"txt\">Y</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_code", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">1210</Col><Col id=\"txt\">경영지원부</Col></Row><Row><Col id=\"cd\">1220</Col><Col id=\"txt\">영업부</Col></Row><Row><Col id=\"cd\">1230</Col><Col id=\"txt\">개발부</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_month", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">01</Col><Col id=\"txt\">01월</Col></Row><Row><Col id=\"cd\">02</Col><Col id=\"txt\">02월</Col></Row><Row><Col id=\"cd\">03</Col><Col id=\"txt\">03월</Col></Row><Row><Col id=\"cd\">04</Col><Col id=\"txt\">04월</Col></Row><Row><Col id=\"cd\">05</Col><Col id=\"txt\">05월</Col></Row><Row><Col id=\"cd\">06</Col><Col id=\"txt\">06월</Col></Row><Row><Col id=\"cd\">07</Col><Col id=\"txt\">07월</Col></Row><Row><Col id=\"cd\">08</Col><Col id=\"txt\">08월</Col></Row><Row><Col id=\"cd\">09</Col><Col id=\"txt\">09월</Col></Row><Row><Col id=\"cd\">10</Col><Col id=\"txt\">10월</Col></Row><Row><Col id=\"cd\">11</Col><Col id=\"txt\">11월</Col></Row><Row><Col id=\"cd\">12</Col><Col id=\"txt\">12월</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_check", this);
+            obj._setContents("<ColumnInfo><Column id=\"classCode\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_salary", this);
+            obj._setContents("<ColumnInfo><Column id=\"salaryBookNo\" type=\"STRING\" size=\"12\"/><Column id=\"empNo\" type=\"STRING\" size=\"12\"/><Column id=\"basicMoney\" type=\"INT\" size=\"10\"/><Column id=\"bonusSum\" type=\"INT\" size=\"10\"/><Column id=\"costSum\" type=\"INT\" size=\"10\"/><Column id=\"taxSum\" type=\"INT\" size=\"10\"/><Column id=\"minusTax\" type=\"INT\" size=\"10\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_send", this);
+            obj._setContents("");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_bonus", this);
+            obj._setContents("<ColumnInfo><Column id=\"salary_book_no\" type=\"STRING\" size=\"12\"/><Column id=\"emp_no\" type=\"STRING\" size=\"12\"/><Column id=\"bonus_code\" type=\"STRING\" size=\"4\"/><Column id=\"bonus_money\" type=\"INT\" size=\"10\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_tax", this);
+            obj._setContents("<ColumnInfo><Column id=\"salary_book_no\" type=\"STRING\" size=\"12\"/><Column id=\"emp_no\" type=\"STRING\" size=\"12\"/><Column id=\"tax_code\" type=\"STRING\" size=\"4\"/><Column id=\"tax_money\" type=\"INT\" size=\"10\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img02", "absolute", "14", "343", "996", "164", null, null, this);
+            obj.set_taborder("18");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_titlebg", "absolute", "14", "7", "996", "50", null, null, this);
+            obj.set_taborder("19");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_title", "absolute", "26", "18", "168", "29", null, null, this);
+            obj.set_taborder("20");
+            obj.set_text("급여대장");
+            obj.style.set_color("whitesmoke");
+            obj.style.set_align("left middle");
+            obj.style.set_font("굴림,12,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_02", "absolute", "55", "350", "950", "25", null, null, this);
+            obj.set_taborder("21");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_33", "absolute", "17", "321", "120", "13", null, null, this);
+            obj.set_taborder("22");
+            obj.set_text("급여대장");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "39", "357", "18", "22", null, null, this);
+            obj.set_taborder("23");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_15", "absolute", "20", "350", "115", "25", null, null, this);
+            obj.set_taborder("24");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            obj.set_text("대장명");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_08", "absolute", "53", "433", "952", "39", null, null, this);
+            obj.set_taborder("25");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_04", "absolute", "45", "423", "960", "25", null, null, this);
+            obj.set_taborder("26");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_03", "absolute", "20", "423", "115", "25", null, null, this);
+            obj.set_taborder("27");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_04", "absolute", "532", "423", "115", "25", null, null, this);
+            obj.set_taborder("28");
+            obj.set_text("확정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_03", "absolute", "23", "471", "982", "25", null, null, this);
+            obj.set_taborder("29");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_09", "absolute", "277", "423", "115", "25", null, null, this);
+            obj.set_taborder("30");
+            obj.set_text("수정자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_add", "absolute", "839", "305", "55", "23", null, null, this);
+            obj.set_taborder("16");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_save", "absolute", "897", "305", "55", "23", null, null, this);
+            obj.set_taborder("12");
+            obj.set_text("등록");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_delete", "absolute", "955", "305", "55", "23", null, null, this);
+            obj.set_taborder("32");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_00", "absolute", "25", "399", "978", "25", null, null, this);
+            obj.set_taborder("33");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_11", "absolute", "532", "399", "119", "25", null, null, this);
+            obj.set_taborder("34");
+            obj.set_text("등록일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_12", "absolute", "769", "399", "119", "25", null, null, this);
+            obj.set_taborder("35");
+            obj.set_text("등록자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btr_no2", "absolute", "140", "352", "361", "20", null, null, this);
+            obj.set_taborder("36");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_13", "absolute", "532", "350", "473", "24", null, null, this);
+            obj.set_taborder("37");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new MaskEdit("emp_no", "absolute", "884", "401", "118", "20", null, null, this);
+            obj.set_taborder("38");
+            obj.set_readonly("true");
+            obj.set_cssclass("essential");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("s_date", "absolute", "140", "426", "130", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("42");
+            obj.set_type("normal");
+            obj.set_locale("ko_KR");
+            obj.set_value("null");
+            obj.set_dateformat("yyyy-MM-dd");
+
+            obj = new Calendar("f_date", "absolute", "647", "426", "123", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("9");
+            obj.set_cssclass("essential");
+            obj.set_locale("ko_KR");
+            obj.set_value("null");
+            obj.set_dateformat("yyyy-MM-dd");
+
+            obj = new Static("sta_16", "absolute", "532", "350", "115", "25", null, null, this);
+            obj.set_taborder("54");
+            obj.set_text("급여코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("area00", "absolute", "884", "401", "120", "20", null, null, this);
+            obj.set_taborder("57");
+            obj.set_cssclass("essential");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("nation00", "absolute", "396", "426", "127", "20", null, null, this);
+            obj.set_taborder("58");
+            obj.set_cssclass("essential");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("fn_search00", "absolute", "501", "427", "22", "20", null, null, this);
+            obj.set_taborder("62");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_00", "absolute", "769", "423", "115", "25", null, null, this);
+            obj.set_taborder("63");
+            obj.set_text("확정자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("area01", "absolute", "884", "425", "119", "20", null, null, this);
+            obj.set_taborder("64");
+            obj.set_cssclass("essential");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("fn_search01", "absolute", "983", "426", "22", "20", null, null, this);
+            obj.set_taborder("10");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("fn_search02", "absolute", "983", "402", "22", "20", null, null, this);
+            obj.set_taborder("8");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_08", "absolute", "20", "447", "115", "25", null, null, this);
+            obj.set_taborder("70");
+            obj.set_text("급여계산시작일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("s_date00", "absolute", "140", "449", "129", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("72");
+            obj.set_locale("ko_KR");
+            obj.set_dateformat("yyyy-MM-dd");
+            obj.set_value("null");
+
+            obj = new Static("sta_17", "absolute", "277", "447", "115", "25", null, null, this);
+            obj.set_taborder("73");
+            obj.set_text("급여계산종료일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("s_date01", "absolute", "396", "449", "129", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("74");
+            obj.set_locale("ko_KR");
+            obj.set_dateformat("yyyy-MM-dd");
+            obj.set_value("null");
+
+            obj = new Calendar("f_date00", "absolute", "647", "401", "123", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("7");
+            obj.set_locale("ko_KR");
+            obj.set_cssclass("essential");
+            obj.set_dateformat("yyyy-MM-dd");
+            obj.set_value("null");
+            obj.set_enable("true");
+            obj.set_type("normal");
+
+            obj = new Static("sta_05", "absolute", "20", "471", "115", "25", null, null, this);
+            obj.set_taborder("78");
+            obj.set_text("근태대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btr_no03", "absolute", "140", "473", "361", "20", null, null, this);
+            obj.set_taborder("79");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("fn_search04", "absolute", "501", "473", "22", "20", null, null, this);
+            obj.set_taborder("80");
+            obj.set_cssclass("btn_WF_SearchSmall");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_06", "absolute", "532", "471", "473", "25", null, null, this);
+            obj.set_taborder("81");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("btrgrid", "absolute", "1.36%", "104", null, "195", "1.94%", null, this);
+            obj.set_taborder("83");
+            obj.set_binddataset("ds_confirm");
+            obj.set_autofittype("col");
+            obj.set_nodatatext("데이터가없습니다.");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"115\"/><Column size=\"191\"/><Column size=\"115\"/><Column size=\"130\"/><Column size=\"115\"/><Column size=\"130\"/><Column size=\"99\"/><Column size=\"78\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell style=\"font:9 Arial,굴림;\" text=\"급여대장번호\"/><Cell col=\"1\" style=\"font:9 Arial,굴림;\" text=\"대장명\"/><Cell col=\"2\" style=\"font:9 Arial,굴림;\" text=\"급여지급일\"/><Cell col=\"3\" style=\"font:9 Arial,굴림;\" text=\"등록자\"/><Cell col=\"4\" style=\"font:9 Arial,굴림;\" text=\"확정일시\"/><Cell col=\"5\" style=\"font:9 Arial,굴림;\" text=\"확정자\"/><Cell col=\"6\" style=\"font:9 Arial,굴림;\" text=\"지급총액\"/><Cell col=\"7\" displaytype=\"normal\" edittype=\"normal\" text=\"성과평가\" expandshow=\"hide\"/></Band><Band id=\"body\"><Cell edittype=\"none\" text=\"bind:salary_book_no\" combodisplay=\"display\"/><Cell col=\"1\" displaytype=\"text\" edittype=\"text\" style=\"align:left middle;\" text=\"bind:salary_book_nm\"/><Cell col=\"2\" displaytype=\"date\" edittype=\"date\" text=\"bind:salary_send_date\"/><Cell col=\"3\" displaytype=\"normal\" edittype=\"none\" style=\"align:left middle;\" text=\"bind:salary_reg_user_no\"/><Cell col=\"4\" displaytype=\"date\" edittype=\"date\" text=\"bind:salary_acc_date\"/><Cell col=\"5\" displaytype=\"normal\" edittype=\"none\" style=\"align:left middle;\" text=\"bind:salary_acc_user_no\"/><Cell col=\"6\" text=\"bind:salary_total\"/><Cell col=\"7\" expandshow=\"show\" expandimage=\"URL('img::btn_WF_SearchSmall.png')\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo00", "absolute", "647", "351", "116", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("1");
+            obj.set_innerdataset("@ds_combo_01");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("text");
+            obj.set_enable("false");
+            obj.set_index("-1");
+
+            obj = new Static("sta_10", "absolute", "769", "350", "115", "25", null, null, this);
+            obj.set_taborder("87");
+            obj.set_text("급여지급일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("f_date01", "absolute", "885", "351", "119", "22", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("2");
+            obj.set_locale("ko_KR");
+            obj.set_cssclass("essential");
+            obj.set_enable("true");
+            obj.set_dateformat("yyyy-MM-dd");
+            obj.set_value("null");
+
+            obj = new Static("sta_01", "absolute", "60", "70", "944", "25", null, null, this);
+            obj.set_taborder("123");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_no", "absolute", "20", "70", "105", "25", null, null, this);
+            obj.set_taborder("124");
+            obj.set_text("대장명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_search", "absolute", "413", "70", "55", "23", null, null, this);
+            obj.set_taborder("15");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo01", "absolute", "133", "73", "130", "19", null, null, this);
+            this.addChild(obj.name, obj);
+            var Combo01_innerdataset = new Dataset("Combo01_innerdataset", this.Combo01);
+            Combo01_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">CLASS_CODE</Col><Col id=\"datacolumn\">분류코드</Col></Row><Row><Col id=\"codecolumn\">CLASS_NAME</Col><Col id=\"datacolumn\">분류명칭</Col></Row><Row><Col id=\"codecolumn\">useYn</Col><Col id=\"datacolumn\">사용여부</Col></Row></Rows>");
+            obj.set_innerdataset(Combo01_innerdataset);
+            obj.set_taborder("13");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+            obj.set_innerdataset("@ds_month");
+            obj.set_displaynulltext("선택");
+
+            obj = new Combo("Combo03", "absolute", "272", "73", "130", "19", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("14");
+            obj.set_displaynulltext("선택");
+            obj.set_innerdataset("@ds_code");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+
+            obj = new ImageViewer("img_01", "absolute", "52", "375", "952", "25", null, null, this);
+            obj.set_taborder("129");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_14", "absolute", "769", "375", "115", "25", null, null, this);
+            obj.set_taborder("130");
+            obj.set_text("부서코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo02", "absolute", "885", "378", "116", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("5");
+            obj.set_innerdataset("@ds_code");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+            obj.set_displaynulltext("선택");
+            obj.set_enable("false");
+
+            obj = new Static("sta_18", "absolute", "532", "375", "115", "25", null, null, this);
+            obj.set_taborder("132");
+            obj.set_text("월");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_19", "absolute", "20", "374", "115", "25", null, null, this);
+            obj.set_taborder("134");
+            obj.set_text("급여대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btr_no01", "absolute", "140", "376", "130", "20", null, null, this);
+            obj.set_taborder("136");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_02", "absolute", "20", "399", "115", "25", null, null, this);
+            obj.set_taborder("137");
+            obj.set_text("확정여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Radio("ok_Ascertain00", "absolute", "153", "403", "323", "20", null, null, this);
+            this.addChild(obj.name, obj);
+            var ok_Ascertain00_ds_yn = new Dataset("ok_Ascertain00_ds_yn", this.ok_Ascertain00);
+            ok_Ascertain00_ds_yn._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">Y</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">N</Col></Row></Rows>");
+            obj.set_innerdataset(ok_Ascertain00_ds_yn);
+            obj.set_taborder("6");
+            obj.set_innerdataset("@ds_radio");
+            obj.set_codecolumn("txt");
+            obj.set_datacolumn("txt");
+            obj.set_value("N");
+            obj.set_direction("vertical");
+            obj.getSetter("ds_yn").set("[object Dataset]");
+            obj.set_index("0");
+
+            obj = new Static("sta_07", "absolute", "532", "447", "115", "25", null, null, this);
+            obj.set_taborder("139");
+            obj.set_text("지급총액");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new MaskEdit("area02", "absolute", "647", "449", "356", "20", null, null, this);
+            obj.set_taborder("11");
+            obj.set_cssclass("essential");
+            obj.set_value("0");
+            obj.set_mask("###,###,###,#");
+            obj.set_maskchar(",");
+            obj.style.set_align("left middle");
+            obj.set_displaynulltext("0");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_20", "absolute", "277", "374", "115", "25", null, null, this);
+            obj.set_taborder("142");
+            obj.set_text("년");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo04", "absolute", "647", "377", "116", "23", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("4");
+            obj.set_innerdataset("@ds_month");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+            obj.set_enable("false");
+            obj.set_displaynulltext("05");
+            obj.set_value("05");
+            obj.set_text("05월");
+
+            obj = new Spin("Spin00", "absolute", "396", "376", "130", "21", null, null, this);
+            obj.set_taborder("3");
+            obj.set_enable("false");
+            obj.set_enableevent("true");
+            obj.set_tooltiptype("default");
+            obj.set_displaycomma("false");
+            obj.set_usecontextmenu("true");
+            obj.set_displaynulltext("2021");
+            obj.set_value("2021");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_clear", "absolute", "477", "70", "55", "23", null, null, this);
+            obj.set_taborder("146");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btr_no05", "absolute", "396", "426", "105", "20", null, null, this);
+            obj.set_taborder("149");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btr_no04", "absolute", "885", "424", "95", "20", null, null, this);
+            obj.set_taborder("150");
+            obj.set_readonly("true");
+            obj.set_cssclass("essential");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btr_no00", "absolute", "885", "401", "95", "20", null, null, this);
+            obj.set_taborder("151");
+            obj.set_readonly("true");
+            obj.set_cssclass("essential");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "542", "351", "18", "22", null, null, this);
+            obj.set_taborder("152");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "775", "351", "18", "22", null, null, this);
+            obj.set_taborder("153");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "286", "376", "18", "22", null, null, this);
+            obj.set_taborder("154");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "542", "376", "18", "22", null, null, this);
+            obj.set_taborder("155");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "775", "376", "18", "22", null, null, this);
+            obj.set_taborder("156");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "absolute", "775", "402", "18", "22", null, null, this);
+            obj.set_taborder("157");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "absolute", "542", "402", "18", "22", null, null, this);
+            obj.set_taborder("158");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "542", "425", "18", "22", null, null, this);
+            obj.set_taborder("159");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "775", "425", "18", "22", null, null, this);
+            obj.set_taborder("160");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "542", "447", "18", "22", null, null, this);
+            obj.set_taborder("161");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1030, 876, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("Temp01_SingleDetail");
+            		p.set_titletext("New Form");
+            		p.set_scrollbars("autoboth");
+            		p.set_dragscrolltype("both");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item16","edt_btr_no00","value","ds_confirm","salary_reg_user_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","edt_btr_no00","value","gds_empno","emp_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","edt_btr_no04","value","ds_confirm","salary_acc_user_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","edt_btr_no04","value","gds_reempno","re_empno");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Combo00","value","ds_confirm","salary_book_code");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","f_date00","value","ds_confirm","salary_book_reg_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","f_date01","value","ds_confirm","salary_send_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","s_date","value","ds_confirm","salary_mod_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","f_date","value","ds_confirm","salary_acc_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","s_date00","value","ds_confirm","salary_cal_sta_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","s_date01","value","ds_confirm","salary_cal_end_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","edt_btr_no03","value","ds_confirm","attitude_book_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item19","edt_btr_no2","value","ds_confirm","salary_book_nm");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item20","btrgrid","binddataset","ds_confirm","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item21","edt_btr_no01","value","ds_confirm","salary_book_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","ok_Ascertain00","value","ds_confirm","salary_acc_yn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","area02","value","ds_confirm","salary_total");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","edt_btr_no05","value","ds_confirm","salary_mod_user_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item15","edt_btr_no05","value","gds_okempno","ok_empno");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item17","btrgrid","binddataset","ds_confirm","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","edt_btr_no03","value","gds_s_book_id","attitude_book_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("PD_IN_COM_S_Book_PopB_Con.xfdl", "Lib::Comm.xjs");
+        this.registerScript("PD_IN_COM_S_Book_PopB_Con.xfdl", function() {
+        //include "Lib::Comm.xjs";
+
+        
+
+        
+
+        this.form_onload = function(obj,e)
+        {
+
+        	Iject.formOnload(obj);
+        	this.Spin00.set_value(this.fn_year());
+        	var nRow = this.ds_search.addRow();
+        	this.ds_search.setColumn(nRow,"searchKeyword","ALL");
+
+        	this.fn_search();
+        	
+
+        	
+
+        } 
+
+        //조회(검색)버튼 5/19
+        this.fn_search = function(obj,e)
+        {
+        	if(this.Combo01.value != null || this.Combo03.value != null){
+        		 
+        		 var nRow2 = this.ds_search.addRow();
+        		 var searchKeyword = this.Combo01.text+" "+this.Combo03.text;
+        		 this.ds_search.setColumn(nRow2,"searchKeyword", searchKeyword);
+        	}else if(this.Combo01.value == null || this.Combo03.value == null){
+        		var nRow2 = this.ds_search.addRow();
+        		 this.ds_search.setColumn(nRow2,"searchKeyword","ALL");
+        	}
+        	
+        	
+        		
+        	
+        	 var oDatas =  {
+        			  svcid : "search",
+        			  sController : "sbSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_confirm=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    
+        			  nDataType : 0,   
+        			  bCompress :false		  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        		
+        	
+        	 Iject.transaction(this,oDatas,function(){   
+        		
+        		//alert(" this.errorcode : " + this.errorcode);
+        		
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid      : 서비스 ID
+        		*   @param : {object}    this.fobj       : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/   
+        		
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	       var pThis = this.fobj;   //form object	      
+        	       trace(" ds_confirm : " + pThis.ds_confirm.saveXML()); //결과정보 save?
+        	});
+        	
+        	 this.ds_search.clearData();
+        	
+
+        }
+
+        //초기화 버튼 5/19
+        this.btn_clear_onclick = function(obj,e)
+        {
+        	
+        	this.reload()
+        }
+
+        //삭제
+        this.fn_delete = function(obj,e)
+        {
+
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	var nRow = this.ds_confirm.rowposition;
+        	this.ds_confirm.deleteRow(nRow);
+        	if(rtnValue)
+        	{
+        		this.fn_save("delete");	
+        	}
+        	else
+        	{
+        		this.fn_search();
+        	}
+
+        
+        }
+
+        
+
+        //추가버튼 5/19
+        this.fn_add = function(obj,e)
+        {
+        	var add=this.ds_confirm.addRow();
+        	
+        	
+        	this.area02.set_value("0");
+        	this.ok_Ascertain00.set_index("0");
+        	
+        	this.ds_confirm.setColumn(add,"salary_book_reg_date",this.fn_today());
+        	this.ds_confirm.setColumn(add,"salary_send_date",this.fn_today());
+        	this.ds_confirm.setColumn(add,"salary_mod_date",this.fn_today());
+        	this.ds_confirm.setColumn(add,"salary_acc_date",this.fn_today());
+        	this.ds_confirm.setColumn(add,"salary_cal_sta_date",this.fn_today());
+        	this.ds_confirm.setColumn(add,"salary_cal_end_date",this.fn_today());
+        	this.Spin00.set_enable("true");
+        	
+        	this.enable_edit();
+        	
+        	
+
+        }
+
+        // 편집창 활성화 5/18
+        this.enable_edit = function()
+        {
+        	this.Combo00.set_enable("true");
+        	this.Combo04.set_enable("true");
+        	this.Combo02.set_enable("true");
+        	this.Combo00.setFocus();
+        	this.visible_edit();
+        	
+        	
+        }
+        //
+        // 편집창 비활성화 5/18
+        this.enable_nonEdit = function()
+        {
+        	this.Combo00.set_enable("false");
+        	this.Spin00.set_enable("false");
+        	this.Combo04.set_enable("false");
+        	this.Combo02.set_enable("false");
+
+        }
+        //보이게설정
+        this.visible_edit = function()
+        {
+        	this.Static00.set_visible("true");
+        	this.Static01.set_visible("true");
+        	this.Static03.set_visible("true");
+        	this.Static04.set_visible("true");
+        	this.Static05.set_visible("true");
+        	this.Static06.set_visible("true");
+        	this.Static07.set_visible("true");
+        	this.Static08.set_visible("true");
+        	this.Static09.set_visible("true");
+        	this.Static10.set_visible("true");
+        	this.Static11.set_visible("true");
+        	
+
+        }
+
+        //날짜 조정
+        this.fn_today = function()
+        {
+        	var objDate = new Date();
+        	return this.fn_toString(objDate);
+
+        }
+
+        this.fn_year = function()
+        {
+        	var objDate = new Date();
+        	return this.fn_toString2(objDate);
+
+        }
+
+        this.fn_toString = function(objDate)
+        {
+            var sRtn =  objDate.getFullYear()
+                     + (objDate.getMonth()+1).toString().padLeft(2, "0")
+                     +  objDate.getDate().toString().padLeft(2, "0");   
+                             //    trace(sRtn);
+        	return sRtn;
+        } 
+        this.fn_toString2 = function(objDate)
+        {
+            var sRtn2 =  objDate.getFullYear()
+                     
+        	return sRtn2;
+        } 
+
+        //저장버튼 5/19
+        this.saveButton_onclick = function(obj,e)
+        {	
+        	
+        	
+        	if(this.Combo00.enable==false){
+        		var mod_no = this.edt_btr_no05.value;
+        		if(this.edt_btr_no05.value != null){
+        			var mod_no = this.edt_btr_no05.value.slice(-12);
+        			}
+        		
+        		var reg_no = this.edt_btr_no00.value.slice(-12);
+        		
+        		
+        		var acc_no = this.edt_btr_no04.value.slice(-12);
+        		
+        		
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_mod_user_no",mod_no);
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_acc_user_no",acc_no);
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_book_reg_no",reg_no);
+        		this.fn_save("modify");
+        	}else{
+        		
+        		var mod_no = this.edt_btr_no05.value;
+        		if(this.edt_btr_no05.value != null){
+        			var mod_no = this.edt_btr_no05.value.slice(-12);
+        			}
+        		
+        		var reg_no = this.edt_btr_no00.value.slice(-12);
+        		
+        		
+        		var acc_no = this.edt_btr_no04.value.slice(-12);
+        		
+        		var dajang = this.Spin00.value+"년 "+this.Combo04.text+" "+this.Combo02.text+" "+this.Combo00.text;
+        		var dajang_no = this.Spin00.value+this.Combo04.value+this.Combo02.value+this.Combo00.value.substring(2,4);
+        		
+        		
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_mod_user_no",mod_no);
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_acc_user_no",acc_no);
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_book_reg_no",reg_no);
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_book_no",dajang_no);
+        		this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_book_nm",dajang);
+        		this.fn_save("save");
+        	}
+        }
+
+        
+
+        //등록
+        this.fn_save = function(strid)
+        {
+
+        	this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_reg_user_no", this.edt_btr_no00.value);
+        	this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_acc_user_no", this.edt_btr_no04.value);
+        	this.ds_confirm.setColumn(this.ds_confirm.rowposition, "salary_mod_user_no", this.edt_btr_no05.value);
+        	
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "sbModifyVO.do",			 
+        			  inds :["input1=ds_confirm:U"],
+        			  outds :[
+        				 "ds_confirm=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        		 //trace(" this.confirm: " + this.confirm.saveXML());
+
+        
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/    
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert("필수입력을 확인해주세요.","알림");			
+        		   return;
+        		}			
+        	      
+        	       var pThis = this.fobj;   //form object       
+        	       
+        	       
+        	      switch(strid)
+        	      {
+        			case "modify" :
+        				Iject.alert("수정완료");
+        				break;
+        	      
+        	      
+        	         case "save" : 
+        				Iject.alert("등록완료");
+        				
+        				var salary = Iject.confirm("급여를 등록하시겠습니까?");
+        				if(salary){
+        					 pThis.fn_salary_gogo();
+        					 }
+        				 break;
+        				 
+        	         case "delete" : 
+        	            Iject.alert("삭제완료");
+        				break; 
+        				
+        			 
+        	      }
+        	      
+        			
+        		  this.fn_search();
+        		  
+        	});
+        }
+
+        //급여조회
+        this.fn_salary_gogo = function(searchKeyword)
+        {
+        		alert("급여시작");
+        		var searchKeyword = this.edt_btr_no01.value;
+        		if(searchKeyword.substring(4,6) == 01){
+        			searchCondition = searchKeyword - 89000000;
+        		}else{
+        			searchCondition = searchKeyword - 1000000;
+        		}
+        	
+        		 var nRow2 = this.ds_search.addRow();
+        		 this.ds_search.setColumn(nRow2,"searchKeyword", searchKeyword);
+        		 this.ds_search.setColumn(nRow2,"searchCondition", searchCondition);
+        		var oDatas =  {
+        			  svcid : "create",
+        			  sController : "sbinsert_selectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_salary=output2"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    
+        			  nDataType : 0,   
+        			  bCompress :false		  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        		
+        	
+        	 Iject.transaction(this,oDatas,function(){   
+        		
+        		
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert("급여 생성실패",this.errorMsg);			
+        		   return;
+        		}
+        		
+        	       var pThis = this.fobj;   //form object
+        	       
+        	       trace(" ds_salary : " + pThis.ds_salary.saveXML()); //결과정보 save?
+        	  
+        			Iject.alert("급여생성완료");
+        			var bonus = Iject.confirm("수당을 등록하시겠습니까?");
+        				if(bonus){
+        					 pThis.fn_bonus();
+        					 }
+        	});
+        	
+        	this.ds_search.clearData();
+        	
+        }
+
+        //수당생성
+        this.fn_bonus = function()
+        {
+        	var searchKeyword = this.edt_btr_no01.value;
+        		if(searchKeyword.substring(4,6) == 01){
+        			searchCondition = this.edt_btr_no01.value - 89000000;
+        		}else{
+        			searchCondition = this.edt_btr_no01.value - 1000000;
+        		}
+        		 var nRow5 = this.ds_search.addRow();
+        		 this.ds_search.setColumn(nRow5,"searchKeyword", searchKeyword);
+        		 this.ds_search.setColumn(nRow5,"searchCondition", searchCondition);
+        		var oDatas =  {
+        			  svcid : "create2",
+        			  sController : "sb_bonusVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_bonus=output3"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    
+        			  nDataType : 0,   
+        			  bCompress :false		  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        		
+        	
+        	 Iject.transaction(this,oDatas,function(){   
+        		 
+        		
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert("수당생성실패",this.errorMsg);			
+        		   return;
+        		}
+        		
+        	       var pThis = this.fobj;   //form object
+        	       
+        	       trace(" ds_bonus : " + pThis.ds_bonus.saveXML()); //결과정보 save?
+        	  
+        			Iject.alert("수당생성완료");
+        			var tax = Iject.confirm("세금을 등록하시겠습니까?");
+        				if(tax){
+        					 pThis.fn_tax();
+        			 }
+        	});
+        	
+        	this.ds_search.clearData();
+        }
+        //세금생성
+        this.fn_tax = function()
+        {
+
+        	trace("세금 시작");
+        	var searchKeyword = this.edt_btr_no01.value;
+        		if(searchKeyword.substring(4,6) == 01){
+        			searchCondition = this.edt_btr_no01.value - 89000000;
+        		}else{
+        			searchCondition = this.edt_btr_no01.value - 1000000;
+        		}
+        	
+        		 var nRow6 = this.ds_search.addRow();
+        		 this.ds_search.setColumn(nRow6,"searchKeyword", searchKeyword);
+        		 this.ds_search.setColumn(nRow6,"searchCondition", searchCondition);
+        		var oDatas =  {
+        			  svcid : "create3",
+        			  sController : "sb_s_taxVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_tax=output4"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    
+        			  nDataType : 0,   
+        			  bCompress :false		  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        		
+        	
+        	 Iject.transaction(this,oDatas,function(){   
+        		 
+        		
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert("세금생성실패",this.errorMsg);			
+        		   return;
+        		}
+        		
+        	       var pThis = this.fobj;   //form object
+        	       
+        	       trace(" ds_tax : " + pThis.ds_tax.saveXML()); //결과정보 save?
+        	  
+        		Iject.alert("세금생성완료");
+        		var confirm11 = Iject.confirm(" 급여창으로 이동하시겠습니까?");
+        		if(confirm11){
+        		pThis.fn_gogo();
+        		}
+        			
+        	});
+        	
+        	this.ds_search.clearData();
+        	
+        }
+
+        this.fn_gogo = function(){
+        	
+        	/*this.go("SALARY::sal_popup_type00_0527_CRUD_copy.xfdl");*/
+        	var nLeft = system.clientToScreenX(this, 10);
+         	var nTop = system.clientToScreenY(this, 10);
+         	
+         	 
+         	 
+         	var Salary = new ChildFrame();
+         	
+         	Salary.init("Salary"
+         					, "absolute"
+         					, nLeft
+         					, nTop
+         					, 1000
+         					, 800
+         					, null
+         					, null
+         					, "S_book::sal_popup_test.xfdl");
+         	
+         	
+         	
+         	Salary.set_openalign("center middle");
+         	Salary.set_dragmovetype("all");
+          	
+          	
+           //DB 연결시 잠금
+        //   	system.showModalWindow(Salary_Book, 
+        // 							"empModal",
+        // 							this.getOwnerFrame(),
+        // 							"",
+        // 							this);
+        							
+        //	DB 연결시 해제
+        	
+        	var objParam = {param2:this.edt_btr_no01.value};
+        						
+                  
+            Salary.showModal(this.getOwnerFrame()
+             			  , objParam
+        				      , this
+             			  , "fn_popupCallback");
+           			  
+        		
+        }
+        	
+
+        
+
+        
+
+        ///////////////////////////////////////성과평가  처리////////////////////////////////////////////
+        this.btrgrid_oncelldblclick = function(obj,e)
+        {
+        	
+         	//var btrip_no= this.edt_btr_no2.value;
+        // 		
+         	var nLeft = system.clientToScreenX(this, 10);
+         	var nTop = system.clientToScreenY(this, 10);
+         	
+         	 
+         	 
+         	var Salary_Book = new ChildFrame();
+         	
+         	Salary_Book.init("Salary_Book"
+         					, "absolute"
+         					, nLeft
+         					, nTop
+         					, 524
+         					, 332
+         					, null
+         					, null
+         					, "S_book::PD_IN_COM_R_satandard.xfdl");
+         	
+         	
+         	
+         	Salary_Book.set_openalign("center middle");
+         	Salary_Book.set_dragmovetype("all");
+          	
+          	
+           //DB 연결시 잠금
+        //   	system.showModalWindow(Salary_Book, 
+        // 							"empModal",
+        // 							this.getOwnerFrame(),
+        // 							"",
+        // 							this);
+        							
+        //	DB 연결시 해제
+        	
+        	var objParam = {param1:this.edt_btr_no01.value};
+        						
+                  
+            Salary_Book.showModal(this.getOwnerFrame()
+             			  , objParam
+        				      , this
+             			  , "fn_popupCallback");
+           			  
+        		
+        }
+
+        // 
+         //팝업 콜백함수
+          this.fn_popupCallback = function(strPopupID,strReturn)
+          {
+              if(strReturn == undefined){
+                  return;
+              }
+          
+              if(strPopupID == "Salary_book"){
+                  this.alert("Return Value: " + strReturn);
+              }
+              
+            else if(strPopupID == "Salary"){
+        		this.alert("Return Value: " + strReturn);
+        		}
+        	else if(strPopupID == "attitude_id"){
+        		this.alert("Return Value: " + strReturn);
+        		this.edt_btr_no03.set_value(strReturn);
+        		}
+        	else if(strPopupID == "s_emp_name"){
+        		this.alert("Return Value: " + strReturn);
+        		this.edt_btr_no00.set_value(strReturn);
+        		}
+         }
+
+         //object 인자 생성함수
+         this.fn_parent = function(pObj)
+         {
+             this.ds_parent.copyData(pObj);
+        }
+
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        
+        //등록자 글로벌 안해도
+        this.fn_search02_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        	empSearch.init("btrip"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::empSearch.xfdl");
+        	
+        	
+        	
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+
+        //수정자
+        this.fn_search00_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        	empSearch.init("btrip"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::ok_empSearch.xfdl");
+        	
+        	
+        	
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+
+        //확정자
+        this.fn_search01_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var ok_empSearch = new ChildFrame;
+        	ok_empSearch.init("btrip1"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::re_empSearch.xfdl");
+        	
+        	
+        	
+        	ok_empSearch.set_openalign("center middle");
+        	ok_empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(ok_empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+
+        
+
+        
+
+        
+
+        //근태 대장번호 
+
+        this.fn_search04_onclick = function(obj,e)
+        {
+        		
+        	
+        	 var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var attitude_id = new ChildFrame;
+        		attitude_id.init("attitude_id"
+        					, "absolute"
+        					, nLeft
+        					, nTop
+        					, 300
+        					, 250
+        					, null
+        					, null
+        					, "S_book::S_bookSearch.xfdl");
+        					
+        	attitude_id.set_openalign("center middle");
+        	attitude_id.set_dragmovetype("all");
+        	
+        	var objParam = {
+        					};
+        	
+        	attitude_id.showModal(this.getOwnerFrame(),
+        							objParam
+        							,this
+        							,"fn_popupCallback");
+
+        // 	var attitude_book_id = application.gds_s_book_Id.getColumn(0,"attitude_book_id");
+        // 	this.edt_btr_no03.set_value(attitude_book_id);
+        				
+        	
+        }
+
+        
+
+        
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.sta_title.addEventHandler("onclick", this.sta_title_onclick, this);
+            this.sta_15.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_03.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_04.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_09.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.btn_add.addEventHandler("onclick", this.fn_add, this);
+            this.btn_save.addEventHandler("onclick", this.saveButton_onclick, this);
+            this.btn_delete.addEventHandler("onclick", this.fn_delete, this);
+            this.sta_11.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_12.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_btr_no2.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_13.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_16.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.fn_search00.addEventHandler("onclick", this.fn_search00_onclick, this);
+            this.sta_00.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.fn_search01.addEventHandler("onclick", this.fn_search01_onclick, this);
+            this.fn_search02.addEventHandler("onclick", this.fn_search02_onclick, this);
+            this.sta_08.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_17.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_05.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_btr_no03.addEventHandler("oneditclick", this.edt_btr_no03_oneditclick, this);
+            this.fn_search04.addEventHandler("onclick", this.fn_search04_onclick, this);
+            this.sta_06.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.btrgrid.addEventHandler("oncelldblclick", this.btrgrid_oncelldblclick, this);
+            this.btrgrid.addEventHandler("oncellclick", this.btrgrid_oncellclick, this);
+            this.sta_10.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_no.addEventHandler("onclick", this.sta_no_onclick, this);
+            this.btn_search.addEventHandler("onclick", this.fn_search, this);
+            this.Combo01.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.sta_14.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.Combo02.addEventHandler("onitemchanged", this.Combo02_onitemchanged, this);
+            this.sta_18.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_19.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_btr_no01.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.sta_02.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.ok_Ascertain00.addEventHandler("onitemclick", this.Tab00_tabpage1_div_Detail_ok_Ascertain_onitemclick, this);
+            this.sta_07.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_20.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.Combo04.addEventHandler("onitemchanged", this.Combo04_onitemchanged, this);
+            this.btn_clear.addEventHandler("onclick", this.btn_clear_onclick, this);
+            this.edt_btr_no05.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_btr_no04.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.edt_btr_no00.addEventHandler("oneditclick", this.edt_btr_no2_oneditclick, this);
+            this.Static00.addEventHandler("onclick", this.star_onclick, this);
+            this.Static01.addEventHandler("onclick", this.star_onclick, this);
+            this.Static03.addEventHandler("onclick", this.star_onclick, this);
+            this.Static04.addEventHandler("onclick", this.star_onclick, this);
+            this.Static05.addEventHandler("onclick", this.star_onclick, this);
+            this.Static06.addEventHandler("onclick", this.star_onclick, this);
+            this.Static07.addEventHandler("onclick", this.star_onclick, this);
+            this.Static08.addEventHandler("onclick", this.star_onclick, this);
+            this.Static09.addEventHandler("onclick", this.star_onclick, this);
+            this.Static10.addEventHandler("onclick", this.star_onclick, this);
+
+        };
+
+        this.loadIncludeScript("PD_IN_COM_S_Book_PopB_Con.xfdl");
+
+       
+    };
+}
+)();

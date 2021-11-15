@@ -1,0 +1,230 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("VACATION_CODE");
+                this.set_titletext("New Form");
+                this.set_visible("true");
+                this._setFormPosition(0,0,800,768);
+            }
+            this.style.set_font("10 Dotum");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_vacation", this);
+            obj._setContents("<ColumnInfo><Column id=\"vacation_code_id\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_nm\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_standard_code\" type=\"STRING\" size=\"256\"/><Column id=\"start_date\" type=\"DATE\" size=\"256\"/><Column id=\"end_date\" type=\"DATE\" size=\"256\"/><Column id=\"confirmyn\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Static("Sta_01", "absolute", "1%", "56", null, "45", "10.75%", null, this);
+            obj.set_taborder("0");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "2.38%", "18", null, "23", "81.75%", null, this);
+            obj.set_taborder("1");
+            obj.set_text("연차코드");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "66.5%", "61", null, "32", "24.13%", null, this);
+            obj.set_taborder("2");
+            obj.set_text("초기화");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "77.63%", "61", null, "32", "13%", null, this);
+            obj.set_taborder("3");
+            obj.set_text("저장");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "1%", "115", null, "333", "10.75%", null, this);
+            obj.set_taborder("4");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "2.63%", "125", null, "35", "86.5%", null, this);
+            obj.set_taborder("5");
+            obj.set_text("연차코드 LIST");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "2.38%", "170", null, "262", "54%", null, this);
+            obj.set_taborder("6");
+            obj.set_binddataset("ds_vacation");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"99\"/><Column size=\"101\"/><Column size=\"69\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"연차명\"/><Cell col=\"1\" text=\"시작일\"/><Cell col=\"2\" text=\"종료일\"/><Cell col=\"3\" text=\"확정\"/></Band><Band id=\"body\"><Cell text=\"bind:연차명\"/><Cell col=\"1\" text=\"bind:시작일\"/><Cell col=\"2\" text=\"bind:종료일\"/><Cell col=\"3\" text=\"bind:확정\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "54.87%", "125", null, "35", "34.25%", null, this);
+            obj.set_taborder("7");
+            obj.set_text("연차코드번호");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "55%", "170", null, "35", "34.13%", null, this);
+            obj.set_taborder("8");
+            obj.set_text("연차명");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "55%", "215", null, "35", "34.13%", null, this);
+            obj.set_taborder("9");
+            obj.set_text("연차기준코드");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "absolute", "55%", "260", null, "35", "34.13%", null, this);
+            obj.set_taborder("10");
+            obj.set_text("시작일");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "absolute", "55%", "305", null, "35", "34.13%", null, this);
+            obj.set_taborder("11");
+            obj.set_text("종료일");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "55%", "350", null, "35", "34.13%", null, this);
+            obj.set_taborder("12");
+            obj.set_text("확정여부");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button02", "absolute", "55%", "393", null, "39", "13%", null, this);
+            obj.set_taborder("13");
+            obj.set_text("적용");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "66.75%", "125", null, "35", "14.5%", null, this);
+            obj.set_taborder("14");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "66.75%", "170", null, "35", "14.5%", null, this);
+            obj.set_taborder("15");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit02", "absolute", "66.75%", "215", null, "35", "24.5%", null, this);
+            obj.set_taborder("16");
+            this.addChild(obj.name, obj);
+
+            obj = new Radio("Radio00", "absolute", "66.63%", "350", null, "35", "14.63%", null, this);
+            this.addChild(obj.name, obj);
+            var Radio00_innerdataset = new Dataset("Radio00_innerdataset", this.Radio00);
+            Radio00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">확정</Col></Row><Row><Col id=\"codecolumn\">0</Col><Col id=\"datacolumn\">미확정</Col></Row></Rows>");
+            obj.set_innerdataset(Radio00_innerdataset);
+            obj.set_taborder("18");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.style.set_align("left middle");
+            obj.set_positionstep("0");
+            obj.set_columncount("2");
+            obj.set_rowcount("2");
+            obj.set_readonly("false");
+
+            obj = new Calendar("Calendar00", "absolute", "66.75%", "260", null, "35", "14.5%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("19");
+
+            obj = new Calendar("Calendar01", "absolute", "66.75%", "305", null, "35", "14.5%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("20");
+
+            obj = new Combo("Combo00", "absolute", "76.5%", "216", null, "32", "14.25%", null, this);
+            this.addChild(obj.name, obj);
+            var Combo00_innerdataset = new Dataset("Combo00_innerdataset", this.Combo00);
+            Combo00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">2310</Col><Col id=\"datacolumn\">40시간제</Col></Row><Row><Col id=\"codecolumn\">2320</Col><Col id=\"datacolumn\">44시간제</Col></Row></Rows>");
+            obj.set_innerdataset(Combo00_innerdataset);
+            obj.set_taborder("21");
+            obj.set_text("Combo00");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 800, 768, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+            		p.style.set_font("10 Dotum");
+            		p.set_visible("true");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Edit00","value","ds_vacation","vacation_code_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Edit01","value","ds_vacation","vacation_nm");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","Edit02","value","ds_vacation","vacation_standard_code");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Calendar00","value","ds_vacation","start_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","Calendar01","value","ds_vacation","end_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","Radio00","value","ds_vacation","confirmyn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.Static03.addEventHandler("onclick", this.Static03_onclick, this);
+            this.Static08.addEventHandler("onclick", this.Static08_onclick, this);
+            this.Radio00.addEventHandler("onitemclick", this.Radio00_onitemclick, this);
+            this.Combo00.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+
+        };
+
+        this.loadIncludeScript("VACATION_CODE.xfdl");
+
+       
+    };
+}
+)();

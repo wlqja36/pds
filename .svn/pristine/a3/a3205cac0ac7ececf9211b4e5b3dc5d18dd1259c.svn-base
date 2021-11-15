@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Oct_vacationCodeList" classname="vacationcodelist" inheritanceid="" position="absolute" left="0" top="0" width="558" height="441" onload="Oct_vacationCodeList_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img00" taborder="57" left="14" top="73" width="530" height="284" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_titlebg1" taborder="59" left="9" top="64" width="544" height="361" style="background:#d8dcedff;"/>
+        <Button id="btn_vaclist_select" taborder="53" text="선택" onclick="btn_vaclist_select_onclick" left="187" top="381" width="76" height="27" style="pusheddrawoffset:0 0;background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+        <Button id="btn_vaclist_cancel" taborder="54" text="취소" onclick="btn_vaclist_cancel_onclick" left="289" top="381" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+        <Edit id="Edit05" taborder="55" maxlength="10" oneditclick="Edit05_oneditclick" enable="false" enableevent="false" left="406" top="81" width="0" height="19"/>
+        <Grid id="grd_vaccode_list" taborder="56" binddataset="ds_vacation" scrollbars="autovert" useinputpanel="false" autofittype="col" left="19" top="79" width="520" height="272">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="169"/>
+                <Column size="166"/>
+                <Column size="185"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="연차코드"/>
+                <Cell col="1" text="연차명"/>
+                <Cell col="2" text="연차기준코드"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:vacation_code_id"/>
+                <Cell col="1" displaytype="combo" edittype="combo" text="bind:vacation_nm" combodataset="ds_code_list" combocodecol="code" combodatacol="name"/>
+                <Cell col="2" displaytype="combo" edittype="combo" text="bind:vacation_standard_code" combodataset="ds_vacation_Standard" combocodecol="code" combodatacol="name"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="joinTitle" taborder="58" text="연차코드리스트" left="9" top="6" width="544" height="45" style="align:center;background:#165fa6ff;color:#ffffffff;font:bold 12 Dotum;">
+          <Layouts>
+            <Layout/>
+          </Layouts>
+        </Div>
+        <Edit id="Edit01" taborder="69" maxlength="10" oneditclick="Edit05_oneditclick" enable="false" enableevent="false" left="452" top="485" width="0" height="19"/>
+        <Static id="Static00" taborder="70" text="Static00" left="576" top="84" width="109" height="49"/>
+        <Edit id="Edit00" taborder="71" left="591" top="165" width="94" height="32"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_code_list">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2210</Col>
+            <Col id="name">연차휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2220</Col>
+            <Col id="name">경조휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2230</Col>
+            <Col id="name">병가</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchCondition" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="vacation_code_id" type="STRING" size="4"/>
+          <Column id="vacation_standard_code" type="STRING" size="4"/>
+          <Column id="vacation_nm" type="STRING" size="256"/>
+          <Column id="reg_date" type="STRING" size="256"/>
+          <Column id="reg_emp_id" type="STRING" size="12"/>
+          <Column id="modify_date" type="STRING" size="256"/>
+          <Column id="modify_emp_id" type="STRING" size="12"/>
+          <Column id="confirm_date" type="STRING" size="256"/>
+          <Column id="confirm_emp_id" type="STRING" size="12"/>
+          <Column id="confirmyn" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_vacation_Standard">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2310</Col>
+            <Col id="name">40시간제</Col>
+          </Row>
+          <Row>
+            <Col id="code">2320</Col>
+            <Col id="name">44시간제</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind/>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+
+this.Oct_vacationCodeList_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	this.Oct_vacatioCodeList_onclick();
+	
+} 
+
+this.Oct_vacatioCodeList_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_search.clearData();
+	var nRow = this.ds_search.addRow();
+	
+	this.gfn_transaction(this,
+ 						"Oct_vacationCodeList",
+ 						"Oct_vacationCodeListSelectVO.do",
+ 						"ds_search=ds_search",
+ 						"ds_vacation=ds_output",
+ 						"",
+ 						"transaction_callback"
+ 						);
+}
+
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+}
+
+//취소
+this.btn_vaclist_cancel_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+//선택
+this.btn_vaclist_select_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var vacation_code_id = this.ds_vacation.getColumn(this.ds_vacation.rowposition,"vacation_code_id");
+		application.gds_vacationCodeId.addRow();
+		application.gds_vacationCodeId.setColumn(application.gds_vacationCodeId.rowposition,"vacation_code_id",vacation_code_id);
+		this.close();
+}
+]]></Script>
+  </Form>
+</FDL>

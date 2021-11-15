@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Oct_SalaryTestMapper">
+
+   <resultMap id="Oct_SalaryTest" type="nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO">
+        <result property="salary_book_no" column="SALARY_BOOK_NO" />
+        <result property="record_code" column="RECORD_CODE" />
+        <result property="record_score" column="RECORD_SCORE" />
+        <result property="record_money" column="RECORD_MONEY" />
+    </resultMap>
+    
+     <select id="selectOctSalaryTestVO" parameterType="nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO" resultMap="Oct_SalaryTest">
+         
+            SELECT
+                SALARY_BOOK_NO,
+				RECORD_CODE,	
+				RECORD_SCORE,
+				RECORD_MONEY
+            FROM RECORD_STANDARD  
+		 	WHERE 
+                SALARY_BOOK_NO =#{searchKeyword} 
+		         	       
+            
+    </select>
+   
+
+   
+    <insert id="insertOctSalaryTestVO" parameterType="nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO">
+        <![CDATA[
+            INSERT INTO RECORD_STANDARD (
+				SALARY_BOOK_NO,
+				RECORD_CODE,	
+				RECORD_SCORE,
+				RECORD_MONEY
+            ) VALUES (
+            	#{salary_book_no},
+                #{record_code},
+                #{record_score},
+                #{record_money}
+                
+            )
+        ]]>
+    </insert>
+    
+      <update id="updateOctSalaryTestVO" parameterType="nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO">
+        <![CDATA[
+            UPDATE RECORD_STANDARD 
+            SET 
+				RECORD_CODE =#{record_code},
+				RECORD_SCORE =#{record_score},	
+				RECORD_MONEY =#{record_money}
+            WHERE SALARY_BOOK_NO =#{salary_book_no}
+        ]]>
+    </update>
+    
+    <delete id="deleteOctSalaryTestVO" parameterType="nexacro.sample.vo.Oct_SalaryTest.Oct_SalaryTestVO">
+        <![CDATA[
+            DELETE FROM RECORD_STANDARD 
+            WHERE SALARY_BOOK_NO=#{salary_book_no}
+        ]]>
+    </delete>
+   	  
+
+</mapper>
+

@@ -1,0 +1,276 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("empSearch");
+                this.set_titletext("사원찾기");
+                this._setFormPosition(0,0,558,477);
+            }
+            this.getSetter("inheritanceid").set("");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_emp", this);
+            obj._setContents("<ColumnInfo><Column id=\"emp_no\" type=\"STRING\" size=\"256\"/><Column id=\"emp_name\" type=\"STRING\" size=\"256\"/><Column id=\"grade\" type=\"STRING\" size=\"256\"/><Column id=\"dept\" type=\"STRING\" size=\"256\"/><Column id=\"birth\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("joinTitle", "absolute", "9", "6", "544", "50", null, null, this);
+            obj.set_taborder("27");
+            obj.set_text("  사원 검색");
+            obj.style.set_align("left");
+            obj.style.set_background("#165fa6ff");
+            obj.style.set_border("1 solid #e5e5e5ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Arial Black");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_empList", "absolute", "19", "127", "520", "272", null, null, this);
+            obj.set_taborder("29");
+            obj.set_binddataset("ds_emp");
+            obj.set_scrollbars("autovert");
+            obj.set_autofittype("col");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"130\"/><Column size=\"131\"/><Column size=\"131\"/><Column size=\"131\"/><Column size=\"131\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell style=\"font:bold 9 dotum;\" text=\"사번\"/><Cell col=\"1\" style=\"font:bold 9 dotum;\" text=\"이름\"/><Cell col=\"2\" style=\"font:bold 9 dotum;\" text=\"직위\"/><Cell col=\"3\" style=\"font:bold 9 dotum;\" text=\"부서\"/><Cell col=\"4\" style=\"font:bold 9 dotum;\" text=\"생년월일\"/></Band><Band id=\"body\"><Cell style=\"align:center;\" text=\"bind:emp_no\"/><Cell col=\"1\" edittype=\"none\" style=\"align:center;\" text=\"bind:emp_name\" editlimit=\"30\"/><Cell col=\"2\" edittype=\"none\" style=\"align:center;\" text=\"bind:grade\" editlimit=\"30\"/><Cell col=\"3\" edittype=\"none\" style=\"align:center;\" text=\"bind:dept\" editlimit=\"30\"/><Cell col=\"4\" edittype=\"none\" style=\"align:center;\" text=\"bind:birth\" editlimit=\"30\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_01", "absolute", "60", "78", "480", "25", null, null, this);
+            obj.set_taborder("31");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_searchKeyword", "absolute", "219", "78", "80", "25", null, null, this);
+            obj.set_taborder("32");
+            obj.set_text("검색어");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_searchCondition", "absolute", "20", "78", "80", "25", null, null, this);
+            obj.set_taborder("35");
+            obj.set_text("검색종류");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_searchCondition", "absolute", "18.83%", "81", "100", "19", null, null, this);
+            this.addChild(obj.name, obj);
+            var combo_searchCondition_innerdataset = new Dataset("combo_searchCondition_innerdataset", this.combo_searchCondition);
+            combo_searchCondition_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">total</Col><Col id=\"datacolumn\">전체</Col></Row><Row><Col id=\"codecolumn\">name</Col><Col id=\"datacolumn\">이름</Col></Row><Row><Col id=\"codecolumn\">grade</Col><Col id=\"datacolumn\">직급</Col></Row><Row><Col id=\"codecolumn\">dept</Col><Col id=\"datacolumn\">부서</Col></Row></Rows>");
+            obj.set_innerdataset(combo_searchCondition_innerdataset);
+            obj.set_taborder("36");
+            obj.set_text("전체");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+
+            obj = new Edit("edt_searchKeyword", "absolute", "306", "81", "100", "19", null, null, this);
+            obj.set_taborder("37");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_emp_reset", "absolute", "476", "81", "57", "19", null, null, this);
+            obj.set_taborder("39");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 13 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_emp_search", "absolute", "413", "81", "57", "19", null, null, this);
+            obj.set_taborder("40");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 13 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_emp_cancel", "absolute", "285", "427", "84", "27", null, null, this);
+            obj.set_taborder("41");
+            obj.set_text("취소");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_emp_select", "absolute", "189", "427", "84", "27", null, null, this);
+            obj.set_taborder("42");
+            obj.set_text("선택");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 544, 50, this.joinTitle,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("27");
+            		p.set_text("  사원 검색");
+            		p.style.set_align("left");
+            		p.style.set_background("#165fa6ff");
+            		p.style.set_border("1 solid #e5e5e5ff");
+            		p.style.set_color("#ffffffff");
+            		p.style.set_font("bold 16 Arial Black");
+
+            	}
+            );
+            this.joinTitle.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 558, 477, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("member002");
+            		p.getSetter("inheritanceid").set("");
+            		p.set_titletext("사원찾기");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item1","combo_searchCondition","value","ds_search","searchCondition");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","edt_searchKeyword","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("YJB_empSearch.xfdl", "Lib::common.xjs");
+        this.registerScript("YJB_empSearch.xfdl", function() {
+
+        //include "Lib::common.xjs";
+
+        
+        this.btn_emp_cancel_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+
+        
+
+        this.btn_emp_reset_onclick = function(obj,e)
+        {
+        	this.reload();
+        }
+
+        
+        this.empSearch_onload = function(obj,e)
+        {
+        	
+        	this.btn_emp_search_onclick();
+        	
+        }
+        this.btn_emp_search_onclick = function(obj,e)
+        {
+        	this.ds_search.setColumn(0,"searchKeyword",this.edt_searchKeyword.value);
+        	this.ds_search.setColumn(0,"searchCondition",this.combo_searchCondition.value);
+
+        	this.gfn_transaction(this,
+         						"empSearch_YJB",
+         						"empSelectVO_YJB.do",
+         						"ds_search=ds_search",
+         						"ds_emp=output1",
+         						"",
+         						"transaction_callback"
+         						);
+        }
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		return;
+        	}
+        	
+        }
+        this.btn_emp_select_onclick = function(obj,e)
+        {
+
+              var emp_no = this.ds_emp.getColumn(this.ds_emp.rowposition, "emp_no");   
+              var emp_name = this.ds_emp.getColumn(this.ds_emp.rowposition, "emp_name");
+
+        	  application.gds_empno.addRow();
+        	  application.gds_empno.setColumn(application.gds_empno.rowposition, "emp_no", emp_no);
+        	  application.gds_empno.setColumn(application.gds_empno.rowposition, "emp_name", emp_name);
+        	  application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_name"); 
+        	  
+        	  
+        	  var emp_noName = emp_name + ',' + emp_no;
+         	  this.close(emp_noName);
+
+        
+        }
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.empSearch_onload, this);
+            this.combo_searchCondition.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.btn_emp_reset.addEventHandler("onclick", this.btn_emp_reset_onclick, this);
+            this.btn_emp_search.addEventHandler("onclick", this.btn_emp_search_onclick, this);
+            this.btn_emp_cancel.addEventHandler("onclick", this.btn_emp_cancel_onclick, this);
+            this.btn_emp_select.addEventHandler("onclick", this.btn_emp_select_onclick, this);
+
+        };
+
+        this.loadIncludeScript("YJB_empSearch.xfdl");
+
+       
+    };
+}
+)();

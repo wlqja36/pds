@@ -1,0 +1,967 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("YJB_CCMM");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1280,674);
+            }
+            this.style.set_bordertype("normal 0 0");
+            this.style.set_font("20 Dotum");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_detailCodeList", this);
+            obj._setContents("<ColumnInfo><Column id=\"rowNum\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"detailCode\" type=\"STRING\" size=\"256\"/><Column id=\"detailCodeName\" type=\"STRING\" size=\"256\"/><Column id=\"codeNameEng\" type=\"STRING\" size=\"256\"/><Column id=\"etcCode\" type=\"STRING\" size=\"256\"/><Column id=\"etcCode2\" type=\"STRING\" size=\"256\"/><Column id=\"use\" type=\"STRING\" size=\"256\"/><Column id=\"detailCodeInfo\" type=\"STRING\" size=\"256\"/><Column id=\"sortOrder\" type=\"STRING\" size=\"256\"/><Column id=\"regDate\" type=\"STRING\" size=\"256\"/><Column id=\"regId\" type=\"STRING\" size=\"256\"/><Column id=\"updateDate\" type=\"STRING\" size=\"256\"/><Column id=\"updateEnum\" type=\"STRING\" size=\"256\"/><Column id=\"lastUpdateDate\" type=\"STRING\" size=\"256\"/><Column id=\"addEnum\" type=\"STRING\" size=\"256\"/><Column id=\"higherClassCode\" type=\"STRING\" size=\"256\"/><Column id=\"higherCodeNo\" type=\"STRING\" size=\"256\"/><Column id=\"rnum\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_code", this);
+            obj._setContents("<ColumnInfo><Column id=\"classCode\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"codeFull\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/><Column id=\"searchUseYn\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_check", this);
+            obj._setContents("<ColumnInfo><Column id=\"detailCode\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_rnum", this);
+            obj._setContents("<ColumnInfo><Column id=\"rnum\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("ImageViewer02", "absolute", "20", "509", "1235", "136", null, null, this);
+            obj.set_taborder("59");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer01", "absolute", "20", "142", "1235", "324", null, null, this);
+            obj.set_taborder("58");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer04", "absolute", "20", "67", "1235", "44", null, null, this);
+            obj.set_taborder("57");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static23", "absolute", "23", "608", "1228", "33", null, null, this);
+            obj.set_taborder("51");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static19", "absolute", "23", "576", "1228", "33", null, null, this);
+            obj.set_taborder("52");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "23", "544", "1228", "33", null, null, this);
+            obj.set_taborder("53");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "absolute", "23", "512", "1228", "33", null, null, this);
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            obj.set_positionstep("0");
+            obj.set_taborder("54");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_cd_list", "absolute", "23", "147", "1228", "314", null, null, this);
+            obj.set_taborder("1");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj.style.set_font("bold 10 Dotum");
+            obj.set_binddataset("ds_detailCodeList");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"64\"/><Column size=\"154\"/><Column size=\"169\"/><Column size=\"175\"/><Column size=\"223\"/><Column size=\"140\"/><Column size=\"303\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell style=\"font:bold 10 dotum;\" text=\"NO\"/><Cell col=\"1\" style=\"font:bold 10 dotum;\" text=\"분류코드\"/><Cell col=\"2\" style=\"font:bold 10 dotum;\" text=\"분류명칭\"/><Cell col=\"3\" style=\"font:bold 10 dotum;\" text=\"상세코드\"/><Cell col=\"4\" style=\"font:bold 10 dotum;\" text=\"상세코드명\"/><Cell col=\"5\" style=\"font:bold 10 dotum;\" text=\"사용여부\"/><Cell col=\"6\" style=\"font:bold 10 dotum;\" text=\"등록자(사번)\"/></Band><Band id=\"body\"><Cell text=\"bind:rowNum\"/><Cell col=\"1\" text=\"bind:classCode\"/><Cell col=\"2\" text=\"bind:className\"/><Cell col=\"3\" text=\"bind:detailCode\"/><Cell col=\"4\" text=\"bind:detailCodeName\"/><Cell col=\"5\" text=\"bind:use\"/><Cell col=\"6\" text=\"bind:regId\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_list", "absolute", "26", "111", "255", "38", null, null, this);
+            obj.set_taborder("2");
+            obj.set_text("공통코드 상세 리스트");
+            obj.style.set_font("bold 14 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cd_add", "absolute", "1092", "473", "76", "27", null, null, this);
+            obj.set_taborder("4");
+            obj.set_text("신규");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cd_save", "absolute", "1178", "473", "76", "27", null, null, this);
+            obj.set_taborder("5");
+            obj.set_text("저장");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_dCodeName", "absolute", "1093", "518", "151", "21", null, null, this);
+            obj.set_taborder("7");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_class1", "absolute", "23", "512", "139", "33", null, null, this);
+            obj.set_taborder("8");
+            obj.set_text("분류코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_className", "absolute", "333", "512", "139", "33", null, null, this);
+            obj.set_taborder("9");
+            obj.set_text("분류명칭");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            obj.set_visible("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_className", "absolute", "478", "518", "151", "21", null, null, this);
+            obj.set_taborder("10");
+            obj.style.set_border("1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_readonly("true");
+            obj.set_visible("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_dcode1", "absolute", "640", "512", "139", "33", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("상세코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_dCode1", "absolute", "785", "518", "151", "21", null, null, this);
+            obj.set_taborder("12");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_dCodeName", "absolute", "945", "512", "139", "33", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("상세코드명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_codeName_eng", "absolute", "23", "544", "139", "33", null, null, this);
+            obj.set_taborder("14");
+            obj.set_text("코드영문명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_codeEtc", "absolute", "333", "544", "139", "33", null, null, this);
+            obj.set_taborder("15");
+            obj.set_text("기타코드1");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_codeEtc", "absolute", "478", "550", "151", "21", null, null, this);
+            obj.set_taborder("16");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_codeEtc2", "absolute", "640", "544", "139", "33", null, null, this);
+            obj.set_taborder("17");
+            obj.set_text("기타코드2");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_codeEtc2", "absolute", "785", "550", "151", "21", null, null, this);
+            obj.set_taborder("18");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_use", "absolute", "945", "544", "139", "33", null, null, this);
+            obj.set_taborder("19");
+            obj.set_text("사용여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_codeName_eng", "absolute", "168", "550", "151", "21", null, null, this);
+            obj.set_taborder("20");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "55", "511", "16", "33", null, null, this);
+            obj.set_taborder("21");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "366", "511", "16", "33", null, null, this);
+            obj.set_taborder("22");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            obj.set_visible("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static15", "absolute", "672", "511", "16", "33", null, null, this);
+            obj.set_taborder("23");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_cd_class1", "absolute", "168", "518", "151", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("24");
+            obj.style.set_font("9 Dotum");
+            obj.set_innerdataset("@ds_code");
+            obj.set_codecolumn("classCode");
+            obj.set_datacolumn("codeFull");
+
+            obj = new Static("Static18", "absolute", "980", "542", "16", "33", null, null, this);
+            obj.set_taborder("25");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_dCodeInfo", "absolute", "23", "576", "139", "33", null, null, this);
+            obj.set_taborder("26");
+            obj.set_text("상세코드설명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_dCodeInfo", "absolute", "168", "582", "769", "21", null, null, this);
+            obj.set_taborder("27");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_sortOrder", "absolute", "945", "576", "139", "33", null, null, this);
+            obj.set_taborder("28");
+            obj.set_text("정렬순서");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_regDate", "absolute", "23", "608", "139", "33", null, null, this);
+            obj.set_taborder("29");
+            obj.set_text("등록일자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_updateDate", "absolute", "333", "608", "139", "33", null, null, this);
+            obj.set_taborder("30");
+            obj.set_text("수정일자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_updateDate", "absolute", "478", "614", "151", "21", null, null, this);
+            obj.set_taborder("31");
+            obj.style.set_font("9 Dotum");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_updateEno", "absolute", "640", "608", "139", "33", null, null, this);
+            obj.set_taborder("32");
+            obj.set_text("수정자(사번)");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_updateEno", "absolute", "785", "614", "151", "21", null, null, this);
+            obj.set_taborder("33");
+            obj.style.set_font("9 Dotum");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_lastChangeDate", "absolute", "945", "608", "139", "33", null, null, this);
+            obj.set_taborder("34");
+            obj.set_text("최종수정일자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_lastChangeDate", "absolute", "1093", "614", "151", "21", null, null, this);
+            obj.set_taborder("35");
+            obj.style.set_font("9 Dotum");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_regDate", "absolute", "168", "614", "151", "21", null, null, this);
+            obj.set_taborder("36");
+            obj.style.set_font("9 Dotum");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_cd_use", "absolute", "1093", "550", "151", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            var combo_cd_use_innerdataset = new Dataset("combo_cd_use_innerdataset", this.combo_cd_use);
+            combo_cd_use_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">Y</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">N</Col></Row></Rows>");
+            obj.set_innerdataset(combo_cd_use_innerdataset);
+            obj.set_taborder("37");
+            obj.set_value("Y");
+            obj.set_text("Y");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_index("0");
+
+            obj = new ImageViewer("ImageViewer00", "absolute", "7", "8", "1265", "45", null, null, this);
+            obj.set_taborder("38");
+            obj.style.set_background("#165fa6ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_dtm", "absolute", "16", "14", "352", "34", null, null, this);
+            obj.set_taborder("39");
+            obj.set_text("공통코드 상세관리");
+            obj.style.set_background("transparent");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Arial Black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static21", "absolute", "23", "71", "1228", "36", null, null, this);
+            obj.set_taborder("41");
+            obj.set_wordwrap("char");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_class", "absolute", "30", "73", "90", "32", null, null, this);
+            obj.set_taborder("42");
+            obj.set_text("분류코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_cd_class", "absolute", "119", "79", "211", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("43");
+            obj.set_text("전체");
+            obj.style.set_font("9 Dotum");
+            obj.set_innerdataset("@ds_code");
+            obj.set_codecolumn("classCode");
+            obj.set_datacolumn("codeFull");
+
+            obj = new Static("sta_cd_codeName", "absolute", "637", "73", "84", "32", null, null, this);
+            obj.set_taborder("44");
+            obj.set_text("코드명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_codeName", "absolute", "687", "78", "240", "21", null, null, this);
+            obj.set_taborder("45");
+            obj.style.set_font("10 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cd_search", "absolute", "950", "76", "76", "27", null, null, this);
+            obj.set_taborder("46");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cd_searchReset", "absolute", "1036", "76", "76", "27", null, null, this);
+            obj.set_taborder("47");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cd_dCode", "absolute", "361", "73", "114", "32", null, null, this);
+            obj.set_taborder("48");
+            obj.set_text("상세코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_dCode", "absolute", "425", "79", "187", "21", null, null, this);
+            obj.set_taborder("49");
+            obj.style.set_font("10 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cd_sortOrder", "absolute", "1093", "582", "151", "21", null, null, this);
+            obj.set_taborder("50");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "973", "508", "16", "33", null, null, this);
+            obj.set_taborder("55");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cd_delete", "absolute", "1006", "473", "76", "27", null, null, this);
+            obj.set_taborder("56");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1280, 674, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+            		p.style.set_bordertype("normal 0 0");
+            		p.style.set_font("20 Dotum");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item3","combo_cd_class1","value","ds_detailCodeList","classCode");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","edt_cd_className","value","ds_detailCodeList","className");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","edt_cd_dCode1","value","ds_detailCodeList","detailCode");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","edt_cd_dCodeName","value","ds_detailCodeList","detailCodeName");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","edt_cd_codeName_eng","value","ds_detailCodeList","codeNameEng");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","edt_cd_codeEtc","value","ds_detailCodeList","etcCode");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","edt_cd_codeEtc2","value","ds_detailCodeList","etcCode2");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","combo_cd_use","value","ds_detailCodeList","use");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","edt_cd_dCodeInfo","value","ds_detailCodeList","detailCodeInfo");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","edt_cd_sortOrder","value","ds_detailCodeList","sortOrder");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","edt_cd_regDate","value","ds_detailCodeList","regDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","edt_cd_updateDate","value","ds_detailCodeList","updateDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item15","edt_cd_updateEno","value","ds_detailCodeList","updateEnum");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item16","edt_cd_lastChangeDate","value","ds_detailCodeList","lastUpdateDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("YJB_CCDM002.xfdl", "Lib::common.xjs");
+        this.registerScript("YJB_CCDM002.xfdl", function() {
+        //include "Lib::common.xjs";
+
+        this.confirmStr = "";
+        var rowNum = "";
+        var strSwitch = "";
+        var idxCode="";
+
+        // 폼 온로드
+        this.YJB_CCMM_onload = function(obj,e)
+        {
+        	this.ds_code.clearData();
+        	this.ds_code.addRow();
+        	this.enable_nonEdit();
+
+        	this.gfn_transaction(this,
+        						"selectDetailCode",
+        						"com/YJB_selectDetailCode.do",
+        						"",
+        						"ds_code=ds_output",
+        						"",
+        						"transaction_callback"
+        						);
+
+        	this.btn_cd_search_onclick();					
+        }
+
+        // 검색 버튼
+        this.btn_cd_search_onclick = function(obj,e)
+        {
+        	this.combo_cd_class_onitemchanged();
+        }
+
+        // 전체 분류 선택 시 자동 조회
+        this.combo_cd_class_onitemchanged = function(obj,e)
+        {
+        	idxCode=application.gds_idx.getColumn(application.gds_idx.rowposition,"idxCode");
+        	application.gds_idx.clearData();
+
+        	var masterCode;
+        	
+        	if(this.combo_cd_class.value == ' '){
+        		masterCode = null;
+        	}else{
+        		masterCode = this.combo_cd_class.value;
+        	}
+        	
+        	var detailCode = this.edt_cd_dCode.value;
+        	var detailCodeName = this.edt_cd_codeName.value;
+        	
+        	this.ds_search.clearData();
+        	var rowIdx = this.ds_search.addRow();
+        	this.enable_nonEdit();
+        	
+        	
+        	if(idxCode!=null)
+        	{
+        		var strParam = "detailCode="+idxCode;
+        		
+        		this.gfn_transaction(this,
+        					"selectDRnum",
+        					"com/YJB_selectDRnum.do",
+        					"",
+        					"ds_rnum=ds_output",
+        					strParam,
+        					"transaction_callback"
+        					);
+        	}
+        	
+        	this.ds_search.setColumn(0, "searchCondition", masterCode);
+        	this.ds_search.setColumn(0, "searchKeyword", detailCode);
+        	this.ds_search.setColumn(0, "searchUseYn", detailCodeName);
+
+        	
+        	this.gfn_transaction(this,
+        						"detailList",
+        						"com/YJB_selectDetailList.do",
+        						"ds_search=ds_search",
+        						"ds_detailCodeList=ds_output",
+        						"",
+        						"transaction_callback"
+        						);
+        }
+
+        
+
+        // 초기화 버튼
+        this.btn_cd_searchReset_onclick = function(obj,e)
+        {
+        	this.reload();
+        }
+
+        // 편집창 활성화
+        this.enable_edit = function()
+        {
+        	this.edt_cd_dCodeName.set_enable("true");
+        	this.edt_cd_codeName_eng.set_enable("true");
+        	this.edt_cd_codeEtc.set_enable("true");
+        	this.edt_cd_codeEtc2.set_enable("true");
+        	this.edt_cd_dCodeInfo.set_enable("true");
+        	this.combo_cd_use.set_enable("true");
+        	this.edt_cd_sortOrder.set_enable("true");
+        	this.edt_cd_dCodeName.setFocus();
+        }
+
+        // 편집창 비활성화
+        this.enable_nonEdit = function()
+        {
+        	this.combo_cd_class1.set_enable("true");
+        	this.edt_cd_dCode1.set_enable("false");
+        	this.edt_cd_dCodeName.set_enable("true");
+        	this.edt_cd_codeName_eng.set_enable("true");
+        	this.edt_cd_codeEtc.set_enable("true");
+        	this.edt_cd_codeEtc2.set_enable("true");
+        	this.edt_cd_dCodeInfo.set_enable("true");
+        	this.combo_cd_use.set_enable("true");
+        	this.edt_cd_sortOrder.set_enable("true");
+        }
+        // 신규버튼
+        this.btn_cd_add_onclick = function(obj,e)
+        {
+        	var masterCodeValue = this.combo_cd_class.value;
+        	
+        	this.ds_detailCodeList.addRow();
+        	this.combo_cd_use.set_value("Y");
+
+        	
+        	
+        // 	this.alert(this.ds_detailCodeList.getColumn(this.ds_detailCodeList.rowposition, "registId"));
+        // 	this.alert(this.ds_detailCodeList.getColumn(this.ds_detailCodeList.rowposition, "updateId"));
+        	
+        	this.enable_edit();
+        	
+        	this.edt_cd_dCode1.set_enable("true");
+        	//this.Combo02.set_enable("true");
+        	this.combo_cd_class1.set_value(masterCodeValue);
+        	this.edt_cd_dCode1.setFocus();
+        	
+        }
+
+        
+
+        // 저장 버튼
+
+        this.btn_cd_save_onclick = function(obj,e)
+        {
+        	if(this.combo_cd_class1.index == -1){
+        		this.alert("분류코드를 확인해주세요");
+        		this.combo_cd_class1.setFocus();
+        		return;
+        	}else if(this.edt_cd_dCode1.value == null || this.edt_cd_dCode1.getLength() != 4){
+        		this.alert("상세코드를 확인해주세요");
+        		this.edt_cd_dCode1.setFocus();
+        		return;
+        	}else if(this.edt_cd_dCodeName.value == null){
+        		this.alert("상세코드명을 입력해주세요");
+        		this.edt_cd_dCodeName.setFocus();
+        		return;
+        	}
+        	
+        	var confirmStr = this.confirm("저장하시겠습니까?");
+        	
+        	if(confirmStr){
+        		var id = application.gds_User.getColumn(application.gds_User.rowposition, "id");
+        		if(id == null) {
+        		id = "ID";
+        		}
+        		this.ds_detailCodeList.setColumn(this.ds_detailCodeList.rowposition, "regId", id);
+        		this.code_transaction("saveCode");
+        	}
+        }
+
+        
+        // 코드 정보 저장/수정/삭제 시 트랜잭션
+        this.code_transaction = function(sSvcid)
+        {
+        	//var updateId = application.gds_User.getColumn(application.gds_User.rowposition, "id"); 
+        	//var strParam = "updateId=" + updateId;
+        	
+        	rowNum = this.ds_detailCodeList.rowposition;
+        	
+        	var strSvcid = sSvcid;
+        	var strController = "com/YJB_editDetailCode.do";
+        	
+        	this.gfn_transaction(this,
+        						strSvcid,
+        						strController,
+        						"ds_input=ds_detailCodeList:U",
+        						"",
+        						"",
+        						"transaction_callback"
+        						);
+        	
+        }
+
+        
+        // 트랜잭션 콜백
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		return;
+        	}
+        	
+        	switch(sSvcId){
+        		
+        		case "detailList":
+        			var setNum = application.gds_idx.getColumn(application.gds_idx.rowposition,"rnum");
+
+        			application.gds_idx.clearData();
+        			
+        				if (this.ds_detailCodeList.getRowCount() == 0)
+        				{
+        					this.ds_detailCodeList.filter("");
+        					this.alert("조회할 자료가 없습니다.");
+        					
+        					return;
+        				}
+        				else
+        				{
+        					
+        // 					this.fv_iServerRowCount = this.ds_detailCodeList.getRowCount();
+        // 					this.fn_SetStyle();
+        // 					this.fn_SetPageNo();
+        					
+        					
+        				} 
+
+        		
+        			this.enable_nonEdit();
+        			this.fn_SetStyle();
+        			this.grd_plaintiff.selectRow(rowNum);
+        			break;
+        	
+        		case "saveCode":
+        			if(this.confirmStr == "저장"){
+        				application.gds_idx.addRow();
+        				application.gds_idx.setColumn(0,"idxCode",this.ds_detailCodeList.getColumn(this.ds_detailCodeList.rowposition,"detailCode"));
+        				
+        				this.btn_clear_onclick();
+        				this.alert("저장완료");
+        			}else if(this.confirmStr == "수정"){
+        				strSwitch = "수정";
+        				this.Combo00_onitemchanged();
+        				this.alert("수정완료");
+        			}
+        			
+        			break;
+        			
+        		case "codeChecker": 
+        			var check = this.ds_check.getColumn(this.ds_check.rowposition, "detailCode");
+        			trace("체크:"+check);
+        			if(check != "NONE"){
+        				this.alert("중복 코드입니다.");
+        				this.edt_cd_dCode1.set_value(null);
+        				this.edt_cd_dCode1.set_text("");
+        				this.edt_cd_dCode1.setFocus();
+        			}
+        			break;
+        		case "deleteCode":
+        			alert("삭제완료");
+        			break;
+        		case "selectDRnum":
+        			application.gds_idx.addRow();
+        			application.gds_idx.setColumn(0,"rnum",this.ds_rnum.getColumn(this.ds_rnum.rowposition,"rnum"));
+        			trace("DRnum:"+application.gds_idx.getColumn(0,"rnum"));
+        			break;
+        	}
+        	
+        }
+
+        // 삭제 버튼
+        this.btn_cd_delete_onclick = function(obj,e)
+        {
+        	var confirmStr = this.confirm("삭제하시겠습니까?");
+        	
+        	if(confirmStr){
+        		this.ds_detailCodeList.deleteRow(this.ds_detailCodeList.rowposition);
+        		this.code_transaction("deleteCode");
+        	}
+        }
+
+        
+
+        
+        //-------------------------------------------------------------------------------------------------
+        // Style조정
+        //-------------------------------------------------------------------------------------------------
+
+        this.edt_cd_dCode1_canchange = function(obj,e)
+        {
+        	var codeValue = this.edt_cd_dCode1.value;
+        	
+        	var strParam = "detailCode=" + codeValue;
+        	
+        	this.gfn_transaction(this,
+        						"codeChecker",
+        						"com/YJB_searchDetailCode.do",
+        						"",
+        						"ds_check=ds_output",
+        						strParam,
+        						"transaction_callback"
+        						);
+        }
+
+        
+
+        
+
+        
+
+        
+        this.combo_cd_class1_onitemchanged = function(obj,e)
+        {
+        	var data1 = obj.text;
+        	var data2 = data1.split(" / ");
+        	var data3 = data2[1];
+        	this.edt_cd_className.set_value(data3);
+        	
+        	//var data1 = obj.value;
+        	//var test1 = data1.getColumn(data1.rowposition,"className");
+        	//var test2 = data1.getColumn(this.ds_detailCodeList.rowposition,"className");
+        	//var check = this.ds_check.getColumn(this.ds_check.rowposition, "detailCode");
+        	//this.ds_code.setColumn(0, "classCode" );
+        	//var test1 = this.ds_detailCodeList.getColumn(data1.rowposition,"className");
+        	//trace(" 테스트3 : "+data1);
+        	//this.edt_cd_className.set_value(test1);
+        }
+
+        
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.YJB_CCMM_onload, this);
+            this.Static23.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static19.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static10.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static07.addEventHandler("onclick", this.Static05_onclick, this);
+            this.sta_cd_list.addEventHandler("onclick", this.Static02_onclick, this);
+            this.btn_cd_add.addEventHandler("onclick", this.btn_cd_add_onclick, this);
+            this.btn_cd_save.addEventHandler("onclick", this.btn_cd_save_onclick, this);
+            this.sta_cd_class1.addEventHandler("onclick", this.Static06_onclick, this);
+            this.edt_cd_dCode1.addEventHandler("canchange", this.edt_cd_dCode1_canchange, this);
+            this.edt_cd_dCode1.addEventHandler("oneditclick", this.edt_cd_dCode1_oneditclick, this);
+            this.sta_cd_codeName_eng.addEventHandler("onclick", this.Static06_onclick, this);
+            this.combo_cd_class1.addEventHandler("onitemchanged", this.combo_cd_class1_onitemchanged, this);
+            this.sta_cd_dCodeInfo.addEventHandler("onclick", this.Static06_onclick, this);
+            this.sta_cd_regDate.addEventHandler("onclick", this.Static06_onclick, this);
+            this.combo_cd_use.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.sta_cc_dtm.addEventHandler("onclick", this.Static00_onclick, this);
+            this.combo_cd_class.addEventHandler("onitemchanged", this.combo_cd_class_onitemchanged, this);
+            this.btn_cd_search.addEventHandler("onclick", this.btn_cd_search_onclick, this);
+            this.btn_cd_searchReset.addEventHandler("onclick", this.btn_cd_searchReset_onclick, this);
+            this.btn_cd_delete.addEventHandler("onclick", this.btn_cd_delete_onclick, this);
+
+        };
+
+        this.loadIncludeScript("YJB_CCDM002.xfdl");
+
+       
+    };
+}
+)();

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="emp_appo">
+
+   	<typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="emp_appoVO" type="nexacro.sample.vo.emp_appo.Emp_appoVO"/>
+	<!-- 부서코드 조인으로 가져올때는 해당코드의 vO값도 타입알리아스 달아줘야 한다 -->
+    <!-- Sample resultObject -->
+    <resultMap id="emp_appo" class="emp_appoVO">
+        <result property="EMP_NO" column="EMP_NO" />
+        <result property="APPOINTMENT_ID" column="APPOINTMENT_ID" />
+        <result property="APPOINTMENT_ASSORT_CODE" column="APPOINTMENT_ASSORT_CODE" />
+        <result property="APPOINTMENT_DATE" column="APPOINTMENT_DATE" />
+        <result property="APPOINTMENT_DETAIL" column="APPOINTMENT_DETAIL" />
+        <result property="PRE_POSITION_CODE" column="PRE_POSITION_CODE" />
+        <result property="CHANGED_POSITION_CODE" column="CHANGED_POSITION_CODE" />
+        <result property="PRE_DEPARTMENT_CODE" column="PRE_DEPARTMENT_CODE" />
+        <result property="CHANGED_DEPARTMENT_CODE" column="CHANGED_DEPARTMENT_CODE" />
+        <result property="REG_EMP_NO" column="REG_EMP_NO" />
+        <result property="REG_DATE" column="REG_DATE" />
+        <result property="MOD_EMP_NO" column="MOD_EMP_NO" />
+        <result property="MOD_DATE" column="MOD_DATE" />
+        <result property="ACCEPT_EMP_NO" column="ACCEPT_EMP_NO" />
+        <result property="ACCEPT_DATE" column="ACCEPT_DATE" />
+        <result property="ACCEPTED_YN" column="ACCEPTED_YN" />
+        <result property="EMP_NAME" column="EMP_NAME"/>
+        <result property="EMP_REG_NAME" column="EMP_REG_NAME"/>
+        <result property="EMP_MOD_NAME" column="EMP_MOD_NAME"/>
+        <result property="EMP_OK_NAME" column="EMP_OK_NAME"/>      
+    </resultMap>
+    
+	<select id="selectEmp_appo" parameterClass="emp_appoVO" resultMap="emp_appo">
+	        
+	   SELECT
+	   EMP_NO,
+	   APPOINTMENT_ID,
+	   APPOINTMENT_ASSORT_CODE,
+	   APPOINTMENT_DATE,
+	   APPOINTMENT_DETAIL,
+	   PRE_POSITION_CODE,
+	   CHANGED_POSITION_CODE,
+	   PRE_DEPARTMENT_CODE,
+	   CHANGED_DEPARTMENT_CODE,
+	   REG_EMP_NO,
+	   REG_DATE,
+	   MOD_EMP_NO,
+	   MOD_DATE,
+	   ACCEPT_EMP_NO,
+	   ACCEPT_DATE,
+	   EMP_NAME,
+	   EMP_REG_NAME,
+	   EMP_MOD_NAME,
+	   EMP_OK_NAME,
+	   ACCEPTED_YN	   
+	   FROM EMP_APPOINTMENT
+	where 1=1
+  <dynamic>
+         <isNotNull property="searchKeyword" >      
+         <isEqual prepend=" AND " property="searchCondition" compareValue="EMP_NO">
+            EMP_NO LIKE '%' || #searchKeyword# || '%' 
+         </isEqual>  
+         </isNotNull>    
+         <isNotNull prepend=" AND " property="searchDateFrom" >
+           APPOINTMENT_DATE BETWEEN TO_DATE(#searchDateFrom#, 'YYYYMMDD')
+           AND TO_DATE(#searchDateTo#, 'YYYYMMDD') 
+         </isNotNull>
+  </dynamic> 
+</select>
+
+		<!-- where EMP_NO LIKE '%' || #searchKeyword# || '%'   -->
+    <insert id="insertEmp_appo" parameterClass="emp_appoVO">
+        <![CDATA[
+            INSERT INTO EMP_APPOINTMENT (
+            	EMP_NO,
+				APPOINTMENT_ID,
+				APPOINTMENT_ASSORT_CODE,
+				APPOINTMENT_DATE,
+				APPOINTMENT_DETAIL,
+				PRE_POSITION_CODE,
+				CHANGED_POSITION_CODE,
+				PRE_DEPARTMENT_CODE,
+				CHANGED_DEPARTMENT_CODE,
+				REG_EMP_NO,
+				REG_DATE,
+				MOD_EMP_NO,
+				MOD_DATE,
+			    EMP_NAME,
+			    EMP_REG_NAME,
+			    EMP_MOD_NAME,
+			    EMP_OK_NAME,
+				ACCEPT_EMP_NO,
+				ACCEPT_DATE,
+				ACCEPTED_YN
+			            ) VALUES (
+			    #EMP_NO#,
+				TO_CHAR(SYSDATE, 'yyyymmdd') ||LPAD(EMP_APPO_SEQ.NEXTVAL,4,0),
+				#APPOINTMENT_ASSORT_CODE#,
+				#APPOINTMENT_DATE#,
+				#APPOINTMENT_DETAIL#,
+				#PRE_POSITION_CODE#,
+				#CHANGED_POSITION_CODE#,
+				#PRE_DEPARTMENT_CODE#,
+				#CHANGED_DEPARTMENT_CODE#,
+				#REG_EMP_NO#,
+				#REG_DATE#,
+				#MOD_EMP_NO#,
+				#MOD_DATE#,
+				#EMP_NAME#,
+			    #EMP_REG_NAME#,
+			    #EMP_MOD_NAME#,
+			    #EMP_OK_NAME#,
+				#ACCEPT_EMP_NO#,
+				#ACCEPT_DATE#,
+				#ACCEPTED_YN#
+       	     )
+        ]]>
+    </insert>
+    
+      <update id="updateEmp_appo" parameterClass="emp_appoVO">
+        <![CDATA[
+            UPDATE EMP_APPOINTMENT 
+            SET
+				EMP_NO = #EMP_NO#,
+				APPOINTMENT_ID = #APPOINTMENT_ID#,
+				APPOINTMENT_ASSORT_CODE = #APPOINTMENT_ASSORT_CODE#,
+				APPOINTMENT_DATE = #APPOINTMENT_DATE#,
+				APPOINTMENT_DETAIL = #APPOINTMENT_DETAIL#,
+				PRE_POSITION_CODE = #PRE_POSITION_CODE#,
+				CHANGED_POSITION_CODE = #CHANGED_POSITION_CODE#,
+				PRE_DEPARTMENT_CODE = #PRE_DEPARTMENT_CODE#,
+				CHANGED_DEPARTMENT_CODE = #CHANGED_DEPARTMENT_CODE#,
+				REG_EMP_NO = #REG_EMP_NO#,
+				REG_DATE =  #REG_DATE#,
+				MOD_EMP_NO = #MOD_EMP_NO#,
+				MOD_DATE = #MOD_DATE#,
+				EMP_NAME = #EMP_NAME#,
+			    EMP_REG_NAME = #EMP_REG_NAME#,
+			    EMP_MOD_NAME = #EMP_MOD_NAME#,
+			    EMP_OK_NAME = #EMP_OK_NAME#,
+				ACCEPT_EMP_NO  = #ACCEPT_EMP_NO#,
+				ACCEPT_DATE  = #ACCEPT_DATE#,
+				ACCEPTED_YN  = #ACCEPTED_YN#	
+  			 WHERE APPOINTMENT_ID = #APPOINTMENT_ID#
+        ]]>
+    </update>
+    
+    <delete id="deleteEmp_appo" parameterClass="emp_appoVO">
+        <![CDATA[
+            DELETE 
+            FROM EMP_APPOINTMENT 
+            WHERE APPOINTMENT_ID=#APPOINTMENT_ID#
+        ]]>
+    </delete> 
+   
+</sqlMap>

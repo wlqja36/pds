@@ -1,0 +1,229 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Oct_vacationCodeList");
+                this._setFormPosition(0,0,558,441);
+            }
+            this.getSetter("inheritanceid").set("");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_code_list", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">2210</Col><Col id=\"name\">연차휴가</Col></Row><Row><Col id=\"code\">2220</Col><Col id=\"name\">경조휴가</Col></Row><Row><Col id=\"code\">2230</Col><Col id=\"name\">병가</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_vacation", this);
+            obj._setContents("<ColumnInfo><Column id=\"vacation_code_id\" type=\"STRING\" size=\"4\"/><Column id=\"vacation_standard_code\" type=\"STRING\" size=\"4\"/><Column id=\"vacation_nm\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/><Column id=\"reg_emp_id\" type=\"STRING\" size=\"12\"/><Column id=\"modify_date\" type=\"STRING\" size=\"256\"/><Column id=\"modify_emp_id\" type=\"STRING\" size=\"12\"/><Column id=\"confirm_date\" type=\"STRING\" size=\"256\"/><Column id=\"confirm_emp_id\" type=\"STRING\" size=\"12\"/><Column id=\"confirmyn\" type=\"STRING\" size=\"1\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_vacation_Standard", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">2310</Col><Col id=\"name\">40시간제</Col></Row><Row><Col id=\"code\">2320</Col><Col id=\"name\">44시간제</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img00", "absolute", "14", "73", "530", "284", null, null, this);
+            obj.set_taborder("57");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_titlebg1", "absolute", "9", "64", "544", "361", null, null, this);
+            obj.set_taborder("59");
+            obj.style.set_background("#d8dcedff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_vaclist_select", "absolute", "187", "381", "76", "27", null, null, this);
+            obj.set_taborder("53");
+            obj.set_text("선택");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_vaclist_cancel", "absolute", "289", "381", "76", "27", null, null, this);
+            obj.set_taborder("54");
+            obj.set_text("취소");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit05", "absolute", "406", "81", "0", "19", null, null, this);
+            obj.set_taborder("55");
+            obj.set_maxlength("10");
+            obj.set_enable("false");
+            obj.set_enableevent("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_vaccode_list", "absolute", "19", "79", "520", "272", null, null, this);
+            obj.set_taborder("56");
+            obj.set_binddataset("ds_vacation");
+            obj.set_scrollbars("autovert");
+            obj.set_autofittype("col");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"169\"/><Column size=\"166\"/><Column size=\"185\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"연차코드\"/><Cell col=\"1\" text=\"연차명\"/><Cell col=\"2\" text=\"연차기준코드\"/></Band><Band id=\"body\"><Cell text=\"bind:vacation_code_id\"/><Cell col=\"1\" displaytype=\"combo\" edittype=\"combo\" text=\"bind:vacation_nm\" combodataset=\"ds_code_list\" combocodecol=\"code\" combodatacol=\"name\"/><Cell col=\"2\" displaytype=\"combo\" edittype=\"combo\" text=\"bind:vacation_standard_code\" combodataset=\"ds_vacation_Standard\" combocodecol=\"code\" combodatacol=\"name\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("joinTitle", "absolute", "9", "6", "544", "45", null, null, this);
+            obj.set_taborder("58");
+            obj.set_text("연차코드리스트");
+            obj.style.set_align("center");
+            obj.style.set_background("#165fa6ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 12 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "452", "485", "0", "19", null, null, this);
+            obj.set_taborder("69");
+            obj.set_maxlength("10");
+            obj.set_enable("false");
+            obj.set_enableevent("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "576", "84", "109", "49", null, null, this);
+            obj.set_taborder("70");
+            obj.set_text("Static00");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "591", "165", "94", "32", null, null, this);
+            obj.set_taborder("71");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 544, 45, this.joinTitle,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("58");
+            		p.set_text("연차코드리스트");
+            		p.style.set_align("center");
+            		p.style.set_background("#165fa6ff");
+            		p.style.set_color("#ffffffff");
+            		p.style.set_font("bold 12 Dotum");
+
+            	}
+            );
+            this.joinTitle.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 558, 441, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("vacationcodelist");
+            		p.getSetter("inheritanceid").set("");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("OCT_Vacation_CodeList.xfdl", "Lib::common.xjs");
+        this.registerScript("OCT_Vacation_CodeList.xfdl", function() {
+
+        //include "Lib::common.xjs";
+
+        
+        this.Oct_vacationCodeList_onload = function(obj,e)
+        {	
+        	this.Oct_vacatioCodeList_onclick();
+        	
+        } 
+
+        this.Oct_vacatioCodeList_onclick = function(obj,e)
+        {
+        	this.ds_search.clearData();
+        	var nRow = this.ds_search.addRow();
+        	
+        	this.gfn_transaction(this,
+         						"Oct_vacationCodeList",
+         						"Oct_vacationCodeListSelectVO.do",
+         						"ds_search=ds_search",
+         						"ds_vacation=ds_output",
+         						"",
+         						"transaction_callback"
+         						);
+        }
+
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		return;
+        	}
+        	
+        }
+
+        //취소
+        this.btn_vaclist_cancel_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+
+        //선택
+        this.btn_vaclist_select_onclick = function(obj,e)
+        {
+        	var vacation_code_id = this.ds_vacation.getColumn(this.ds_vacation.rowposition,"vacation_code_id");
+        		application.gds_vacationCodeId.addRow();
+        		application.gds_vacationCodeId.setColumn(application.gds_vacationCodeId.rowposition,"vacation_code_id",vacation_code_id);
+        		this.close();
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.Oct_vacationCodeList_onload, this);
+            this.btn_vaclist_select.addEventHandler("onclick", this.btn_vaclist_select_onclick, this);
+            this.btn_vaclist_cancel.addEventHandler("onclick", this.btn_vaclist_cancel_onclick, this);
+            this.Edit05.addEventHandler("oneditclick", this.Edit05_oneditclick, this);
+            this.Edit01.addEventHandler("oneditclick", this.Edit05_oneditclick, this);
+
+        };
+
+        this.loadIncludeScript("OCT_Vacation_CodeList.xfdl");
+
+       
+    };
+}
+)();

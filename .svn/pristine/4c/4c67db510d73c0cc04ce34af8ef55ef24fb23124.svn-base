@@ -1,0 +1,223 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("PD_IN_COM_MM001");
+                this.set_titletext("부서장인사평가");
+                this._setFormPosition(0,0,771,230);
+            }
+            this.getSetter("inheritanceid").set("");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_emp_eval_book", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_EVAL_BOOK_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_BOOK_NM\" type=\"STRING\" size=\"256\"/><Column id=\"EVAL_TERM_CLASS_CODE\" type=\"STRING\" size=\"4\"/><Column id=\"EVAL_TERM_CODE\" type=\"STRING\" size=\"4\"/><Column id=\"EMP_EVAL_STA_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_END_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_REG_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_REG_USER_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_MOD_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_MOD_USER_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_ACC_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_ACC_USER_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_ACC_YN\" type=\"STRING\" size=\"1\"/><Column id=\"EMP_EVAL_SUM\" type=\"INT\" size=\"3\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_eval_head_code", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">4110</Col><Col id=\"name\">4110/책임감</Col></Row><Row><Col id=\"code\">4120</Col><Col id=\"name\">4120/적극</Col></Row><Row><Col id=\"code\">4130</Col><Col id=\"name\">4130/수행능력</Col></Row><Row><Col id=\"code\">4140</Col><Col id=\"name\">4140/규정준수</Col></Row><Row><Col id=\"code\">4150</Col><Col id=\"name\">4150/영업실적</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img_titlebg", "absolute", "0", "7", "768", "50", null, null, this);
+            obj.set_taborder("1");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_title", "absolute", "26", "18", "168", "29", null, null, this);
+            obj.set_text("부서장평가기준");
+            obj.style.set_color("whitesmoke");
+            obj.style.set_align("left middle");
+            obj.style.set_font("굴림,12,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img02", "absolute", "134", "89", "524", "69", null, null, this);
+            obj.set_taborder("5");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_02", "absolute", "144", "122", "504", "25", null, null, this);
+            obj.set_taborder("6");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_00", "absolute", "144", "97", "504", "25", null, null, this);
+            obj.set_taborder("7");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_17", "absolute", "144", "98", "105", "25", null, null, this);
+            obj.set_taborder("8");
+            obj.set_text("인사평가대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "256", "101", "130", "19", null, null, this);
+            obj.set_taborder("10");
+            obj.set_maxlength("30");
+            obj.style.setStyleValue("border", "disabled", "1 solid #a8a8a8ff");
+            obj.style.setStyleValue("color", "disabled", "#505050ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_03", "absolute", "393", "98", "105", "25", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("부서장평가점수");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "505", "100", "130", "20", null, null, this);
+            obj.set_taborder("13");
+            obj.set_maxlength("30");
+            obj.style.setStyleValue("border", "disabled", "1 solid #a8a8a8ff");
+            obj.style.setStyleValue("color", "disabled", "#505050ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_04", "absolute", "144", "123", "105", "25", null, null, this);
+            obj.set_taborder("14");
+            obj.set_text("사원번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo02", "absolute", "505", "125", "130", "19", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("15");
+            obj.set_displaynulltext("선택");
+            obj.set_innerdataset("@ds_eval_head_code");
+            obj.set_codecolumn("code");
+            obj.set_datacolumn("name");
+            obj.set_index("-1");
+
+            obj = new Static("sta_22", "absolute", "393", "122", "105", "25", null, null, this);
+            obj.set_taborder("16");
+            obj.set_text("부서평가코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit09", "absolute", "256", "125", "130", "19", null, null, this);
+            obj.set_taborder("17");
+            obj.set_maxlength("10");
+            obj.set_enable("true");
+            obj.style.setStyleValue("border", "disabled", "1 solid #a8a8a8ff");
+            obj.style.setStyleValue("color", "disabled", "#505050ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "1.3%", "193", null, "30", "85.73%", null, this);
+            obj.set_taborder("19");
+            obj.set_text("뒤로가기");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 771, 230, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("PD_IN_COM_MM001");
+            		p.getSetter("inheritanceid").set("");
+            		p.set_titletext("부서장인사평가");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item8","EMP_EVAL_BOOK","font","ds_search","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","Edit01","value","ds_masterCodeList","className");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","Edit01","","ds_emp_eval_book","EMP_EVAL_BOOK_NM");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","Edit00","value","ds_masterCodeList","mainColumn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","Edit09","value","ds_detailCodeList","codeName");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","Edit09","","ds_emp_eval_book","EMP_EVAL_SUM");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("EMP_EVAL_HEAD.xfdl", "Lib::common.xjs");
+        this.registerScript("EMP_EVAL_HEAD.xfdl", function() {
+        //include "Lib::common.xjs";
+
+        this.form_onload = function(obj,e){
+        	alert("EMP_EVAL_BOOK");
+        }
+
+        this.Button00_onclick = function(obj,e)
+        {	
+        	this.go("EMP_EVAL::EMP_EVAL.xfdl");
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.img_titlebg.addEventHandler("onclick", this.img_titlebg_onclick, this);
+            this.sta_title.addEventHandler("onclick", this.sta_title_onclick, this);
+            this.sta_17.addEventHandler("onclick", this.sta_17_onclick, this);
+            this.sta_04.addEventHandler("onclick", this.sta_17_onclick, this);
+            this.sta_22.addEventHandler("onclick", this.sta_19_onclick, this);
+            this.Button00.addEventHandler("onclick", this.Button00_onclick, this);
+
+        };
+
+        this.loadIncludeScript("EMP_EVAL_HEAD.xfdl");
+
+       
+    };
+}
+)();

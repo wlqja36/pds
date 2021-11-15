@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="nexacro.sqlmap.sqlmaps.nexacro.sample.resolution">
+
+	
+	<typeAlias  alias="resolutionVO" type="nexacro.sample.vo.resolution.ResolutionVO"/>
+	<typeAlias  alias="empNo" type="nexacro.sample.vo.emp.EmpVO"/>
+	<typeAlias  alias="s_bookVO" type="nexacro.sample.vo.s_bookVO.S_bookVO"/>
+	<typeAlias  alias="resCodeVO" type="nexacro.sample.vo.resolution.ResCodeVO"/>
+
+   
+   <!-- <result property="EMP_NO"      	column="EMP_NO" />
+   <result property="EMP_NAME"      	column="EMP_NAME" />	 -->
+   
+    <resultMap id="resolutionVOInfo" class="resolutionVO">                         
+        <result property="REG_DATE"      	column="REG_DATE" />	                         
+        <result property="SALARY_BOOK_NO"  column="SALARY_BOOK_NO"/>	              
+        <result property="RESOLUTION_CODE"  column="RESOLUTION_CODE"/>	      
+        <result property="TOTAL_COST"     column="TOTAL_COST"/>	                                   
+        <result property="REG_EMP_NO"     column="REG_EMP_NO"/>	                                   
+        <result property="MODIFY_EMP_NO"     column="MODIFY_EMP_NO"/>	                                   
+        <result property="MODIFY_DATE"     column="MODIFY_DATE"/>	                                   
+        <result property="CONFIRM_EMP_NO"     column="CONFIRM_EMP_NO"/>	                                   
+        <result property="CONFIRM_DATE"     column="CONFIRM_DATE"/>	                                   
+        <result property="CONFIRM_YN"     column="CONFIRM_YN"/>	                                   
+    </resultMap>
+    
+	<resultMap id="empInfo" class="empNo">
+        <result property="EMP_NO"      	column="EMP_NO" />
+        <result property="EMP_NAME"     column="EMP_NAME" />                                                          
+    </resultMap> 
+
+    <resultMap id="empInfo1" class="empNo">
+        <result property="EMP_NO"      	column="EMP_NO" />
+        <result property="EMP_NAME"     column="EMP_NAME" />
+        <result property="JOIN_DATE"     column="JOIN_DATE" />	                                                          
+    </resultMap>
+
+    <resultMap id="S_bookVO" class="s_bookVO">
+        <result property="salary_book_no"      	column="SALARY_BOOK_NO" />
+        <result property="salary_book_code"     column="SALARY_BOOK_CODE" />
+        <result property="salary_book_nm"     column="SALARY_BOOK_NM" />	                                                          
+    </resultMap>
+
+    <resultMap id="ResCodeVO" class="resCodeVO">
+        <result property="CODE_NO"      	column="CODE_NO" /> 
+        <!-- <result property="CODE_NAME"     column="CODE_NAME" /> -->	                                                          
+    </resultMap>
+    
+	<select id="loadResList" parameterClass="resolutionVO" resultMap="resolutionVOInfo">
+		SELECT 
+		    	(SELECT EMP_NAME||'('||EMP_NO||')' 
+		    	FROM EMP 
+		    	WHERE EMP.EMP_NO=SPENDING_RESOLUTION.EMP_NO) 
+		    AS EMP_NO, 
+		    REG_DATE, 
+		        (SELECT SALARY_BOOK.SALARY_BOOK_NM||'('||SALARY_BOOK.SALARY_BOOK_NO||')' 
+		        FROM SALARY_BOOK 
+		        WHERE SPENDING_RESOLUTION.SALARY_BOOK_NO=SALARY_BOOK.SALARY_BOOK_NO) 
+		    AS SALARY_BOOK_NO,
+		        (SELECT CODE_NAME||'('||CODE_NO||')' 
+		        FROM COMMON_CODE_DETAIL 
+		        WHERE CLASS_CODE ='E01' 
+		        AND SPENDING_RESOLUTION.RESOLUTION_CODE=COMMON_CODE_DETAIL.CODE_NO) 
+		    AS RESOLUTION_CODE, 
+		    TOTAL_COST, 
+		        (SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.EMP_NO) 
+		    AS REG_EMP_NO, 
+		        (SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.MODIFY_EMP_NO) 
+		    AS MODIFY_EMP_NO, 
+		    MODIFY_DATE, 
+		        (SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.CONFIRM_EMP_NO) 
+		    AS CONFIRM_EMP_NO, 
+		    CONFIRM_DATE, 
+		    CONFIRM_YN    
+		FROM SPENDING_RESOLUTION  
+		
+	</select>
+
+	<select id="selectResList" parameterClass="resolutionVO" resultMap="resolutionVOInfo">
+		SELECT 
+			REG_DATE, 
+			(SELECT SALARY_BOOK.SALARY_BOOK_NM||'('||SALARY_BOOK.SALARY_BOOK_NO||')' 
+		        FROM SALARY_BOOK 
+		        WHERE SPENDING_RESOLUTION.SALARY_BOOK_NO=SALARY_BOOK.SALARY_BOOK_NO) 
+		    AS SALARY_BOOK_NO, 
+			(SELECT CODE_NAME||'('||CODE_NO||')' 
+		        FROM COMMON_CODE_DETAIL 
+		        WHERE CLASS_CODE ='E01' 
+		        AND SPENDING_RESOLUTION.RESOLUTION_CODE=COMMON_CODE_DETAIL.CODE_NO) 
+		    AS RESOLUTION_CODE, 
+			TOTAL_COST, 
+			(SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.EMP_NO) 
+		    AS REG_EMP_NO,  
+			(SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.MODIFY_EMP_NO) 
+		    AS MODIFY_EMP_NO, 
+			MODIFY_DATE, 
+			(SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.CONFIRM_EMP_NO) 
+		    AS CONFIRM_EMP_NO, 
+			CONFIRM_DATE, 
+			CONFIRM_YN 
+		FROM SPENDING_RESOLUTION
+		WHERE	EMP_NO= 
+						SUBSTR(
+					        #searchKeyword#, 
+					            INSTR(#searchKeyword#,'(')+1, 
+					            (INSTR(#searchKeyword#,')')-1)-(INSTR(#searchKeyword#,'(')))
+			AND REG_DATE BETWEEN to_date(#searchDateFrom#) AND to_date(#searchDateTo#)+1 
+			<isNotEmpty property="searchCondition" prepend='AND' >
+				RESOLUTION_CODE = 
+					SUBSTR(
+			        #searchCondition#, 
+			            INSTR(#searchCondition#,'(')+1, 
+			            (INSTR(#searchCondition#,')')-1)-(INSTR(#searchCondition#,'(')))
+			</isNotEmpty>
+	</select>
+
+	<select id="loadEmpInfo" parameterClass="resolutionVO" resultMap="empInfo">
+		SELECT 
+			EMP_NO, 
+			EMP_NAME 
+		FROM EMP 
+		<!-- WHERE EMP_NO = #searchKeyword#	 -->
+	</select> 
+
+	<select id="loadResCode" resultMap="ResCodeVO">
+		SELECT 
+			CODE_NAME||'('||CODE_NO||')' 
+		AS CODE_NO 
+		FROM COMMON_CODE_DETAIL 
+		WHERE CLASS_CODE ='E01'
+	</select> 
+
+	<select id="selectds_S_BookCode" parameterClass="resolutionVO" resultMap="S_bookVO">
+		SELECT 
+			SALARY_BOOK_NO, SALARY_BOOK_CODE, SALARY_BOOK_NM 
+		FROM SALARY_BOOK 
+		<dynamic prepend="where">
+			<isNotEmpty property="searchKeyword" prepend='AND' >
+				SALARY_BOOK_NM LIKE '%'||#searchKeyword#||'%'
+			</isNotEmpty>
+		</dynamic>
+	</select>
+
+	<select id="selectEmpList" resultMap="empInfo1">
+		SELECT EMP_NO, EMP_NAME, JOIN_DATE FROM EMP
+	</select>
+
+	<insert id="insertResList" parameterClass="resolutionVO" >
+		INSERT INTO SPENDING_RESOLUTION (
+		    EMP_NO,
+		    REG_DATE,
+		    SALARY_BOOK_NO,
+		    RESOLUTION_CODE,
+		    TOTAL_COST,
+		    REG_EMP_NO,
+		    MODIFY_EMP_NO,
+		    MODIFY_DATE,
+		    CONFIRM_EMP_NO,
+		    CONFIRM_DATE,
+		    CONFIRM_YN
+		) VALUES(
+			SUBSTR(
+	    	#REG_EMP_NO#,
+		    	INSTR(#REG_EMP_NO#,'(')+1, 
+		    	(INSTR(#REG_EMP_NO#,')')-1)-(INSTR(#REG_EMP_NO#,'('))),
+		    SYSDATE,
+		    SUBSTR(
+	    	#SALARY_BOOK_NO#,
+		    	INSTR(#SALARY_BOOK_NO#,'(')+1, 
+		    	(INSTR(#SALARY_BOOK_NO#,')')-1)-(INSTR(#SALARY_BOOK_NO#,'('))),
+		    SUBSTR(
+	    	#RESOLUTION_CODE#,
+		    	INSTR(#RESOLUTION_CODE#,'(')+1, 
+		    	(INSTR(#RESOLUTION_CODE#,')')-1)-(INSTR(#RESOLUTION_CODE#,'('))),
+		    #TOTAL_COST#,
+		    SUBSTR(
+	    	#REG_EMP_NO#,
+		    	INSTR(#REG_EMP_NO#,'(')+1, 
+		    	(INSTR(#REG_EMP_NO#,')')-1)-(INSTR(#REG_EMP_NO#,'('))),
+		    SUBSTR(
+	    	#MODIFY_EMP_NO#,
+		    	INSTR(#MODIFY_EMP_NO#,'(')+1, 
+		    	(INSTR(#MODIFY_EMP_NO#,')')-1)-(INSTR(#MODIFY_EMP_NO#,'('))),
+		    #MODIFY_DATE#,
+		    SUBSTR(
+	    	#CONFIRM_EMP_NO#,
+		    	INSTR(#CONFIRM_EMP_NO#,'(')+1, 
+		    	(INSTR(#CONFIRM_EMP_NO#,')')-1)-(INSTR(#CONFIRM_EMP_NO#,'('))),
+		    #CONFIRM_DATE#,
+		    #CONFIRM_YN#)
+	</insert>
+	
+	<update id="updateResList" parameterClass="resolutionVO" >
+		UPDATE SPENDING_RESOLUTION 
+			SET 
+			    SALARY_BOOK_NO = 
+			    	SUBSTR(
+			    	#SALARY_BOOK_NO#,
+				    	INSTR(#SALARY_BOOK_NO#,'(')+1, 
+				    	(INSTR(#SALARY_BOOK_NO#,')')-1)-(INSTR(#SALARY_BOOK_NO#,'('))), 
+			    RESOLUTION_CODE =
+				    SUBSTR(
+				    	#RESOLUTION_CODE#,
+					    	INSTR(#RESOLUTION_CODE#,'(')+1, 
+					    	(INSTR(#RESOLUTION_CODE#,')')-1)-(INSTR(#RESOLUTION_CODE#,'('))),
+			    TOTAL_COST = #TOTAL_COST#,
+			    MODIFY_EMP_NO = 
+				    SUBSTR(
+				    	#MODIFY_EMP_NO#,
+					    	INSTR(#MODIFY_EMP_NO#,'(')+1, 
+					    	(INSTR(#MODIFY_EMP_NO#,')')-1)-(INSTR(#MODIFY_EMP_NO#,'('))), 
+			    MODIFY_DATE = #MODIFY_DATE#, 
+			    CONFIRM_EMP_NO = 
+				    SUBSTR(
+				    	#CONFIRM_EMP_NO#,
+					    	INSTR(#CONFIRM_EMP_NO#,'(')+1, 
+					    	(INSTR(#CONFIRM_EMP_NO#,')')-1)-(INSTR(#CONFIRM_EMP_NO#,'('))),
+			    CONFIRM_DATE = #CONFIRM_DATE#, 
+			    CONFIRM_YN = #CONFIRM_YN#
+			WHERE REG_EMP_NO =
+				SUBSTR(
+		    	#REG_EMP_NO#,
+			    	INSTR(#REG_EMP_NO#,'(')+1, 
+			    	(INSTR(#REG_EMP_NO#,')')-1)-(INSTR(#REG_EMP_NO#,'(')))
+			AND REG_DATE =#REG_DATE#
+	</update>
+	
+	<delete id="deleteResList" parameterClass="resolutionVO" >
+		DELETE FROM SPENDING_RESOLUTION 
+		WHERE EMP_NO = 
+			SUBSTR(
+	    	#REG_EMP_NO#,
+		    	INSTR(#REG_EMP_NO#,'(')+1, 
+		    	(INSTR(#REG_EMP_NO#,')')-1)-(INSTR(#REG_EMP_NO#,'('))) 
+		AND REG_DATE =#REG_DATE#
+	</delete>
+
+
+</sqlMap>

@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="VACATION_CODE" left="0" top="0" width="947" height="768" titletext="New Form" onload="form_onload" visible="true">
+    <Layouts>
+      <Layout>
+        <Static id="Static00" taborder="0" text="연차코드" left="1%" top="8" right="6.88%" height="61" style="background:#3366ffff;border:1 solid #808080ff ;color:azure;font:bold 12 굴림;" onclick="Static00_onclick"/>
+        <Grid id="Grid00" taborder="3" useinputpanel="false" left="1.13%" top="131" right="7%" height="189" binddataset="ds_vacation" scrollbars="fixedboth" autofittype="none" oncelldblclick="Grid00_oncelldblclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="88"/>
+                <Column size="63"/>
+                <Column size="78"/>
+                <Column size="104"/>
+                <Column size="131"/>
+                <Column size="95"/>
+                <Column size="126"/>
+                <Column size="71"/>
+                <Column size="103"/>
+                <Column size="71"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="연차코드번호"/>
+                <Cell col="1" text="연차명"/>
+                <Cell col="2" text="연차기준코드"/>
+                <Cell col="3" text="등록일시"/>
+                <Cell col="4" text="등록자사번"/>
+                <Cell col="5" text="수정일시"/>
+                <Cell col="6" text="수정자사번"/>
+                <Cell col="7" text="확정일시"/>
+                <Cell col="8" text="확정자사번"/>
+                <Cell col="9" text="확정여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:vacation_code_id"/>
+                <Cell col="1" displaytype="combo" edittype="combo" text="bind:vacation_nm" combodataset="ds_code_list" combocodecol="code" combodatacol="name"/>
+                <Cell col="2" displaytype="combo" edittype="combo" text="bind:vacation_standard_code" combodataset="ds_vacation_standard" combocodecol="code" combodatacol="name"/>
+                <Cell col="3" text="bind:reg_date"/>
+                <Cell col="4" text="bind:reg_emp_id"/>
+                <Cell col="5" text="bind:modify_date"/>
+                <Cell col="6" text="bind:modify_emp_id"/>
+                <Cell col="7" displaytype="normal" text="bind:confirm_date"/>
+                <Cell col="8" text="bind:confirm_emp_id"/>
+                <Cell col="9" displaytype="checkbox" text="expr:confirmyn ==&quot;Y&quot;?1:0&quot;"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="Div00" taborder="32" left="1%" top="373" right="7.12%" height="131" style="align:left middle;background:lavenderblush;border:1 solid #808080ff ;" scrollbars="none">
+          <Layouts>
+            <Layout>
+              <Div id="Div00" taborder="0" left="0.55%" top="2" right="0.82%" height="175" style="background:#f0f0f0ff;border:0 solid #808080ff ;">
+                <Layouts>
+                  <Layout>
+                    <Div id="Div01" taborder="5" left="0%" top="35" right="0%" height="28" style="border:1 solid #808080ff ;" visible="true" dragscrolltype="none" scrollbars="none">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static00" taborder="13" text="연차명" left="-0.73%" top="-1" right="83.58%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static01" taborder="14" text="수정일시" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static02" taborder="15" text="확정여부" left="65.04%" top="-1" right="17.55%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Radio id="Radio00" taborder="16" columncount="2" codecolumn="codecolumn" datacolumn="datacolumn" onitemclick="Div00_Div00_Div01_Radio00_onitemclick" left="83.12%" top="3" right="0.43%" height="21">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">Y</Col>
+                                  <Col id="datacolumn">확정</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">N</Col>
+                                  <Col id="datacolumn">미확정</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Radio>
+                          <Combo id="Combo00" taborder="17" value="2210" text="연차휴가" displaynulltext="연차명선택" innerdataset="@ds_code_list" codecolumn="code" datacolumn="name" index="0" onitemchanged="Div00_Div00_Div01_Combo00_onitemchanged" left="17.2%" top="3" right="68.65%" height="21"/>
+                          <Calendar id="Calendar00" taborder="18" left="50.94%" top="1" right="36.08%" height="21"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div02" taborder="6" left="0%" top="63" right="0%" height="28" style="border:1 solid #808080ff ;" visible="true" scrollbars="none">
+                      <Layouts>
+                        <Layout width="708" height="28">
+                          <Static id="Static00" taborder="11" text="연차기준코드" left="-0.44%" top="-1" right="83.58%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static01" taborder="12" text="수정자사번" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Combo id="Combo01" taborder="13" displaynulltext="시간제선택" codecolumn="codecolumn" datacolumn="datacolumn" onitemchanged="Div00_Div00_Div02_Combo00_onitemchanged" left="17.2%" top="1" right="68.65%" height="21">
+                            <Dataset id="innerdataset">
+                              <ColumnInfo>
+                                <Column id="codecolumn" size="256"/>
+                                <Column id="datacolumn" size="256"/>
+                              </ColumnInfo>
+                              <Rows>
+                                <Row>
+                                  <Col id="codecolumn">2310</Col>
+                                  <Col id="datacolumn">40시간제</Col>
+                                </Row>
+                                <Row>
+                                  <Col id="codecolumn">2320</Col>
+                                  <Col id="datacolumn">44시간제</Col>
+                                </Row>
+                              </Rows>
+                            </Dataset>
+                          </Combo>
+                          <Edit id="Edit02" taborder="14" maxlength="12" oneditclick="Div00_Div00_Div02_Edit02_oneditclick" enable="false" left="50.9%" top="3" right="38.7%" height="21"/>
+                          <Button id="Button00" taborder="15" left="61.72%" top="3" right="35.23%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" onclick="Div00_Div00_Div02_Button00_onclick"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div03" taborder="7" left="0%" top="91" right="0%" height="28" style="border:1 solid #808080ff ;" visible="true" scrollbars="none">
+                      <Layouts>
+                        <Layout>
+                          <Static id="Static00" taborder="20" text="등록일시" left="-0.44%" top="-2" right="83.58%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static01" taborder="21" text="확정일시" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Calendar id="Calendar00" taborder="22" enable="false" left="17.06%" top="2" right="68.52%" height="21"/>
+                          <Calendar id="Calendar01" taborder="23" left="51.08%" top="2" right="35.93%" height="21"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                    <Div id="Div00" taborder="8" left="0%" top="7" right="0%" height="28" style="border:1 solid #808080ff ;" visible="true" scrollbars="none">
+                      <Layouts>
+                        <Layout width="723" height="28">
+                          <Static id="Static01" taborder="28" text="등록자사번" left="32.32%" top="-1" right="49.93%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Static id="Static02" taborder="29" text="확정자사번" left="65.04%" top="-1" right="17.55%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Edit id="Edit03" taborder="30" maxlength="12" oneditclick="Div00_Div00_Div00_Edit03_oneditclick" enable="false" left="83.12%" top="3" right="3.9%" height="21"/>
+                          <Static id="Static00" taborder="31" text="연차코드번호" left="-0.44%" top="-1" right="83.58%" height="31" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+                          <Edit id="Edit04" taborder="32" maxlength="12" oneditclick="Div00_Div00_Div00_Edit04_oneditclick" enable="false" left="50.94%" top="2" right="38.67%" height="21"/>
+                          <Edit id="Edit00" taborder="33" maxlength="4" oneditclick="Div00_Div00_Div00_Edit00_oneditclick" enable="false" left="17.2%" top="3" right="68.65%" height="21"/>
+                          <Button id="Button00" taborder="34" onclick="Div00_Div00_Div00_Button00_onclick" left="61.47%" top="3" right="35.5%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');"/>
+                          <Button id="Button01" taborder="35" onclick="Div00_Div00_Div00_Button01_onclick" left="96.54%" top="3" right="0.43%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');"/>
+                        </Layout>
+                      </Layouts>
+                    </Div>
+                  </Layout>
+                </Layouts>
+              </Div>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Button id="Button00" taborder="33" text="초기화" left="59.88%" top="331" right="32.75%" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 10 굴림;" onclick="Button00_onclick"/>
+        <Button id="Button01" taborder="34" text="등록" left="77.13%" top="331" right="15.5%" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 10 굴림;" onclick="Button01_onclick"/>
+        <Static id="Static01" taborder="40" left="1.13%" top="74" right="7%" height="46" style="background:lavenderblush;border:1 solid #808080ff ;"/>
+        <Static id="Static02" taborder="41" left="2%" top="82" right="8%" height="28" style="background:lavenderblush;border:1 solid #808080ff ;" onclick="Static02_onclick"/>
+        <Static id="Static03" taborder="42" text="연차조회" left="2%" top="82" right="82.13%" height="28" style="background:#f4edfaff;border:1 solid #808080ff ;color:#133678ff;align:center middle;font:bold 10 굴림;"/>
+        <Button id="Button03" taborder="44" text="조회" left="77%" top="86" right="12%" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 굴림;" onclick="fn_search"/>
+        <Button id="Button04" taborder="45" text="삭제" left="85.75%" top="331" right="7%" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 굴림;" onclick="fn_delete"/>
+        <Button id="Button05" taborder="46" text="추가" left="68.5%" top="331" right="24.13%" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 굴림;" onclick="Button05_onclick"/>
+        <Combo id="Combo00" taborder="47" left="18.13%" top="86" right="24.88%" height="21" innerdataset="@ds_code_list" codecolumn="code" datacolumn="name" displaynulltext="연차선택" onitemchanged="Combo00_onitemchanged"/>
+        <Static id="Static04" taborder="48" text="*" left="19" top="392" width="11" height="22" style="color:red;font:arial,18;"/>
+        <Edit id="Edit00" taborder="49" left="1.16%" top="513" right="83%" height="21" visible="false"/>
+        <Edit id="Edit01" taborder="50" left="1.16%" top="542" right="83%" height="21" visible="false"/>
+        <Edit id="Edit02" taborder="51" left="1.16%" top="572" right="83%" height="21" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="vacation_code_id" type="STRING" size="4"/>
+          <Column id="vacation_standard_code" type="STRING" size="4"/>
+          <Column id="vacation_nm" type="STRING" size="256"/>
+          <Column id="reg_date" type="STRING" size="256"/>
+          <Column id="reg_emp_id" type="STRING" size="12"/>
+          <Column id="modify_date" type="STRING" size="256"/>
+          <Column id="modify_emp_id" type="STRING" size="12"/>
+          <Column id="confirm_date" type="STRING" size="256"/>
+          <Column id="confirm_emp_id" type="STRING" size="12"/>
+          <Column id="confirmyn" type="STRING" size="1"/>
+          <Column id="emp_reg_name" type="STRING" size="256"/>
+          <Column id="emp_ok_name" type="STRING" size="256"/>
+          <Column id="emp_mod_name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows/>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <ConstColumn id="ConstColumn0" type="STRING" size="30" value=""/>
+          <ConstColumn id="ConstColumn1" type="STRING" size="30" value=""/>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchCondition">111</Col>
+            <Col id="searchKeyword">111</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_code_list">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2210</Col>
+            <Col id="name">연차휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2220</Col>
+            <Col id="name">경조휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2230</Col>
+            <Col id="name">병가</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vacation_standard">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2310</Col>
+            <Col id="name">40시간제</Col>
+          </Row>
+          <Row>
+            <Col id="code">2320</Col>
+            <Col id="name">44시간제</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item8" compid="Div00.Div00.Div00.Edit03" propid="value" datasetid="ds_vacation" columnid="confirm_emp_id"/>
+      <BindItem id="item6" compid="Div00.Div00.Div00.Edit04" propid="value" datasetid="ds_vacation" columnid="reg_emp_id"/>
+      <BindItem id="item10" compid="Div00.Div00.Div00.Edit00" propid="value" datasetid="ds_vacation" columnid="vacation_code_id"/>
+      <BindItem id="item2" compid="Div00.Div00.Div02.Combo01" propid="value" datasetid="ds_vacation" columnid="vacation_standard_code"/>
+      <BindItem id="item9" compid="Div00.Div00.Div01.Radio00" propid="value" datasetid="ds_vacation" columnid="confirmyn"/>
+      <BindItem id="item0" compid="Div00.Div00.Div02.Edit02" propid="value" datasetid="ds_vacation" columnid="modify_emp_id"/>
+      <BindItem id="item1" compid="Div00.Div00.Div01.Combo00" propid="value" datasetid="ds_vacation" columnid="vacation_nm"/>
+      <BindItem id="item3" compid="Div00.Div00.Div03.Calendar00" propid="value" datasetid="ds_vacation" columnid="reg_date"/>
+      <BindItem id="item4" compid="Div00.Div00.Div01.Calendar00" propid="value" datasetid="ds_vacation" columnid="modify_date"/>
+      <BindItem id="item5" compid="Div00.Div00.Div03.Calendar01" propid="value" datasetid="ds_vacation" columnid="confirm_date"/>
+      <BindItem id="item7" compid="Edit00" propid="value" datasetid="ds_vacation" columnid="emp_reg_name"/>
+      <BindItem id="item11" compid="Edit01" propid="value" datasetid="ds_vacation" columnid="emp_mod_name"/>
+      <BindItem id="item12" compid="Edit02" propid="value" datasetid="ds_vacation" columnid="emp_ok_name"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+//폼 로드
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{	
+	Iject.formOnload(obj);
+	var nRow = this.ds_vacation.addRow();
+	this.ds_search.setColumn(nRow,"searchCondition","all");	
+	
+	//현재날짜 등록
+	var today = new Date();
+	var year = today.getFullYear().toString().padLeft(4,"0");
+	var month = (today.getMonth()+1).toString().padLeft(2,"0");
+	var day = today.getDate().toString().padLeft(2,"0");
+	
+	this.Div00.Div00.Div03.Calendar00.set_value(year+month+day);
+	this.Div00.Div00.Div01.Calendar00.set_value(year+month+day);
+	this.Div00.Div00.Div03.Calendar01.set_value(year+month+day);
+	
+
+	this.fn_search();
+	
+} 
+
+//초기화
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	this.ds_vacation.reset();
+}
+
+
+
+//등록
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	
+	this.fn_save("save");
+	
+	
+	
+}
+
+//추가
+this.Button05_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	 var nRow = this.ds_vacation.addRow();
+	 
+	 //현재날짜 등록
+	var today = new Date();
+	var year = today.getFullYear().toString().padLeft(4,"0");
+	var month = (today.getMonth()+1).toString().padLeft(2,"0");
+	var day = today.getDate().toString().padLeft(2,"0");
+	
+	//추가버튼 클릭시 현재날짜 셋팅
+	this.Div00.Div00.Div03.Calendar00.set_value(year+month+day);
+	this.Div00.Div00.Div01.Calendar00.set_value(year+month+day);
+	this.Div00.Div00.Div03.Calendar01.set_value(year+month+day);
+}
+//삭제
+this.fn_delete = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_vacation.rowposition;
+	this.ds_vacation.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.fn_search();
+	}
+}	
+
+
+this.fn_gridClick = function(obj:Grid, e:nexacro.GridClickEventInfo){
+	
+		if(e.col == '0'){
+			this.Div00_Div00_Div00_Button00_onclick();
+		}
+}
+
+//연차정보조회(팝업)
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+
+
+var objChildFrame = new ChildFrame();
+    objChildFrame.init("chf_popup1"//팝업창id
+	          ,"absolute"
+                      , nLeft 
+                      , nTop 
+                      , 400
+                      , 350
+                      , null
+                      , null
+                      , "VACATION::VACATION_INFO.xfdl");
+    objChildFrame.set_dragmovetype("all");
+    objChildFrame.set_openalign("center middle");
+ //   objChildFrame.set_overlaycolor("RGBA(196,196,196,0.5)")
+    
+    var objParam = {param1:this.Div00.Div00.Div00.Edit00.value,
+					param2:this.Div00.Div00.Div01.Combo00.value // 값이 안넘어감...
+				
+					};
+
+    objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_popupCallback");
+
+}
+
+ //콜백함수
+this.fn_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "chf_popup1"){
+        this.alert("Return Value: " + strReturn);
+    }
+};
+
+//등록
+this.fn_save = function(strid)
+{
+   
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "vacationModifyVO.do",			 
+			  inds :["input2=ds_vacation:U"],
+			  outds :[
+				 "ds_vacation=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		
+		if(this.errorcode < 0)
+		{		
+		   Iject.alert("입력정보를 다시확인해 주세요","알림");			
+		   return;
+		}			
+	      
+	      var pThis = this.fobj;   //form object
+	      switch(strid)
+	      {
+	         case "save" : 
+				Iject.alert("등록완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+			
+	      }
+	      
+	     // pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search();
+	});
+}
+
+//조회
+this.fn_search = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_search.addRow();  
+ 	var searchCondition = this.Combo00.value;
+ 	
+	
+	
+
+  //  var searchKeyword = this.edt_searchKeyword.value;
+    
+	this.ds_search.setColumn(nRow, "searchCondition",searchCondition);
+ 	//this.ds_search.setColumn(nRow, "searchKeyword", searchKeyword);
+	
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "vacationSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_vacation=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	// trace(" this.ds_search : " + this.ds_search.saveXML());
+	trace(this.ds_vacation.saveXML());
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		//alert(" this.errorcode : " + this.errorcode);
+		
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid      : 서비스 ID
+		*   @param : {object}    this.fobj       : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       //trace(" ds_search : " + pThis.ds_user.saveXML());
+			//alert(pThis.ds_vacation.rowcount);
+	
+	
+	});
+
+	
+	this.ds_search.clearData();
+	
+	
+}
+
+//그리드 팝업띄우기
+this.Grid00_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+
+	var objChildFrame = new ChildFrame();
+    objChildFrame.init("chf_popup1"//팝업창id
+	          ,"absolute"
+                      , nLeft 
+                      , nTop 
+                      , 400
+                      , 350
+                      , null
+                      , null
+                      , "VACATION::VACATION_INFO.xfdl");
+	
+	var objParam = {param1:this.Div00.Div00.Div00.Edit00.value
+					};
+    objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_popupCallback");
+    
+}
+
+
+
+
+//수정자 사번
+this.Div00_Div00_Div02_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::re_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+	var re_empno = application.gds_reempno.getColumn(application.gds_reempno.rowposition,"re_empno");
+	var re_empname = application.gds_reempno.getColumn(application.gds_reempno.rowposition,"re_empname");
+	var empPlus = re_empno + "(" + re_empname +")";
+	
+ 	this.Div00.Div00.Div02.Edit02.set_value(re_empno);
+ 	this.Edit01.set_value(re_empname);
+
+}
+
+
+//확정자 사번
+this.Div00_Div00_Div00_Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::ok_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal1",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+	var ok_empno = application.gds_okempno.getColumn(application.gds_okempno.rowposition,"ok_empno");
+	var ok_empname = application.gds_okempno.getColumn(application.gds_okempno.rowposition,"ok_empname");
+	var empPlus = ok_empno  + "(" + ok_empname +")";	
+	
+	this.Div00.Div00.Div00.Edit03.set_value(ok_empno);
+	this.Edit02.set_value(ok_empname);
+
+}
+
+//등록자 사번
+this.Div00_Div00_Div00_Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+	var empPlus = emp_no + "(" + emp_name +")";
+	//VO에 같은 이름의 변수가 존재하거나, 
+	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+	this.Div00.Div00.Div00.Edit04.set_value(emp_no);
+	this.Edit00.set_value(emp_name);
+
+	//this.Edit01.set_value(empPlus);
+}
+]]></Script>
+  </Form>
+</FDL>

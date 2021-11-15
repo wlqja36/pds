@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="empSearch" classname="member002" inheritanceid="" position="absolute" titletext="사원찾기" left="0" top="0" width="558" height="477" onload="empSearch_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg1" taborder="24" position="absolute" left="9" width="544" top="64" height="400" style="background:lavenderblush;"/>
+        <Button id="Button01" taborder="26" text="취소" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" position="absolute" left="315" width="55" top="424" height="23" onclick="Button01_onclick" titletext="회원가입창"/>
+        <Div id="joinTitle" taborder="27" text="근태대장번호 검색" left="9" top="6" width="544" height="50" style="align:center;background:#3366ffff;color:#ffffffff;font:bold 12 Dotum;">
+          <Layouts>
+            <Layout width="544" height="50"/>
+          </Layouts>
+        </Div>
+        <ImageViewer id="img00" taborder="28" left="14" top="121" width="530" height="284" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Grid id="grd_plaintiff" taborder="29" binddataset="ds_vacation" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="19" top="127" width="520" height="272">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="245"/>
+                <Column size="271"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="대장번호"/>
+                <Cell col="1" text="대장명"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:attitude_book_id"/>
+                <Cell col="1" text="bind:attitude_book_nm"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_09" taborder="30" left="14" top="73" width="530" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_01" taborder="31" left="60" top="78" width="480" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Button id="btn_sc" taborder="33" text="검색" onclick="btn_sc_onclick" left="416" top="79" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Button id="btn_reset" taborder="34" text="초기화" onclick="btn_reset_onclick" left="476" top="79" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Static id="sta_no00" taborder="35" text="대장번호" left="20" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Button id="Button00" taborder="38" text="입력" onclick="Button00_onclick" left="211" top="424" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" titletext="회원가입창"/>
+        <Edit id="Edit05" taborder="39" maxlength="10" oneditclick="Edit05_oneditclick" left="112" top="81" width="294" height="19"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchCondition" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_vacation">
+        <ColumnInfo>
+          <Column id="attitude_book_id" type="STRING" size="4"/>
+          <Column id="attitude_book_nm" type="STRING" size="4"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item1" compid="Edit05" propid="value" datasetid="ds_search" columnid="searchCondition"/>
+      <BindItem id="item0" compid="Edit7" propid="value" datasetid="ds_insa" columnid="address1"/>
+    </Bind>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+
+
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+
+this.empSearch_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.btn_sc_onclick();
+	
+}
+
+this.btn_reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+this.btn_sc_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	var nRow = this.ds_search.addRow();
+	var searchCondition = this.Edit05.value;
+	
+	
+	this.ds_search.setColumn(nRow,"searchCondition",searchCondition);
+	this.gfn_transaction(this,
+ 						"s_bookCodeSearch",
+ 						"s_bookSelectSearchVO.do",
+ 						"ds_search=ds_search",
+ 						"ds_vacation=ds_output",
+ 						"",
+ 						"transaction_callback"
+ 						);
+ 						
+ 			this.ds_search.clearData();
+}
+
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+	
+		 
+	
+}
+
+
+//입력
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		var attitude_book_id = this.ds_vacation.getColumn(this.ds_vacation.rowposition,"attitude_book_id");
+		application.gds_s_book_Id.addRow();
+		application.gds_s_book_Id.setColumn(application.gds_s_book_Id.rowposition,"attitude_book_id",attitude_book_id);
+		this.close();
+	//	var objParam = {param1:this.ds_vacation.getColumn};
+		
+// 		var re_empno = this.ds_emp.getColumn(this.ds_emp.rowposition, "emp_no");	
+// 		application.gds_reempno.addRow();
+// 		application.gds_reempno.setColumn(application.gds_reempno.rowposition, "re_empno", re_empno);
+// 		this.close();
+// 		var objParam = {param1:this.ds_emp.getColumn};
+}
+
+
+this.fn_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "chf_popup1"){
+        this.alert("Return Value: " + strReturn);
+    }
+};
+
+
+]]></Script>
+  </Form>
+</FDL>

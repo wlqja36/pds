@@ -1,0 +1,1032 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("VACATION_INFO");
+                this.set_titletext("New Form");
+                this.set_scrollbars("autoboth");
+                this._setFormPosition(0,0,949,768);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_vacation_info", this);
+            obj._setContents("<ColumnInfo><Column id=\"vacation_code_id\" type=\"STRING\" size=\"256\"/><Column id=\"use_start\" type=\"STRING\" size=\"256\"/><Column id=\"use_end\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_days\" type=\"INT\" size=\"256\"/><Column id=\"use_days\" type=\"INT\" size=\"256\"/><Column id=\"emp_no\" type=\"STRING\" size=\"256\"/><Column id=\"join_date\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/><Column id=\"reg_emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"modify_date\" type=\"STRING\" size=\"256\"/><Column id=\"modify_emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"confirm_date\" type=\"STRING\" size=\"256\"/><Column id=\"confirm_emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"confirmyn\" type=\"STRING\" size=\"256\"/><Column id=\"emp_reg_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_mod_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_ok_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_name\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><ConstColumn id=\"ConstColumn0\" type=\"STRING\" size=\"30\" value=\"\"/><ConstColumn id=\"ConstColumn1\" type=\"STRING\" size=\"30\" value=\"\"/><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_EMP", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_NO\" type=\"STRING\" size=\"256\"/><Column id=\"EMP_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"MGR_NO\" type=\"STRING\" size=\"256\"/><Column id=\"CURRENT_CLASS_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"CURRENT_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"GRADE_CLASS_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"GRADE_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_CLASS_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"EMP_ID\" type=\"STRING\" size=\"256\"/><Column id=\"EMP_PW\" type=\"STRING\" size=\"256\"/><Column id=\"LAST_LOGIN\" type=\"STRING\" size=\"256\"/><Column id=\"ENG_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"RESIDENT_NO\" type=\"STRING\" size=\"256\"/><Column id=\"HOUSEHOLDER\" type=\"STRING\" size=\"256\"/><Column id=\"JOIN_DATE\" type=\"STRING\" size=\"256\"/><Column id=\"PHONE\" type=\"STRING\" size=\"256\"/><Column id=\"CELL_PHONE\" type=\"STRING\" size=\"256\"/><Column id=\"EMAIL\" type=\"STRING\" size=\"256\"/><Column id=\"ADDRESS\" type=\"STRING\" size=\"256\"/><Column id=\"RELIGION\" type=\"STRING\" size=\"256\"/><Column id=\"IMAGE\" type=\"STRING\" size=\"256\"/><Column id=\"JOIN_CLASS_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"JOIN_CODE\" type=\"STRING\" size=\"256\"/><Column id=\"HOUSEHOLDER_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"HOUSEHOLDER_RELATION\" type=\"STRING\" size=\"256\"/><Column id=\"REGISTRATION_ADDRESS\" type=\"STRING\" size=\"256\"/><Column id=\"BIRTH\" type=\"STRING\" size=\"256\"/><Column id=\"MARRIAGE\" type=\"STRING\" size=\"256\"/><Column id=\"MARRIAGE_DATE\" type=\"STRING\" size=\"256\"/><Column id=\"DISABILITY\" type=\"STRING\" size=\"256\"/><Column id=\"REGISTRATION_ADDRESS_DETAIL\" type=\"STRING\" size=\"256\"/><Column id=\"ADDRESS_DETAIL\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Static("Static00", "absolute", "2%", "16", null, "61", "9.13%", null, this);
+            obj.set_taborder("0");
+            obj.set_text("연차정보");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 12 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "2%", "88", null, "46", "8.88%", null, this);
+            obj.set_taborder("2");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "3.13%", "96", null, "30", "10.38%", null, this);
+            obj.set_taborder("3");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "3.13%", "96", null, "30", "81%", null, this);
+            obj.set_taborder("4");
+            obj.set_text("검색");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 10 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "82.13%", "101", null, "21", "11.38%", null, this);
+            obj.set_taborder("6");
+            obj.set_text("조회");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 굴림");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("Div00", "absolute", "1.63%", "447", null, "153", "9.13%", null, this);
+            obj.set_taborder("8");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.addChild(obj.name, obj);
+            obj = new Div("Div00", "absolute", "0.84%", "-13", null, "158", "0.84%", null, this.Div00);
+            obj.set_taborder("0");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("0 solid #808080ff");
+            obj.set_scrollbars("none");
+            obj.set_visible("true");
+            this.Div00.addChild(obj.name, obj);
+            obj = new Div("Div01", "absolute", "0%", "46", null, "28", "0%", null, this.Div00.Div00);
+            obj.set_taborder("5");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static00", "absolute", "-0.72%", "-2", null, "32", "83.24%", null, this.Div00.Div00.Div01);
+            obj.set_taborder("10");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            obj.set_text("사원번호");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Static("Static01", "absolute", "32.38%", "-1", null, "28", "49.86%", null, this.Div00.Div00.Div01);
+            obj.set_taborder("11");
+            obj.set_text("사용휴가일수");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Static("Static02", "absolute", "64.68%", "-1", null, "28", "17.59%", null, this.Div00.Div00.Div01);
+            obj.set_taborder("12");
+            obj.set_text("사용기간종료");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Edit("Edit01", "absolute", "17.48%", "1", null, "21", "72.06%", null, this.Div00.Div00.Div01);
+            obj.set_maxlength("12");
+            obj.set_taborder("13");
+            obj.set_enable("false");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Edit("Edit04", "absolute", "50.88%", "2", null, "21", "36.03%", null, this.Div00.Div00.Div01);
+            obj.set_maxlength("2");
+            obj.set_taborder("16");
+            obj.set_enable("true");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Calendar("Calendar00", "absolute", "83.09%", "4", null, "21", "1.03%", null, this.Div00.Div00.Div01);
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj.set_taborder("17");
+            obj = new Button("Button00", "absolute", "28.09%", "3", null, "21", "68.09%", null, this.Div00.Div00.Div01);
+            obj.set_taborder("18");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Div("Div00", "absolute", "0%", "19", null, "28", "0%", null, this.Div00.Div00);
+            obj.set_taborder("8");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static01", "absolute", "32.41%", "-1", null, "28", "49.85%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("16");
+            obj.set_text("발생휴가일수");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static02", "absolute", "64.68%", "-1", null, "28", "17.59%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("17");
+            obj.set_text("사용시작기간");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static00", "absolute", "-0.29%", "-1", null, "29", "83.28%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("20");
+            obj.set_text("연차코드번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Edit("Edit00", "absolute", "17.48%", "1", null, "21", "72.06%", null, this.Div00.Div00.Div00);
+            obj.set_maxlength("4");
+            obj.set_taborder("21");
+            obj.set_enable("false");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Edit("Edit03", "absolute", "50.88%", "2", null, "21", "36.03%", null, this.Div00.Div00.Div00);
+            obj.set_maxlength("2");
+            obj.set_taborder("24");
+            obj.set_enable("false");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Calendar("Calendar00", "absolute", "83.09%", "2", null, "21", "1.03%", null, this.Div00.Div00.Div00);
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj.set_taborder("25");
+            obj.set_enable("true");
+            obj = new Button("Button00", "absolute", "28.09%", "2", null, "21", "68.09%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("26");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static05", "absolute", "29", "458", "11", "22", null, null, this.Div00.Div00.Div00);
+            obj.set_taborder("27");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Div("Div02", "absolute", "0%", "74", null, "28", "0%", null, this.Div00.Div00);
+            obj.set_taborder("9");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static01", "absolute", "-0.57%", "-4", null, "36", "83.24%", null, this.Div00.Div00.Div02);
+            obj.set_taborder("1");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            obj.set_text("등록일시");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Static("Static02", "absolute", "32.38%", "-1", null, "28", "49.86%", null, this.Div00.Div00.Div02);
+            obj.set_taborder("2");
+            obj.set_text("등록자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Calendar("Calendar00", "absolute", "17.48%", "2", null, "21", "68.77%", null, this.Div00.Div00.Div02);
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj.set_taborder("3");
+            obj = new Edit("Edit00", "absolute", "50.88%", "2", null, "21", "39.85%", null, this.Div00.Div00.Div02);
+            obj.set_maxlength("12");
+            obj.set_taborder("5");
+            obj.set_enable("true");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Button("Button00", "absolute", "60.44%", "2", null, "21", "35.74%", null, this.Div00.Div00.Div02);
+            obj.set_taborder("6");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Static("Static00", "absolute", "64.68%", "-4", null, "36", "17.59%", null, this.Div00.Div00.Div02);
+            obj.set_taborder("7");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Calendar("Calendar01", "absolute", "83.09%", "2", null, "21", "1.03%", null, this.Div00.Div00.Div02);
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj.set_taborder("8");
+            obj = new Div("Div03", "absolute", "0%", "101", null, "28", "-0.14%", null, this.Div00.Div00);
+            obj.set_taborder("10");
+            obj.set_text("Div03");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("Static01", "absolute", "-0.29%", "-2", null, "30", "83.24%", null, this.Div00.Div00.Div03);
+            obj.set_taborder("1");
+            obj.set_text("수정자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Static("Static02", "absolute", "32.41%", "-1", null, "28", "49.85%", null, this.Div00.Div00.Div03);
+            obj.set_taborder("2");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            obj.set_text("확정일시");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Edit("Edit00", "absolute", "17.48%", "1", null, "21", "72.06%", null, this.Div00.Div00.Div03);
+            obj.set_maxlength("12");
+            obj.set_taborder("7");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Calendar("Calendar01", "absolute", "50.74%", "2", null, "21", "36.18%", null, this.Div00.Div00.Div03);
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj.set_taborder("8");
+            obj = new Static("Static00", "absolute", "64.61%", "-2", null, "30", "17.62%", null, this.Div00.Div00.Div03);
+            obj.set_taborder("9");
+            obj.set_text("확정자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Edit("Edit01", "absolute", "83.09%", "2", null, "21", "4.56%", null, this.Div00.Div00.Div03);
+            obj.set_maxlength("12");
+            obj.set_taborder("10");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Button("Button00", "absolute", "95.88%", "2", null, "21", "0.29%", null, this.Div00.Div00.Div03);
+            obj.set_taborder("11");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Button("Button01", "absolute", "28.09%", "3", null, "21", "68.09%", null, this.Div00.Div00.Div03);
+            obj.set_taborder("12");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Div("Div04", "absolute", "0%", "129", null, "28", "-0.14%", null, this.Div00.Div00);
+            obj.set_taborder("11");
+            obj.style.set_border("0 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Radio("Radio00", "absolute", "17.57%", "2", null, "21", "64.43%", null, this.Div00.Div00.Div04);
+            this.Div00.Div00.Div04.addChild(obj.name, obj);
+            var Radio00_innerdataset = new Dataset("Radio00_innerdataset", this.Div00.Div00.Div04.Radio00);
+            Radio00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">확정</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">미확정</Col></Row></Rows>");
+            obj.set_innerdataset(Radio00_innerdataset);
+            obj.set_taborder("1");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_columncount("2");
+            obj = new Static("Static01", "absolute", "0%", "-1", null, "28", "83.11%", null, this.Div00.Div00.Div04);
+            obj.set_taborder("2");
+            obj.set_text("확정여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div04.addChild(obj.name, obj);
+
+            obj = new Button("Button02", "absolute", "78%", "408", null, "22", "16.13%", null, this);
+            obj.set_taborder("9");
+            obj.set_text("등록");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button03", "absolute", "63.75%", "408", null, "22", "30.38%", null, this);
+            obj.set_taborder("10");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "70.88%", "408", null, "22", "23.25%", null, this);
+            obj.set_taborder("11");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button05", "absolute", "85.13%", "408", null, "22", "9.13%", null, this);
+            obj.set_taborder("15");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_searchKeyword", "absolute", "20.13%", "101", null, "21", "33%", null, this);
+            obj.set_taborder("18");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button04", "absolute", "73.13%", "101", null, "21", "19.13%", null, this);
+            obj.set_taborder("19");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("white");
+            obj.style.set_font("bold 10 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "37", "487", "11", "22", null, null, this);
+            obj.set_taborder("20");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "37", "461", "11", "22", null, null, this);
+            obj.set_taborder("21");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "absolute", "309", "461", "11", "22", null, null, this);
+            obj.set_taborder("22");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "2.38%", "142", null, "257", "9.13%", null, this);
+            obj.set_taborder("23");
+            obj.set_binddataset("ds_vacation_info");
+            obj.set_scrollbars("fixedboth");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"106\"/><Column size=\"75\"/><Column size=\"75\"/><Column size=\"81\"/><Column size=\"123\"/><Column size=\"68\"/><Column size=\"119\"/><Column size=\"60\"/><Column size=\"118\"/><Column size=\"89\"/><Column size=\"136\"/><Column size=\"127\"/><Column size=\"69\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"사원번호\"/><Cell col=\"1\" text=\"연차코드번호\"/><Cell col=\"2\" text=\"발생휴가일수\"/><Cell col=\"3\" text=\"사용휴가일수\"/><Cell col=\"4\" text=\"등록자사번\"/><Cell col=\"5\" text=\"등록일시\"/><Cell col=\"6\" text=\"수정자사번\"/><Cell col=\"7\" text=\"수정일시\"/><Cell col=\"8\" text=\"확정자사번\"/><Cell col=\"9\" text=\"확정일시\"/><Cell col=\"10\" text=\"사용기간시작\"/><Cell col=\"11\" text=\"사용기간종료\"/><Cell col=\"12\" text=\"확정여부\"/></Band><Band id=\"body\"><Cell text=\"bind:emp_no\"/><Cell col=\"1\" text=\"bind:vacation_code_id\"/><Cell col=\"2\" text=\"bind:vacation_days\"/><Cell col=\"3\" text=\"bind:use_days\"/><Cell col=\"4\" text=\"bind:reg_emp_id\"/><Cell col=\"5\" text=\"bind:reg_date\"/><Cell col=\"6\" text=\"bind:modify_emp_id\"/><Cell col=\"7\" text=\"bind:modify_date\"/><Cell col=\"8\" text=\"bind:confirm_emp_id\"/><Cell col=\"9\" text=\"bind:confirm_date\"/><Cell col=\"10\" text=\"bind:use_start\" mask=\"####-##-##\"/><Cell col=\"11\" text=\"bind:use_end\" mask=\"####-##-##\"/><Cell col=\"12\" displaytype=\"checkbox\" text=\"expr:confirmyn ==&quot;Y&quot;?1:0&quot;\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "0.11%", "779", null, "21", "83.98%", null, this);
+            obj.set_taborder("24");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "0.11%", "808", null, "21", "83.98%", null, this);
+            obj.set_taborder("25");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit02", "absolute", "0.11%", "840", null, "21", "83.98%", null, this);
+            obj.set_taborder("26");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit03", "absolute", "0.11%", "872", null, "21", "83.98%", null, this);
+            obj.set_taborder("27");
+            obj.set_visible("false");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 28, this.Div00.Div00.Div01,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("5");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div01.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 28, this.Div00.Div00.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("8");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 28, this.Div00.Div00.Div02,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("9");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div02.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 28, this.Div00.Div00.Div03,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("10");
+            		p.set_text("Div03");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div03.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 28, this.Div00.Div00.Div04,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("11");
+            		p.style.set_border("0 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div04.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 158, this.Div00.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("0");
+            		p.style.set_background("#f0f0f0ff");
+            		p.style.set_border("0 solid #808080ff");
+            		p.set_scrollbars("none");
+            		p.set_visible("true");
+
+            	}
+            );
+            this.Div00.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 153, this.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("8");
+            		p.style.set_background("lavenderblush");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 949, 768, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+            		p.set_scrollbars("autoboth");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item2","Div00.Div00.Div00.Edit03","value","ds_vacation_info","vacation_days");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Div00.Div00.Div01.Edit04","value","ds_vacation_info","use_days");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","edt_searchKeyword","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","edt_searchKeyword","value","gds_empno","emp_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Div00.Div00.Div01.Edit01","value","ds_vacation_info","emp_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","Div00.Div00.Div00.Edit00","value","ds_vacation_info","vacation_code_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","Div00.Div00.Div00.Calendar00","value","ds_vacation_info","use_start");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","Div00.Div00.Div01.Calendar00","value","ds_vacation_info","use_end");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","Div00.Div00.Div03.Edit00","value","ds_vacation_info","modify_emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","Div00.Div00.Div02.Edit00","value","ds_vacation_info","reg_emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","Div00.Div00.Div03.Edit01","value","ds_vacation_info","confirm_emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","Div00.Div00.Div02.Calendar01","value","ds_vacation_info","modify_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","Div00.Div00.Div03.Calendar01","value","ds_vacation_info","confirm_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","Div00.Div00.Div02.Calendar00","value","ds_vacation_info","reg_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","Div00.Div00.Div04.Radio00","value","ds_vacation_info","confirmyn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item15","Edit00","value","ds_vacation_info","emp_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item16","Edit01","value","ds_vacation_info","emp_mod_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item17","Edit02","value","ds_vacation_info","emp_ok_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item18","Edit03","value","ds_vacation_info","emp_reg_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("VACATION_INFO.xfdl", "Lib::Comm.xjs");
+        this.registerScript("VACATION_INFO.xfdl", function() {
+        //include "Lib::Comm.xjs";
+
+        this.form_onload = function(obj,e)
+        {	
+        	Iject.formOnload(obj);
+        	var nRow = this.ds_search.addRow();
+        	this.ds_vacation_info.addRow();
+        	this.ds_search.setColumn(nRow,"searchKeyword","ALL");
+        	
+        	//파람 값 넘겨받기
+        	var strParam1 = this.parent.param1;
+        	var strParam2 = this.parent.param2;
+        	
+        	var strParam3 = this.parent.param3;
+        	trace(strParam2);
+        	trace(strParam1);
+        	this.Div00.Div00.Div00.Edit00.set_value(strParam1);
+        	
+        	//현재날짜 입력하기
+        	var today = new Date();
+        	var year = today.getFullYear().toString().padLeft(4,"0");		
+         	var month = (today.getMonth()+1).toString().padLeft(2,"0");
+        	var day1 = today.getDate().toString().padLeft(2,"0");
+         	var day2 = (today.getDate()+1).toString().padLeft(2,"0");
+
+        		
+
+        	this.Div00.Div00.Div02.Calendar00.set_value(year+month+day1);
+        	this.Div00.Div00.Div03.Calendar01.set_value(year+month+day1);
+        	this.Div00.Div00.Div02.Calendar01.set_value(year+month+day1);
+
+        	
+        	//폼로드시 전체 조회
+        	this.fn_search();
+        	
+        } 
+        //연차코드 조회
+        this.fn_search = function(obj,e)
+        {
+        	
+            var searchKeyword = this.edt_searchKeyword.value;
+        	this.ds_search.setColumn(0, "searchCondition", this.searchCondition);
+        	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+           
+           var oDatas =  {
+        			  svcid : "search",
+        			  sController : "vacationInfoSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_vacation_info=output2"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		
+        		//alert(" this.errorcode : " + this.errorcode);
+        		
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid      : 서비스 ID
+        		*   @param : {object}    this.fobj       : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/   
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	      
+        	       var pThis = this.fobj;   //form object	      
+        	       //trace(" ds_search : " + pThis.ds_user.saveXML());
+        	});
+        	
+        }
+
+        
+
+        //등록
+        //등록버튼 클릭
+        this.Button02_onclick = function(obj,e)
+        {
+        	//발생휴가일수보다 사용휴가일수가 많을때
+        	var use_vacation = nexacro.toNumber(this.Div00.Div00.Div00.Edit03.value); // 발생휴가일수
+        	var used_vacation = nexacro.toNumber(this.Div00.Div00.Div01.Edit04.value); // 사용휴가일수
+        	
+        	//사용시작기간이 사용종료기간보다 늦을때
+        	var start_vacation = this.Div00.Div00.Div00.Calendar00.value;
+        	var end_vacation = this.Div00.Div00.Div01.Calendar00.value;
+        	
+        // 	var test = this.Div00.Div00.Div01.Edit01.value;
+        // 	var test2 = test.substring(0,11);
+        // 	this.Div00.Div00.Div01.Edit01.set_value(test2);
+        // 	alert(test2);
+
+        	
+
+        	if(use_vacation < used_vacation){
+        		alert("휴가 일수를 정확히 입력해 주세요");
+        	}else if(start_vacation > end_vacation){
+        			alert("사용시작기간이 사용종료기간보다 늦을 수 없습니다");
+        	}else{
+        		this.fn_save("saveInfo");	
+        	}			
+        }
+
+        //초기화
+        this.Button03_onclick = function(obj,e)
+        {
+        	this.ds_vacation_info.reset();
+        }
+
+        //삭제
+        this.fn_delete = function(obj,e)
+        {
+
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	var nRow = this.ds_vacation_info.rowposition;
+        	this.ds_vacation_info.deleteRow(nRow);
+        	if(rtnValue)
+        	{
+        		this.fn_save("deleteInfo");	
+        	}
+        	else
+        	{
+        		this.fn_search();
+        	}
+
+        
+        }
+
+        //추가
+        this.Button01_onclick = function(obj,e)
+        {
+        		var vacation_code_id = this.parent.param1;
+        		var nRow = this.ds_vacation_info.addRow();//줄추가
+        		this.ds_vacation_info.setColumn(nRow,"vacation_code_id", vacation_code_id);
+        		
+        		//검색값 사원코드에 넣기
+        		var emp_no = this.edt_searchKeyword.value;
+        		this.ds_vacation_info.setColumn(nRow,"emp_no", emp_no);
+        	
+        	
+        		var today = new Date();
+        		var year = today.getFullYear().toString().padLeft(4,"0");		
+        		var month = (today.getMonth()+1).toString().padLeft(2,"0");
+        		var day1 = today.getDate().toString().padLeft(2,"0");
+        		var day2 = (today.getDate()+1).toString().padLeft(2,"0");
+        		
+        		this.Div00.Div00.Div00.Calendar00.set_value(year+month+day1);
+        		this.Div00.Div00.Div01.Calendar00.set_value(year+month+day1);
+        		this.Div00.Div00.Div02.Calendar00.set_value(year+month+day1);
+        		this.Div00.Div00.Div03.Calendar01.set_value(year+month+day1);
+        		this.Div00.Div00.Div02.Calendar01.set_value(year+month+day1);
+        }
+        		
+        		
+
+        //컴포넌트 활성화
+        // this.enable_edit = function()
+        // {
+        // 	this.Edit00.set_enable("true");
+        // 	this.Edit01.set_enable("true");
+        // 	this.Edit02.set_enable("true");
+        // 	this.Edit03.set_enable("true");
+        // 	this.MaskEdit01.set_enable("true");
+        // 	this.MaskEdit02.set_enable("true");
+        // 	this.Edit00.setFocus();
+        // }
+
+        //등록
+        this.fn_save = function(strid)
+        {
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "vacationInfoModifyVO.do",			 
+        			  inds :["input2=ds_vacation_info:U"],
+        			  outds :[
+        				 "ds_vacation_info=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        		 trace(" this.ds_vacation_info: " + this.ds_vacation_info.saveXML());
+
+        
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/    
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert("정보를 정확히 입력해주세요","알림");			
+        		   return;
+        		}			
+        	      
+        	       var pThis = this.fobj;   //form object
+        	       
+        	      switch(strid)
+        	      {
+        	         case "saveInfo" : 
+        				Iject.alert("등록완료");
+        				break;
+        				
+        	         case "deleteInfo" : 
+        	            Iject.alert("삭제완료");
+        				break; 		 
+        	      }
+        	      
+        		  pThis.fn_search();
+        	});
+        }
+
+        //사원검색
+        this.Button04_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        				
+        }
+
+        //사원번호
+        this.Div00_Div00_Div01_Button00_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::empSearch3.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	 
+        	system.showModalWindow(empSearch, 
+        							"empModal1",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        							
+        	var emp_no2 = application.gds_empno2.getColumn(application.gds_empno2.rowposition,"emp_no2");
+        	var emp_name2 = application.gds_empno2.getColumn(application.gds_empno2.rowposition,"emp_name2");
+        	
+        	var empPlus = emp_no2 + "(" + emp_name2 +")";
+        	this.Div00.Div00.Div01.Edit01.set_value(emp_no2);
+        	this.Edit00.set_value(emp_name2);
+        	
+
+        	
+        	//발생휴가
+        	var today = new Date();
+        	var year = today.getFullYear().toString().padLeft(4,"0");		
+         	
+         	var empPlus2 = empPlus.substring(0,4); // 사원번호에서 연도만 자름
+        	var empPlus3 = nexacro.toNumber(empPlus2); // 넘버형으로 변경
+        	var empPlus4 = year - empPlus3; // 올해 - 입사년도
+        	var empPlus5 = 12; // 디폴트 12
+        	var empPlus6 = empPlus4+empPlus5 // 올해 - 디폴트 
+        	
+        	this.Div00.Div00.Div00.Edit03.set_value(empPlus6);
+
+        
+        }
+
+        //연차검색
+        this.Div00_Div00_Div00_Button00_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::vacationCodeSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"vacationModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        /*	this.ds_vacation_info.addRow();	*/					
+        	var vacation_code_id = application.gds_vacationCodeId.getColumn(application.gds_vacationCodeId.rowposition,"vacation_code_id");
+        	this.Div00.Div00.Div00.Edit00.set_value(vacation_code_id);
+        	
+        // 	var reg_emp_id = application.gds_regempno.getColumn(application.gds_regempno.rowposition,"reg_emp_no");
+        // 	this.Div00.Div00.Div02.Edit00.set_value(reg_emp_id);
+        }
+
+        //등록자
+        this.Div00_Div00_Div02_Button00_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::reg_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"vacationModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        							
+        							this.ds_EMP.rowposition
+        	var reg_empno = application.gds_regempno.getColumn(application.gds_regempno.rowposition,"reg_emp_no");
+        	var reg_empname = application.gds_regempno.getColumn(application.gds_regempno.rowposition,"reg_emp_name");
+        	var empPlus = reg_empno + "(" + reg_empname +")";
+        	
+        	this.Div00.Div00.Div02.Edit00.set_value(reg_empno);
+        	this.Edit02.set_value(reg_empname);
+
+        }
+
+        //수정자
+        this.Div00_Div00_Div03_Button01_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::re_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"vacationModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        							
+        	var re_empno = application.gds_reempno.getColumn(application.gds_reempno.rowposition,"re_empno");
+        	var re_empname =  application.gds_reempno.getColumn(application.gds_reempno.rowposition,"re_empname");
+        	var empPlus = re_empno + "(" + re_empname +")";
+        	
+        	this.Div00.Div00.Div03.Edit00.set_value(re_empno);
+        	this.Edit01.set_value(re_empname);
+
+        }
+
+        //확정자 사번
+        this.Div00_Div00_Div03_Button00_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::ok_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"vacationModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        							
+        	var ok_empno = application.gds_okempno.getColumn(application.gds_okempno.rowposition,"ok_empno");
+        	var ok_empname = application.gds_okempno.getColumn(application.gds_okempno.rowposition,"ok_empname");
+        	var empPlus = ok_empno + "(" + ok_empname +")";
+        	
+        	this.Div00.Div00.Div03.Edit01.set_value(ok_empno);
+        	this.Edit03.set_value(ok_empname);
+
+        }
+
+        
+
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.Static00.addEventHandler("onclick", this.Static00_onclick, this);
+            this.Button00.addEventHandler("onclick", this.fn_search, this);
+            this.Div00.Div00.Div01.Static00.addEventHandler("onclick", this.Div00_Div00_Div01_Static00_onclick, this);
+            this.Div00.Div00.Div01.Edit01.addEventHandler("oneditclick", this.Div00_Div00_Div01_Edit01_oneditclick, this);
+            this.Div00.Div00.Div01.Calendar00.addEventHandler("oneditclick", this.Div00_Div00_Div01_Calendar00_oneditclick, this);
+            this.Div00.Div00.Div01.Button00.addEventHandler("onclick", this.Div00_Div00_Div01_Button00_onclick, this);
+            this.Div00.Div00.Div00.Static00.addEventHandler("onclick", this.Div00_Div00_Div00_Static00_onclick, this);
+            this.Div00.Div00.Div00.Button00.addEventHandler("onclick", this.Div00_Div00_Div00_Button00_onclick, this);
+            this.Div00.Div00.Div00.Static05.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Div00.Div00.Div02.Button00.addEventHandler("onclick", this.Div00_Div00_Div02_Button00_onclick, this);
+            this.Div00.Div00.Div03.Edit01.addEventHandler("oneditclick", this.Div00_Div00_Div03_Edit01_oneditclick, this);
+            this.Div00.Div00.Div03.Button00.addEventHandler("onclick", this.Div00_Div00_Div03_Button00_onclick, this);
+            this.Div00.Div00.Div03.Button01.addEventHandler("onclick", this.Div00_Div00_Div03_Button01_onclick, this);
+            this.Button02.addEventHandler("onclick", this.Button02_onclick, this);
+            this.Button03.addEventHandler("onclick", this.Button03_onclick, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+            this.Button05.addEventHandler("onclick", this.fn_delete, this);
+            this.Button04.addEventHandler("onclick", this.Button04_onclick, this);
+            this.Static05.addEventHandler("onclick", this.Static05_onclick, this);
+            this.Static06.addEventHandler("onclick", this.Static06_onclick, this);
+            this.Grid00.addEventHandler("oncelldblclick", this.grid_fn, this);
+
+        };
+
+        this.loadIncludeScript("VACATION_INFO.xfdl");
+
+       
+    };
+}
+)();

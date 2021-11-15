@@ -1,0 +1,221 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("TopFrame");
+                this._setFormPosition(0,0,1920,70);
+            }
+            this.style.set_background("#e2e2e2ff");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+
+            
+            // UI Components Initialize
+            obj = new Static("st_nexa", "absolute", "0", "0", "230", "70", null, null, this);
+            obj.set_taborder("0");
+            obj.set_cssclass("sta_LF_Logo");
+            obj.style.set_background("transparent URL('img::LOGINBG.png') stretch");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button02", "absolute", null, "0", "67", "29", "0", null, this);
+            obj.set_taborder("3");
+            obj.set_cssclass("btn_TF_Logout");
+            obj.set_text("Log-out");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("stNm", "absolute", null, "0", "157", "29", "152", null, this);
+            obj.set_taborder("5");
+            obj.set_cssclass("sta_TF_Admin");
+            obj.set_usedecorate("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", null, "0", "67", "29", "64", null, this);
+            obj.set_taborder("7");
+            obj.set_text("정보 수정");
+            obj.set_cssclass("btn_TF_Logout");
+            this.addChild(obj.name, obj);
+
+            obj = new Menu("Menu00", "absolute", "230", "28", null, "42", "0%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("8");
+            obj.set_innerdataset("@gds_menu");
+            obj.set_captioncolumn("MENU_NAME");
+            obj.set_levelcolumn("MENU_LEVEL");
+            obj.set_idcolumn("MENU_ID");
+            obj.set_enablecolumn("MENU_NAME");
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1920, 70, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("TopFrame");
+            		p.style.set_background("#e2e2e2ff");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("TopFrame.xfdl", "Lib::common.xjs");
+        this.registerScript("TopFrame.xfdl", function() {
+        /***********************************************************************************
+        * SYSTEM      : 넥사크로플랫폼 PackageB
+        * BUSINESS    : 넥사크로플랫폼 PackageB
+        * FILE NAME   : TopFrame.xfdl
+        * PROGRAMMER  : 
+        * DATE        : 
+        * DESCRIPTION : TopFrame
+        *------------------------------------------------------------------
+        * MODIFY DATE   PROGRAMMER			DESCRIPTION
+        *------------------------------------------------------------------
+        * 
+        *------------------------------------------------------------------
+        ***********************************************************************************/
+
+        /***********************************************************************************
+        * Common Library
+        ***********************************************************************************/
+        //include "Lib::common.xjs";
+
+        
+        /***********************************************************************************
+        * Global/Local Variable
+        ***********************************************************************************/
+
+        /***********************************************************************************
+        * Form Event
+        ***********************************************************************************/
+        /**
+         * form onload 함수
+         * @return 
+         * @example
+         *
+         * @memberOf this
+         */
+        this.fn_onload = function(obj,e)
+        {  
+        }
+
+        
+        //left 펼침 접힘 실행
+        //kjh, 20211021 :: left메뉴 사용 안함
+        /*
+        this.btn_leftMenuOpen_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+        {
+           Iject.Mdi.leftMenuAction(this,obj);
+        }
+        */
+        //logout
+        this.fn_logout = function(obj,e)
+        {
+        	Iject.logout();
+        }
+
+        
+
+        this.fn_set = function()
+        {
+
+           this.stNm.set_text(Iject.$["usernm"] + " <b v='false'>님 환영합니다.</b>");
+        }
+
+        this.fn_update = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empUpdate = new ChildFrame;
+        	empUpdate.init("update"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::empUpdate.xfdl");
+        					
+        	empUpdate.set_openalign("center middle");
+        	empUpdate.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empUpdate, 
+        							"updateModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+
+        this.Menu00_onmenuclick = function(obj,e)
+        {
+        	
+        	//global dataset :: gds_menu에 대응하는 행번호 담는 용도 변수선언
+        	var gdsRowNum = 0;
+        	//메뉴 클릭이벤트 대응 inner dataset 메뉴아이디 저장
+        	var clickedMenuId = e.id;
+        	//trace("클릭한 메뉴 아이디 = "+clickedMenuId);
+        	
+        	var ds_row = application.gds_menu.getRowCount();
+        	//application.alert(ds_row);
+        	
+        	//데이터셋 순회 조회
+        	for(var i=0; i<ds_row; i++){
+        		
+        		var gdsMenuIdVal = application.gds_menu.getColumn(i,"MENU_ID");
+        		var gdsMenuLevel = application.gds_menu.getColumn(i,"MENU_LEVEL");
+        		//trace("메뉴레벨 = "+application.gds_menu.getColumn(i,"MENU_LEVEL"));
+        		//trace(gdsMenuIdVal);
+        		if(clickedMenuId == gdsMenuIdVal && gdsMenuLevel != 0){
+        			gdsRowNum = i;
+        		}
+        	}
+        	//application.alert("클릭한 메뉴의 gds대응 rNum = "+nRow);
+        	
+        	var oObj = {
+                  ds    : application.gds_menu,   // 메뉴 dataset 
+                  nRow  : gdsRowNum, 		// 메뉴클릭이벤트로 계산한 gds 행번		
+                  oArgs : []              //넘길 argument
+            };
+            
+            //trace(e.row);
+            Iject.closeWindow();
+            Iject.Mdi.call(this,oObj);
+        }
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.fn_onload, this);
+            this.st_nexa.addEventHandler("onclick", this.fn_main, this);
+            this.Button02.addEventHandler("onclick", this.fn_logout, this);
+            this.Button00.addEventHandler("onclick", this.fn_update, this);
+            this.Menu00.addEventHandler("onmenuclick", this.Menu00_onmenuclick, this);
+
+        };
+
+        this.loadIncludeScript("TopFrame.xfdl");
+
+       
+    };
+}
+)();

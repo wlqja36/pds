@@ -1,0 +1,414 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Login");
+                this.set_titletext("Login");
+                this.set_scrollbars("none");
+                this._setFormPosition(0,0,596,408);
+            }
+            this.style.set_background("transparent");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_idpw", this);
+            obj._setContents("<ColumnInfo><Column id=\"msg\" type=\"STRING\" size=\"256\"/><Column id=\"emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"emp_no\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("div_login", "absolute", "0", "0", "470", "360", null, null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("transparent URL('img::login_insa.png')");
+            obj.set_scrollbars("none");
+            this.addChild(obj.name, obj);
+            obj = new Edit("txt_userId", "absolute", "152", "167", "150", "25", null, null, this.div_login);
+            obj.set_taborder("27");
+            obj.set_displaynulltext("User ID");
+            this.div_login.addChild(obj.name, obj);
+            obj = new Edit("txt_userPwd", "absolute", "152", "196", "150", "25", null, null, this.div_login);
+            obj.set_taborder("28");
+            obj.set_password("true");
+            obj.set_displaynulltext("Password");
+            this.div_login.addChild(obj.name, obj);
+            obj = new Button("btn_close", "absolute", null, "45", "29", "19", "33", null, this.div_login);
+            obj.set_taborder("30");
+            obj.set_text("X");
+            obj.set_visible("true");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 9 Dotum");
+            this.div_login.addChild(obj.name, obj);
+            obj = new Div("Div00", "absolute", "30.86%", "248", "100", "21", null, null, this.div_login);
+            obj.set_taborder("33");
+            obj.set_text("아이디 찾기");
+            obj.style.set_color("midnightblue");
+            obj.style.set_font("bold 12 Dotum");
+            obj.style.set_cursor("hand");
+            this.div_login.addChild(obj.name, obj);
+            obj = new Div("Div01", "absolute", "54.46%", "248", "115", "21", null, null, this.div_login);
+            obj.set_taborder("34");
+            obj.set_text("비밀번호 찾기");
+            obj.style.set_color("midnightblue");
+            obj.style.set_font("bold 12 Dotum");
+            obj.style.set_cursor("hand");
+            this.div_login.addChild(obj.name, obj);
+            obj = new Button("btn_login", "absolute", null, "167", "60", "50", "66", null, this.div_login);
+            obj.set_taborder("36");
+            obj.set_text("로그인");
+            obj.set_wordwrap("char");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 9 Dotum");
+            this.div_login.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 65, 12, this.div_login.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("33");
+            		p.set_text("아이디 찾기");
+            		p.style.set_color("midnightblue");
+            		p.style.set_font("bold 12 Dotum");
+            		p.style.set_cursor("hand");
+
+            	}
+            );
+            this.div_login.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 75, 12, this.div_login.Div01,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("34");
+            		p.set_text("비밀번호 찾기");
+            		p.style.set_color("midnightblue");
+            		p.style.set_font("bold 12 Dotum");
+            		p.style.set_cursor("hand");
+
+            	}
+            );
+            this.div_login.Div01.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 553, 321, this.div_login,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("0");
+            		p.style.set_background("transparent URL('img::login_insa.png')");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.div_login.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 596, 408, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("Login");
+            		p.style.set_background("transparent");
+            		p.set_titletext("Login");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("Login.xfdl", "Lib::common.xjs");
+        this.registerScript("Login.xfdl", function() {
+        /***********************************************************************************
+        * SYSTEM      : 넥사크로플랫폼 PackageB
+        * BUSINESS    : 넥사크로플랫폼 PackageB
+        * FILE NAME   : Login.xfdl
+        * PROGRAMMER  : 
+        * DATE        : 
+        * DESCRIPTION : 로그인 화면
+        *------------------------------------------------------------------
+        * MODIFY DATE   PROGRAMMER			DESCRIPTION
+        *------------------------------------------------------------------
+        * 
+        *------------------------------------------------------------------
+        ***********************************************************************************/
+
+        /***********************************************************************************
+        * Common Library
+        ***********************************************************************************/
+        //include "Lib::common.xjs";
+
+        
+        /***********************************************************************************
+        * Global/Local Variable
+        ***********************************************************************************/
+
+        
+        /***********************************************************************************
+        * Form Event
+        ***********************************************************************************/
+        /**
+         * form onload 함수
+         * @return 
+         * @example
+         *
+         * @memberOf this
+         */
+        this.form_onload = function (obj,e)
+        {
+        	if(nexacro.Browser == "Runtime") this.div_login.btn_close.set_visible(true);
+
+        	Iject.formOnload(obj);
+        	this.form_onsize();
+        }
+
+         
+        /***********************************************************************************
+        * User Function
+        ***********************************************************************************/
+
+        /**
+        * form onsize
+        * @return 
+        * @example
+        * @memberOf public
+        */ 
+        this.form_onsize = function()
+        {
+          	if(nexacro.Browser == "Runtime") return;
+
+          	var nLeft = (application.mainframe.width / 2) - Math.round((this.div_login.getOffsetWidth()) / 2);
+          	var nTop = (application.mainframe.height / 2) - Math.round((this.div_login.getOffsetHeight()) / 2);
+
+        	if(nLeft <= 0)
+        	{
+        		this.div_login.setOffsetLeft(0);
+        	}
+        	else
+        	{
+            	this.div_login.setOffsetLeft(nLeft);
+        		this.div_login.setOffsetTop(nTop);
+        	}
+        }
+
+        
+        /***********************************************************************************
+        * Component Event
+        ***********************************************************************************/
+        this.btn_login_onclick = function(obj,e)
+        {
+
+        		this.fn_login();
+           
+        }
+
+        
+
+        //일반 login function
+        this.fn_login = function()
+        {
+        	this.ds_idpw.clearData();
+        	application.gds_User.clearData();
+        	
+        	// id 입력 안했을때
+        	if(this.gfn_IsNull(this.div_login.txt_userId.value)){
+        		this.alert("ID를 입력해주시기 바랍니다.");
+        		return;
+        	}
+        	// pw 입력 안했을때
+        	if(this.gfn_IsNull(this.div_login.txt_userPwd.value)){
+        		this.alert("비밀번호를 입력해주시기 바랍니다.");
+        		return;
+        	}
+        	
+        	var idValue = this.gfn_Trim(this.div_login.txt_userId.value);
+        	var pwdValue = this.gfn_Trim(this.div_login.txt_userPwd.value);
+        	
+        	var strParam = "emp_id=" + idValue + " emp_pw=" + pwdValue;
+        	
+        	this.transaction(
+        						"loginCheck",
+        						"http://localhost:8080/nexacro-egov/administrator/login.do",
+        						"",
+        						"ds_idpw=ds_output",
+        						strParam,
+        						"transaction_callback"
+        						);
+        	
+        }
+
+        // 트랜잭션 콜백
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		return;
+        	}
+        	
+        	if(sSvcId == "loginCheck"){
+        		
+        		var msg = this.ds_idpw.getColumn(this.ds_idpw.rowposition, "msg");
+        	
+        		if(msg == "ok"){
+
+        			var emp_id = this.ds_idpw.getColumn(this.ds_idpw.rowposition, "emp_id");
+        			var emp_no = this.ds_idpw.getColumn(this.ds_idpw.rowposition, "emp_no");
+        			
+        			application.gds_User.addRow();
+        			application.gds_User.setColumn(application.gds_User.rowposition, "name", emp_id);
+        			application.gds_User.setColumn(application.gds_User.rowposition, "id", emp_no);
+        			application.gds_User.setColumn(application.gds_User.rowposition, "sabun", emp_no);
+        								
+        					
+        			trace("gds_User : "+application.gds_User.getColumn(application.gds_User.rowposition, "name"));
+
+        			var oArgs = "close";
+        			trace("확인 :: "+ typeof Iject.popClose);
+        			Iject.popClose(this,oArgs);		
+
+        
+        				
+
+        		}else if(msg == "password"){
+        			this.null_text("아이디나 암호를 확인해주세요");
+        		}else if(msg == "none"){
+        			this.null_text("아이디가 존재하지 않습니다.");
+        		}
+        	}//end login_callback
+        	
+
+        }//end callback 함수	
+
+        // 경고창 및 edit component set null
+        this.null_text = function(msg)
+        {
+        	this.alert(msg);
+        	this.div_login.txt_userId.set_value(null);
+        	this.div_login.txt_userPwd.set_value(null);
+        	this.div_login.txt_userId.setFocus();
+        }
+
+        
+        /**
+        * 프레임 open
+        * @return 
+        * @example
+        * @memberOf public
+        */ 
+
+        this.fn_menuOpen = function()
+        {
+            gv_vFrameSet.set_separatesize("0,*,42");
+            gv_workFrame.frames["MainForm"].setFocus();
+        }
+
+        
+        this.Login_onsize = function(obj,e)
+        {
+             this.form_onsize(e.cx, e.cy);
+        }
+
+        this.fn_close = function(obj,e)
+        {
+        	application.exit();
+        }
+
+        this.login_onkeydown = function(obj,e)
+        {
+        	if(e.keycode == 13)
+        	{
+        		this.btn_login_onclick();
+        	}
+        }
+
+        this.div_login.Div00_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	 var newChild = new ChildFrame;
+        	 newChild.init("idSearch"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::idSearch.xfdl");
+        					
+        	newChild.set_openalign("center middle");
+        	newChild.set_dragmovetype("all");
+        	
+        	system.showModalWindow(newChild, 
+        							"idSearchModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+
+        
+        this.div_login.Div01_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	 var newChild = new ChildFrame;
+        	 newChild.init("pwSearch"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::pwSearch.xfdl");
+        					
+        	newChild.set_openalign("center middle");
+        	newChild.set_dragmovetype("all");
+        	
+        	system.showModalWindow(newChild, 
+        							"pwSearchModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        }
+
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.addEventHandler("onsize", this.Login_onsize, this);
+            this.div_login.txt_userId.addEventHandler("oneditclick", this.div_login_txt_userId_oneditclick, this);
+            this.div_login.txt_userPwd.addEventHandler("onkeydown", this.login_onkeydown, this);
+            this.div_login.btn_close.addEventHandler("onclick", this.fn_close, this);
+            this.div_login.Div00.addEventHandler("onclick", this.div_login.Div00_onclick, this);
+            this.div_login.Div01.addEventHandler("onclick", this.div_login.Div01_onclick, this);
+            this.div_login.btn_login.addEventHandler("onclick", this.btn_login_onclick, this);
+            this.div_login.btn_login.addEventHandler("onkeyup", this.div_login_btn_login_onkeyup, this);
+
+        };
+
+        this.loadIncludeScript("Login.xfdl");
+
+       
+    };
+}
+)();

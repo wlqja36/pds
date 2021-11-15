@@ -1,0 +1,1316 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Pattern_01");
+                this.set_titletext("SingleDetail");
+                this._setFormPosition(0,0,800,567);
+            }
+            this.getSetter("inheritanceid").set("");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj.set_firefirstcount("0");
+            obj.getSetter("firenextcount").set("0");
+            obj.set_useclientlayout("false");
+            obj.set_updatecontrol("true");
+            obj.set_enableevent("true");
+            obj.set_loadkeymode("keep");
+            obj.set_loadfiltermode("keep");
+            obj.set_reversesubsum("false");
+            obj._setContents("<ColumnInfo><ConstColumn id=\"PageIndex\" type=\"INT\" size=\"30\" value=\"1\"/><ConstColumn id=\"PageSize\" type=\"INT\" size=\"30\" value=\"5\"/><ConstColumn id=\"PageUnit\" type=\"INT\" size=\"30\" value=\"5\"/><Column id=\"searchCondition\" type=\"STRING\" size=\"100\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"100\"/></ColumnInfo><Rows><Row><Col id=\"searchKeyword\">홍길동</Col><Col id=\"searchCondition\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_user", this);
+            obj.set_firefirstcount("0");
+            obj.getSetter("firenextcount").set("0");
+            obj.set_useclientlayout("false");
+            obj.set_updatecontrol("true");
+            obj.set_enableevent("true");
+            obj.set_loadkeymode("keep");
+            obj.set_loadfiltermode("keep");
+            obj.set_reversesubsum("false");
+            obj._setContents("<ColumnInfo><Column id=\"userId\" type=\"STRING\" size=\"256\"/><Column id=\"password\" type=\"STRING\" size=\"256\"/><Column id=\"userName\" type=\"STRING\" size=\"256\"/><Column id=\"enName\" type=\"STRING\" size=\"256\"/><Column id=\"email\" type=\"STRING\" size=\"256\"/><Column id=\"phone\" type=\"DATE\" size=\"256\"/><Column id=\"cellPhone\" type=\"STRING\" size=\"256\"/><Column id=\"zipCode\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_carrer", this);
+            obj._setContents("<ColumnInfo><Column id=\"JOIN_DATE\" type=\"STRING\" size=\"256\"/><Column id=\"RETIRE_DATE\" type=\"STRING\" size=\"256\"/><Column id=\"COMPANY_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"POSITION\" type=\"STRING\" size=\"256\"/><Column id=\"DEPT_NAME\" type=\"STRING\" size=\"256\"/><Column id=\"RETIRE_REASON\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("div_search", "absolute", "0", "0", null, "41", "0", null, this);
+            obj.set_taborder("16");
+            obj.set_scrollbars("none");
+            obj.set_cssclass("div_WF_searchBg");
+            this.addChild(obj.name, obj);
+            obj = new Static("st_searchCondition", "absolute", "20", "0", "64", "41", null, null, this.div_search);
+            obj.set_taborder("24");
+            obj.set_text("사용자");
+            obj.set_cssclass("sta_WF_schTitle");
+            obj.getSetter("domainId").set("nexa.s_condition");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Edit("edt_searchKeyword", "absolute", "9.52%", "10", null, "20", "57.89%", null, this.div_search);
+            obj.set_taborder("29");
+            obj.set_value("홍길동");
+            this.div_search.addChild(obj.name, obj);
+            obj = new Button("Button05", "absolute", null, "3", "58", "25", "4", null, this.div_search);
+            obj.set_taborder("30");
+            obj.set_text("조회");
+            obj.set_cssclass("btn_WF_Search");
+            this.div_search.addChild(obj.name, obj);
+
+            obj = new Div("div_grid_top", "absolute", "0", "31", null, "23", "0", null, this);
+            obj.set_taborder("17");
+            obj.set_scrollbars("none");
+            this.addChild(obj.name, obj);
+            obj = new Button("btn_add", "absolute", null, "0", "50", "23", "160", null, this.div_grid_top);
+            obj.set_taborder("27");
+            obj.set_text("추가");
+            obj.set_cssclass("btn_WF_CRUD");
+            obj.getSetter("domainId").set("nexa.add");
+            this.div_grid_top.addChild(obj.name, obj);
+            obj = new Button("btn_delete", "absolute", null, "0", "50", "23", "107", null, this.div_grid_top);
+            obj.set_taborder("28");
+            obj.set_text("삭제");
+            obj.set_cssclass("btn_WF_CRUD");
+            obj.getSetter("domainId").set("nexa.delete");
+            this.div_grid_top.addChild(obj.name, obj);
+            obj = new Button("btn_save", "absolute", null, "0", "50", "23", "1", null, this.div_grid_top);
+            obj.set_taborder("29");
+            obj.set_text("저장");
+            obj.set_cssclass("btn_WF_CRUD");
+            obj.getSetter("domainId").set("nexa.save");
+            this.div_grid_top.addChild(obj.name, obj);
+            obj = new Button("btn_reset", "absolute", null, "0", "50", "23", "54", null, this.div_grid_top);
+            obj.set_taborder("30");
+            obj.set_text("리셋");
+            obj.set_cssclass("btn_WF_CRUD");
+            obj.getSetter("domainId").set("nexa.reset");
+            this.div_grid_top.addChild(obj.name, obj);
+
+            obj = new Div("divInput", "absolute", "0", "63", null, null, "0", "-375", this);
+            obj.set_taborder("18");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+            obj = new Static("stc_EMP_NO", "absolute", "27", "16", "100", "30", null, null, this.divInput);
+            obj.set_taborder("25");
+            obj.set_text("사원번호");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_EMP_NO", "absolute", "142", "16", "100", "30", null, null, this.divInput);
+            obj.set_taborder("33");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_EMP_NAME", "absolute", "257", "16", "100", "30", null, null, this.divInput);
+            obj.set_taborder("34");
+            obj.set_text("성명");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_EMP_NAME", "absolute", "372", "16", "100", "30", null, null, this.divInput);
+            obj.set_taborder("35");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_MGR_NO", "absolute", "487", "16", "100", "30", null, null, this.divInput);
+            obj.set_taborder("36");
+            obj.set_text("관리자번호");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_MGR_NO", "absolute", "602", "16", "100", "30", null, null, this.divInput);
+            obj.set_taborder("37");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_CURRENT_CLASS_CODE", "absolute", "142", "64", "100", "30", null, null, this.divInput);
+            obj.set_taborder("39");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_CURRENT_CODE", "absolute", "257", "64", "100", "30", null, null, this.divInput);
+            obj.set_taborder("40");
+            obj.set_text("재직코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_CURRENT_CODE", "absolute", "372", "64", "100", "30", null, null, this.divInput);
+            obj.set_taborder("41");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_GRADE_CLASS_CODE", "absolute", "487", "64", "100", "30", null, null, this.divInput);
+            obj.set_taborder("42");
+            obj.set_text("직급클래스코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_GRADE_CLASS_CODE", "absolute", "602", "64", "100", "30", null, null, this.divInput);
+            obj.set_taborder("43");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_GRADE_CODE", "absolute", "27", "107", "100", "30", null, null, this.divInput);
+            obj.set_taborder("44");
+            obj.set_text("직급코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_GRADE_CODE", "absolute", "142", "107", "100", "30", null, null, this.divInput);
+            obj.set_taborder("45");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_DEPT_CLASS_CODE", "absolute", "257", "107", "100", "30", null, null, this.divInput);
+            obj.set_taborder("46");
+            obj.set_text("부서클래스코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_DEPT_CLASS_CODE", "absolute", "372", "107", "100", "30", null, null, this.divInput);
+            obj.set_taborder("47");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_DEPT_CODE", "absolute", "487", "107", "100", "30", null, null, this.divInput);
+            obj.set_taborder("48");
+            obj.set_text("부서코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_DEPT_CODE", "absolute", "602", "107", "100", "30", null, null, this.divInput);
+            obj.set_taborder("49");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_EMP_ID", "absolute", "27", "155", "100", "30", null, null, this.divInput);
+            obj.set_taborder("50");
+            obj.set_text("사원 ID");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_EMP_ID", "absolute", "142", "155", "100", "30", null, null, this.divInput);
+            obj.set_taborder("51");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_EMP_PW", "absolute", "257", "155", "100", "30", null, null, this.divInput);
+            obj.set_taborder("52");
+            obj.set_text("사원PW");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_EMP_PW", "absolute", "372", "155", "100", "30", null, null, this.divInput);
+            obj.set_taborder("53");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_LAST_LOGIN", "absolute", "487", "155", "100", "30", null, null, this.divInput);
+            obj.set_taborder("54");
+            obj.set_text("최종접속시간");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_LAST_LOGIN", "absolute", "602", "155", "100", "30", null, null, this.divInput);
+            obj.set_taborder("55");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_ENG_NAME", "absolute", "23", "199", "100", "30", null, null, this.divInput);
+            obj.set_taborder("56");
+            obj.set_text("영문성명");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_ENG_NAME", "absolute", "138", "199", "100", "30", null, null, this.divInput);
+            obj.set_taborder("57");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_RESIDENT_NO", "absolute", "253", "199", "100", "30", null, null, this.divInput);
+            obj.set_taborder("58");
+            obj.set_text("주민등록번호");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_RESIDENT_NO", "absolute", "368", "199", "100", "30", null, null, this.divInput);
+            obj.set_taborder("59");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_HOUSEHOLDER", "absolute", "483", "199", "100", "30", null, null, this.divInput);
+            obj.set_taborder("60");
+            obj.set_text("세대주여부");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_HOUSEHOLDER", "absolute", "598", "199", "100", "30", null, null, this.divInput);
+            obj.set_taborder("61");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_JOIN_DATE", "absolute", "23", "247", "100", "30", null, null, this.divInput);
+            obj.set_taborder("62");
+            obj.set_text("입사일자");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_JOIN_DATE", "absolute", "138", "247", "100", "30", null, null, this.divInput);
+            obj.set_taborder("63");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_PHONE", "absolute", "253", "247", "100", "30", null, null, this.divInput);
+            obj.set_taborder("64");
+            obj.set_text("전화번호");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_PHONE", "absolute", "368", "247", "100", "30", null, null, this.divInput);
+            obj.set_taborder("65");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_CELL_PHONE", "absolute", "483", "247", "100", "30", null, null, this.divInput);
+            obj.set_taborder("66");
+            obj.set_text("휴대폰번호");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_CELL_PHONE", "absolute", "598", "247", "100", "30", null, null, this.divInput);
+            obj.set_taborder("67");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_EMAIL", "absolute", "23", "290", "100", "30", null, null, this.divInput);
+            obj.set_taborder("68");
+            obj.set_text("이메일");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_EMAIL", "absolute", "138", "290", "100", "30", null, null, this.divInput);
+            obj.set_taborder("69");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_ADDRESS", "absolute", "253", "290", "100", "30", null, null, this.divInput);
+            obj.set_taborder("70");
+            obj.set_text("주소");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_ADDRESS", "absolute", "368", "290", "100", "30", null, null, this.divInput);
+            obj.set_taborder("71");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_RELIGION", "absolute", "483", "290", "100", "30", null, null, this.divInput);
+            obj.set_taborder("72");
+            obj.set_text("종교");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_RELIGION", "absolute", "598", "290", "100", "30", null, null, this.divInput);
+            obj.set_taborder("73");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_IMAGE", "absolute", "23", "338", "100", "30", null, null, this.divInput);
+            obj.set_taborder("74");
+            obj.set_text("사진");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_IMAGE", "absolute", "138", "338", "100", "30", null, null, this.divInput);
+            obj.set_taborder("75");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_JOIN_CLASS_CODE", "absolute", "253", "338", "100", "30", null, null, this.divInput);
+            obj.set_taborder("76");
+            obj.set_text("입사구분클래스코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_JOIN_CLASS_CODE", "absolute", "368", "338", "100", "30", null, null, this.divInput);
+            obj.set_taborder("77");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_JOIN_CODE", "absolute", "483", "338", "100", "30", null, null, this.divInput);
+            obj.set_taborder("78");
+            obj.set_text("입사구분코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_JOIN_CODE", "absolute", "598", "338", "100", "30", null, null, this.divInput);
+            obj.set_taborder("79");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_HOUSEHOLDER_NAME", "absolute", "23", "378", "100", "30", null, null, this.divInput);
+            obj.set_taborder("80");
+            obj.set_text("세대주성명");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_HOUSEHOLDER_NAME", "absolute", "138", "378", "100", "30", null, null, this.divInput);
+            obj.set_taborder("81");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_HOUSEHOLDER_RELATION", "absolute", "253", "378", "100", "30", null, null, this.divInput);
+            obj.set_taborder("82");
+            obj.set_text("세대주와의 관계");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_HOUSEHOLDER_RELATION", "absolute", "368", "378", "100", "30", null, null, this.divInput);
+            obj.set_taborder("83");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_REGISTRATION_ADDRESS", "absolute", "483", "378", "100", "30", null, null, this.divInput);
+            obj.set_taborder("84");
+            obj.set_text("주민등록상 주소");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_REGISTRATION_ADDRESS", "absolute", "598", "378", "100", "30", null, null, this.divInput);
+            obj.set_taborder("85");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_BIRTH", "absolute", "23", "426", "100", "30", null, null, this.divInput);
+            obj.set_taborder("86");
+            obj.set_text("생년월일");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_BIRTH", "absolute", "138", "426", "100", "30", null, null, this.divInput);
+            obj.set_taborder("87");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_MARRIAGE", "absolute", "253", "426", "100", "30", null, null, this.divInput);
+            obj.set_taborder("88");
+            obj.set_text("결혼여부");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_MARRIAGE", "absolute", "368", "426", "100", "30", null, null, this.divInput);
+            obj.set_taborder("89");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Static("stc_MARRIAGE_DATE", "absolute", "483", "426", "100", "30", null, null, this.divInput);
+            obj.set_taborder("90");
+            obj.set_text("결혼기념일");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Edit("edt_MARRIAGE_DATE", "absolute", "598", "426", "100", "30", null, null, this.divInput);
+            obj.set_taborder("91");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Tab("Tab00", "absolute", "17", "552", null, null, "3", "-447", this.divInput);
+            obj.set_taborder("92");
+            obj.set_tabindex("0");
+            obj.set_scrollbars("autoboth");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Tabpage("tabpage1", this.divInput.Tab00);
+            obj.set_text("Tab 01");
+            this.divInput.Tab00.addChild(obj.name, obj);
+            obj = new Div("div_Detail", "absolute", "0", "9", null, "372", "0", null, this.divInput.Tab00.tabpage1);
+            obj.set_taborder("0");
+            obj.set_scrollbars("none");
+            this.divInput.Tab00.tabpage1.addChild(obj.name, obj);
+            obj = new Static("Static41", "absolute", "0", "141", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("151");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static00", "absolute", "0", "1", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("152");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static01", "absolute", "0", "29", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("153");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static02", "absolute", "0", "57", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("154");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static03", "absolute", "0", "85", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("155");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static04", "absolute", "0", "113", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("156");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static05", "absolute", "0", "169", null, "29", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("157");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static06", "absolute", "0", "1", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("158");
+            obj.set_text("Edit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static07", "absolute", "0", "29", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("159");
+            obj.set_text("Combo");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static08", "absolute", "0", "85", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("160");
+            obj.set_text("Spin");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static09", "absolute", "0", "57", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("161");
+            obj.set_text("Calendar");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static10", "absolute", "0", "141", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("162");
+            obj.set_text("MaskEdit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static11", "absolute", "0", "113", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("163");
+            obj.set_text("CheckBox");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static12", "absolute", "0", "284", null, "88", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("164");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static13", "absolute", "0", "197", null, "88", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("165");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static14", "absolute", "0", "0", "0", "0", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("166");
+            obj.set_cssclass("sta_WF_DetailLabel02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static15", "absolute", "0", "169", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("167");
+            obj.set_text("Radio");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static16", "absolute", "0", "197", "107", "88", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("168");
+            obj.set_text("TextArea");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static17", "absolute", "0", "284", "107", "88", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("169");
+            obj.set_text("TextArea");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static19", "absolute", "254", "1", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("170");
+            obj.set_text("Edit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static20", "absolute", "254", "29", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("171");
+            obj.set_text("Combo");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static21", "absolute", "254", "57", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("172");
+            obj.set_text("Calendar");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static22", "absolute", "254", "85", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("173");
+            obj.set_text("Spin");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static23", "absolute", "254", "113", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("174");
+            obj.set_text("CheckBox");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static24", "absolute", "254", "141", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("175");
+            obj.set_text("MaskEdit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static25", "absolute", "254", "169", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("176");
+            obj.set_text("Radio");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("MaskEdit00", "absolute", "110", "145", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("177");
+            obj.set_displaynulltext("123,456,789");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Radio("Radio00", "absolute", "110", "173", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            var Radio00_innerdataset = new Dataset("Radio00_innerdataset", this.divInput.Tab00.tabpage1.div_Detail.Radio00);
+            Radio00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">선택01</Col></Row><Row><Col id=\"codecolumn\">2</Col><Col id=\"datacolumn\">선택02</Col></Row></Rows>");
+            obj.set_innerdataset(Radio00_innerdataset);
+            obj.set_taborder("178");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_value("2");
+            obj.set_direction("vertical");
+            obj.set_index("1");
+            obj = new Spin("Spin00", "absolute", "110", "89", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("179");
+            obj.set_value("987");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Calendar("Calendar00", "absolute", "110", "61", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("180");
+            obj.set_displaynulltext("2015-00-00");
+            obj = new Combo("Combo00", "absolute", "110", "33", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("181");
+            obj.set_text("전체선택");
+            obj = new Edit("Edit00", "absolute", "110", "5", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("182");
+            obj.set_displaynulltext("Enabled");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox01", "absolute", "180", "118", "71", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("183");
+            obj.set_text("체크02");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox00", "absolute", "110", "118", "71", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("184");
+            obj.set_text("체크01");
+            obj.set_value("true");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("MaskEdit01", "absolute", "364", "145", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("185");
+            obj.set_displaynulltext("123,456,789");
+            obj.set_cssclass("essential");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Radio("Radio01", "absolute", "364", "173", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            var Radio01_innerdataset = new Dataset("Radio01_innerdataset", this.divInput.Tab00.tabpage1.div_Detail.Radio01);
+            Radio01_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">선택01</Col></Row><Row><Col id=\"codecolumn\">2</Col><Col id=\"datacolumn\">선택02</Col></Row></Rows>");
+            obj.set_innerdataset(Radio01_innerdataset);
+            obj.set_taborder("186");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_value("2");
+            obj.set_direction("vertical");
+            obj.set_cssclass("essential");
+            obj.set_index("1");
+            obj = new Spin("Spin01", "absolute", "364", "89", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("187");
+            obj.set_value("987");
+            obj.set_cssclass("essential");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Calendar("Calendar01", "absolute", "364", "61", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("188");
+            obj.set_displaynulltext("2015-00-00");
+            obj.set_cssclass("essential");
+            obj = new Combo("Combo01", "absolute", "364", "33", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("189");
+            obj.set_text("전체선택");
+            obj.set_cssclass("essential");
+            obj = new Edit("Edit01", "absolute", "364", "5", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("190");
+            obj.set_displaynulltext("Enabled");
+            obj.set_cssclass("essential");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox02", "absolute", "434", "118", "71", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("191");
+            obj.set_text("체크02");
+            obj.set_cssclass("essential");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox03", "absolute", "364", "118", "71", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("192");
+            obj.set_text("체크01");
+            obj.set_value("true");
+            obj.set_cssclass("essential");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("MaskEdit02", "absolute", "618", "145", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("193");
+            obj.set_displaynulltext("123,456,789");
+            obj.set_cssclass("readonly");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Radio("Radio02", "absolute", "618", "173", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            var Radio02_innerdataset = new Dataset("Radio02_innerdataset", this.divInput.Tab00.tabpage1.div_Detail.Radio02);
+            Radio02_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">선택01</Col></Row><Row><Col id=\"codecolumn\">2</Col><Col id=\"datacolumn\">선택02</Col></Row></Rows>");
+            obj.set_innerdataset(Radio02_innerdataset);
+            obj.set_taborder("194");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_value("2");
+            obj.set_direction("vertical");
+            obj.set_cssclass("readonly");
+            obj.set_index("1");
+            obj = new Spin("Spin02", "absolute", "618", "89", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("195");
+            obj.set_value("987");
+            obj.set_cssclass("readonly");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Calendar("Calendar02", "absolute", "618", "61", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("196");
+            obj.set_displaynulltext("2015-00-00");
+            obj.set_cssclass("readonly");
+            obj = new Combo("Combo02", "absolute", "618", "33", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("197");
+            obj.set_text("전체선택");
+            obj.set_cssclass("readonly");
+            obj = new Edit("Edit02", "absolute", "618", "5", "141", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("198");
+            obj.set_displaynulltext("Enabled");
+            obj.set_cssclass("readonly");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox04", "absolute", "688", "118", "71", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("199");
+            obj.set_text("체크02");
+            obj.set_cssclass("readonly");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox05", "absolute", "618", "118", "71", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("200");
+            obj.set_text("체크01");
+            obj.set_value("true");
+            obj.set_cssclass("readonly");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static18", "absolute", "508", "1", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("201");
+            obj.set_text("Edit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static26", "absolute", "508", "29", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("202");
+            obj.set_text("Combo");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static27", "absolute", "508", "57", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("203");
+            obj.set_text("Calendar");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static28", "absolute", "508", "85", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("204");
+            obj.set_text("Spin");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static29", "absolute", "508", "113", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("205");
+            obj.set_text("CheckBox");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static30", "absolute", "508", "141", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("206");
+            obj.set_text("MaskEdit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static31", "absolute", "508", "169", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("207");
+            obj.set_text("Radio");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new MaskEdit("MaskEdit03", "absolute", "872", "145", "134", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("208");
+            obj.set_displaynulltext("123,456,789");
+            obj.set_enable("false");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Radio("Radio03", "absolute", "872", "173", "134", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            var Radio03_innerdataset = new Dataset("Radio03_innerdataset", this.divInput.Tab00.tabpage1.div_Detail.Radio03);
+            Radio03_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">선택01</Col></Row><Row><Col id=\"codecolumn\">2</Col><Col id=\"datacolumn\">선택02</Col></Row></Rows>");
+            obj.set_innerdataset(Radio03_innerdataset);
+            obj.set_taborder("209");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_value("2");
+            obj.set_direction("vertical");
+            obj.set_enable("false");
+            obj.set_index("1");
+            obj = new Spin("Spin03", "absolute", "872", "89", "134", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("210");
+            obj.set_value("987");
+            obj.set_enable("false");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Calendar("Calendar03", "absolute", "872", "61", "134", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("211");
+            obj.set_displaynulltext("2015-00-00");
+            obj.set_enable("false");
+            obj = new Combo("Combo03", "absolute", "872", "33", "134", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj.set_taborder("212");
+            obj.set_text("전체선택");
+            obj.set_enable("false");
+            obj = new Edit("Edit03", "absolute", "872", "5", "134", "21", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("213");
+            obj.set_displaynulltext("Enabled");
+            obj.set_enable("false");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox06", "absolute", "936", "118", "70", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("214");
+            obj.set_text("체크02");
+            obj.set_enable("false");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new CheckBox("CheckBox07", "absolute", "872", "118", "65", "20", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("215");
+            obj.set_text("체크01");
+            obj.set_value("true");
+            obj.set_enable("false");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static32", "absolute", "762", "1", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("216");
+            obj.set_text("Edit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static33", "absolute", "762", "29", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("217");
+            obj.set_text("Combo");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static34", "absolute", "762", "57", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("218");
+            obj.set_text("Calendar");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static35", "absolute", "762", "85", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("219");
+            obj.set_text("Spin");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static36", "absolute", "762", "113", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("220");
+            obj.set_text("CheckBox");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static37", "absolute", "762", "141", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("221");
+            obj.set_text("MaskEdit");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static38", "absolute", "762", "169", "107", "29", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("222");
+            obj.set_text("Radio");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static39", "absolute", "508", "197", "107", "88", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("223");
+            obj.set_text("TextArea");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static40", "absolute", "508", "284", "107", "88", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("224");
+            obj.set_text("TextArea");
+            obj.set_cssclass("sta_WF_DetailLabel01");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new TextArea("TextArea00", "absolute", "110", "201", "395", "80", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("225");
+            obj.set_displaynulltext("가나다라마바사");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new TextArea("TextArea01", "absolute", "110", "288", "395", "80", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("226");
+            obj.set_displaynulltext("가나다라마바사");
+            obj.set_cssclass("readonly");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new TextArea("TextArea02", "absolute", "618", "288", "388", "80", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("227");
+            obj.set_displaynulltext("가나다라마바사");
+            obj.set_enable("false");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new TextArea("TextArea03", "absolute", "618", "201", "388", "80", null, null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("228");
+            obj.set_displaynulltext("가나다라마바사");
+            obj.set_cssclass("essential");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Static("Static42", "absolute", "0", "0", null, "2", "0", null, this.divInput.Tab00.tabpage1.div_Detail);
+            obj.set_taborder("229");
+            obj.set_cssclass("sta_WF_DetailLine");
+            this.divInput.Tab00.tabpage1.div_Detail.addChild(obj.name, obj);
+            obj = new Tabpage("tabpage2", this.divInput.Tab00);
+            obj.set_text("Tab 02");
+            this.divInput.Tab00.addChild(obj.name, obj);
+            obj = new Static("stc_CURRENT_CLASS_CODE", "absolute", "27", "64", "100", "30", null, null, this.divInput);
+            obj.set_taborder("93");
+            obj.set_text("재직클래스코드");
+            obj.style.set_background("lavender URL('img::ico_bullet.gif') left middle");
+            obj.style.set_padding("1px 1px 1px 10");
+            obj.style.set_font("9 Dotum");
+            obj.getSetter("class").set("sub_title");
+            this.divInput.addChild(obj.name, obj);
+            obj = new Grid("Grid00", "absolute", "4.08%", "620", null, "372", "-0.76%", null, this.divInput);
+            obj.set_taborder("94");
+            obj.set_binddataset("ds_carrer");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row band=\"head\" size=\"24\"/><Row band=\"body\" size=\"24\"/></Rows><Band id=\"head\"><Cell col=\"0\" disptype=\"normal\" text=\"JOIN_DATE\"/><Cell col=\"1\" disptype=\"normal\" text=\"RETIRE_DATE\"/><Cell col=\"2\" disptype=\"normal\" text=\"COMPANY_NAME\"/><Cell col=\"3\" disptype=\"normal\" text=\"POSITION\"/><Cell col=\"4\" disptype=\"normal\" text=\"DEPT_NAME\"/><Cell col=\"5\" disptype=\"normal\" text=\"RETIRE_REASON\"/></Band><Band id=\"body\"><Cell col=\"0\" disptype=\"normal\" text=\"bind:JOIN_DATE\"/><Cell col=\"1\" disptype=\"normal\" text=\"bind:RETIRE_DATE\"/><Cell col=\"2\" disptype=\"normal\" text=\"bind:COMPANY_NAME\"/><Cell col=\"3\" disptype=\"normal\" text=\"bind:POSITION\"/><Cell col=\"4\" disptype=\"normal\" text=\"bind:DEPT_NAME\"/><Cell col=\"5\" disptype=\"normal\" text=\"bind:RETIRE_REASON\"/></Band></Format></Formats>");
+            this.divInput.addChild(obj.name, obj);
+
+            obj = new Static("stc_detail", "absolute", "2.13%", "36", null, "20", "77%", null, this);
+            obj.set_taborder("21");
+            obj.set_text("상세정보");
+            obj.set_cssclass("sta_WF_title");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 800, 41, this.div_search,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("16");
+            		p.set_scrollbars("none");
+            		p.set_cssclass("div_WF_searchBg");
+
+            	}
+            );
+            this.div_search.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 23, this.div_grid_top,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("17");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.div_grid_top.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 372, this.divInput.Tab00.tabpage1.div_Detail,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("0");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.divInput.Tab00.tabpage1.div_Detail.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 0, this.divInput.Tab00.tabpage1,
+            	//-- Layout function
+            	function(p) {
+            		p.set_text("Tab 01");
+
+            	}
+            );
+            this.divInput.Tab00.tabpage1.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 800, 879, this.divInput,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("18");
+            		p.style.set_border("1 solid #808080ff");
+
+            	}
+            );
+            this.divInput.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 800, 567, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("Work");
+            		p.getSetter("inheritanceid").set("");
+            		p.set_titletext("SingleDetail");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item18","div_search.edt_searchKeyword","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","divInput.edt_EMP_NO","value","ds_user","EMP_NO");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","divInput.edt_EMP_NAME","value","ds_user","EMP_NAME");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","divInput.edt_MGR_NO","value","ds_user","MGR_NO");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","divInput.edt_CURRENT_CLASS_CODE","value","ds_user","CURRENT_CLASS_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","divInput.edt_CURRENT_CODE","value","ds_user","CURRENT_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","divInput.edt_GRADE_CLASS_CODE","value","ds_user","GRADE_CLASS_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","divInput.edt_GRADE_CODE","value","ds_user","GRADE_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","divInput.edt_DEPT_CLASS_CODE","value","ds_user","DEPT_CLASS_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","divInput.edt_DEPT_CODE","value","ds_user","DEPT_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","divInput.edt_EMP_ID","value","ds_user","EMP_ID");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","divInput.edt_EMP_PW","value","ds_user","EMP_PW");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","divInput.edt_LAST_LOGIN","value","ds_user","LAST_LOGIN");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","divInput.edt_ENG_NAME","value","ds_user","ENG_NAME");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","divInput.edt_RESIDENT_NO","value","ds_user","RESIDENT_NO");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","divInput.edt_HOUSEHOLDER","value","ds_user","HOUSEHOLDER");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item15","divInput.edt_JOIN_DATE","value","ds_user","JOIN_DATE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item16","divInput.edt_PHONE","value","ds_user","PHONE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item17","divInput.edt_CELL_PHONE","value","ds_user","CELL_PHONE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item19","divInput.edt_EMAIL","value","ds_user","EMAIL");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item20","divInput.edt_ADDRESS","value","ds_user","ADDRESS");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item21","divInput.edt_RELIGION","value","ds_user","RELIGION");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item22","divInput.edt_IMAGE","value","ds_user","IMAGE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item23","divInput.edt_JOIN_CLASS_CODE","value","ds_user","JOIN_CLASS_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item24","divInput.edt_JOIN_CODE","value","ds_user","JOIN_CODE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item25","divInput.edt_HOUSEHOLDER_NAME","value","ds_user","HOUSEHOLDER_NAME");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item26","divInput.edt_HOUSEHOLDER_RELATION","value","ds_user","HOUSEHOLDER_RELATION");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item27","divInput.edt_REGISTRATION_ADDRESS","value","ds_user","REGISTRATION_ADDRESS");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item28","divInput.edt_BIRTH","value","ds_user","BIRTH");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item29","divInput.edt_MARRIAGE","value","ds_user","MARRIAGE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item30","divInput.edt_MARRIAGE_DATE","value","ds_user","MARRIAGE_DATE");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("EMP1.xfdl", "Lib::Comm.xjs");
+        this.registerScript("EMP1.xfdl", function() {
+        /***********************************************************************************
+        * SYSTEM      : 넥사크로플랫폼 PackageB
+        * BUSINESS    : 넥사크로플랫폼 PackageB
+        * FILE NAME   : Pattern_01
+        * PROGRAMMER  : 
+        * DATE        : 
+        * DESCRIPTION : SingleDetail
+        *------------------------------------------------------------------
+        * MODIFY DATE   PROGRAMMER			DESCRIPTION
+        *------------------------------------------------------------------
+        * 
+        *------------------------------------------------------------------
+        ***********************************************************************************/
+
+        /***********************************************************************************
+        * Common Library
+        ***********************************************************************************/
+        //include "Lib::Comm.xjs";
+
+        
+        /***********************************************************************************
+        * Global/Local Variable
+        ***********************************************************************************/
+
+        
+
+        /***********************************************************************************
+        * Form Event
+        ***********************************************************************************/
+        /**
+         * form onload 함수
+         * @return 
+         * @example
+         *
+         * @memberOf this
+         */
+        this.form_onload = function(obj,e)
+        {
+        	//기본 공통  함수 초기화
+        	Iject.formOnload(obj);	
+            //this.fn_search();
+           
+        } 
+
+        
+        /**
+         * 조회처리
+         * @return 
+         * @example
+         *
+         * @memberOf Iject
+         */
+        this.fn_search = function(obj,e)
+        {
+          
+           var searchCondition =  "NAME";
+            var searchKeyword = this.div_search.edt_searchKeyword.value;       
+            
+
+        	this.ds_search.setColumn(0, "searchCondition", "NAME");
+        	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+           
+           var oDatas =  {
+        			  svcid : "search",
+        			  sController : "empSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_user=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		
+        		//alert(" this.errorcode : " + this.errorcode);
+        		
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid      : 서비스 ID
+        		*   @param : {object}    this.fobj       : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/   
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	      
+        	       var pThis = this.fobj;   //form object	      
+        	       trace(" ds_user : " + pThis.ds_user.saveXML());
+        	});
+        }
+
+        
+
+        //추가
+        this.fn_add = function(obj,e)
+        {
+        	var nRow = this.ds_user.addRow();
+        	this.div_search.edt_searchKeyword.set_value("");
+        }
+
+        //삭제
+        this.fn_delete = function(obj,e)
+        {
+        	var nRow = this.ds_user.rowposition;
+        	this.ds_user.deleteRow(nRow);
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	
+        	if(rtnValue)
+        	{
+        	
+        		this.fn_save("delete");
+        	}
+        	else
+        	{
+        		this.fn_search();
+        	}
+        }
+
+        //리셋
+        this.fn_reset = function(obj,e)
+        {
+        	this.ds_user.reset();
+        }
+
+        
+        //저장
+        this.fn_save = function(strid)
+        {
+             
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "empModifyVO.do",			 
+        			  inds :["input1=ds_user:U"],
+        			  outds :[
+        				 "ds_user=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/    
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg,"알림");			
+        		   return;
+        		}			
+        	      
+        	       var pThis = this.fobj;   //form object
+        	       
+        	      switch(this.svcid)
+        	      {
+        	         case "save" : 
+        				Iject.alert("저장완료");
+        				break;
+        				
+        	         case "dlete" : 
+        	            Iject.alert("삭제완료");
+        				break; 
+        	      }
+        	      
+        	      pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+        		  pThis.fn_search();
+        	});
+        }
+
+        
+        /**********************************************************************
+        * User Function
+        ***********************************************************************/
+
+        //저장버튼 클릭시 
+        this.div_grid_top_btn_save_onclick = function(obj,e)
+        {
+        	this.fn_save("save");
+        }
+
+        //검색  Enter키
+        this.div_search_btn_search_onclick = function(obj,e)
+        {
+        	if ( e.keycode == 13 )
+        	{
+        		this.fn_search();
+        	}
+        }
+
+        this.divInput_stc_id00_onclick = function(obj,e)
+        {
+        	
+        }
+
+        this.divInput_stc_EMP_NO_onclick = function(obj,e)
+        {
+        	
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.div_search.edt_searchKeyword.addEventHandler("onkeyup", this.div_search_btn_search_onclick, this);
+            this.div_search.Button05.addEventHandler("onclick", this.fn_search, this);
+            this.div_grid_top.btn_add.addEventHandler("onclick", this.fn_add, this);
+            this.div_grid_top.btn_delete.addEventHandler("onclick", this.fn_delete, this);
+            this.div_grid_top.btn_save.addEventHandler("onclick", this.div_grid_top_btn_save_onclick, this);
+            this.div_grid_top.btn_reset.addEventHandler("onclick", this.fn_reset, this);
+            this.divInput.stc_EMP_NO.addEventHandler("onclick", this.divInput_stc_EMP_NO_onclick, this);
+            this.divInput.edt_EMP_NO.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.stc_EMP_NAME.addEventHandler("onclick", this.divInput_stc_id00_onclick, this);
+            this.divInput.edt_EMP_NAME.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_MGR_NO.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_CURRENT_CLASS_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_CURRENT_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_GRADE_CLASS_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_GRADE_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_DEPT_CLASS_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_DEPT_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_EMP_ID.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_EMP_PW.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_LAST_LOGIN.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_ENG_NAME.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_RESIDENT_NO.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_HOUSEHOLDER.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_JOIN_DATE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_PHONE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_CELL_PHONE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_EMAIL.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_ADDRESS.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_RELIGION.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_IMAGE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_JOIN_CLASS_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_JOIN_CODE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_HOUSEHOLDER_NAME.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_HOUSEHOLDER_RELATION.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_REGISTRATION_ADDRESS.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_BIRTH.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_MARRIAGE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+            this.divInput.edt_MARRIAGE_DATE.addEventHandler("oneditclick", this.divInput_edt_id_oneditclick, this);
+
+        };
+
+        this.loadIncludeScript("EMP1.xfdl");
+
+       
+    };
+}
+)();

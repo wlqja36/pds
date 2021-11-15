@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Pattern_01" classname="Work" inheritanceid="" position="absolute" titletext="SingleDetail" left="0" width="800" top="0" height="567" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <Div id="div_search" taborder="16" left="0" top="0" right="0" height="41" scrollbars="none" cssclass="div_WF_searchBg">
+          <Layouts>
+            <Layout width="800" height="41">
+              <Static id="st_searchCondition" taborder="24" text="사용자" cssclass="sta_WF_schTitle" left="20" top="0" width="64" height="41" domainId="nexa.s_condition"/>
+              <Edit id="edt_searchKeyword" taborder="29" onkeyup="div_search_btn_search_onclick" left="9.52%" top="10" right="57.89%" height="20" value="홍길동"/>
+              <Button id="Button05" taborder="30" text="조회" onclick="fn_search" cssclass="btn_WF_Search" top="3" right="4" width="58" height="25"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="div_grid_top" taborder="17" left="0" top="31" right="0" height="23" scrollbars="none">
+          <Layouts>
+            <Layout>
+              <Button id="btn_add" taborder="27" text="추가" cssclass="btn_WF_CRUD" top="0" right="160" width="50" height="23" domainId="nexa.add" onclick="fn_add"/>
+              <Button id="btn_delete" taborder="28" text="삭제" cssclass="btn_WF_CRUD" top="0" right="107" width="50" height="23" domainId="nexa.delete" onclick="fn_delete"/>
+              <Button id="btn_save" taborder="29" text="저장" cssclass="btn_WF_CRUD" top="0" right="1" width="50" height="23" domainId="nexa.save" onclick="div_grid_top_btn_save_onclick"/>
+              <Button id="btn_reset" taborder="30" text="리셋" cssclass="btn_WF_CRUD" top="0" right="54" height="23" domainId="nexa.reset" width="50" onclick="fn_reset"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Div id="divInput" taborder="18" left="0" top="63" right="0" style="border:1 solid #808080ff ;" bottom="-375">
+          <Layouts>
+            <Layout width="800" height="879">
+              <Static id="stc_EMP_NO" taborder="25" text="사원번호" left="27" top="16" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title" width="100" onclick="divInput_stc_EMP_NO_onclick"/>
+              <Edit id="edt_EMP_NO" taborder="33" left="142" top="16" height="30" oneditclick="divInput_edt_id_oneditclick" width="100"/>
+              <Static id="stc_EMP_NAME" taborder="34" text="성명" left="257" top="16" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title" onclick="divInput_stc_id00_onclick"/>
+              <Edit id="edt_EMP_NAME" taborder="35" oneditclick="divInput_edt_id_oneditclick" left="372" top="16" width="100" height="30"/>
+              <Static id="stc_MGR_NO" taborder="36" text="관리자번호" left="487" top="16" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_MGR_NO" taborder="37" oneditclick="divInput_edt_id_oneditclick" left="602" top="16" width="100" height="30"/>
+              <Edit id="edt_CURRENT_CLASS_CODE" taborder="39" oneditclick="divInput_edt_id_oneditclick" left="142" top="64" width="100" height="30"/>
+              <Static id="stc_CURRENT_CODE" taborder="40" text="재직코드" left="257" top="64" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_CURRENT_CODE" taborder="41" oneditclick="divInput_edt_id_oneditclick" left="372" top="64" width="100" height="30"/>
+              <Static id="stc_GRADE_CLASS_CODE" taborder="42" text="직급클래스코드" left="487" top="64" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_GRADE_CLASS_CODE" taborder="43" oneditclick="divInput_edt_id_oneditclick" left="602" top="64" width="100" height="30"/>
+              <Static id="stc_GRADE_CODE" taborder="44" text="직급코드" left="27" top="107" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_GRADE_CODE" taborder="45" oneditclick="divInput_edt_id_oneditclick" left="142" top="107" width="100" height="30"/>
+              <Static id="stc_DEPT_CLASS_CODE" taborder="46" text="부서클래스코드" left="257" top="107" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_DEPT_CLASS_CODE" taborder="47" oneditclick="divInput_edt_id_oneditclick" left="372" top="107" width="100" height="30"/>
+              <Static id="stc_DEPT_CODE" taborder="48" text="부서코드" left="487" top="107" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_DEPT_CODE" taborder="49" oneditclick="divInput_edt_id_oneditclick" left="602" top="107" width="100" height="30"/>
+              <Static id="stc_EMP_ID" taborder="50" text="사원 ID" left="27" top="155" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_EMP_ID" taborder="51" oneditclick="divInput_edt_id_oneditclick" left="142" top="155" width="100" height="30"/>
+              <Static id="stc_EMP_PW" taborder="52" text="사원PW" left="257" top="155" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_EMP_PW" taborder="53" oneditclick="divInput_edt_id_oneditclick" left="372" top="155" width="100" height="30"/>
+              <Static id="stc_LAST_LOGIN" taborder="54" text="최종접속시간" left="487" top="155" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_LAST_LOGIN" taborder="55" oneditclick="divInput_edt_id_oneditclick" left="602" top="155" width="100" height="30"/>
+              <Static id="stc_ENG_NAME" taborder="56" text="영문성명" left="23" top="199" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_ENG_NAME" taborder="57" oneditclick="divInput_edt_id_oneditclick" left="138" top="199" width="100" height="30"/>
+              <Static id="stc_RESIDENT_NO" taborder="58" text="주민등록번호" left="253" top="199" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_RESIDENT_NO" taborder="59" oneditclick="divInput_edt_id_oneditclick" left="368" top="199" width="100" height="30"/>
+              <Static id="stc_HOUSEHOLDER" taborder="60" text="세대주여부" left="483" top="199" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_HOUSEHOLDER" taborder="61" oneditclick="divInput_edt_id_oneditclick" left="598" top="199" width="100" height="30"/>
+              <Static id="stc_JOIN_DATE" taborder="62" text="입사일자" left="23" top="247" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_JOIN_DATE" taborder="63" oneditclick="divInput_edt_id_oneditclick" left="138" top="247" width="100" height="30"/>
+              <Static id="stc_PHONE" taborder="64" text="전화번호" left="253" top="247" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_PHONE" taborder="65" oneditclick="divInput_edt_id_oneditclick" left="368" top="247" width="100" height="30"/>
+              <Static id="stc_CELL_PHONE" taborder="66" text="휴대폰번호" left="483" top="247" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_CELL_PHONE" taborder="67" oneditclick="divInput_edt_id_oneditclick" left="598" top="247" width="100" height="30"/>
+              <Static id="stc_EMAIL" taborder="68" text="이메일" left="23" top="290" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_EMAIL" taborder="69" oneditclick="divInput_edt_id_oneditclick" left="138" top="290" width="100" height="30"/>
+              <Static id="stc_ADDRESS" taborder="70" text="주소" left="253" top="290" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_ADDRESS" taborder="71" oneditclick="divInput_edt_id_oneditclick" left="368" top="290" width="100" height="30"/>
+              <Static id="stc_RELIGION" taborder="72" text="종교" left="483" top="290" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_RELIGION" taborder="73" oneditclick="divInput_edt_id_oneditclick" left="598" top="290" width="100" height="30"/>
+              <Static id="stc_IMAGE" taborder="74" text="사진" left="23" top="338" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_IMAGE" taborder="75" oneditclick="divInput_edt_id_oneditclick" left="138" top="338" width="100" height="30"/>
+              <Static id="stc_JOIN_CLASS_CODE" taborder="76" text="입사구분클래스코드" left="253" top="338" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_JOIN_CLASS_CODE" taborder="77" oneditclick="divInput_edt_id_oneditclick" left="368" top="338" width="100" height="30"/>
+              <Static id="stc_JOIN_CODE" taborder="78" text="입사구분코드" left="483" top="338" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_JOIN_CODE" taborder="79" oneditclick="divInput_edt_id_oneditclick" left="598" top="338" width="100" height="30"/>
+              <Static id="stc_HOUSEHOLDER_NAME" taborder="80" text="세대주성명" left="23" top="378" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_HOUSEHOLDER_NAME" taborder="81" oneditclick="divInput_edt_id_oneditclick" left="138" top="378" width="100" height="30"/>
+              <Static id="stc_HOUSEHOLDER_RELATION" taborder="82" text="세대주와의 관계" left="253" top="378" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_HOUSEHOLDER_RELATION" taborder="83" oneditclick="divInput_edt_id_oneditclick" left="368" top="378" width="100" height="30"/>
+              <Static id="stc_REGISTRATION_ADDRESS" taborder="84" text="주민등록상 주소" left="483" top="378" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_REGISTRATION_ADDRESS" taborder="85" oneditclick="divInput_edt_id_oneditclick" left="598" top="378" width="100" height="30"/>
+              <Static id="stc_BIRTH" taborder="86" text="생년월일" left="23" top="426" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_BIRTH" taborder="87" oneditclick="divInput_edt_id_oneditclick" left="138" top="426" width="100" height="30"/>
+              <Static id="stc_MARRIAGE" taborder="88" text="결혼여부" left="253" top="426" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_MARRIAGE" taborder="89" oneditclick="divInput_edt_id_oneditclick" left="368" top="426" width="100" height="30"/>
+              <Static id="stc_MARRIAGE_DATE" taborder="90" text="결혼기념일" left="483" top="426" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Edit id="edt_MARRIAGE_DATE" taborder="91" oneditclick="divInput_edt_id_oneditclick" left="598" top="426" width="100" height="30"/>
+              <Tab id="Tab00" taborder="92" left="17" top="552" right="3" bottom="-447" tabindex="0" scrollbars="autoboth">
+                <Tabpages>
+                  <Tabpage id="tabpage1" text="Tab 01">
+                    <Layouts>
+                      <Layout>
+                        <Div id="div_Detail" taborder="0" left="0" top="9" right="0" height="372" scrollbars="none">
+                          <Layouts>
+                            <Layout>
+                              <Static id="Static41" taborder="151" cssclass="sta_WF_DetailLabel02" left="0" top="141" right="0" height="29"/>
+                              <Static id="Static00" taborder="152" cssclass="sta_WF_DetailLabel02" left="0" top="1" right="0" height="29"/>
+                              <Static id="Static01" taborder="153" cssclass="sta_WF_DetailLabel02" left="0" top="29" right="0" height="29"/>
+                              <Static id="Static02" taborder="154" cssclass="sta_WF_DetailLabel02" left="0" top="57" right="0" height="29"/>
+                              <Static id="Static03" taborder="155" cssclass="sta_WF_DetailLabel02" left="0" top="85" right="0" height="29"/>
+                              <Static id="Static04" taborder="156" cssclass="sta_WF_DetailLabel02" left="0" top="113" right="0" height="29"/>
+                              <Static id="Static05" taborder="157" cssclass="sta_WF_DetailLabel02" left="0" top="169" right="0" height="29"/>
+                              <Static id="Static06" taborder="158" text="Edit" cssclass="sta_WF_DetailLabel01" left="0" top="1" width="107" height="29"/>
+                              <Static id="Static07" taborder="159" text="Combo" cssclass="sta_WF_DetailLabel01" left="0" top="29" width="107" height="29"/>
+                              <Static id="Static08" taborder="160" text="Spin" cssclass="sta_WF_DetailLabel01" left="0" top="85" width="107" height="29"/>
+                              <Static id="Static09" taborder="161" text="Calendar" cssclass="sta_WF_DetailLabel01" left="0" top="57" width="107" height="29"/>
+                              <Static id="Static10" taborder="162" text="MaskEdit" cssclass="sta_WF_DetailLabel01" left="0" top="141" width="107" height="29"/>
+                              <Static id="Static11" taborder="163" text="CheckBox" cssclass="sta_WF_DetailLabel01" left="0" top="113" width="107" height="29"/>
+                              <Static id="Static12" taborder="164" cssclass="sta_WF_DetailLabel02" left="0" top="284" right="0" height="88"/>
+                              <Static id="Static13" taborder="165" cssclass="sta_WF_DetailLabel02" left="0" top="197" right="0" height="88"/>
+                              <Static id="Static14" taborder="166" cssclass="sta_WF_DetailLabel02" left="0" top="0" width="0" height="0"/>
+                              <Static id="Static15" taborder="167" text="Radio" cssclass="sta_WF_DetailLabel01" left="0" top="169" width="107" height="29"/>
+                              <Static id="Static16" taborder="168" text="TextArea" cssclass="sta_WF_DetailLabel01" left="0" top="197" width="107" height="88"/>
+                              <Static id="Static17" taborder="169" text="TextArea" cssclass="sta_WF_DetailLabel01" left="0" top="284" width="107" height="88"/>
+                              <Static id="Static19" taborder="170" text="Edit" cssclass="sta_WF_DetailLabel01" left="254" top="1" width="107" height="29"/>
+                              <Static id="Static20" taborder="171" text="Combo" cssclass="sta_WF_DetailLabel01" left="254" top="29" width="107" height="29"/>
+                              <Static id="Static21" taborder="172" text="Calendar" cssclass="sta_WF_DetailLabel01" left="254" top="57" width="107" height="29"/>
+                              <Static id="Static22" taborder="173" text="Spin" cssclass="sta_WF_DetailLabel01" left="254" top="85" width="107" height="29"/>
+                              <Static id="Static23" taborder="174" text="CheckBox" cssclass="sta_WF_DetailLabel01" left="254" top="113" width="107" height="29"/>
+                              <Static id="Static24" taborder="175" text="MaskEdit" cssclass="sta_WF_DetailLabel01" left="254" top="141" width="107" height="29"/>
+                              <Static id="Static25" taborder="176" text="Radio" cssclass="sta_WF_DetailLabel01" left="254" top="169" width="107" height="29"/>
+                              <MaskEdit id="MaskEdit00" taborder="177" displaynulltext="123,456,789" left="110" top="145" width="141" height="21"/>
+                              <Radio id="Radio00" taborder="178" index="1" codecolumn="codecolumn" datacolumn="datacolumn" value="2" direction="vertical" left="110" top="173" width="141" height="21">
+                                <Dataset id="innerdataset">
+                                  <ColumnInfo>
+                                    <Column id="codecolumn" size="256"/>
+                                    <Column id="datacolumn" size="256"/>
+                                  </ColumnInfo>
+                                  <Rows>
+                                    <Row>
+                                      <Col id="codecolumn">1</Col>
+                                      <Col id="datacolumn">선택01</Col>
+                                    </Row>
+                                    <Row>
+                                      <Col id="codecolumn">2</Col>
+                                      <Col id="datacolumn">선택02</Col>
+                                    </Row>
+                                  </Rows>
+                                </Dataset>
+                              </Radio>
+                              <Spin id="Spin00" taborder="179" value="987" left="110" top="89" width="141" height="21"/>
+                              <Calendar id="Calendar00" taborder="180" displaynulltext="2015-00-00" left="110" top="61" width="141" height="21"/>
+                              <Combo id="Combo00" taborder="181" text="전체선택" left="110" top="33" width="141" height="21"/>
+                              <Edit id="Edit00" taborder="182" displaynulltext="Enabled" left="110" top="5" width="141" height="21"/>
+                              <CheckBox id="CheckBox01" taborder="183" text="체크02" left="180" top="118" width="71" height="20"/>
+                              <CheckBox id="CheckBox00" taborder="184" text="체크01" value="true" left="110" top="118" width="71" height="20"/>
+                              <MaskEdit id="MaskEdit01" taborder="185" displaynulltext="123,456,789" cssclass="essential" left="364" top="145" width="141" height="21"/>
+                              <Radio id="Radio01" taborder="186" index="1" codecolumn="codecolumn" datacolumn="datacolumn" value="2" direction="vertical" cssclass="essential" left="364" top="173" width="141" height="21">
+                                <Dataset id="innerdataset">
+                                  <ColumnInfo>
+                                    <Column id="codecolumn" size="256"/>
+                                    <Column id="datacolumn" size="256"/>
+                                  </ColumnInfo>
+                                  <Rows>
+                                    <Row>
+                                      <Col id="codecolumn">1</Col>
+                                      <Col id="datacolumn">선택01</Col>
+                                    </Row>
+                                    <Row>
+                                      <Col id="codecolumn">2</Col>
+                                      <Col id="datacolumn">선택02</Col>
+                                    </Row>
+                                  </Rows>
+                                </Dataset>
+                              </Radio>
+                              <Spin id="Spin01" taborder="187" value="987" cssclass="essential" left="364" top="89" width="141" height="21"/>
+                              <Calendar id="Calendar01" taborder="188" displaynulltext="2015-00-00" cssclass="essential" left="364" top="61" width="141" height="21"/>
+                              <Combo id="Combo01" taborder="189" text="전체선택" cssclass="essential" left="364" top="33" width="141" height="21"/>
+                              <Edit id="Edit01" taborder="190" displaynulltext="Enabled" cssclass="essential" left="364" top="5" width="141" height="21"/>
+                              <CheckBox id="CheckBox02" taborder="191" text="체크02" cssclass="essential" left="434" top="118" width="71" height="20"/>
+                              <CheckBox id="CheckBox03" taborder="192" text="체크01" value="true" cssclass="essential" left="364" top="118" width="71" height="20"/>
+                              <MaskEdit id="MaskEdit02" taborder="193" displaynulltext="123,456,789" cssclass="readonly" left="618" top="145" width="141" height="21"/>
+                              <Radio id="Radio02" taborder="194" index="1" codecolumn="codecolumn" datacolumn="datacolumn" value="2" direction="vertical" cssclass="readonly" left="618" top="173" width="141" height="21">
+                                <Dataset id="innerdataset">
+                                  <ColumnInfo>
+                                    <Column id="codecolumn" size="256"/>
+                                    <Column id="datacolumn" size="256"/>
+                                  </ColumnInfo>
+                                  <Rows>
+                                    <Row>
+                                      <Col id="codecolumn">1</Col>
+                                      <Col id="datacolumn">선택01</Col>
+                                    </Row>
+                                    <Row>
+                                      <Col id="codecolumn">2</Col>
+                                      <Col id="datacolumn">선택02</Col>
+                                    </Row>
+                                  </Rows>
+                                </Dataset>
+                              </Radio>
+                              <Spin id="Spin02" taborder="195" value="987" cssclass="readonly" left="618" top="89" width="141" height="21"/>
+                              <Calendar id="Calendar02" taborder="196" displaynulltext="2015-00-00" cssclass="readonly" left="618" top="61" width="141" height="21"/>
+                              <Combo id="Combo02" taborder="197" text="전체선택" cssclass="readonly" left="618" top="33" width="141" height="21"/>
+                              <Edit id="Edit02" taborder="198" displaynulltext="Enabled" cssclass="readonly" left="618" top="5" width="141" height="21"/>
+                              <CheckBox id="CheckBox04" taborder="199" text="체크02" cssclass="readonly" left="688" top="118" width="71" height="20"/>
+                              <CheckBox id="CheckBox05" taborder="200" text="체크01" value="true" cssclass="readonly" left="618" top="118" width="71" height="20"/>
+                              <Static id="Static18" taborder="201" text="Edit" cssclass="sta_WF_DetailLabel01" left="508" top="1" width="107" height="29"/>
+                              <Static id="Static26" taborder="202" text="Combo" cssclass="sta_WF_DetailLabel01" left="508" top="29" width="107" height="29"/>
+                              <Static id="Static27" taborder="203" text="Calendar" cssclass="sta_WF_DetailLabel01" left="508" top="57" width="107" height="29"/>
+                              <Static id="Static28" taborder="204" text="Spin" cssclass="sta_WF_DetailLabel01" left="508" top="85" width="107" height="29"/>
+                              <Static id="Static29" taborder="205" text="CheckBox" cssclass="sta_WF_DetailLabel01" left="508" top="113" width="107" height="29"/>
+                              <Static id="Static30" taborder="206" text="MaskEdit" cssclass="sta_WF_DetailLabel01" left="508" top="141" width="107" height="29"/>
+                              <Static id="Static31" taborder="207" text="Radio" cssclass="sta_WF_DetailLabel01" left="508" top="169" width="107" height="29"/>
+                              <MaskEdit id="MaskEdit03" taborder="208" displaynulltext="123,456,789" enable="false" left="872" top="145" width="134" height="21"/>
+                              <Radio id="Radio03" taborder="209" index="1" codecolumn="codecolumn" datacolumn="datacolumn" value="2" direction="vertical" enable="false" left="872" top="173" width="134" height="21">
+                                <Dataset id="innerdataset">
+                                  <ColumnInfo>
+                                    <Column id="codecolumn" size="256"/>
+                                    <Column id="datacolumn" size="256"/>
+                                  </ColumnInfo>
+                                  <Rows>
+                                    <Row>
+                                      <Col id="codecolumn">1</Col>
+                                      <Col id="datacolumn">선택01</Col>
+                                    </Row>
+                                    <Row>
+                                      <Col id="codecolumn">2</Col>
+                                      <Col id="datacolumn">선택02</Col>
+                                    </Row>
+                                  </Rows>
+                                </Dataset>
+                              </Radio>
+                              <Spin id="Spin03" taborder="210" value="987" enable="false" left="872" top="89" width="134" height="21"/>
+                              <Calendar id="Calendar03" taborder="211" displaynulltext="2015-00-00" enable="false" left="872" top="61" width="134" height="21"/>
+                              <Combo id="Combo03" taborder="212" text="전체선택" enable="false" left="872" top="33" width="134" height="21"/>
+                              <Edit id="Edit03" taborder="213" displaynulltext="Enabled" enable="false" left="872" top="5" width="134" height="21"/>
+                              <CheckBox id="CheckBox06" taborder="214" text="체크02" enable="false" left="936" top="118" width="70" height="20"/>
+                              <CheckBox id="CheckBox07" taborder="215" text="체크01" value="true" enable="false" left="872" top="118" width="65" height="20"/>
+                              <Static id="Static32" taborder="216" text="Edit" cssclass="sta_WF_DetailLabel01" left="762" top="1" width="107" height="29"/>
+                              <Static id="Static33" taborder="217" text="Combo" cssclass="sta_WF_DetailLabel01" left="762" top="29" width="107" height="29"/>
+                              <Static id="Static34" taborder="218" text="Calendar" cssclass="sta_WF_DetailLabel01" left="762" top="57" width="107" height="29"/>
+                              <Static id="Static35" taborder="219" text="Spin" cssclass="sta_WF_DetailLabel01" left="762" top="85" width="107" height="29"/>
+                              <Static id="Static36" taborder="220" text="CheckBox" cssclass="sta_WF_DetailLabel01" left="762" top="113" width="107" height="29"/>
+                              <Static id="Static37" taborder="221" text="MaskEdit" cssclass="sta_WF_DetailLabel01" left="762" top="141" width="107" height="29"/>
+                              <Static id="Static38" taborder="222" text="Radio" cssclass="sta_WF_DetailLabel01" left="762" top="169" width="107" height="29"/>
+                              <Static id="Static39" taborder="223" text="TextArea" cssclass="sta_WF_DetailLabel01" left="508" top="197" width="107" height="88"/>
+                              <Static id="Static40" taborder="224" text="TextArea" cssclass="sta_WF_DetailLabel01" left="508" top="284" width="107" height="88"/>
+                              <TextArea id="TextArea00" taborder="225" displaynulltext="가나다라마바사" left="110" top="201" width="395" height="80"/>
+                              <TextArea id="TextArea01" taborder="226" displaynulltext="가나다라마바사" cssclass="readonly" left="110" top="288" width="395" height="80"/>
+                              <TextArea id="TextArea02" taborder="227" displaynulltext="가나다라마바사" enable="false" left="618" top="288" width="388" height="80"/>
+                              <TextArea id="TextArea03" taborder="228" displaynulltext="가나다라마바사" cssclass="essential" left="618" top="201" width="388" height="80"/>
+                              <Static id="Static42" taborder="229" cssclass="sta_WF_DetailLine" left="0" top="0" right="0" height="2"/>
+                            </Layout>
+                          </Layouts>
+                        </Div>
+                      </Layout>
+                    </Layouts>
+                  </Tabpage>
+                  <Tabpage id="tabpage2" text="Tab 02"/>
+                </Tabpages>
+              </Tab>
+              <Static id="stc_CURRENT_CLASS_CODE" taborder="93" text="재직클래스코드" left="27" top="64" width="100" height="30" style="background:lavender URL('img::ico_bullet.gif') left middle;padding:1px 1px 1px 10;font:9 Dotum;" class="sub_title"/>
+              <Grid id="Grid00" taborder="94" useinputpanel="false" left="4.08%" top="620" right="-0.76%" height="372" binddataset="ds_carrer">
+                <Formats>
+                  <Format id="default">
+                    <Columns>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                      <Col size="80"/>
+                    </Columns>
+                    <Rows>
+                      <Row band="head" size="24"/>
+                      <Row band="body" size="24"/>
+                    </Rows>
+                    <Band id="head">
+                      <Cell col="0" disptype="normal" text="JOIN_DATE"/>
+                      <Cell col="1" disptype="normal" text="RETIRE_DATE"/>
+                      <Cell col="2" disptype="normal" text="COMPANY_NAME"/>
+                      <Cell col="3" disptype="normal" text="POSITION"/>
+                      <Cell col="4" disptype="normal" text="DEPT_NAME"/>
+                      <Cell col="5" disptype="normal" text="RETIRE_REASON"/>
+                    </Band>
+                    <Band id="body">
+                      <Cell col="0" disptype="normal" text="bind:JOIN_DATE"/>
+                      <Cell col="1" disptype="normal" text="bind:RETIRE_DATE"/>
+                      <Cell col="2" disptype="normal" text="bind:COMPANY_NAME"/>
+                      <Cell col="3" disptype="normal" text="bind:POSITION"/>
+                      <Cell col="4" disptype="normal" text="bind:DEPT_NAME"/>
+                      <Cell col="5" disptype="normal" text="bind:RETIRE_REASON"/>
+                    </Band>
+                  </Format>
+                </Formats>
+              </Grid>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Static id="stc_detail" taborder="21" text="상세정보" left="2.13%" top="36" right="77%" height="20" cssclass="sta_WF_title"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <ConstColumn id="PageIndex" type="INT" size="30" value="1"/>
+          <ConstColumn id="PageSize" type="INT" size="30" value="5"/>
+          <ConstColumn id="PageUnit" type="INT" size="30" value="5"/>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword">홍길동</Col>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_user" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="userId" type="STRING" size="256"/>
+          <Column id="password" type="STRING" size="256"/>
+          <Column id="userName" type="STRING" size="256"/>
+          <Column id="enName" type="STRING" size="256"/>
+          <Column id="email" type="STRING" size="256"/>
+          <Column id="phone" type="DATE" size="256"/>
+          <Column id="cellPhone" type="STRING" size="256"/>
+          <Column id="zipCode" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_carrer">
+        <ColumnInfo>
+          <Column id="JOIN_DATE" type="STRING" size="256"/>
+          <Column id="RETIRE_DATE" type="STRING" size="256"/>
+          <Column id="COMPANY_NAME" type="STRING" size="256"/>
+          <Column id="POSITION" type="STRING" size="256"/>
+          <Column id="DEPT_NAME" type="STRING" size="256"/>
+          <Column id="RETIRE_REASON" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item18" compid="div_search.edt_searchKeyword" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item0" compid="divInput.edt_EMP_NO" propid="value" datasetid="ds_user" columnid="EMP_NO"/>
+      <BindItem id="item1" compid="divInput.edt_EMP_NAME" propid="value" datasetid="ds_user" columnid="EMP_NAME"/>
+      <BindItem id="item2" compid="divInput.edt_MGR_NO" propid="value" datasetid="ds_user" columnid="MGR_NO"/>
+      <BindItem id="item3" compid="divInput.edt_CURRENT_CLASS_CODE" propid="value" datasetid="ds_user" columnid="CURRENT_CLASS_CODE"/>
+      <BindItem id="item4" compid="divInput.edt_CURRENT_CODE" propid="value" datasetid="ds_user" columnid="CURRENT_CODE"/>
+      <BindItem id="item5" compid="divInput.edt_GRADE_CLASS_CODE" propid="value" datasetid="ds_user" columnid="GRADE_CLASS_CODE"/>
+      <BindItem id="item6" compid="divInput.edt_GRADE_CODE" propid="value" datasetid="ds_user" columnid="GRADE_CODE"/>
+      <BindItem id="item7" compid="divInput.edt_DEPT_CLASS_CODE" propid="value" datasetid="ds_user" columnid="DEPT_CLASS_CODE"/>
+      <BindItem id="item8" compid="divInput.edt_DEPT_CODE" propid="value" datasetid="ds_user" columnid="DEPT_CODE"/>
+      <BindItem id="item9" compid="divInput.edt_EMP_ID" propid="value" datasetid="ds_user" columnid="EMP_ID"/>
+      <BindItem id="item10" compid="divInput.edt_EMP_PW" propid="value" datasetid="ds_user" columnid="EMP_PW"/>
+      <BindItem id="item11" compid="divInput.edt_LAST_LOGIN" propid="value" datasetid="ds_user" columnid="LAST_LOGIN"/>
+      <BindItem id="item12" compid="divInput.edt_ENG_NAME" propid="value" datasetid="ds_user" columnid="ENG_NAME"/>
+      <BindItem id="item13" compid="divInput.edt_RESIDENT_NO" propid="value" datasetid="ds_user" columnid="RESIDENT_NO"/>
+      <BindItem id="item14" compid="divInput.edt_HOUSEHOLDER" propid="value" datasetid="ds_user" columnid="HOUSEHOLDER"/>
+      <BindItem id="item15" compid="divInput.edt_JOIN_DATE" propid="value" datasetid="ds_user" columnid="JOIN_DATE"/>
+      <BindItem id="item16" compid="divInput.edt_PHONE" propid="value" datasetid="ds_user" columnid="PHONE"/>
+      <BindItem id="item17" compid="divInput.edt_CELL_PHONE" propid="value" datasetid="ds_user" columnid="CELL_PHONE"/>
+      <BindItem id="item19" compid="divInput.edt_EMAIL" propid="value" datasetid="ds_user" columnid="EMAIL"/>
+      <BindItem id="item20" compid="divInput.edt_ADDRESS" propid="value" datasetid="ds_user" columnid="ADDRESS"/>
+      <BindItem id="item21" compid="divInput.edt_RELIGION" propid="value" datasetid="ds_user" columnid="RELIGION"/>
+      <BindItem id="item22" compid="divInput.edt_IMAGE" propid="value" datasetid="ds_user" columnid="IMAGE"/>
+      <BindItem id="item23" compid="divInput.edt_JOIN_CLASS_CODE" propid="value" datasetid="ds_user" columnid="JOIN_CLASS_CODE"/>
+      <BindItem id="item24" compid="divInput.edt_JOIN_CODE" propid="value" datasetid="ds_user" columnid="JOIN_CODE"/>
+      <BindItem id="item25" compid="divInput.edt_HOUSEHOLDER_NAME" propid="value" datasetid="ds_user" columnid="HOUSEHOLDER_NAME"/>
+      <BindItem id="item26" compid="divInput.edt_HOUSEHOLDER_RELATION" propid="value" datasetid="ds_user" columnid="HOUSEHOLDER_RELATION"/>
+      <BindItem id="item27" compid="divInput.edt_REGISTRATION_ADDRESS" propid="value" datasetid="ds_user" columnid="REGISTRATION_ADDRESS"/>
+      <BindItem id="item28" compid="divInput.edt_BIRTH" propid="value" datasetid="ds_user" columnid="BIRTH"/>
+      <BindItem id="item29" compid="divInput.edt_MARRIAGE" propid="value" datasetid="ds_user" columnid="MARRIAGE"/>
+      <BindItem id="item30" compid="divInput.edt_MARRIAGE_DATE" propid="value" datasetid="ds_user" columnid="MARRIAGE_DATE"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : Pattern_01
+* PROGRAMMER  : 
+* DATE        : 
+* DESCRIPTION : SingleDetail
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+
+/***********************************************************************************
+* Global/Local Variable
+***********************************************************************************/
+
+
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+/**
+ * form onload 함수
+ * @return 
+ * @example
+ *
+ * @memberOf this
+ */
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+    //this.fn_search();
+   
+} 
+
+
+/**
+ * 조회처리
+ * @return 
+ * @example
+ *
+ * @memberOf Iject
+ */
+this.fn_search = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+  
+   var searchCondition =  "NAME";
+    var searchKeyword = this.div_search.edt_searchKeyword.value;       
+    
+
+	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "empSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		//alert(" this.errorcode : " + this.errorcode);
+		
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid      : 서비스 ID
+		*   @param : {object}    this.fobj       : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_user : " + pThis.ds_user.saveXML());
+	});
+}
+
+
+
+//추가
+this.fn_add = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_user.addRow();
+	this.div_search.edt_searchKeyword.set_value("");
+}
+
+//삭제
+this.fn_delete = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_user.rowposition;
+	this.ds_user.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+	
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.fn_search();
+	}
+}
+
+//리셋
+this.fn_reset = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_user.reset();
+}
+
+
+//저장
+this.fn_save = function(strid)
+{
+     
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "empModifyVO.do",			 
+			  inds :["input1=ds_user:U"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		/*  
+		*   callback argument
+		*   @param : {string}    this.svcid       서비스 ID
+		*   @param : {object}    this.fobj        : 현재 form object
+		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+		*/    
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	      switch(this.svcid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "dlete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	      
+	      pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+		  pThis.fn_search();
+	});
+}
+
+
+/**********************************************************************
+* User Function
+***********************************************************************/
+
+//저장버튼 클릭시 
+this.div_grid_top_btn_save_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+//검색  Enter키
+this.div_search_btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	if ( e.keycode == 13 )
+	{
+		this.fn_search();
+	}
+}
+
+this.divInput_stc_id00_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+
+this.divInput_stc_EMP_NO_onclick = function(obj:Static, e:nexacro.ClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

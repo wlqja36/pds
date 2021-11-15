@@ -1,0 +1,654 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_edu" classname="PD_IN_COM_MM001" inheritanceid="" position="absolute" titletext="교육관리" onload="form_onload" left="0" top="0" width="1024" height="633">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img00" taborder="16" left="14" top="120" width="996" height="287" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_titlebg" taborder="14" style="background:#3366ffff;color:#ffffffff;" position="absolute" left="14" top="7" height="50" width="996" onclick="img_titlebg_onclick"/>
+        <Static id="sta_title" text="교육관리" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29" onclick="sta_title_onclick" taborder="0"/>
+        <!--
+        <Button id="btn_mody00" taborder="9" text="수정활성화" top="112" right="224" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="true" onclick="btn_mody00_onclick"/>
+        <Button id="btn_mody01" taborder="9" text="수정비활성화" top="112" right="225" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="false" onclick="btn_mody01_onclick"/>
+        -->
+        <Static id="sta_12" taborder="15" text="교육 현황" onclick="sta_12_onclick" left="16" top="104" width="82" height="13" style="background:transparent;border:0 none white ;color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <ImageViewer id="img01" taborder="17" left="14" top="450" width="996" height="173" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <ImageViewer id="img_04" taborder="18" left="55" top="591" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <ImageViewer id="img_03" taborder="19" left="55" top="567" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <ImageViewer id="img_00" taborder="20" left="55" top="481" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <ImageViewer id="img_02" taborder="21" left="55" top="457" width="950" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_01" taborder="22" text="사원번호" onclick="sta_15_onclick" left="20" top="457" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_13" taborder="23" text="교육시작일자" onclick="sta_16_onclick" left="351" top="481" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_14" taborder="24" text="교육관리번호" onclick="sta_17_onclick" left="351" top="457" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_19" taborder="25" text="교육종료일자" onclick="sta_18_onclick" left="682" top="481" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_22" taborder="26" text="수강교육명" onclick="sta_19_onclick" left="20" top="481" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="Edit03" taborder="2" maxlength="12" enable="false" left="471" top="460" width="140" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" tabstop="true" displaynulltext="자동으로 입력 됩니다"/>
+        <Edit id="Edit04" taborder="3" maxlength="255" enable="false" left="141" top="484" width="140" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_24" taborder="27" text="교육기관" onclick="sta_16_onclick" left="20" top="567" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_25" taborder="28" text="교육장소" onclick="sta_18_onclick" left="351" top="567" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_26" taborder="29" text="승인자(사번)" onclick="sta_16_onclick" left="20" top="591" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_27" taborder="30" text="승인일시" onclick="sta_18_onclick" left="351" top="591" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_28" taborder="31" text="승인여부" onclick="sta_06_onclick" left="682" top="591" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="Edit08" taborder="7" maxlength="255" enable="true" left="141" top="570" width="140" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="Static02" taborder="32" text="*" left="39" top="464" width="18" height="22" style="color:red;font:arial,18;"/>
+        <Edit id="Edit09" maxlength="255" left="471" top="570" width="140" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="Edit09_oneditclick" taborder="8" enable="false"/>
+        <Static id="sta_32" taborder="33" text="예상경비" onclick="sta_20_onclick" left="682" top="567" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_01" taborder="34" left="20" top="505" width="985" height="63" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_30" taborder="35" text="교육상세내용" onclick="sta_20_onclick" left="20" top="505" width="115" height="63" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="Edit02" taborder="1" maxlength="12" enable="false" left="141" top="460" width="140" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="Edit02_oneditclick"/>
+        <Static id="sta_00" taborder="36" onclick="sta_18_onclick" left="682" top="457" width="322" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <ImageViewer id="img_05" taborder="37" left="14" top="65" width="996" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_02" taborder="38" onclick="sta_01_onclick" left="61" top="70" width="944" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_no" taborder="39" text="분류" onclick="sta_no_onclick" left="20" top="70" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="btn_search" taborder="40" text="검색" onclick="btn_search_onclick" left="949" top="71" width="55" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onkeydown="btn_search_onclick" hotkey="RETURN"/>
+        <Edit id="Edit01" taborder="49" left="325" top="73" width="531" height="19" oneditclick="Edit01_oneditclick"/>
+        <Button id="btn_clear" taborder="41" text="초기화" onclick="btn_clear_onclick" left="951" top="422" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_del" taborder="42" text="삭제" onclick="btn_delete_onclick" left="777" top="422" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_new" taborder="43" text="신규" onclick="btn_new_onclick" left="835" top="422" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_save" taborder="44" text="저장" onclick="btn_save_onclick" left="893" top="422" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Edit id="Edit11" taborder="10" maxlength="12" enable="false" left="141" top="594" width="140" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Grid id="grd_plaintiff" taborder="45" binddataset="ds_eduselect" scrollbars="autovert" useinputpanel="false" nodatatext="데이터가 없습니다." left="20" top="136" width="984" height="273" oncellclick="enable_edit">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="132"/>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="109"/>
+                <Column size="88"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="사원번호"/>
+                <Cell col="1" text="교육관리번호"/>
+                <Cell col="2" text="수강교육명"/>
+                <Cell col="3" text="교육시작일"/>
+                <Cell col="4" text="교육종료일"/>
+                <Cell col="5" text="교육기관"/>
+                <Cell col="6" text="승인자사번"/>
+                <Cell col="7" text="승인일시"/>
+                <Cell col="8" text="승인여부"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:EMP_NO"/>
+                <Cell col="1" text="bind:EDU_ID"/>
+                <Cell col="2" text="bind:EDUCLASS_NAME"/>
+                <Cell col="3" text="bind:EDU_START_DATE" mask="####-##-##"/>
+                <Cell col="4" text="bind:EDU_END_DATE" mask="####-##-##"/>
+                <Cell col="5" text="bind:EDU_AGENCY"/>
+                <Cell col="6" text="bind:ACCEPT_EMP_NO"/>
+                <Cell col="7" text="bind:ACCEPT_DATE" mask="####-##-##"/>
+                <Cell col="8" text="bind:ACCEPTED_YN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Div id="div_page" taborder="46" text="Div00" left="203" top="423" width="573" height="18">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="37" text="이전" onclick="div_page_stc_Prev_onclick" visible="false" left="98" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_Next" taborder="38" text="다음" onclick="div_page_stc_Next_onclick" visible="false" left="468" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No0" taborder="39" text="1" onclick="div_page_stc_No_onclick" visible="false" left="138" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No1" taborder="40" text="2" onclick="div_page_stc_No_onclick" visible="false" left="170" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No2" taborder="41" text="3" onclick="div_page_stc_No_onclick" visible="false" left="202" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No3" taborder="42" text="4" onclick="div_page_stc_No_onclick" visible="false" left="234" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No4" taborder="43" text="5" onclick="div_page_stc_No_onclick" visible="false" left="266" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No5" taborder="44" text="6" onclick="div_page_stc_No_onclick" visible="false" left="298" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No6" taborder="45" text="7" onclick="div_page_stc_No_onclick" visible="false" left="330" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No7" taborder="46" text="8" onclick="div_page_stc_No_onclick" visible="false" left="362" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No8" taborder="47" text="9" onclick="div_page_stc_No_onclick" visible="false" left="394" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No9" taborder="48" text="10" onclick="div_page_stc_No_onclick" visible="false" left="426" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+        <Combo id="Combo01" taborder="12" type="dropdown" onitemchanged="Combo01_onitemchanged" left="78.32%" top="593" right="8.11%" height="21" codecolumn="codecolumn" datacolumn="datacolumn" index="1" value="N" text="미승인" enable="false">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">승인</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">미승인</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <MaskEdit id="Edit10" taborder="9" left="78.32%" top="570" height="19" mask="#,###,###,###" oneditclick="Edit10_oneditclick" width="140" enable="false" type="string"/>
+        <Calendar id="Edit05" taborder="4" left="471" top="484" width="140" height="19" enable="false"/>
+        <Calendar id="Edit06" taborder="5" left="802" top="484" width="140" height="19" enable="false"/>
+        <Calendar id="Edit12" taborder="11" left="471" top="594" width="140" height="19" enable="true"/>
+        <TextArea id="Edit07" taborder="6" left="141" top="513" height="47" width="801" wordwrap="char" style="align:left bottom;" maxlength="255" enable="false"/>
+        <Button id="Button00" taborder="50" text="사번검색" left="86.23%" top="71" right="8.01%" height="21" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 10 굴림;" onclick="Button00_onclick"/>
+        <Combo id="Combo00" taborder="51" displaynulltext="전체" codecolumn="codecolumn" datacolumn="datacolumn" index="-1" onitemchanged="Combo00_onitemchanged" left="141" top="73" width="170" height="19">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">EDUCLASS_NAME</Col>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">EMP_NO</Col>
+                <Col id="datacolumn">사번</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Button id="Button01" taborder="52" left="27.73%" top="459" right="68.75%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" onclick="Button01_onclick"/>
+        <Button id="Button02" taborder="53" left="27.73%" top="593" right="68.75%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" onclick="Button02_onclick"/>
+        <Button id="Button03" taborder="54" left="27.73%" top="569" right="68.75%" height="21" style="image:URL('img::btn_WF_SearchSmall.png');" onclick="Button03_onclick" visible="false"/>
+        <Edit id="Edit00" taborder="55" left="2.93%" top="647" right="84.67%" height="21" visible="false"/>
+        <Edit id="Edit14" taborder="57" left="2.93%" top="680" right="84.67%" height="21" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item1" compid="Combo01" propid="value" datasetid="ds_eduselect" columnid="ACCEPTED_YN"/>
+      <BindItem id="item10" compid="Edit03" propid="value" datasetid="ds_eduselect" columnid="EDU_ID"/>
+      <BindItem id="item11" compid="Edit04" propid="value" datasetid="ds_eduselect" columnid="EDUCLASS_NAME"/>
+      <BindItem id="item17" compid="Edit08" propid="value" datasetid="ds_eduselect" columnid="EDU_AGENCY"/>
+      <BindItem id="item18" compid="Edit09" propid="value" datasetid="ds_eduselect" columnid="EDU_LOCATION"/>
+      <BindItem id="item12" compid="Edit02" propid="value" datasetid="ds_eduselect" columnid="EMP_NO"/>
+      <BindItem id="item0" compid="Edit11" propid="value" datasetid="ds_eduselect" columnid="ACCEPT_EMP_NO"/>
+      <BindItem id="item3" compid="img00" propid="text" datasetid="ds_eduselect" columnid=""/>
+      <BindItem id="item2" compid="Edit10" propid="value" datasetid="ds_eduselect" columnid="EXPECTED_CHARGE"/>
+      <BindItem id="item4" compid="Edit05" propid="value" datasetid="ds_eduselect" columnid="EDU_START_DATE"/>
+      <BindItem id="item5" compid="Edit06" propid="value" datasetid="ds_eduselect" columnid="EDU_END_DATE"/>
+      <BindItem id="item6" compid="Edit12" propid="value" datasetid="ds_eduselect" columnid="ACCEPT_DATE"/>
+      <BindItem id="item7" compid="Edit07" propid="value" datasetid="ds_eduselect" columnid="EDU_DETAIL"/>
+      <BindItem id="item14" compid="edt_searchKeyword" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item8" compid="Edit00" propid="value" datasetid="ds_eduselect" columnid="EMP_NAME"/>
+      <BindItem id="item9" compid="Edit14" propid="value" datasetid="ds_eduselect" columnid="OK_EMP_NAME"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_eduselect">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="EDU_ID" type="STRING" size="256"/>
+          <Column id="EDUCLASS_NAME" type="STRING" size="256"/>
+          <Column id="EDU_START_DATE" type="STRING" size="256"/>
+          <Column id="EDU_END_DATE" type="STRING" size="256"/>
+          <Column id="EDU_DETAIL" type="STRING" size="256"/>
+          <Column id="EDU_AGENCY" type="STRING" size="256"/>
+          <Column id="EDU_LOCATION" type="STRING" size="256"/>
+          <Column id="EXPECTED_CHARGE" type="STRING" size="256"/>
+          <Column id="ACCEPT_EMP_NO" type="STRING" size="256"/>
+          <Column id="ACCEPT_DATE" type="STRING" size="256"/>
+          <Column id="ACCEPTED_YN" type="STRING" size="256"/>
+          <Column id="EMP_NAME" type="STRING" size="256"/>
+          <Column id="OK_EMP_NAME" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+//넘버링등 기타 작업을 위한 변수들
+this.confirmStr = "";
+var pageNum = "";
+var rowNum = "";
+var strSwitch = "";
+
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//this.btn_search_onclick(); //로딩시 빈검색 한번 해서 초기화, 사번끌어와서 사번조회로 변경해야함
+	var edu_name = this.parent.param1;
+	
+
+}
+
+// 조회 버튼
+this.btn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+	var searchKeyword = "";	
+	var searchCondition="";
+  
+    var searchCondition =  this.Combo00.value; //분류설정
+    var searchKeyword = this.Edit01.value;     //검색어매칭      
+	this.ds_search.setColumn(0, "searchCondition", searchCondition); //ds_search에 검색정보저장
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+   	trace(this.ds_search.saveXML());
+
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "selectEdu.do",
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_eduselect=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 
+			}; 
+		var rowIdx = this.ds_search.addRow("ds_eduselect");
+			trace("oDatas : "+oDatas);
+	 trace(" this.ds_eduselect: " + this.ds_eduselect.saveXML());
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 	         
+	       var pThis = this.fobj;   //form object	      
+	    /*   trace(" ds_eduselect : " + this.ds_eduselect.saveXML());*/
+	});
+// 	this.alert("searchCondition4:"+searchCondition);
+// 	this.alert("searchKeyword4:"+searchKeyword);
+	trace(searchKeyword);
+}
+
+
+//추가
+this.btn_new_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var imsi = this.Edit02.value;
+	var nRow = this.ds_eduselect.addRow();
+	this.Edit02.set_value(imsi);
+	
+	//
+	var emp_no = this.Edit01.value;
+	this.ds_eduselect.setColumn(nRow,"EMP_NO",emp_no);
+
+	
+}
+
+
+ //저장버튼 누를시
+ this.btn_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+ {
+	var edu_start_date = nexacro.toNumber(this.Edit05.value);
+	var edu_end_date = nexacro.toNumber(this.Edit06.value);
+	
+	
+	//교육 시작일이 교육 종료일보다 늦을때 처리
+	if(edu_start_date > edu_end_date){
+		alert("교육 시작일과 종료일을 정확히 입력해 주세요");
+	}else{
+	 	this.fn_save("edu_save");
+	}
+
+ }
+
+
+//저장
+this.fn_save = function(strid)
+{
+	this.ds_eduselect.setColumn(this.ds_eduselect.rowposition, "Edit02", this.Edit02.value);
+    
+	var oDatas =  {
+			  svcid : strid, //strid에 적힌 문자열을 서비스아이디로 저장
+			  sController : "modifyEdu.do",			 
+			  inds :["ds_input=ds_eduselect:U"],
+			  outds :[
+				 "ds_eduselect=output"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //	
+			}; 
+
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	       trace("svcid: "+strid);
+	 
+		    switch(strid)
+	      {
+	         case "edu_save" : 
+				alert("저장완료");
+				break;
+				
+	         case "edu_delete" : 
+	            alert("삭제완료");
+				break; 
+	      } 
+	    
+	});
+}
+
+
+
+//삭제
+this.btn_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+ 
+	var nRow = this.ds_eduselect.rowposition;	
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	this.ds_eduselect.deleteRow(nRow);
+
+	if(rtnValue){
+		this.fn_save("edu_delete");
+		trace("nRow : " + nRow);
+
+		trace("this.ds_eduselect.getDeletedRowset: "+this.ds_eduselect.getDeletedRowset);
+	}else{
+		this.fn_search();
+	}
+}
+
+
+// 초기화 버튼
+this.btn_clear_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.fv_iStartPageNo    = 0;   // 전체 페이지 순서
+	this.fv_iUnitSelRowNo   = 100; // 한번 Server호출시 가져올 row갯수
+	this.fv_iStartSelRowNo  = 1;   // Server호출시 시작할 row no
+	this.fv_iMaxPageNum     = 10;  // 화면에 보여줄 최대 Page번호 갯수
+	this.fv_iServerRowCount = 0;   // 서버에서 넘어온 Row갯수(100건이 안될 수 있음)
+	this.reload();
+}
+
+// 신규버튼
+this.btn_new_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_eduselect.addRow();  //줄추가
+	this.enable_edit();
+	
+	var today = new Date();
+	var year = today.getFullYear().toString().padLeft(4,"0");
+	var month = (today.getMonth()+1).toString().padLeft(2,"0");
+	var day = today.getDate().toString().padLeft(2,"0");
+	
+	this.Edit05.set_value(year+month+day);
+	this.Edit06.set_value(year+month+day);
+	this.Edit12.set_value(year+month+day);
+}
+
+// 편집창 활성화
+this.enable_edit = function()
+{
+	this.Combo01.set_enable(true);
+	if(this.Combo01.value==null){
+		this.Combo01.set_value('N'); //신규등록시 미승인을 기본값으로
+	}
+
+	//this.Edit02.set_enable(true); 사원번호
+	//this.Edit03.set_enable(true); 교육관리번호
+	this.Edit04.set_enable(true); //수강교육명
+	this.Edit05.set_enable(true);
+	this.Edit06.set_enable(true);
+	this.Edit07.set_enable(true);
+	this.Edit08.set_enable(true);
+	this.Edit09.set_enable(true);
+	this.Edit10.set_enable(true);
+	//this.Edit11.set_enable(true); 승인자사번
+	//this.Edit12.set_enable(true); 승인일시
+	this.Edit01.setFocus();
+}
+
+
+
+// 편집창 비활성화
+// this.enable_nonEdit = function()
+// {
+// 		this.Edit01.enable
+// 	this.Edit02.set_enable("true");
+// 	this.Edit03.set_enable("true");
+// 	this.Edit04.set_enable("true");
+// this.Edit05.set_enable("true");
+// this.Edit06.set_enable("true");
+// this.Edit07.set_enable("true");
+// this.Edit08.set_enable("true");
+// this.Edit09.set_enable("true");
+// this.Edit10.set_enable("true");
+// }
+
+
+
+///////////////////// 페이징 처리
+
+//-------------------------------------------------------------------------------------------------
+// 인덱스 클릭
+//-------------------------------------------------------------------------------------------------
+/*
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+
+	pageNum = iNo;
+	
+	this.pageSelect(iNo);
+}
+
+// 페이지 액션
+this.pageSelect = function(page)
+{
+	var iFirstNum = (page-1) * this.fv_iMaxPageNum + 1;
+
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+
+	this.fn_SetStyle();
+	this.div_page.components["stc_No"+(page-1)].style.set_color("gray");
+	this.ds_masterCodeList.filter("");
+	
+	this.ds_masterCodeList.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+//-------------------------------------------------------------------------------------------------
+// 이전 버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	// Transaction()코딩 할 부분
+	this.transaction_callback("selectCode", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// 다음버튼
+//-------------------------------------------------------------------------------------------------
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	// Transaction()코딩 할 부분
+	this.transaction_callback("selectCode", 0, "succ");
+}
+
+//-------------------------------------------------------------------------------------------------
+// Page번호 Setting
+//-------------------------------------------------------------------------------------------------
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+}
+*/
+//-------------------------------------------------------------------------------------------------
+// Style조정
+//-------------------------------------------------------------------------------------------------
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].style.set_color("black");			
+	}	
+
+
+}
+
+
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal10",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+	this.Edit01.set_value(emp_no);
+	
+	//this.btn_search_onclick();	
+}
+
+//입력창 사원번호
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::empSearch3.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	
+	var emp_no2 = application.gds_empno2.getColumn(application.gds_empno2.rowposition,"emp_no2");
+	var emp_name2 = application.gds_empno2.getColumn(application.gds_empno2.rowpsition,"emp_name2");
+	
+	this.Edit02.set_value(emp_no2);
+	this.Edit00.set_value(emp_name2);
+	
+
+	
+	
+	//this.btn_search_onclick();		
+}
+
+//승인자 사원번호
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::ok_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+	var ok_empno = application.gds_okempno.getColumn(application.gds_okempno.rowposition,"ok_empno");
+	var ok_empname = application.gds_okempno.getColumn(application.gds_okempno.rowposition,"ok_empname");
+	
+	this.Edit11.set_value(ok_empno);
+	this.Edit14.set_value(ok_empname);
+
+}
+//교육기관 검색
+this.Button03_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+		empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::eduSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+	var education_name = application.gds_education.getColumn(application.gds_education.rowposition,"education_name");
+	this.Edit08.set_value(education_name);
+}
+]]></Script>
+  </Form>
+</FDL>

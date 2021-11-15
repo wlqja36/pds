@@ -1,0 +1,654 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("YJB_CCMM");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1280,624);
+            }
+            this.style.set_font("20 Dotum");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_masterCodeList", this);
+            obj._setContents("<ColumnInfo><Column id=\"rownum\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"use\" type=\"STRING\" size=\"256\"/><Column id=\"mainTable\" type=\"STRING\" size=\"256\"/><Column id=\"useCol\" type=\"STRING\" size=\"256\"/><Column id=\"addDate\" type=\"STRING\" size=\"256\"/><Column id=\"addEnum\" type=\"STRING\" size=\"256\"/><Column id=\"classCodeInfo\" type=\"STRING\" size=\"256\"/><Column id=\"updateDate\" type=\"STRING\" size=\"256\"/><Column id=\"updateEnum\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_check", this);
+            obj._setContents("<ColumnInfo><Column id=\"classCode\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("ImageViewer04", "absolute", "20", "62", "1235", "41", null, null, this);
+            obj.set_taborder("76");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer03", "absolute", "20", "161", "1235", "326", null, null, this);
+            obj.set_taborder("75");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer02", "absolute", "21", "534", "1235", "75", null, null, this);
+            obj.set_taborder("74");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "24", "66", "1228", "33", null, null, this);
+            obj.set_taborder("73");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_cc_list", "absolute", "24", "166", "1228", "314", null, null, this);
+            obj.set_taborder("7");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj.style.set_font("bold 12 Dotum");
+            obj.set_autofittype("col");
+            obj.set_binddataset("ds_masterCodeList");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"64\"/><Column size=\"154\"/><Column size=\"134\"/><Column size=\"98\"/><Column size=\"204\"/><Column size=\"214\"/><Column size=\"193\"/><Column size=\"170\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell style=\"font:bold 14 dotum;\" text=\"NO\"/><Cell col=\"1\" style=\"font:bold 14 dotum;\" text=\"분류코드\"/><Cell col=\"2\" style=\"font:bold 14 dotum;\" text=\"분류명칭\"/><Cell col=\"3\" style=\"font:bold 14 dotum;\" text=\"사용여부\"/><Cell col=\"4\" style=\"font:bold 14 dotum;\" text=\"주사용테이블\"/><Cell col=\"5\" style=\"font:bold 14 dotum;\" text=\"사용컬럼명칭\"/><Cell col=\"6\" style=\"font:bold 14 dotum;\" text=\"등록일자\"/><Cell col=\"7\" style=\"font:bold 14 dotum;\" text=\"등록자(사번)\"/></Band><Band id=\"body\"><Cell text=\"bind:rownum\"/><Cell col=\"1\" text=\"bind:classCode\"/><Cell col=\"2\" text=\"bind:className\"/><Cell col=\"3\" text=\"bind:use\"/><Cell col=\"4\" text=\"bind:mainTable\"/><Cell col=\"5\" text=\"bind:useCol\"/><Cell col=\"6\" text=\"bind:addDate\"/><Cell col=\"7\" text=\"bind:addEnum\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_list", "absolute", "25", "110", "121", "38", null, null, this);
+            obj.set_taborder("8");
+            obj.set_text("코드목록");
+            obj.style.set_font("bold 14 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cc_del", "absolute", "1004", "498", "76", "27", null, null, this);
+            obj.set_taborder("9");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cc_add", "absolute", "1090", "498", "76", "27", null, null, this);
+            obj.set_taborder("10");
+            obj.set_text("신규");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cc_save", "absolute", "1176", "498", "76", "27", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("저장");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_07", "absolute", "24", "539", "1228", "33", null, null, this);
+            obj.set_taborder("19");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_class", "absolute", "169", "545", "151", "21", null, null, this);
+            obj.set_taborder("21");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("false");
+            obj.set_maxlength("4");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_class", "absolute", "24", "539", "139", "33", null, null, this);
+            obj.set_taborder("22");
+            obj.set_text("분류코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_className", "absolute", "326", "539", "139", "33", null, null, this);
+            obj.set_taborder("23");
+            obj.set_text("분류명칭");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_className", "absolute", "482", "545", "151", "21", null, null, this);
+            obj.set_taborder("24");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_maxlength("255");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_classInfo", "absolute", "639", "539", "139", "33", null, null, this);
+            obj.set_taborder("25");
+            obj.set_text("분류코드설명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_classInfo", "absolute", "792", "545", "151", "21", null, null, this);
+            obj.set_taborder("26");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_maxlength("255");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_use", "absolute", "946", "539", "139", "33", null, null, this);
+            obj.set_taborder("28");
+            obj.set_text("사용여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "24", "571", "1228", "33", null, null, this);
+            obj.set_taborder("31");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 20 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_mainTable", "absolute", "24", "571", "139", "33", null, null, this);
+            obj.set_taborder("32");
+            obj.set_text("주사용테이블");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_useCol", "absolute", "326", "571", "139", "33", null, null, this);
+            obj.set_taborder("33");
+            obj.set_text("사용컬럼명칭");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_useCol", "absolute", "482", "577", "151", "21", null, null, this);
+            obj.set_taborder("34");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_maxlength("255");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_changeDate", "absolute", "639", "571", "139", "33", null, null, this);
+            obj.set_taborder("35");
+            obj.set_text("수정일자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_changeDate", "absolute", "792", "577", "151", "21", null, null, this);
+            obj.set_taborder("36");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_changeEno", "absolute", "946", "571", "139", "33", null, null, this);
+            obj.set_taborder("37");
+            obj.set_text("수정자(사번)");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_changeEno", "absolute", "1091", "577", "151", "21", null, null, this);
+            obj.set_taborder("38");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_mainTable", "absolute", "169", "577", "151", "21", null, null, this);
+            obj.set_taborder("39");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+            obj.set_maxlength("255");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_cc_use", "absolute", "1093", "545", "151", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            var combo_cc_use_innerdataset = new Dataset("combo_cc_use_innerdataset", this.combo_cc_use);
+            combo_cc_use_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">Y</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">N</Col></Row></Rows>");
+            obj.set_innerdataset(combo_cc_use_innerdataset);
+            obj.set_taborder("41");
+            obj.set_text("Y");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_value("Y");
+            obj.style.set_font("9 Dotum");
+            obj.set_enable("true");
+
+            obj = new Static("Static08", "absolute", "56", "550", "16", "18", null, null, this);
+            obj.set_taborder("42");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "362", "547", "16", "18", null, null, this);
+            obj.set_taborder("43");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static15", "absolute", "978", "550", "16", "18", null, null, this);
+            obj.set_taborder("44");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("15 arial");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer00", "absolute", "7", "8", "1265", "45", null, null, this);
+            obj.set_taborder("45");
+            obj.style.set_background("#165fa6ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc", "absolute", "1.25%", "14", "352", "34", null, null, this);
+            obj.set_taborder("46");
+            obj.set_text("공통코드 마스터관리");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Arial Black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_cc_search", "absolute", "24", "66", "139", "33", null, null, this);
+            obj.set_taborder("49");
+            obj.set_text("코드검색");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_cc_search", "absolute", "176", "72", "386", "21", null, null, this);
+            obj.set_taborder("52");
+            obj.style.set_font("9 Dotum");
+            obj.set_maxlength("15");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cc_search", "absolute", "576", "69", "76", "27", null, null, this);
+            obj.set_taborder("53");
+            obj.set_text("검색");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_cc_reset", "absolute", "662", "69", "76", "27", null, null, this);
+            obj.set_taborder("54");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1280, 624, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+            		p.style.set_font("20 Dotum");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","edt_cc_search","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","edt_cc_class","value","ds_masterCodeList","classCode");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","edt_cc_className","value","ds_masterCodeList","className");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","edt_cc_classInfo","value","ds_masterCodeList","classCodeInfo");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","combo_cc_use","value","ds_masterCodeList","use");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","edt_cc_mainTable","value","ds_masterCodeList","mainTable");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","edt_cc_useCol","value","ds_masterCodeList","useCol");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","edt_cc_changeDate","value","ds_masterCodeList","updateDate");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","edt_cc_changeEno","value","ds_masterCodeList","updateEnum");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("YJB_CCMM001.xfdl", "Lib::common.xjs");
+        this.registerScript("YJB_CCMM001.xfdl", function() {
+        //include "Lib::common.xjs";
+        var strSwitch = "";
+        this.confirmStr = "";
+        var rowNum = "";
+        var idxCode="";
+        var codeCount="";
+
+        this.YJB_CCMM_onload = function(obj,e)
+        {
+        	this.btn_cc_search_onclick();
+        }
+
+        // 조회 버튼
+        this.btn_cc_search_onclick = function(obj,e)
+
+        {	
+        	//idxCode=application.gds_idx.getColumn(application.gds_idx.rowposition,"idxCode");
+        	//application.gds_idx.clearData();
+        	
+        	this.ds_search.setColumn(0, "searchKeyword", this.edt_cc_search.value);
+        	
+        	this.gfn_transaction(this,
+        						"selectCode",
+        						"com/YJB_selectCode.do",
+        						"ds_search=ds_search",
+        						"ds_masterCodeList=ds_output",
+        						"",
+        						"transaction_callback"
+        						);
+        }
+        // 초기화 버튼
+        this.btn_cc_reset_onclick = function(obj,e)
+        {
+        	this.edt_cc_search.set_value("");
+        	this.btn_cc_search_onclick();
+        }
+
+        // 신규버튼
+        this.btn_cc_add_onclick = function(obj,e)
+        {
+        	var nRow = this.ds_masterCodeList.addRow();
+        	this.combo_cc_use.set_value("Y");
+
+        	this.edt_cc_class.set_enable("true");
+        	this.enable_edit();
+        	
+
+        }
+
+        // 편집창 활성화
+        this.enable_edit = function()
+        {
+        	this.edt_cc_className.set_enable("true");
+        	
+        	this.edt_cc_classInfo.set_enable("true");
+        	this.combo_cc_use.set_enable("true");
+        	this.edt_cc_mainTable.set_enable("true");
+        	this.edt_cc_useCol.set_enable("true");
+        	this.edt_cc_class.setFocus();
+        }
+
+        // 편집창 비활성화
+        this.enable_nonEdit = function()
+        {
+        	this.edt_cc_class.set_enable("false");
+        	this.edt_cc_classInfo.set_enable("true");
+        	
+        	this.combo_cc_use.set_enable("true");
+        	this.edt_cc_mainTable.set_enable("true");
+        	this.edt_cc_useCol.set_enable("true");
+        	this.edt_cc_className.set_enable("true");
+        }
+
+        // 저장버튼
+        this.btn_cc_save_onclick = function(obj,e)
+        {
+        	if(this.edt_cc_class.value == null || this.edt_cc_class.getLength() < 3){
+        		this.alert("분류코드를 확인해주세요. 3자리 이상이여야 합니다.");
+        		this.edt_cc_class.setFocus();
+        		return;
+        	}else if(this.edt_cc_className.value == null){
+        		this.alert("분류명칭을 입력해주세요.");
+        		this.edt_cc_className.setFocus();
+        		return;
+        	}
+        	
+        	var id = application.gds_User.getColumn(application.gds_User.rowposition, "id");
+        	if(id == null) {
+        		id = "ID";
+        	}
+        	this.ds_masterCodeList.setColumn(this.ds_masterCodeList.rowposition, "addEnum", id);
+        		
+        	var confirmStr = this.confirm("저장하시겠습니까?");
+        	
+        	
+        	if(confirmStr){
+        		codeCount = this.ds_masterCodeList.getColumn(this.ds_masterCodeList.rowposition,"classCode");
+        		this.code_transaction("saveCode");
+        	}
+        }
+
+        
+        // 코드 정보 저장/수정/삭제 시 트랜잭션
+        this.code_transaction = function(sSvcid)
+        {
+        	
+        	var strSvcid = sSvcid;
+        	var strController = "com/YJB_editCode.do";
+        	
+        	rowNum = this.ds_masterCodeList.rowposition;
+        	
+        	this.gfn_transaction(this,
+        						strSvcid,
+        						strController,
+        						"ds_input=ds_masterCodeList:U",
+        						"",
+        						"",
+        						"transaction_callback"
+        						);
+        }
+
+        
+        // 트랜잭션 콜백
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		return;
+        	}
+        	switch(sSvcId){
+        		case "selectCode":		
+        			
+        		
+        			this.enable_nonEdit();
+        			
+        			if(codeCount!=""){
+        				rowNum = this.ds_masterCodeList.findRow("classCode",codeCount);
+        			}
+        			this.grd_cc_list.selectCell(rowNum);
+        			break;
+        	
+        		case "saveCode":
+        			if(this.confirmStr == "저장"){
+        				//application.gds_idx.addRow();
+        				//application.gds_idx.setColumn(0,"idxCode",this.ds_masterCodeList.getColumn(this.ds_masterCodeList.rowposition,"classCode"));
+        				this.btn_cc_reset_onclick();
+        				var su1 = nexacro.toNumber(this.ds_masterCodeList.rowcount);
+        				this.grd_cc_list.selectCell(su1);
+
+        				this.alert("저장완료");
+
+        			}else if(this.confirmStr == "수정"){
+        				strSwitch = "수정";
+        				//trace("테스트"+this.ds_masterCodeList.rowposition);
+        				this.btn_cc_reset_onclick();
+        				var su2 = nexacro.toNumber(this.ds_masterCodeList.rowposition);
+        				this.grd_cc_list.selectCell(su2);
+        				this.alert("수정완료");
+        				
+        			}
+        			
+        			break;
+        		
+        		case "deleteCode":
+        			
+        			this.btn_cc_reset_onclick();
+        			var su3 = nexacro.toNumber(this.ds_masterCodeList.rowcount);
+        			this.grd_cc_list.selectCell(su3);
+        			this.alert("삭제완료");
+        			break;
+        			
+        		case "codeChecker": 
+        			var check = this.ds_check.getColumn(this.ds_check.rowposition, "classCode");
+        			if(check != "NONE"){
+        				this.alert("중복 코드입니다.");
+        				this.edit00.set_value(null);
+        				this.edit00.set_text("");
+        				this.edit00.setFocus();
+        			}
+        			break;
+        	}
+        }
+
+        // 삭제 버튼
+        this.btn_cc_del_onclick = function(obj,e)
+        {
+        	var confirmStr = this.confirm("삭제하시겠습니까?");
+        	
+        	if(confirmStr){
+        		this.ds_masterCodeList.deleteRow(this.ds_masterCodeList.rowposition);
+        		this.code_transaction("deleteCode");
+        	}
+        }
+
+        
+        this.edt_cc_class_canchange = function(obj,e)
+        {
+        	var codeValue = this.edt_cc_class.value;
+        	
+        	var strParam = "classCode=" + codeValue;
+        	
+        	this.gfn_transaction(this,
+        						"codeChecker",
+        						"com/searchCode.do",
+        						"",
+        						"ds_check=ds_output",
+        						strParam,
+        						"transaction_callback"
+        						);
+        }
+
+        
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.YJB_CCMM_onload, this);
+            this.Static00.addEventHandler("onclick", this.Static05_onclick, this);
+            this.sta_cc_list.addEventHandler("onclick", this.Static02_onclick, this);
+            this.btn_cc_del.addEventHandler("onclick", this.btn_cc_del_onclick, this);
+            this.btn_cc_add.addEventHandler("onclick", this.btn_cc_add_onclick, this);
+            this.btn_cc_save.addEventHandler("onclick", this.btn_cc_save_onclick, this);
+            this.edt_cc_class.addEventHandler("oneditclick", this.edt_cc_class_oneditclick, this);
+            this.edt_cc_class.addEventHandler("canchange", this.edt_cc_class_canchange, this);
+            this.sta_cc_class.addEventHandler("onclick", this.Static06_onclick, this);
+            this.Static10.addEventHandler("onclick", this.Static05_onclick, this);
+            this.sta_cc_mainTable.addEventHandler("onclick", this.Static06_onclick, this);
+            this.combo_cc_use.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.sta_cc.addEventHandler("onclick", this.Static00_onclick, this);
+            this.btn_cc_search.addEventHandler("onclick", this.btn_cc_search_onclick, this);
+            this.btn_cc_reset.addEventHandler("onclick", this.btn_cc_reset_onclick, this);
+
+        };
+
+        this.loadIncludeScript("YJB_CCMM001.xfdl");
+
+       
+    };
+}
+)();

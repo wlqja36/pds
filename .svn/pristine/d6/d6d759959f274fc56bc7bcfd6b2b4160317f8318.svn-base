@@ -1,0 +1,272 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("pwSearch");
+                this.set_titletext("비밀번호 찾기");
+                this._setFormPosition(0,0,300,270);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"emp_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"birth\" type=\"STRING\" size=\"256\"/><Column id=\"back_birth\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_result", this);
+            obj._setContents("<ColumnInfo><Column id=\"emp_no\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("joinTitle", "absolute", "9", "6", "285", "50", null, null, this);
+            obj.set_taborder("0");
+            obj.set_text("  비밀번호 찾기");
+            obj.style.set_align("left");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 12 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_titlebg1", "absolute", "9", "64", "285", "200", null, null, this);
+            obj.set_taborder("5");
+            obj.style.set_background("lavenderblush");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static29", "absolute", "14", "75", "270", "25", null, null, this);
+            obj.set_taborder("6");
+            obj.set_text("이름, 아이디, 주민등록번호를 입력해주세요");
+            obj.style.set_font("bold 9 Dotum,굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "11", "112", "280", "25", null, null, this);
+            obj.set_taborder("7");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "11", "136", "280", "25", null, null, this);
+            obj.set_taborder("8");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "11", "160", "280", "25", null, null, this);
+            obj.set_taborder("9");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "11", "112", "95", "25", null, null, this);
+            obj.set_taborder("10");
+            obj.set_text("이름");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "11", "136", "95", "25", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("아이디");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "11", "160", "95", "25", null, null, this);
+            obj.set_taborder("12");
+            obj.set_text("주민등록번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "86", "208", "55", "23", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("찾기");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "171", "208", "55", "23", null, null, this);
+            obj.set_taborder("14");
+            obj.set_text("닫기");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            obj.getSetter("titletext").set("회원가입창");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "113", "116", "170", "19", null, null, this);
+            obj.set_taborder("1");
+            obj.set_enableevent("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "113", "140", "170", "19", null, null, this);
+            obj.set_taborder("2");
+            obj.set_inputtype("number,english");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit02", "absolute", "113", "164", "80", "19", null, null, this);
+            obj.set_taborder("3");
+            obj.set_inputtype("number");
+            obj.set_autoskip("true");
+            obj.set_maxlength("6");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit03", "absolute", "202", "164", "80", "19", null, null, this);
+            obj.set_taborder("4");
+            obj.set_password("true");
+            obj.set_inputtype("number");
+            obj.set_maxlength("7");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 300, 270, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("비밀번호 찾기");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Edit01","value","ds_search","emp_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Edit00","value","ds_search","emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","Edit02","value","ds_search","birth");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Edit03","value","ds_search","back_birth");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("pwSearch.xfdl", "Lib::common.xjs");
+        this.registerScript("pwSearch.xfdl", function() {
+
+        //include "Lib::common.xjs";
+
+        this.Button01_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+
+        this.Button00_onclick = function(obj,e)
+        {
+         	if(this.Edit01.value == null){
+         		this.alert("이름을 입력해주세요");
+         		this.Edit01.setFocus();
+         		return;
+         	}else if(this.Edit00.value == null){
+         		this.alert("아이디를 입력해주세요");
+         		this.Edit00.setFocus();
+         		return;
+         	}else if(this.Edit02.getLength() < 6 || this.Edit03.getLength() < 7){
+         		this.alert("주민등록번호를 입력해주세요");
+         		this.Edit02.setFocus();
+         		return;
+         	}
+         	
+         	this.gfn_transaction(this,
+         					"searchPw",
+         					"administrator/searchPw.do",
+         					"ds_search=ds_search",
+         					"ds_result=ds_output",
+         					"",
+         					"transaction_callback"
+         					);
+        }
+
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		this.alert("오류입니다. 관리자에게 문의하십시오");
+        		return;
+        	}
+        	
+        	if(this.ds_result.getColumn(this.ds_result.rowposition,"emp_no")=="NONE")
+        	{
+        		alert("입력 정보를 다시 확인해주세요.");
+        		this.ds_result.clear();
+        	}
+        	
+        	var empNo = this.ds_result.getColumn(this.ds_result.rowposition, "emp_no");
+        	application.gds_empno.addRow();
+        	application.gds_empno.setColumn(application.gds_empno.rowposition, "emp_no", empNo);
+        	this.go("member::pwUpdate.xfdl");
+        }
+
+        
+
+        
+
+        
+
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.Static29.addEventHandler("onclick", this.Static29_onclick, this);
+            this.Button00.addEventHandler("onclick", this.Button00_onclick, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+
+        };
+
+        this.loadIncludeScript("pwSearch.xfdl");
+
+       
+    };
+}
+)();

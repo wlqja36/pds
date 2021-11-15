@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Oct_VacationMapper">
+
+     
+    <resultMap id="Oct_vacation" type="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeVO">
+        <result property="vacation_code_id"      	column="VACATION_CODE_ID" />	                         
+        <result property="vacation_nm"           	column="VACATION_NM"/>	              
+        <result property="vacation_standard_code"  	column="VACATION_STANDARD_CODE"/>	      
+        <result property="reg_date"              	column="REG_DATE"/>	          
+        <result property="reg_emp_id"            	column="REG_EMP_ID"/>	          
+        <result property="modify_date"           	column="MODIFY_DATE"/>	          
+        <result property="modify_emp_id"         	column="MODIFY_EMP_ID"/>	          
+        <result property="emp_reg_name"         	column="EMP_REG_NAME"/>	          
+        <result property="emp_mod_name"         	column="EMP_MOD_NAME"/>	          
+        <result property="emp_ok_name"           	column="EMP_OK_NAME"/>	          
+        <result property="confirm_date"          	column="CONFIRM_DATE"/>	          
+        <result property="confirm_emp_id"        	column="CONFIRM_EMP_ID"/>	          
+        <result property="confirmyn"             	column="CONFIRMYN"/>	                
+    </resultMap>
+      <select id="selectVacationCodeVO" parameterType="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeVO" resultMap="Oct_vacation">
+      	SELECT 
+      		VACATION_CODE_ID,
+      		VACATION_NM,
+      		VACATION_STANDARD_CODE,
+      		REG_DATE,
+      		REG_EMP_ID,
+      		MODIFY_DATE,
+      		MODIFY_EMP_ID,
+      		EMP_REG_NAME,
+   	  		EMP_MOD_NAME,
+   	  		EMP_OK_NAME,
+      		CONFIRM_DATE,
+      		CONFIRM_EMP_ID,
+      		CONFIRMYN
+       FROM VACATION_CODE
+       <if test='searchCondition !=""'> WHERE VACATION_NM = #{searchCondition}</if>
+       ORDER BY VACATION_CODE_ID
+		</select>
+
+   	  <insert id="insertVacationCodeVO" parameterType="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeVO">
+   	  	<![CDATA[
+   	  		INSERT INTO VACATION_CODE(
+   	  		VACATION_CODE_ID,
+   	  		VACATION_NM,
+   	  		VACATION_STANDARD_CODE,
+   	  		REG_DATE,
+   	  		REG_EMP_ID,
+   	  		MODIFY_DATE,
+   	  		MODIFY_EMP_ID,
+   	  		EMP_REG_NAME,
+   	  		EMP_MOD_NAME,
+   	  		EMP_OK_NAME,
+   	  		CONFIRM_DATE,
+   	  		CONFIRM_EMP_ID,
+   	  		CONFIRMYN
+   	  		) 
+   	  		VALUES (
+   	  		 VACAITON_SEQ.NEXTVAL,
+   	  		#{vacation_nm},
+   	  		#{vacation_standard_code},
+   	  		#{reg_date},
+   	  		#{reg_emp_id},
+   	  		#{modify_date},
+   	  		#{modify_emp_id},
+   	  		#{emp_reg_name},
+			#{emp_mod_name},
+			#{emp_ok_name},
+   	  		#{confirm_date},
+   	  		#{confirm_emp_id},
+   	  		#{confirmyn}
+   	  		)	 	  	
+   	  	]]>  	 
+   	  	</insert>
+   	  	
+   	  <update id="updateVacationCodeVO" parameterType="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeVO">
+   	  	<![CDATA[
+   	  		UPDATE VACATION_CODE
+   	  		SET
+   	  			VACATION_CODE_ID = #{vacation_code_id},
+   	  			VACATION_NM = #{vacation_nm},
+   	  			VACATION_STANDARD_CODE = #{vacation_standard_code},
+   	  			REG_DATE = #{reg_date},
+   	  			REG_EMP_ID = #{reg_emp_id},
+   	  			MODIFY_DATE = #{modify_date},
+   	  			MODIFY_EMP_ID = #{modify_emp_id},
+   	  			EMP_REG_NAME = #{emp_reg_name},
+   	  			EMP_MOD_NAME = #{emp_mod_name},
+   	  			EMP_OK_NAME = #{emp_ok_name}, 
+   	  			CONFIRM_DATE = #{confirm_date},
+   	  			CONFIRM_EMP_ID = #{confirm_emp_id},
+   	  			CONFIRMYN = #{confirmyn}
+   	  			
+   	  		WHERE VACATION_CODE_ID = #{vacation_code_id}
+   	  	]]>
+   	  	  	  
+   	  </update>
+   	  	
+   	  <delete id="deleteVacationCodeVO" parameterType="nexacro.sample.vo.Oct_vacation.Oct_vacationCodeVO">
+   	  	<![CDATA[
+   	  		DELETE VACATION_CODE
+   	  		WHERE VACATION_CODE_ID = #{vacation_code_id}
+   	  	]]>   	  
+   	  </delete>
+   	  
+
+</mapper>
+

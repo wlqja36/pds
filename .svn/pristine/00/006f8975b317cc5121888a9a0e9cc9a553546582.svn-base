@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="SPENDING_RESOLRUTION" left="0" top="0" width="1036" height="700" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="0" left="1.38%" top="7" height="50" style="background:#3366ffff;color:#ffffffff;" right="0.89%"/>
+        <Static id="sta_title" taborder="1" text="지출결의서" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <ImageViewer id="img02" taborder="2" left="1.54%" top="65" height="84" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" right="1.06%"/>
+        <Static id="sta_11" taborder="3" text="기간" onclick="sta_15_onclick" left="608" top="75" width="95" height="27" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Calendar id="cal_start_date" taborder="4" left="702" top="75" width="145" height="27" style="align:center middle;" value="null" dateformat="yyyy-MM-dd ddd"/>
+        <Static id="Static00" taborder="5" text="~" left="845" top="80" right="164" height="20" style="align:center;"/>
+        <Calendar id="cal_end_date" taborder="6" left="869" top="76" width="145" height="25" style="align:center middle;" oneditclick="cal_end_date_oneditclick"/>
+        <Button id="btn_search" taborder="7" text="조회" onclick="btn_search_onclick" left="946" top="115" width="71" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Grid id="Grid00" taborder="8" useinputpanel="false" left="16" top="201" right="11" height="191" binddataset="ds_spending" autoenter="select" selecttype="row" onexpandup="Grid00_onexpandup" autosizingtype="row" cellsizingtype="col">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+                <Column size="130"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="등록일시"/>
+                <Cell col="1" text="급여대장번호" expandshow="show"/>
+                <Cell col="2" text="지출유형코드"/>
+                <Cell col="3" text="총지출경비"/>
+                <Cell col="4" text="등록자사번"/>
+                <Cell col="5" text="수정자사번"/>
+                <Cell col="6" text="수정일시"/>
+                <Cell col="7" text="승인자사번"/>
+                <Cell col="8" text="승인일시"/>
+                <Cell col="9" text="승인여부"/>
+              </Band>
+              <Band id="body">
+                <Cell displaytype="date" edittype="date" text="bind:REG_DATE" wordwrap="none" mask="yyyy-MM-dd ddd" calendardisplay="edit" calendardisplaynulltype="none"/>
+                <Cell col="1" edittype="text" text="bind:ATTITUDE_BOOK_ID" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall_D.png')"/>
+                <Cell col="2" displaytype="combo" edittype="combo" text="bind:RESOLUTION_CODE" combodataset="ds_rescode" combocodecol="CODE_NO" combodatacol="CODE_NO"/>
+                <Cell col="3" edittype="text" text="bind:TOTAL_COST"/>
+                <Cell col="4" edittype="none" text="bind:REG_EMP_NO"/>
+                <Cell col="5" edittype="text" text="bind:MODIFY_EMP_NO"/>
+                <Cell col="6" edittype="text" text="bind:MODIFY_DATE" calendardisplaynulltype="none"/>
+                <Cell col="7" edittype="text" text="bind:CONFIRM_EMP_NO"/>
+                <Cell col="8" edittype="text" text="bind:CONFIRM_DATE" calendardisplaynulltype="none"/>
+                <Cell col="9" edittype="text" text="bind:CONFIRM_YN"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_15" taborder="9" text="지출유형코드" onclick="sta_15_onclick" left="316" top="76" width="107" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="combo_search_ResCode" taborder="10" left="422" top="76" right="445" height="25" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff;" index="-1" datacolumn="datacolumn" codecolumn="codecolumn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체보기</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">출장경비(5100)</Col>
+                <Col id="datacolumn">출장경비(5100)</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">교육경비(5200)</Col>
+                <Col id="datacolumn">교육경비(5200)</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <ImageViewer id="img00" taborder="11" left="1.54%" top="444" height="243" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;" right="13"/>
+        <Static id="sta_33" taborder="12" text="지출결의서 상세" left="17" top="427" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;" onclick="sta_33_onclick"/>
+        <Static id="st_empNM" taborder="13" text="품위자" onclick="sta_15_onclick" left="25" top="459" width="165" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_empNM" taborder="14" oneditclick="edt_btr_no2_oneditclick" left="177" top="459" width="343" height="35" enable="false"/>
+        <Static id="st_res_date" taborder="15" text="품위일자" onclick="sta_15_onclick" left="560" top="459" width="167" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림; :disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Static id="st_modify_empNM" taborder="16" text="수정자" onclick="sta_15_onclick" left="25" top="527" width="165" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_modify_empNM" taborder="17" oneditclick="edt_btr_no2_oneditclick" left="177" top="527" width="342" height="35" enable="false"/>
+        <Static id="st_modify_date" taborder="18" text="수정일시" onclick="sta_15_onclick" left="560" top="527" width="167" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림; :disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Static id="st_confim_empNM" taborder="19" text="승인자" onclick="sta_15_onclick" left="25" top="561" width="165" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Edit id="edt_confim_empNM" taborder="20" oneditclick="edt_btr_no2_oneditclick" left="177" top="561" width="342" height="35" enable="false"/>
+        <Static id="st_confirm_date" taborder="21" text="승인일시" onclick="sta_15_onclick" left="560" top="561" width="167" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림; :disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Static id="st_totalCost" taborder="22" text="총지출경비" onclick="sta_15_onclick" left="26" top="595" width="158" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Button id="btn_add" taborder="23" text="추가" onclick="btn_add_onclick" left="765" top="648" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_modify" taborder="24" text="수정" onclick="btn_modify_onclick" left="827" top="648" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_delete" taborder="25" text="삭제" onclick="btn_delete_onclick" left="889" top="648" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_save" taborder="26" text="저장" onclick="btn_save_onclick" left="951" top="648" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Static id="sta_10" taborder="27" text="지출결의서 리스트" onclick="sta_33_onclick" left="17" top="181" width="120" height="13" style="color:#46463dff;align:left top;font:bold 9 굴림;"/>
+        <Static id="st_empnm" taborder="28" text="사원명" onclick="sta_15_onclick" left="24" top="74" width="95" height="27" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="edt_empnm" taborder="29" oneditclick="edt_btr_no2_oneditclick" left="118" top="74" width="157" height="27" enable="true"/>
+        <Button id="btn_z_modify_empNM" taborder="31" onclick="btn_z_modify_empNM_onclick" cssclass="btn_WF_SearchSmall" left="518" top="526" width="37" height="40" enable="false" style=":disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Button id="btn_z_confim_empNM" taborder="32" onclick="btn_z_confim_empNM_onclick" cssclass="btn_WF_SearchSmall" left="518" top="561" width="37" height="34" enable="false" style=":disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Calendar id="cal_res_date" taborder="33" left="726" top="460" width="283" height="35" style="align:center middle; :disabled {border:1 solid #d5d5d5ff ;}" enable="false" editformat="yyyy-MM-dd hh:mm:ss" dateformat="yyyy-MM-dd ddd" value="null"/>
+        <Calendar id="cal_modify_date" taborder="34" left="726" top="527" width="283" height="35" style="align:center middle; :disabled {border:1 solid #d5d5d5ff ;}" enable="false"/>
+        <Calendar id="cal_confirm_date" taborder="35" left="726" top="561" width="283" height="35" style="align:center middle; :disabled {border:1 solid #d5d5d5ff ;}" enable="false"/>
+        <MaskEdit id="edt_totalCost" taborder="36" left="178" top="595" height="35" enable="false" mask="###,###,###,###" trimtype="both" oneditclick="edt_totalCost_oneditclick" width="831"/>
+        <Button id="btn_search00" taborder="37" text="전체보기" onclick="btn_wholeList_onclick" left="870" top="115" width="71" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Static id="Static02" taborder="38" text="*" left="57" top="601" width="17" height="20" style="color:red;font:arial,18;" visible="false"/>
+        <Static id="Static04" taborder="39" text="*" left="596" top="470" width="17" height="20" style="color:red;font:arial,18;" visible="false"/>
+        <Static id="st_sbookNo" taborder="40" text="급여대장번호" onclick="sta_15_onclick" left="25" top="493" width="165" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림;"/>
+        <Static id="Static01" taborder="41" text="*" visible="false" left="48" top="501" width="17" height="20" style="color:red;font:arial,18;"/>
+        <Edit id="edt_sbookNo" taborder="42" oneditclick="edt_btr_no2_oneditclick" enable="false" left="177" top="493" width="342" height="35" style=":disabled {font:8 Dotum;}"/>
+        <Button id="btn_z_sbookNo" taborder="43" onclick="btn_z_sbookNo_onclick" cssclass="btn_WF_SearchSmall" enable="false" left="518" top="493" width="37" height="36" style=":disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Static id="st_resCode" taborder="44" text="지출유형코드" onclick="sta_15_onclick" left="560" top="493" width="167" height="35" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 굴림; :disabled {border:1 solid #d5d5d5ff ;}"/>
+        <Combo id="combo_resCode" taborder="30" innerdataset="@ds_rescode" codecolumn="CODE_NO" datacolumn="CODE_NO" onitemchanged="Combo01_onitemchanged" enable="false" left="725" top="493" height="35" style="border:1 solid #a6a6a9ff,1 solid #d5d5d5ff,1 solid #d5d5d5ff,1 solid #a6a6a9ff; :disabled {border:1 solid #d5d5d5ff ;align:center;}" width="283"/>
+        <Static id="Static03" taborder="45" text="*" visible="false" left="580" top="501" width="17" height="20" style="color:red;font:arial,18;"/>
+        <Button id="btn_z_modify_empNM00" taborder="46" onclick="btn_z_modify_empNM00_onclick" cssclass="btn_WF_SearchSmall" enable="true" left="274" top="74" width="27" height="27"/>
+        <Button id="btn_z_reg_empNM" taborder="47" onclick="btn_z_reg_empNM_onclick" cssclass="btn_WF_SearchSmall" enable="false" left="518" top="459" width="37" height="36" style=":disabled {border:1 solid #d5d5d5ff ;}"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_spending">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+          <Column id="REG_DATE" type="DATE" size="0"/>
+          <Column id="ATTITUDE_BOOK_ID" type="STRING" size="12"/>
+          <Column id="RESOLUTION_CODE" type="STRING" size="4"/>
+          <Column id="TOTAL_COST" type="INT" size="10"/>
+          <Column id="REG_EMP_NO" type="STRING" size="12"/>
+          <Column id="MODIFY_EMP_NO" type="STRING" size="12"/>
+          <Column id="MODIFY_DATE" type="DATE" size="256"/>
+          <Column id="CONFIRM_EMP_NO" type="STRING" size="12"/>
+          <Column id="CONFIRM_DATE" type="DATE" size="256"/>
+          <Column id="CONFIRM_YN" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_rescode">
+        <ColumnInfo>
+          <Column id="CODE_NO" type="STRING" size="6"/>
+          <Column id="CODE_NAME" type="STRING" size="200"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="CODE_NO">null</Col>
+            <Col id="CODE_NAME">전체보기</Col>
+          </Row>
+          <Row>
+            <Col id="CODE_NAME">출장경비(5100)</Col>
+            <Col id="CODE_NO">5100</Col>
+          </Row>
+          <Row>
+            <Col id="CODE_NAME">교육경비(5200)</Col>
+            <Col id="CODE_NO">5200</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_search_info">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="12"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+          <Column id="searchDateFrom" type="STRING" size="256"/>
+          <Column id="searchDateTo" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_emp_info">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_S_BookCode">
+        <ColumnInfo>
+          <Column id="salary_book_no" type="STRING" size="12"/>
+          <Column id="salary_book_code" type="STRING" size="4"/>
+          <Column id="salary_book_nm" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_EmpList">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="12"/>
+          <Column id="EMP_NAME" type="STRING" size="100"/>
+          <Column id="JOIN_DATE" type="DATE" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item5" compid="edt_empNM" propid="value" datasetid="ds_spending" columnid="REG_EMP_NO"/>
+      <BindItem id="item6" compid="cal_res_date" propid="value" datasetid="ds_spending" columnid="REG_DATE"/>
+      <BindItem id="item8" compid="edt_modify_empNM" propid="value" datasetid="ds_spending" columnid="MODIFY_EMP_NO"/>
+      <BindItem id="item9" compid="cal_modify_date" propid="value" datasetid="ds_spending" columnid="MODIFY_DATE"/>
+      <BindItem id="item10" compid="edt_confim_empNM" propid="value" datasetid="ds_spending" columnid="CONFIRM_EMP_NO"/>
+      <BindItem id="item11" compid="cal_confirm_date" propid="value" datasetid="ds_spending" columnid="CONFIRM_DATE"/>
+      <BindItem id="item2" compid="edt_totalCost" propid="value" datasetid="ds_spending" columnid="TOTAL_COST"/>
+      <BindItem id="item7" compid="combo_search_ResCode" propid="innerdataset" datasetid="ds_spending"/>
+      <BindItem id="item3" compid="edt_sbookNo" propid="value" datasetid="ds_spending" columnid="ATTITUDE_BOOK_ID"/>
+      <BindItem id="item4" compid="combo_resCode" propid="value" datasetid="ds_spending" columnid="RESOLUTION_CODE"/>
+      <BindItem id="item13" compid="combo_resCode" propid="innerdataset" datasetid="ds_spending" columnid=""/>
+    </Bind>
+    <InitValue>
+      <Grid id="Grid00" autoenter="select"/>
+    </InitValue>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::Comm.xjs";
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+/**
+ * form onload 함수
+ * @return 
+ * @example
+ *
+ * @memberOf this
+ */
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+	trace("폼 로딩됨!"); 
+	
+	//날짜
+	var today = new Date();
+	var nToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+""+(""+today.getDate()).padLeft(2,'0');
+	var startToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+"01";
+	this.cal_start_date.set_value(startToday); //시작날짜 해당 월의 첫째날로 셋팅 
+	this.cal_end_date.set_value(nToday);
+	this.cal_res_date.set_value(nToday);
+	
+	this.load_empInfo(); 
+	this.load_wholeResList(); 
+	this.load_S_Book();
+	this.load_wholeEmpList();
+	this.load_wholeResCode();
+	
+} 
+
+//로드 로그인한 사원정보 
+this.load_empInfo = function(){
+	trace("로드함수 읽음: 사원정보");
+	//this.ds_search_info.setColumn(0, "searchKeyword", '202105160042'); //조회할 사원번호 <----- 로그인한 사원번호!!! 
+	
+	
+	//사원정보 
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadEmpInfo.do",
+		inds :["ds_search_info=ds_search_info"], 
+		outds :["ds_emp_info=ds_emp_info"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		trace("ds_emp_info : " + pThis.ds_emp_info.saveXML());
+		trace("==여기까지 로딩완료 : 로그인 사원==");
+	});
+}
+
+
+//로드 지출결의서 전체 리스트  
+this.load_wholeResList = function(obj:Button,  e:nexacro.ClickEventInfo){
+	trace("로드함수 읽음: 지출결의서 리스트");
+		
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadResList.do",
+		inds :["ds_search_info=ds_search_info"], 
+		outds :["ds_spending=ds_spending"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace(" ds_spending : " + pThis.ds_spending.saveXML());
+		trace("==여기까지 로딩완료 :지출결의서 리스트==");
+	});
+}
+
+
+//로드 전체 사원리스트  
+this.load_wholeEmpList = function(){
+	trace("로드함수 읽음: 전체 사원 리스트");
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadWholeEmpList.do",
+		inds :[], 
+		outds :["ds_EmpList=ds_EmpList"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace("ds_EmpList : " + pThis.ds_EmpList.saveXML());
+		trace("==여기까지 로딩완료 : 로드 전체 사원리스트==");
+	});
+}
+
+//로드 지출유형 코드  
+this.load_wholeResCode = function(){
+	trace("로드함수 읽음: 지출유형 코드 ");
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadResCode.do",
+		inds :[], 
+		outds :["ds_rescode=ds_rescode"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		trace("ds_rescode : " + pThis.ds_rescode.saveXML());
+		trace("==여기까지 로딩완료 : 지출유형 코드==");
+	});
+	
+	this.ds_rescode.setColumn(0, "CODE_NO", '전체보기');
+}
+
+
+//조회
+this.btn_search_onclick = function(obj:Button, e:nexacro.ClickEventInfo){
+	var dateFrom =this.cal_start_date.value;
+	var dateTo =this.cal_end_date.value;
+	var resCode =this.combo_search_ResCode.value;
+	var empInfo = this.edt_empnm.value;
+    trace("==dateFrom : ", dateFrom );
+    trace("==dateTo : ", dateTo );
+    
+    this.ds_search_info.setColumn(0, "searchDateFrom", dateFrom); 
+    this.ds_search_info.setColumn(0, "searchDateTo", dateTo);
+    this.ds_search_info.setColumn(0, "searchCondition", resCode);
+    this.ds_search_info.setColumn(0, "searchKeyword", empInfo); //조회할 사원번호 <----- 로그인한 사원번호!!! 
+	
+	//급여대장 선택조회 
+	var oDatas1 =  {
+		svcid : "search",
+		sController : "selectResList.do",
+		inds :["ds_search_info=ds_search_info"], 
+		outds :["ds_spending=ds_spending"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+	Iject.transaction(this,oDatas1,function(){
+		if(this.errorcode < 0) //0:정상, this.errorcode<0:오류, this.errorcode>0:경고 
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;   //form object	      
+		//trace(" selectResList : " + pThis.ds_spending.saveXML());
+		trace("==여기까지 조회완료 :급여대장 선택조회==");
+		
+		//this.reload();
+	});
+	
+// 	//사원정보 입력
+// 	var empNo =this.ds_emp_info.getColumn(0, "EMP_NO");
+// 	var empName =this.ds_emp_info.getColumn(0, "EMP_NAME");
+// 	trace("조회시 사원이름 : ",empName, "|| 사원번호: ", empNo );
+// 	this.edt_empnm.set_value(empName);
+// 	this.edt_empno.set_value(empNo);
+}
+
+
+//추가
+this.btn_add_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var yn =Iject.confirm("지출결의서를 작성 하시겠습니까?");
+	if (yn) {
+		//현재시간
+		var today = new Date();
+		var nToday = today.getYear()+""+((today.getMonth()+1)+"").padLeft(2,'0')+""+(""+today.getDate()).padLeft(2,'0');
+		
+// 		var empNo = this.ds_emp_info.getColumn(0, "EMP_NO");
+// 		var empName = this.ds_emp_info.getColumn(0, "EMP_NAME");
+// 		var empInfo = empName+'('+empNo+')';
+		
+		var nRow = this.ds_spending.addRow();
+		
+		//작성창 활성
+		this.edt_empNM.set_enable(true);
+		this.btn_z_reg_empNM.set_enable(true);
+		this.edt_sbookNo.set_enable(true);
+		this.btn_z_sbookNo.set_enable(true);
+		this.combo_resCode.set_enable(true);
+		//this.edt_empNM.set_value(empInfo);
+		this.cal_res_date.set_value(nToday);
+		this.edt_totalCost.set_enable(true);
+		this.Static01.set_visible(true);
+		this.Static02.set_visible(true);
+		this.Static03.set_visible(true);
+		this.Static04.set_visible(true);
+	}
+}
+
+//수정 
+this.btn_modify_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//작성창 활성
+	this.edt_sbookNo.set_enable(true);
+	this.btn_z_sbookNo.set_enable(true);
+	this.combo_resCode.set_enable(true);
+	this.edt_modify_empNM.set_enable(true);
+	this.btn_z_modify_empNM.set_enable(true);
+	this.cal_modify_date.set_enable(true);
+	this.edt_confim_empNM.set_enable(true);
+	this.btn_z_confim_empNM.set_enable(true);
+	this.cal_confirm_date.set_enable(true);
+	this.edt_totalCost.set_enable(true);
+	this.Static01.set_visible(true);
+	this.Static02.set_visible(true);
+	this.Static03.set_visible(true);
+	this.Static04.set_visible(true);
+}
+
+
+//저장버튼 클릭시  
+this.btn_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.alert("변경사항을 저장하시겠습니까?");
+	this.fn_save("save");
+}
+
+//저장
+this.fn_save = function(strid)
+{	
+	var curRowPos =this.ds_spending.rowposition;
+	trace("curRowPos", curRowPos);
+	
+    if (this.ds_spending.getColumn(curRowPos, "ATTITUDE_BOOK_ID") ==null|| 
+    this.ds_spending.getColumn(curRowPos, "RESOLUTION_CODE")==null||
+    this.ds_spending.getColumn(curRowPos, "TOTAL_COST")==null
+    ){
+		alert("필수 기입창을 입력하세요.");
+		return; 
+    } 
+    
+    var v = strid; 
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "modifyResList.do",			 
+			  inds :["ds_spending=ds_spending:U", "empInfo="],
+			  outds :[],			     
+			  args  : [ ],
+			  bAsync : true,  
+			  nDataType : 0,   
+			  bCompress :false,			  
+			}; 
+			
+	Iject.transaction(this,oDatas,function(){   
+  
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}
+		var pThis = this.fobj; 
+		switch(v){
+			case "save" : Iject.alert("저장완료");
+			break;
+			case "delete" : Iject.alert("삭제완료");
+			break; 
+	    }
+	});
+}
+
+//삭제 
+this.btn_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	rtnValue=this.confirm("삭제하시겠습니까?");
+	var nRow = this.ds_spending.rowposition;
+	this.ds_spending.deleteRow(nRow);
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		this.load_atticode();
+	}
+}
+
+
+//급여대장번호 리스트  가져오기 
+this.load_S_Book = function(){
+	
+	var searchKeyword = "";
+	this.ds_search_info.setColumn(0, "searchKeyword", searchKeyword);
+	this.ds_search_info.setColumn(0, "searchCondition", "NAME");	
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadSbookList.do",
+		inds :["ds_search_info=ds_search_info"], 
+		outds :["ds_S_BookCode=ds_S_BookCode"], 	     
+		args  : [],
+		bAsync : true,    
+		nDataType : 0,   
+		bCompress :false,	 		  
+	}; 
+    
+	Iject.transaction(this,oDatas,function(){
+ 
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;      
+		//trace("==메인: ds_S_BookCode : " + pThis.ds_S_BookCode.saveXML());
+		trace("==여기까지 로딩완료: 급여대장번호리스트 가져오기 ==");
+	});
+};
+
+
+//지출결의서 리스트 전체보기 클릭시 
+this.btn_wholeList_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.load_wholeResList();
+};
+
+
+//급여대장번호 모달창 콜백함수 
+this.fn_sBook_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        trace("return 값 - undefined");
+        return;
+    }
+
+    if(strPopupID == "SALARY"){
+		//this.alert("Return Value: " + strReturn);
+		this.edt_sbookNo.set_value(strReturn);
+    }
+};
+
+
+
+//급여대장번호 조회 버튼 클릭시 (모달창 띄우기) 
+this.btn_z_sbookNo_onclick = function(obj:Button, e:nexacro.ClickEventInfo){	
+	
+	//모달창 생성 
+	var objChildFrame = new ChildFrame();  
+	objChildFrame.init("SALARY", "absolute", 30, 30, 424, 340, null, null, "SALARY::Oct_SalaryBook_Search.xfdl");
+	objChildFrame.set_dragmovetype("all");
+	
+	var objParam = {param1: this.ds_SalaryBookCode}
+	
+	objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_SalaryBook_popupCallback");
+
+};
+
+
+//그리드 돋보기 클릭시 
+this.Grid00_onexpandup = function(obj:Grid, e:nexacro.GridMouseEventInfo)
+{
+	this.btn_z_sbookNo_onclick();
+}
+
+
+//사원 조회 버튼 클릭시
+this.modal_empList = function(selStr){
+	//모달창 생성 
+	var objChildFrame = new ChildFrame();  
+	objChildFrame.init(selStr, "absolute", 30, 30, 424, 340, null, null, "SALARY::Search_Emp_Book.xfdl");
+	objChildFrame.set_dragmovetype("all");
+	
+	var objParam = {param1: this.ds_EmpList}
+	trace("==메인 : ds_Emp_BookCode 데이터 넘기는중! ");
+	
+	objChildFrame.showModal(this.getOwnerFrame()
+                          , objParam
+                          , this
+                          , "fn_empList_popupCallback");
+}
+
+//전체 사원리스트 모달창 콜백함수 
+this.fn_empList_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        trace("return 값 - undefined");
+        return;
+    }
+	
+	if(strPopupID == "search"){
+// 		var startIndex = strReturn.indexOf('(');
+// 		trace("startIndex", startIndex);
+// 		var endIndex = strReturn.indexOf(')');
+// 		trace("endIndex", endIndex);
+		this.edt_empnm.set_value(strReturn);
+    }
+	
+	
+    if(strPopupID == "modify"){
+		this.edt_modify_empNM.set_value(strReturn);
+    }
+    
+    if(strPopupID == "reg"){
+		this.edt_empNM.set_value(strReturn);
+    }
+    
+    if(strPopupID == "confirm1"){
+		this.edt_confim_empNM.set_value(strReturn);
+    }
+};
+
+
+//각 버튼 클릭시 사원조회 모달창 
+this.btn_z_modify_empNM_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.modal_empList("modify");
+}
+
+this.btn_z_confim_empNM_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.modal_empList("confirm1");
+}
+
+this.btn_z_modify_empNM00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.modal_empList("search");
+}
+
+this.btn_z_reg_empNM_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.modal_empList("reg");
+}
+
+this.edt_totalCost_oneditclick = function(obj:MaskEdit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

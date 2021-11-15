@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="s_tax">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="tax_VO" type="nexacro.sample.vo.s_salbookVO.TaxVO" /> 
+
+	<!-- Sample resultObject -->
+
+	
+	<!-- 세금vo -->
+	<resultMap id="tax_" class="tax_VO">
+		<result property="salarybookno" column="SALARY_BOOK_NO" />
+		<result property="empno" column="EMP_NO" />
+		<result property="taxcode" column="TAX_CODE" />
+		<result property="taxmoney" column="TAX_MONEY" />
+	</resultMap>
+
+
+	<!-- 세금 자동넣기 -->
+	<insert id="s_book.inserttax_VO" parameterClass="tax_VO">
+		INSERT INTO SAL_TAX(
+		SALARY_BOOK_NO,
+		EMP_NO,
+		TAX_CODE,
+		TAX_MONEY
+		)
+		SELECT 
+		$searchKeyword$,
+		EMP_NO,
+		TAX_CODE,
+		TAX_MONEY
+		FROM
+		SAL_TAX
+		WHERE
+		SALARY_BOOK_NO = #searchCondition#
+		
+	</insert>
+
+</sqlMap>

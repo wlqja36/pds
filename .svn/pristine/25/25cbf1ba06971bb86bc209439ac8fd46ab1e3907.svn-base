@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpEval_Popup">
+
+	<!-- 조인 베이스 -->
+	<!-- <resultMap id="empNo" type="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+        <result  property="EMP_NO"				column="EMP_NO"/>
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_YN"			column="EMP_EVAL_YN"/>
+        <result  property="EVAL_STD_SCORE_SUM"	column="EVAL_STD_SCORE_SUM"/>
+        <result  property="EVAL_HEAD_SCORE_SUM"	column="EVAL_HEAD_SCORE_SUM"/> 
+        <collection property="empEvalHeadVO" 	resultMap="empEvalHead" />   
+		<collection property="empEvalStdVO" 	resultMap="empEvalStd" />
+		<collection property="empEvalVO" 		resultMap="empEval" />           
+	</resultMap> -->
+	
+	<resultMap id="empNo" type="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+        <result  property="EMP_NO"					column="EMP_NO"/>
+        <result  property="EMP_EVAL_BOOK_NO"		column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_YN"				column="EMP_EVAL_YN"/>
+        <result  property="EVAL_STD_SCORE_SUM"		column="EVAL_STD_SCORE_SUM"/>
+        <result  property="EVAL_HEAD_SCORE_SUM"		column="EVAL_HEAD_SCORE_SUM"/> 
+        <result  property="EMP_EVAL_REG_USER_NO"	column="EMP_EVAL_REG_USER_NO"/>
+        <result  property="EMP_EVAL_MOD_USER_NO"	column="EMP_EVAL_MOD_USER_NO"/> 
+        <result  property="EMP_EVAL_ACC_USER_NO"	column="EMP_EVAL_ACC_USER_NO"/> 
+        <result  property="EMP_EVAL_ACC_YN"			column="EMP_EVAL_ACC_YN"/> 
+        <result  property="EMP_EVAL_SUM"			column="EMP_EVAL_SUM"/> 
+        <result  property="EMP_NAME"				column="EMP_NAME"/> 
+        <result  property="EMP_ACC_NAME"			column="EMP_ACC_NAME"/> 
+        <result  property="EMP_MOD_NAME"			column="EMP_MOD_NAME"/> 
+        <result  property="EVAL_STD_CODE"			column="EVAL_STD_CODE"/> 
+        <result  property="EVAL_STD_SCORE"			column="EVAL_STD_SCORE"/> 
+        <result  property="EVAL_HEAD_CODE"			column="EVAL_HEAD_CODE"/> 
+        <result  property="EVAL_HEAD_SCORE"			column="EVAL_HEAD_SCORE"/> 
+
+                          
+                     
+        <collection property="empEvalHeadVO" 	resultMap="empEvalHead" />   
+		<collection property="empEvalStdVO" 	resultMap="empEvalStd" />
+		<collection property="empEvalVO" 		resultMap="empEval" />           
+	</resultMap>
+
+	
+	
+	
+	
+
+<!-- 조인1 -->
+ <resultMap id="empEvalHead" type="nexacro.sample.vo.Oct_eval.LJH_EmpEvalHeadVO">
+        <result  property="EMP_NO"				column="EMP_NO"/>
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EVAL_HEAD_CODE"		column="EVAL_HEAD_CODE"/>
+        <result  property="EVAL_HEAD_SCORE"		column="EVAL_HEAD_SCORE"/>    
+    </resultMap> 
+    
+	<!-- 조인2 -->
+ <resultMap id="empEvalStd" type="nexacro.sample.vo.Oct_eval.LJH_EmpEvalStdVO">
+        <result  property="EMP_EVAL_BOOK_NO"	column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_NO"				column="EMP_NO"/>
+        <result  property="EVAL_STD_CODE"		column="EVAL_STD_CODE"/>
+        <result  property="EVAL_STD_SCORE"		column="EVAL_STD_SCORE"/>    
+    </resultMap> 
+    
+    <!-- 조인3 -->
+    <resultMap id="empEval" type="nexacro.sample.vo.Oct_eval.LJH_EmpEvalVO">
+ 		<result  property="EMP_EVAL_BOOK_NO"		column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_BOOK_NM"		column="EMP_EVAL_BOOK_NM"/>
+        <result  property="EVAL_TERM_CODE"			column="EVAL_TERM_CODE"/>
+        <result  property="EMP_EVAL_STA_DATE"		column="EMP_EVAL_STA_DATE"/>
+        <result  property="EMP_EVAL_END_DATE"		column="EMP_EVAL_END_DATE"/>
+        <result  property="EMP_EVAL_REG_DATE"		column="EMP_EVAL_REG_DATE"/>
+        <result  property="EMP_EVAL_REG_USER_NO"	column="EMP_EVAL_REG_USER_NO"/>
+        <result  property="EMP_EVAL_MOD_DATE"		column="EMP_EVAL_MOD_DATE"/>
+        <result  property="EMP_EVAL_MOD_USER_NO"	column="EMP_EVAL_MOD_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_DATE"		column="EMP_EVAL_ACC_DATE"/>
+        <result  property="EMP_EVAL_ACC_USER_NO"	column="EMP_EVAL_ACC_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_YN"			column="EMP_EVAL_ACC_YN"/>
+        <result  property="EMP_EVAL_SUM"			column="EMP_EVAL_SUM"/>      
+        <result  property="EMP_NAME"				column="EMP_NAME"/>   
+    </resultMap>
+    
+    
+    <select id="LJH_selectEmpEval_PopupVOList" resultMap="empNo">
+		
+			 SELECT 
+			 *
+		 	 FROM EMP_NO
+
+    </select>
+    
+    <select id="LJH_selectEmpEval_PopupVOList2" resultMap="empNo">
+		
+			 SELECT 
+			 	*
+		 	 FROM EMP_EVAL_HEAD eh,
+		 		  EMP_EVAL_STD es,
+		 	      EMP_NO en,
+		 	      EMP_EVAL_BOOK eb
+		 	 WHERE en.EMP_EVAL_BOOK_NO = es.EMP_EVAL_BOOK_NO (+)
+		 	 	   AND
+		 	 	   en.EMP_EVAL_BOOK_NO = eh.EMP_EVAL_BOOK_NO (+)
+		 	 	   AND
+		 	 	   en.EMP_EVAL_BOOK_NO = eb.EMP_EVAL_BOOK_NO (+)
+                   AND
+                   eh.EMP_EVAL_BOOK_NO = #{values}
+		
+    </select>
+    
+    <select id="LJH_selectEmpEvalBookNo" resultMap="empNo">
+		
+			 SELECT 
+				EMP_EVAl_BOOK_SEQ.nextval
+			 FROM DUAL
+		
+    </select>
+    
+    <!-- 문자열 조합 실험 -->
+    <select id="LJH_selectEmpEval_PopupTest" resultMap="empNo" >
+		
+			 SELECT 
+			 	ep.EMP_NO || '(' || ep.EMP_NAME || ')'
+		 	 FROM EMP ep, EMP_EVAL_BOOK eeb
+		 	 WHERE ep.EMP_NO = eeb.emp_eval_reg_user_no
+		 
+    </select>
+    
+    
+    
+ <!-- 	다중인서트 -->
+    <update id="LJH_insertEmpEval" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO" >
+		
+	
+   	  	 
+   	  	 INSERT ALL
+	INTO EMP_NO (EMP_NO,
+			 EMP_EVAL_BOOK_NO,
+			 EMP_EVAL_YN,
+			 EVAL_STD_SCORE_SUM,
+			 EVAL_HEAD_SCORE_SUM)
+	 VALUES (
+			#{EMP_NO},
+			#{EMP_EVAL_BOOK_NO},
+			#{EMP_EVAL_YN},
+			#{EVAL_STD_SCORE_SUM},
+			#{EVAL_HEAD_SCORE_SUM}
+   	  	 )
+INTO EMP_EVAL_HEAD
+			(EMP_NO,
+			 EMP_EVAL_BOOK_NO,
+			 EVAL_HEAD_CODE,
+			 EVAL_HEAD_SCORE)
+		 VALUES (
+			#{EMP_NO},
+			#{EMP_EVAL_BOOK_NO},
+			#{EVAL_HEAD_CODE},
+			#{EVAL_HEAD_SCORE}
+   	  	 )
+   	  	 
+   	  	INTO EMP_EVAL_STD
+			(EMP_NO,
+			EMP_EVAL_BOOK_NO,
+			EVAL_STD_CODE,
+			EVAL_STD_SCORE)
+		VALUES (
+			#{EMP_NO},
+			#{EMP_EVAL_BOOK_NO},
+			#{EVAL_STD_CODE},
+			#{EVAL_STD_SCORE}
+   	  	 )
+   	  	 
+			SELECT * FROM DUAL
+   	  	 
+   	  	 
+   	  	 
+  
+    </update>
+  
+    <update id="LJH_updateEmpNo" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+		UPDATE EMP_NO
+        SET  EVAL_STD_SCORE_SUM = #{EVAL_STD_SCORE_SUM},
+			 EVAL_HEAD_SCORE_SUM = #{EVAL_HEAD_SCORE_SUM}
+		WHERE
+			EMP_NO = #{EMP_NO}
+    </update>
+    
+    <update id="LJH_updateEmpEval" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+		UPDATE EMP_EVAL_BOOK
+        SET  EMP_EVAL_SUM = #{EMP_EVAL_SUM}
+		WHERE
+			EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO}
+	 	
+    </update>
+    
+<!-- <update id="LJH_updateEmpEvalHead" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+		UPDATE EMP_EVAL_HEAD
+        SET  EMP_NO = #{EMP_NO},
+       	     EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO},
+             EVAL_HEAD_CODE = #{EVAL_HEAD_CODE},
+			 EVAL_HEAD_SCORE = #{EVAL_HEAD_SCORE}
+		WHERE
+			EMP_NO = #{EMP_NO}
+	 	
+    </update>
+    
+    <update id="LJH_updateEmpEvalStd" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+		UPDATE EMP_EVAL_STD
+        SET  EMP_NO = #{empEvalStdVO.EMP_NO},
+       	     EMP_EVAL_BOOK_NO = #{empEvalStdVO.EMP_EVAL_BOOK_NO},
+             EVAL_STD_CODE = #{empEvalStdVO.EVAL_STD_CODE},
+			 EVAL_STD_SCORE = #{empEvalStdVO.EVAL_STD_SCORE}
+		WHERE
+			EMP_NO = #{empEvalStdVO.EMP_NO}
+	 	
+    </update>  -->
+  
+    	<delete id="LJH_deleteEmpEvalHead" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+			DELETE
+			FROM
+				EMP_EVAL_HEAD
+			WHERE
+				EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO} 	  	
+	 	
+    </delete>
+    
+   	<delete id="LJH_deleteEmpEvalStd" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+			DELETE
+			FROM
+				EMP_EVAL_STD
+			WHERE
+				EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO}
+	 	
+    </delete>
+    
+	<delete id="LJH_deleteEmpNo" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpNoVO">
+		
+			DELETE
+			FROM
+				EMP_NO
+			WHERE
+				EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO}	  	
+	 	
+    </delete>
+ 
+
+
+</mapper>

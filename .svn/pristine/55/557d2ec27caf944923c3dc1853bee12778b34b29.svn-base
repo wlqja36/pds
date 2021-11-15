@@ -1,0 +1,765 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Oct_Vacation_Code");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1280,1024);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_vacation", this);
+            obj._setContents("<ColumnInfo><Column id=\"vacation_code_id\" type=\"STRING\" size=\"4\"/><Column id=\"vacation_standard_code\" type=\"STRING\" size=\"4\"/><Column id=\"vacation_nm\" type=\"STRING\" size=\"256\"/><Column id=\"reg_date\" type=\"STRING\" size=\"256\"/><Column id=\"reg_emp_id\" type=\"STRING\" size=\"12\"/><Column id=\"modify_date\" type=\"STRING\" size=\"256\"/><Column id=\"modify_emp_id\" type=\"STRING\" size=\"12\"/><Column id=\"confirm_date\" type=\"STRING\" size=\"256\"/><Column id=\"confirm_emp_id\" type=\"STRING\" size=\"12\"/><Column id=\"confirmyn\" type=\"STRING\" size=\"1\"/><Column id=\"emp_reg_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_ok_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_mod_name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows/>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><ConstColumn id=\"ConstColumn0\" type=\"STRING\" size=\"30\" value=\"\"/><ConstColumn id=\"ConstColumn1\" type=\"STRING\" size=\"30\" value=\"\"/><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"searchCondition\">111</Col><Col id=\"searchKeyword\">111</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_code_list", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">2210</Col><Col id=\"name\">연차휴가</Col></Row><Row><Col id=\"code\">2220</Col><Col id=\"name\">경조휴가</Col></Row><Row><Col id=\"code\">2230</Col><Col id=\"name\">병가</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_vacation_standard", this);
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">2310</Col><Col id=\"name\">40시간제</Col></Row><Row><Col id=\"code\">2320</Col><Col id=\"name\">44시간제</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("ImageViewer04", "absolute", "20", "67", "1235", "44", null, null, this);
+            obj.set_taborder("18");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_titlebg", "absolute", "7", "8", "1265", "45", null, null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("#165fa6ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "1.56%", "11", null, "36", "85.94%", null, this);
+            obj.set_taborder("1");
+            obj.set_text("연차코드");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "23", "71", "1228", "36", null, null, this);
+            obj.set_taborder("17");
+            obj.set_wordwrap("char");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_vac_list", "absolute", "23", "147", "1228", "314", null, null, this);
+            obj.set_taborder("8");
+            obj.set_scrollbars("fixedboth");
+            obj.set_binddataset("ds_vacation");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"120\"/><Column size=\"100\"/><Column size=\"132\"/><Column size=\"100\"/><Column size=\"123\"/><Column size=\"123\"/><Column size=\"123\"/><Column size=\"138\"/><Column size=\"105\"/><Column size=\"144\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"연차코드번호\"/><Cell col=\"1\" text=\"연차명\"/><Cell col=\"2\" text=\"연차기준코드\" combodataset=\"ds_vacation_standard\" combocodecol=\"code\" combodatacol=\"name\"/><Cell col=\"3\" text=\"등록일시\"/><Cell col=\"4\" text=\"등록자사번\"/><Cell col=\"5\" text=\"수정일시\"/><Cell col=\"6\" text=\"수정자사번\"/><Cell col=\"7\" text=\"확정일시\"/><Cell col=\"8\" text=\"확정자사번\"/><Cell col=\"9\" text=\"확정여부\"/></Band><Band id=\"body\"><Cell text=\"bind:vacation_code_id\"/><Cell col=\"1\" text=\"bind:vacation_nm\" combodataset=\"ds_code_list\" combocodecol=\"code\" combodatacol=\"name\"/><Cell col=\"2\" text=\"bind:vacation_standard_code\" combodataset=\"ds_vacation_standard\" combodatacol=\"name\"/><Cell col=\"3\" text=\"bind:reg_date\"/><Cell col=\"4\" text=\"bind:reg_emp_id\"/><Cell col=\"5\" text=\"bind:modify_date\"/><Cell col=\"6\" text=\"bind:modify_emp_id\"/><Cell col=\"7\" text=\"bind:confirm_date\"/><Cell col=\"8\" text=\"bind:confirm_emp_id\"/><Cell col=\"9\" text=\"bind:confirmyn\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_vac_reset", "absolute", "916", "476", "76", "27", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_vac_insert", "absolute", "999", "476", "76", "27", null, null, this);
+            obj.set_taborder("12");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_vac_save", "absolute", "1082", "476", "76", "27", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("등록");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_vac_delete", "absolute", "1168", "476", "76", "27", null, null, this);
+            obj.set_taborder("14");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("Div00", "absolute", "20", "509", "1231", "136", null, null, this);
+            obj.set_taborder("15");
+            obj.style.set_align("left middle");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.addChild(obj.name, obj);
+            obj = new Div("Div00", "absolute", "0.48%", "-5", null, "177", "0.88%", null, this.Div00);
+            obj.set_taborder("0");
+            obj.style.set_background("0");
+            obj.style.set_border("0 solid #808080ff");
+            this.Div00.addChild(obj.name, obj);
+            obj = new Div("Div03", "absolute", "0%", "104", null, "33", "0%", null, this.Div00.Div00);
+            obj.set_taborder("4");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Calendar("cal_vac_confirmdate", "absolute", "44.07%", "4", "235", "21", null, null, this.Div00.Div00.Div03);
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj.set_taborder("4");
+            obj = new Static("sta_vac_confirmdate", "absolute", "32.31%", "-1", "139", "33", null, null, this.Div00.Div00.Div03);
+            obj.set_taborder("5");
+            obj.set_text("확정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Static("sta_vac_regdate", "absolute", "0%", "-2", "139", "33", null, null, this.Div00.Div00.Div03);
+            obj.set_taborder("6");
+            obj.set_text("등록일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj = new Calendar("cal_vac_insertdate", "absolute", "12.11%", "4", "235", "21", null, null, this.Div00.Div00.Div03);
+            this.Div00.Div00.Div03.addChild(obj.name, obj);
+            obj.set_taborder("7");
+            obj = new Div("Div01", "absolute", "0%", "40", null, "33", "0%", null, this.Div00.Div00);
+            obj.set_taborder("5");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            obj.set_dragscrolltype("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Combo("combo_vac_title", "absolute", "12.11%", "4", "235", "21", null, null, this.Div00.Div00.Div01);
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj.set_taborder("42");
+            obj.set_displaynulltext("연차선택");
+            obj.set_innerdataset("@ds_code_list");
+            obj.set_codecolumn("code");
+            obj.set_datacolumn("name");
+            obj = new Radio("rd_vac_confirmryn", "absolute", "80.17%", "5", null, "22", "3.55%", null, this.Div00.Div00.Div01);
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            var rd_vac_confirmryn_innerdataset = new Dataset("rd_vac_confirmryn_innerdataset", this.Div00.Div00.Div01.rd_vac_confirmryn);
+            rd_vac_confirmryn_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">Y</Col><Col id=\"datacolumn\">확정</Col></Row><Row><Col id=\"codecolumn\">N</Col><Col id=\"datacolumn\">미확정</Col></Row></Rows>");
+            obj.set_innerdataset(rd_vac_confirmryn_innerdataset);
+            obj.set_taborder("44");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_direction("vertical");
+            obj = new Static("sta_vac_deteryn", "absolute", "65.02%", "-1", "139", "33", null, null, this.Div00.Div00.Div01);
+            obj.set_taborder("45");
+            obj.set_text("확정여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Static("sta_vac_modifydate", "absolute", "32.31%", "-1", "139", "33", null, null, this.Div00.Div00.Div01);
+            obj.set_taborder("46");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Static("sta_vac_title", "absolute", "0%", "-1", "139", "33", null, null, this.Div00.Div00.Div01);
+            obj.set_taborder("47");
+            obj.set_text("연차명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj = new Calendar("cal_vac_modifydate", "absolute", "44.05%", "6", null, "21", "36.53%", null, this.Div00.Div00.Div01);
+            this.Div00.Div00.Div01.addChild(obj.name, obj);
+            obj.set_taborder("48");
+            obj = new Div("Div00", "absolute", "0%", "7", null, "33", "0%", null, this.Div00.Div00);
+            obj.set_taborder("6");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Edit("edt_vac_cd", "absolute", "12.11%", "5", "235", "21", null, null, this.Div00.Div00.Div00);
+            obj.set_taborder("72");
+            obj.set_enable("false");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Edit("edt_vac_confirmno", "absolute", "77.43%", "5", null, "21", "0.33%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("73");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("sta_vac_deterno", "absolute", "65.02%", "-1", "139", "33", null, null, this.Div00.Div00.Div00);
+            obj.set_taborder("74");
+            obj.set_text("확정자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Edit("edt_vac_empno", "absolute", "44.07%", "5", "235", "21", null, null, this.Div00.Div00.Div00);
+            obj.set_taborder("75");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("sta_vac_empno", "absolute", "32.31%", "-1", "139", "33", null, null, this.Div00.Div00.Div00);
+            obj.set_taborder("76");
+            obj.set_text("등록자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("sta_vac_cd", "absolute", "0%", "-1", "139", "33", null, null, this.Div00.Div00.Div00);
+            obj.set_taborder("77");
+            obj.set_text("연차코드번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Button("btn_vac_empno", "absolute", "60.46%", "6", null, "21", "36.57%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("78");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Button("btn_vac_confirmno", "absolute", "96.79%", "6", null, "21", "0.33%", null, this.Div00.Div00.Div00);
+            obj.set_taborder("79");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div00.addChild(obj.name, obj);
+            obj = new Div("Div02", "absolute", "0%", "72", null, "33", "0%", null, this.Div00.Div00);
+            obj.set_taborder("7");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.set_scrollbars("none");
+            this.Div00.Div00.addChild(obj.name, obj);
+            obj = new Static("sta_vac_modifycd", "absolute", "32.31%", "-1", "139", "33", null, null, this.Div00.Div00.Div02);
+            obj.set_taborder("43");
+            obj.set_text("수정자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Combo("combo_vac_standardcd", "absolute", "12.19%", "7", "235", "21", null, null, this.Div00.Div00.Div02);
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            var combo_vac_standardcd_innerdataset = new Dataset("combo_vac_standardcd_innerdataset", this.Div00.Div00.Div02.combo_vac_standardcd);
+            combo_vac_standardcd_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">2310</Col><Col id=\"datacolumn\">40시간제</Col></Row><Row><Col id=\"codecolumn\">2320</Col><Col id=\"datacolumn\">44시간제</Col></Row></Rows>");
+            obj.set_innerdataset(combo_vac_standardcd_innerdataset);
+            obj.set_taborder("44");
+            obj.set_displaynulltext("시간제선택");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj = new Edit("edt_vac_modifycd", "absolute", "44.07%", "5", "235", "21", null, null, this.Div00.Div00.Div02);
+            obj.set_taborder("45");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Static("sta_vac_standardcd", "absolute", "0%", "-1", "139", "33", null, null, this.Div00.Div00.Div02);
+            obj.set_taborder("46");
+            obj.set_text("연차기준코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 굴림");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+            obj = new Button("btn_vac_modifycd", "absolute", "60.54%", "6", null, "21", "36.57%", null, this.Div00.Div00.Div02);
+            obj.set_taborder("47");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            this.Div00.Div00.Div02.addChild(obj.name, obj);
+
+            obj = new Button("btn_vac_search", "absolute", "796", "77", "76", "27", null, null, this);
+            obj.set_taborder("5");
+            obj.set_text("조회");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_vac_search", "absolute", "30", "74", "165", "32", null, null, this);
+            obj.set_taborder("3");
+            obj.set_text("연차조회");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_vac_search", "absolute", "192", "75", "590", "29", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("9");
+            obj.set_codecolumn("code");
+            obj.set_datacolumn("name");
+            obj.set_innerdataset("@ds_code_list");
+            obj.set_index("-1");
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 33, this.Div00.Div00.Div03,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("4");
+            		p.style.set_background("#f0f0f0ff");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div03.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 33, this.Div00.Div00.Div01,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("5");
+            		p.style.set_background("#f0f0f0ff");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+            		p.set_dragscrolltype("none");
+
+            	}
+            );
+            this.Div00.Div00.Div01.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 723, 28, this.Div00.Div00.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("6");
+            		p.style.set_background("#f0f0f0ff");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 708, 28, this.Div00.Div00.Div02,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("7");
+            		p.style.set_background("#f0f0f0ff");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.Div00.Div02.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 0, 177, this.Div00.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("0");
+            		p.style.set_background("0");
+            		p.style.set_border("0 solid #808080ff");
+
+            	}
+            );
+            this.Div00.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 1231, 136, this.Div00,
+            	//-- Layout function
+            	function(p) {
+            		p.set_taborder("15");
+            		p.style.set_align("left middle");
+            		p.style.set_background("#d8dcedff");
+            		p.style.set_border("1 solid #808080ff");
+            		p.set_scrollbars("none");
+
+            	}
+            );
+            this.Div00.addLayout(obj.name, obj);
+
+            //-- Default Layout
+            obj = new Layout("default", "", 1280, 1024, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Div00.Div00.Div00.edt_vac_cd","value","ds_vacation","vacation_code_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Div00.Div00.Div00.edt_vac_empno","value","ds_vacation","reg_emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","Div00.Div00.Div00.edt_vac_confirmno","value","ds_vacation","confirm_emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Div00.Div00.Div01.combo_vac_title","value","ds_vacation","vacation_nm");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","Div00.Div00.Div01.rd_vac_confirmryn","value","ds_vacation","confirmyn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","Div00.Div00.Div02.combo_vac_standardcd","value","ds_vacation","vacation_standard_code");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","Div00.Div00.Div02.edt_vac_modifycd","value","ds_vacation","modify_emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","Div00.Div00.Div03.cal_vac_insertdate","value","ds_vacation","reg_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","Div00.Div00.Div03.cal_vac_confirmdate","value","ds_vacation","confirm_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","Div00.Div00.Div01.cal_vac_modifydate","value","ds_vacation","modify_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("OCT_Vacation_Code.xfdl", "Lib::Comm.xjs");
+        this.registerScript("OCT_Vacation_Code.xfdl", function() {
+        //include "Lib::Comm.xjs";
+        //폼 로드
+        this.Oct_Vacation_Code_onload = function(obj,e)
+        {	
+        	Iject.formOnload(obj);
+        	var nRow = this.ds_vacation.addRow();
+        	this.ds_search.setColumn(nRow,"searchCondition","");	
+
+        
+        	this.fn_search();
+        	
+        } 
+
+        //조회
+        this.fn_search = function(obj,e)
+        {
+        	var nRow = this.ds_search.addRow();  
+         	var searchCondition = this.combo_vac_search.value;
+            
+        	this.ds_search.setColumn(nRow, "searchCondition",searchCondition);
+        	
+           var oDatas =  {
+        			  svcid : "search",
+        			  sController : "Oct_vacationSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_vacation=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        	// trace(" this.ds_search : " + this.ds_search.saveXML());
+        	trace(this.ds_vacation.saveXML());
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	      
+        	       var pThis = this.fobj;   //form object	      
+        	       //trace(" ds_search : " + pThis.ds_user.saveXML());
+        			//alert(pThis.ds_vacation.rowcount);
+        	
+        	
+        	});
+
+        	
+        	this.ds_search.clearData();
+        	
+        	
+        }
+
+        
+        //사원조회버튼
+        this.Div00_Div00_Div00_btn_vac_empno_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+        	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+        	var empPlus = emp_no + "(" + emp_name +")";
+        	//VO에 같은 이름의 변수가 존재하거나, 
+        	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+        	this.Div00.Div00.Div00.edt_vac_empno.set_value(empPlus);
+        }
+
+        this.Div00_Div00_Div02_btn_vac_modifycd_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+        	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+        	var empPlus = emp_no + "(" + emp_name +")";
+        	//VO에 같은 이름의 변수가 존재하거나, 
+        	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+        	this.Div00.Div00.Div02.edt_vac_modifycd.set_value(empPlus);
+
+        	//this.Edit01.set_value(empPlus);
+        }
+
+        this.Div00_Div00_Div00_btn_vac_confirmno_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+        	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+        	var empPlus = emp_no + "(" + emp_name +")";
+        	//VO에 같은 이름의 변수가 존재하거나, 
+        	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+        	this.Div00.Div00.Div00.edt_vac_confirmno.set_value(empPlus);
+
+        	//this.Edit01.set_value(empPlus);
+        }
+
+        
+
+        //초기화
+        this.btn_vac_reset_onclick = function(obj,e)
+        {
+        	this.ds_vacation.reset();
+        }
+
+        //추가
+        this.btn_vac_insert_onclick = function(obj,e)
+        {
+        	var nRow = this.ds_vacation.addRow();
+        }
+
+        
+
+        
+        //저장
+        this.fn_save = function(strid)
+        {
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "Oct_vacationModifyVO.do",			 
+        			  inds :["input2=ds_vacation:U"],
+        			  outds :[
+        				 "ds_vacation=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/    
+        		
+        		if(this.errorcode < 0)
+        		{		
+        		   Iject.alert("입력정보를 다시확인해 주세요","알림");			
+        		   return;
+        		}			
+        	      
+        	      var pThis = this.fobj;   //form object
+        	      switch(strid)
+        	      {
+        	         case "save" : 
+        				Iject.alert("저장완료");
+        				break;
+        				
+        	         case "delete" : 
+        	            Iject.alert("삭제완료");
+        				break; 
+        			
+        	      }
+        	      
+        	     // pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+        		  pThis.fn_search();
+        	});
+        }
+
+        //삭제
+        this.btn_vac_delete_onclick = function(obj,e)
+        {
+        	var nRow = this.ds_vacation.rowposition;
+        	this.ds_vacation.deleteRow(nRow);
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	
+        	if(rtnValue)
+        	{
+        		this.fn_save("delete");
+        	}
+        	else
+        	{
+        		this.fn_search();
+        	}
+        }
+
+        //저장
+        this.btn_vac_save_onclick = function(obj,e)
+        {
+        	this.fn_save("save");
+        }
+
+        
+        //그리드 팝업띄우기
+        this.grd_vac_list_oncelldblclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+         	var nTop = system.clientToScreenY(this, 10);
+
+        	var objChildFrame = new ChildFrame();
+            objChildFrame.init("chf_popup1"//팝업창id
+        	          ,"absolute"
+                              , nLeft 
+                              , nTop 
+                              , 400
+                              , 350
+                              , null
+                              , null
+                              , "VACATION::OCT_Vacation_Info.xfdl");
+        	
+        	var objParam = {param1:this.Div00.Div00.Div00.edt_vac_cd.value
+        					};
+            objChildFrame.showModal(this.getOwnerFrame()
+                                  , objParam
+                                  , this
+                                  , "fn_popupCallback");
+            
+        }
+
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.Oct_Vacation_Code_onload, this);
+            this.Static00.addEventHandler("onclick", this.Static00_onclick, this);
+            this.Static04.addEventHandler("onclick", this.Static04_onclick, this);
+            this.grd_vac_list.addEventHandler("oncelldblclick", this.grd_vac_list_oncelldblclick, this);
+            this.btn_vac_reset.addEventHandler("onclick", this.btn_vac_reset_onclick, this);
+            this.btn_vac_insert.addEventHandler("onclick", this.btn_vac_insert_onclick, this);
+            this.btn_vac_save.addEventHandler("onclick", this.btn_vac_save_onclick, this);
+            this.btn_vac_delete.addEventHandler("onclick", this.btn_vac_delete_onclick, this);
+            this.Div00.Div00.Div01.combo_vac_title.addEventHandler("onitemchanged", this.Div00_Div00_Div01_combo_vac_title_onitemchanged, this);
+            this.Div00.Div00.Div00.btn_vac_empno.addEventHandler("onclick", this.Div00_Div00_Div00_btn_vac_empno_onclick, this);
+            this.Div00.Div00.Div00.btn_vac_confirmno.addEventHandler("onclick", this.Div00_Div00_Div00_btn_vac_confirmno_onclick, this);
+            this.Div00.Div00.Div02.btn_vac_modifycd.addEventHandler("onclick", this.Div00_Div00_Div02_btn_vac_modifycd_onclick, this);
+            this.btn_vac_search.addEventHandler("onclick", this.fn_search, this);
+            this.combo_vac_search.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+
+        };
+
+        this.loadIncludeScript("OCT_Vacation_Code.xfdl");
+
+       
+    };
+}
+)();

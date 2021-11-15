@@ -1,0 +1,248 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("ATTITUDE_CODE");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,800,768);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_attitude_code", this);
+            obj._setContents("<ColumnInfo><Column id=\"attitude_id\" type=\"STRING\" size=\"256\"/><Column id=\"attitude_nm\" type=\"STRING\" size=\"256\"/><Column id=\"useyn\" type=\"STRING\" size=\"256\"/><Column id=\"brife\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_code_id\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_vacation", this);
+            obj._setContents("<ColumnInfo><Column id=\"vacation_code_id\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_class_code\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_nm\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_standard_code\" type=\"STRING\" size=\"256\"/><Column id=\"start_date\" type=\"DATE\" size=\"256\"/><Column id=\"end_date\" type=\"DATE\" size=\"256\"/><Column id=\"reg_date\" type=\"DATE\" size=\"256\"/><Column id=\"reg_emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"modify_date\" type=\"DATE\" size=\"256\"/><Column id=\"modify_emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"confirm_date\" type=\"DATE\" size=\"256\"/><Column id=\"confirm_emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"confirmyn\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Static("Static00", "absolute", "1%", "8", null, "61", "6.88%", null, this);
+            obj.set_taborder("0");
+            obj.set_text("연차코드");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("azure");
+            obj.style.set_font("bold 12 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "1.25%", "136", null, "231", "6.88%", null, this);
+            obj.set_taborder("3");
+            obj.set_binddataset("ds_vacation");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"186\"/><Column size=\"205\"/><Column size=\"192\"/><Column size=\"152\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"연차명\"/><Cell col=\"1\" text=\"시작일\"/><Cell col=\"2\" text=\"종료일\"/><Cell col=\"3\" text=\"확정\"/></Band><Band id=\"body\"><Cell text=\"bind:vacation_nm\"/><Cell col=\"1\" text=\"bind:start_date\"/><Cell col=\"2\" text=\"bind:end_date\"/><Cell col=\"3\" text=\"bind:confirmyn\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "1%", "384", null, "129", "7%", null, this);
+            obj.set_taborder("11");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "2%", "391", null, "116", "7.88%", null, this);
+            obj.set_taborder("12");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "absolute", "2.13%", "392", null, "24", "83.63%", null, this);
+            obj.set_taborder("13");
+            obj.set_text("연차기준클래스코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "2.13%", "436", null, "24", "83.5%", null, this);
+            obj.set_taborder("14");
+            obj.set_text("연차기준코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "2%", "479", null, "24", "83.63%", null, this);
+            obj.set_taborder("15");
+            obj.set_text("등록일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "32.75%", "392", null, "24", "52.88%", null, this);
+            obj.set_taborder("16");
+            obj.set_text("등록자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static11", "absolute", "32.75%", "436", null, "24", "52.88%", null, this);
+            obj.set_taborder("17");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static12", "absolute", "32.63%", "480", null, "24", "53%", null, this);
+            obj.set_taborder("18");
+            obj.set_text("수정자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static13", "absolute", "63.38%", "436", null, "24", "22.25%", null, this);
+            obj.set_taborder("19");
+            obj.set_text("확정자사번");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static14", "absolute", "63.38%", "392", null, "24", "22.25%", null, this);
+            obj.set_taborder("20");
+            obj.set_text("확정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "17%", "393", null, "21", "69.25%", null, this);
+            obj.set_taborder("21");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static15", "absolute", "63.38%", "479", null, "24", "22.25%", null, this);
+            obj.set_taborder("22");
+            obj.set_text("확정여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 8 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "17%", "438", null, "21", "69.25%", null, this);
+            obj.set_taborder("23");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit02", "absolute", "47.5%", "393", null, "21", "38.75%", null, this);
+            obj.set_taborder("24");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit03", "absolute", "47.5%", "437", null, "21", "38.75%", null, this);
+            obj.set_taborder("25");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit04", "absolute", "47.5%", "481", null, "21", "38.75%", null, this);
+            obj.set_taborder("26");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("Calendar00", "absolute", "17%", "481", null, "21", "69.25%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("27");
+
+            obj = new Calendar("Calendar01", "absolute", "78.13%", "393", null, "21", "8.13%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("28");
+
+            obj = new Edit("Edit05", "absolute", "78.13%", "437", null, "21", "8.13%", null, this);
+            obj.set_taborder("29");
+            this.addChild(obj.name, obj);
+
+            obj = new Radio("Radio00", "absolute", "78.13%", "480", null, "21", "8.13%", null, this);
+            this.addChild(obj.name, obj);
+            var Radio00_innerdataset = new Dataset("Radio00_innerdataset", this.Radio00);
+            Radio00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">사용</Col></Row><Row><Col id=\"codecolumn\">2</Col><Col id=\"datacolumn\">비사용</Col></Row></Rows>");
+            obj.set_innerdataset(Radio00_innerdataset);
+            obj.set_taborder("30");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_columncount("2");
+
+            obj = new Static("Static01", "absolute", "1.38%", "80", null, "45", "82.75%", null, this);
+            obj.set_taborder("31");
+            obj.set_text("연차코드리스트");
+            obj.style.set_font("bold 10 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "76.63%", "519", null, "41", "16%", null, this);
+            obj.set_taborder("32");
+            obj.set_text("초기화");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "85%", "519", null, "41", "7.63%", null, this);
+            obj.set_taborder("33");
+            obj.set_text("저장");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 800, 768, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.Static00.addEventHandler("onclick", this.Static00_onclick, this);
+            this.Static15.addEventHandler("onclick", this.Static15_onclick, this);
+            this.Radio00.addEventHandler("onitemclick", this.Radio00_onitemclick, this);
+            this.Static01.addEventHandler("onclick", this.Static01_onclick, this);
+
+        };
+
+        this.loadIncludeScript("ATTITUDE_CODE1.xfdl");
+
+       
+    };
+}
+)();

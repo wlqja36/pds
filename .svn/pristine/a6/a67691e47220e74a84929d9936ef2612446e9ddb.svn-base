@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Oct_ResolutionMapper">
+
+     
+   <resultMap id="Oct_Resolution" type="nexacro.sample.vo.Oct_resolution.Oct_ResolutionVO">                         
+        <result property="REG_DATE"      	column="REG_DATE" />	                         
+        <result property="SALARY_BOOK_NO"  column="SALARY_BOOK_NO"/>	              
+        <result property="RESOLUTION_CODE"  column="RESOLUTION_CODE"/>	      
+        <result property="TOTAL_COST"     column="TOTAL_COST"/>	                                   
+        <result property="REG_EMP_NO"     column="REG_EMP_NO"/>	                                   
+        <result property="MODIFY_EMP_NO"     column="MODIFY_EMP_NO"/>	                                   
+        <result property="MODIFY_DATE"     column="MODIFY_DATE"/>	                                   
+        <result property="CONFIRM_EMP_NO"     column="CONFIRM_EMP_NO"/>	                                   
+        <result property="CONFIRM_DATE"     column="CONFIRM_DATE"/>	                                   
+        <result property="CONFIRM_YN"     column="CONFIRM_YN"/>	                                   
+    </resultMap>
+    
+
+    <resultMap id="EmpList" type="nexacro.sample.vo.Oct_emp.YJB_EmpVO">
+        <result property="emp_no"      	column="EMP_NO" />
+        <result property="emp_name"     column="EMP_NAME" />                                                          
+    </resultMap>
+    
+    <resultMap id="SalaryBook" type="nexacro.sample.vo.Oct_SalaryBook.Oct_SalaryBookVO">
+        <result property="salary_book_no"      	column="SALARY_BOOK_NO" />
+        <result property="salary_book_code"     column="SALARY_BOOK_CODE" />
+        <result property="salary_book_nm"     column="SALARY_BOOK_NM" />	                                                          
+    </resultMap>
+
+
+	<select id="selectOctResolutionVOList" parameterType="nexacro.sample.vo.Oct_resolution.Oct_ResolutionVO" resultMap="Oct_Resolution"> <!-- 선택조회 -->
+		SELECT 
+		    	(SELECT EMP_NAME||'('||EMP_NO||')' 
+		    	FROM EMP 
+		    	WHERE EMP.EMP_NO=SPENDING_RESOLUTION.EMP_NO) 
+		    AS EMP_NO, 
+		    REG_DATE, 
+		        (SELECT SALARY_BOOK.SALARY_BOOK_NM||'('||SALARY_BOOK.SALARY_BOOK_NO||')' 
+		        FROM SALARY_BOOK 
+		        WHERE SPENDING_RESOLUTION.SALARY_BOOK_NO=SALARY_BOOK.SALARY_BOOK_NO) 
+		    AS SALARY_BOOK_NO,
+		        (SELECT CODE_NAME||'('||CODE_NO||')' 
+		        FROM COMMON_CODE_DETAIL 
+		        WHERE CLASS_CODE ='E01' 
+		        AND SPENDING_RESOLUTION.RESOLUTION_CODE=COMMON_CODE_DETAIL.CODE_NO) 
+		    AS RESOLUTION_CODE, 
+		    TOTAL_COST, 
+		        (SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.EMP_NO) 
+		    AS REG_EMP_NO, 
+		        (SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.MODIFY_EMP_NO) 
+		    AS MODIFY_EMP_NO, 
+		    MODIFY_DATE, 
+		        (SELECT EMP_NAME||'('||EMP_NO||')' 
+		        FROM EMP 
+		        WHERE EMP.EMP_NO=SPENDING_RESOLUTION.CONFIRM_EMP_NO) 
+		    AS CONFIRM_EMP_NO, 
+		    CONFIRM_DATE, 
+		    CONFIRM_YN    
+		FROM SPENDING_RESOLUTION 
+
+		WHERE REG_EMP_NO LIKE '%'||#{searchKeyword}||'%' 
+
+		<if test='searchCondition != null'>
+		AND RESOLUTION_CODE = SUBSTR(#{searchCondition},6,4)</if>
+	</select>
+
+	<select id="Oct_selectSalarybookList" parameterType="nexacro.sample.vo.Oct_resolution.Oct_ResolutionVO" resultMap="SalaryBook">
+		SELECT 
+			SALARY_BOOK_NO, SALARY_BOOK_CODE, SALARY_BOOK_NM 
+		FROM SALARY_BOOK 
+		where SALARY_BOOK_NM LIKE '%'||#{searchKeyword}||'%'
+	</select>
+	
+
+
+	<insert id="insertOctResolutionVO" parameterType="nexacro.sample.vo.Oct_resolution.Oct_ResolutionVO" >
+		INSERT INTO SPENDING_RESOLUTION (
+		    EMP_NO,
+		    REG_DATE,
+		    SALARY_BOOK_NO,
+		    RESOLUTION_CODE,
+		    TOTAL_COST,
+		    REG_EMP_NO,
+		    MODIFY_EMP_NO,
+		    MODIFY_DATE,
+		    CONFIRM_EMP_NO,
+		    CONFIRM_DATE,
+		    CONFIRM_YN
+		) VALUES(
+			 SUBSTR(
+	    	#{REG_EMP_NO},
+		    	INSTR(#{REG_EMP_NO},'(')+1, 
+		    	(INSTR(#{REG_EMP_NO},')')-1)-(INSTR(#{REG_EMP_NO},'('))),
+		    SYSDATE,
+		    SUBSTR(
+	    	#{SALARY_BOOK_NO},
+		    	INSTR(#{SALARY_BOOK_NO},'(')+1, 
+		    	(INSTR(#{SALARY_BOOK_NO},')')-1)-(INSTR(#{SALARY_BOOK_NO},'('))),
+		    SUBSTR(
+	    	#{RESOLUTION_CODE},
+		    	INSTR(#{RESOLUTION_CODE},'(')+1, 
+		    	(INSTR(#{RESOLUTION_CODE},')')-1)-(INSTR(#{RESOLUTION_CODE},'('))),
+		    #{TOTAL_COST},
+		    SUBSTR(
+	    	#{REG_EMP_NO},
+		    	INSTR(#{REG_EMP_NO},'(')+1, 
+		    	(INSTR(#{REG_EMP_NO},')')-1)-(INSTR(#{REG_EMP_NO},'('))),
+		    SUBSTR(
+	    	#{MODIFY_EMP_NO},
+		    	INSTR(#{MODIFY_EMP_NO},'(')+1, 
+		    	(INSTR(#{MODIFY_EMP_NO},')')-1)-(INSTR(#{MODIFY_EMP_NO},'('))),
+		    #{MODIFY_DATE},
+		    SUBSTR(
+	    	#{CONFIRM_EMP_NO},
+		    	INSTR(#{CONFIRM_EMP_NO},'(')+1, 
+		    	(INSTR(#{CONFIRM_EMP_NO},')')-1)-(INSTR(#{CONFIRM_EMP_NO},'('))),
+		    #{CONFIRM_DATE},
+		    #{CONFIRM_YN})
+	</insert>
+	
+	<update id="updateOctResolutionVO" parameterType="nexacro.sample.vo.Oct_resolution.Oct_ResolutionVO" >
+		UPDATE SPENDING_RESOLUTION 
+			SET 
+			    SALARY_BOOK_NO = 
+			    	SUBSTR(
+			    	#{SALARY_BOOK_NO},
+				    	INSTR(#{SALARY_BOOK_NO},'(')+1, 
+				    	(INSTR(#{SALARY_BOOK_NO},')')-1)-(INSTR(#{SALARY_BOOK_NO},'('))), 
+			    RESOLUTION_CODE =
+				    SUBSTR(
+				    	#{RESOLUTION_CODE},
+					    	INSTR(#{RESOLUTION_CODE},'(')+1, 
+					    	(INSTR(#{RESOLUTION_CODE},')')-1)-(INSTR(#{RESOLUTION_CODE},'('))),
+			    TOTAL_COST = #{TOTAL_COST},
+			    MODIFY_EMP_NO = 
+				    SUBSTR(
+				    	#{MODIFY_EMP_NO},
+					    	INSTR(#{MODIFY_EMP_NO},'(')+1, 
+					    	(INSTR(#{MODIFY_EMP_NO},')')-1)-(INSTR(#{MODIFY_EMP_NO},'('))), 
+			    MODIFY_DATE = #{MODIFY_DATE}, 
+			    CONFIRM_EMP_NO = 
+				    SUBSTR(
+				    	#{CONFIRM_EMP_NO},
+					    	INSTR(#{CONFIRM_EMP_NO},'(')+1, 
+					    	(INSTR(#{CONFIRM_EMP_NO},')')-1)-(INSTR(#{CONFIRM_EMP_NO},'('))),
+			    CONFIRM_DATE = #{CONFIRM_DATE}, 
+			    CONFIRM_YN = #{CONFIRM_YN}
+		    WHERE REG_EMP_NO =
+				SUBSTR(
+		    	#{REG_EMP_NO},
+			    	INSTR(#{REG_EMP_NO},'(')+1, 
+			    	(INSTR(#{REG_EMP_NO},')')-1)-(INSTR(#{REG_EMP_NO},'(')))
+			AND REG_DATE =#{REG_DATE}
+	</update>
+	
+	<delete id="deleteOctResolutionVO" parameterType="nexacro.sample.vo.Oct_resolution.Oct_ResolutionVO" >
+		DELETE FROM SPENDING_RESOLUTION 
+		WHERE EMP_NO = 
+			SUBSTR(
+	    	#{REG_EMP_NO},
+		    	INSTR(#{REG_EMP_NO},'(')+1, 
+		    	(INSTR(#{REG_EMP_NO},')')-1)-(INSTR(#{REG_EMP_NO},'('))) 
+		AND REG_DATE =#{REG_DATE}
+	</delete>
+   	  
+
+</mapper>
+

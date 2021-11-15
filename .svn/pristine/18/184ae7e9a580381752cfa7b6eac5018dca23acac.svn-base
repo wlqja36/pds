@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="yjb_btrip_management">
+
+  
+
+    <!-- Sample resultObject -->
+    <resultMap id="yjb_btr" type="nexacro.sample.vo.Oct_btrip.YJB_Btrip_ManagementVO">
+        <result property="btrip_No" column="BTRIP_NO" />
+        <result property="btrip_Name" column="BTRIP_NAME" />
+        <result property="country" column="COUNTRY" />
+        <result property="area" column="AREA" />
+        <result property="purpose" column="PURPOSE" />
+        <result property="s_Date" column="S_DATE" />
+        <result property="f_Date" column="F_DATE" />
+        <result property="ex_Expenses" column="EX_EXPENSES" />
+        <result property="re_Emp_No" column="RE_EMP_NO" />
+        <result property="ok_Date" column="OK_DATE" />
+        <result property="ok_Emp_No" column="OK_EMP_NO" />
+        <result property="ok_Ascertain" column="OK_ASCERTAIN" />
+        <result property="emp_No" column="EMP_NO" />
+    </resultMap>
+    
+     <select id="yjb_selectbtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_ManagementVO" resultMap="yjb_btr">
+        <!-- SELECT
+                BTRIP_NO,	
+				BTRIP_NAME,	
+				COUNTRY,
+				AREA,	
+				PURPOSE,	
+				S_DATE,	
+				F_DATE,	
+				EX_EXPENSES,	
+				RE_EMP_NO,	
+				OK_DATE,	
+				OK_EMP_NO,	
+				OK_ASCERTAIN,	
+				EMP_NO	
+            FROM BTRIP_MANAGEMENT 
+            WHERE EMP_NO =#searchKeyword#
+      
+ -->
+  			SELECT
+                BTRIP_NO,	
+				BTRIP_NAME,	
+				COUNTRY,
+				AREA,	
+				PURPOSE,	
+				TO_CHAR(S_DATE,'yyyymmdd') S_DATE,	
+				TO_CHAR(F_DATE,'yyyymmdd') F_DATE,	
+				EX_EXPENSES,
+				CASE concat(
+                    concat(RE_EMP_NO,'('),concat((select emp_name from emp where emp_no = RE_EMP_NO),')'))
+                    WHEN '()' THEN ''
+                    ELSE concat(
+                    concat(RE_EMP_NO,'('),concat((select emp_name from emp where emp_no = RE_EMP_NO),')')) END AS "RE_EMP_NO"
+                    ,	
+				
+				TO_CHAR(OK_DATE,'yyyymmdd') OK_DATE,
+				
+				CASE concat(
+                    concat(OK_EMP_NO,'('),concat((select emp_name from emp where emp_no = OK_EMP_NO),')')) 
+					WHEN '()' THEN ''
+                    ELSE concat(
+                    concat(OK_EMP_NO,'('),concat((select emp_name from emp where emp_no = OK_EMP_NO),')')) END AS "OK_EMP_NO"
+                    ,	
+				
+					
+				OK_ASCERTAIN,	
+				EMP_NO	
+            FROM BTRIP_MANAGEMENT 
+            WHERE EMP_NO =#{searchKeyword, jdbc=varchar}
+            ORDER BY BTRIP_NO ASC
+            
+    </select>
+    <!-- 
+        <select id="btrip_management.confirmVOList" parameterClass="btrVO" resultMap="btr">
+        SELECT  
+        	COUNT(
+        		BTRIP_NO
+        		,B2.BTRIP_DNO	
+		        ,BTRIP_NAME	
+		        ,COUNTRY	
+		        ,AREA	
+		        ,PURPOSE	
+		        ,S_DATE	
+		        ,F_DATE	
+		        ,EX_EXPENSES	
+		        ,RE_EMP_NO	
+		        ,OK_DATE	
+		        ,OK_EMP_NO	
+		        ,OK_ASCERTAIN	
+		        ,EMP_NO)	
+		from BTRIP_MANAGEMENT B1,
+		     BUSINESS_TRIP	B2
+		WHERE B2.BTRIP_DNO = BTRIP_NO AND EMP_NO = #searchKeyword#       
+    </select> -->
+   
+    
+    <insert id="yjb_insertbtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_ManagementVO">
+        <![CDATA[
+            INSERT INTO BTRIP_MANAGEMENT (
+                BTRIP_NO,	
+				BTRIP_NAME,	
+				COUNTRY,
+				AREA,	
+				PURPOSE,	
+				S_DATE,	
+				F_DATE,	
+				EX_EXPENSES,		
+				EMP_NO	
+            ) VALUES (
+                TO_CHAR(SYSDATE, 'yyyymmdd') || LPAD(BTRIP_MANAGEMENT_SEQ.NEXTVAL,4,0),
+                #{btrip_Name,jdbcType=VARCHAR},
+                #{country,jdbcType=VARCHAR},
+                #{area,jdbcType=VARCHAR},
+                #{purpose,jdbcType=VARCHAR},
+                #{s_Date,jdbcType=VARCHAR},
+                #{f_Date,jdbcType=VARCHAR},
+                #{ex_Expenses,jdbcType=VARCHAR},
+                #{emp_No,jdbcType=VARCHAR}
+            )
+        ]]>
+    </insert>
+    
+      <update id="yjb_updatebtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_ManagementVO">
+        
+            UPDATE BTRIP_MANAGEMENT 
+            SET 
+				BTRIP_NAME =#{btrip_Name},	
+				COUNTRY =#{country,jdbcType=VARCHAR},
+				AREA =#{area,jdbcType=VARCHAR},
+				PURPOSE =#{purpose,jdbcType=VARCHAR},	
+				S_DATE =#{s_Date,jdbcType=VARCHAR},
+				F_DATE =#{f_Date,jdbcType=VARCHAR},       
+				EX_EXPENSES	=#{ex_Expenses,jdbcType=VARCHAR},
+				<if test='ok_Ascertain=="Y"'>
+				OK_DATE	=sysdate,
+				OK_ASCERTAIN =#{ok_Ascertain},
+				OK_EMP_NO =#{ok_Emp_No},
+				</if>  
+				<if test='ok_Ascertain=="N"'>
+				
+				</if>  
+				RE_EMP_NO =#{re_Emp_No,jdbcType=VARCHAR}        
+            WHERE BTRIP_NO=#{btrip_No}
+    </update>
+    
+    <delete id="yjb_deletebtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_ManagementVO">
+        {
+        	call
+        		declare
+        		begin
+        	DELETE FROM BUSINESS_TRIP WHERE BTRIP_DNO=#{btrip_No};
+            DELETE FROM BTRIP_MANAGEMENT WHERE BTRIP_NO=#{btrip_No};
+            end
+        }
+    </delete>
+     
+</mapper>

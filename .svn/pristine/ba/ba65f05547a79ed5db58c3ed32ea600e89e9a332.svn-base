@@ -1,0 +1,495 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Salary_Book");
+                this.set_titletext("New Form");
+                this.set_enableevent("true");
+                this._setFormPosition(0,0,524,332);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"searchKeyword\"/><Col id=\"searchCondition\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_R_standard", this);
+            obj._setContents("<ColumnInfo><Column id=\"salary_book_no\" type=\"STRING\" size=\"256\"/><Column id=\"record_code\" type=\"STRING\" size=\"256\"/><Column id=\"record_score\" type=\"STRING\" size=\"256\"/><Column id=\"record_money\" type=\"INT\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_combo_03", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">3600</Col><Col id=\"txt\">0%</Col></Row><Row><Col id=\"cd\">3610</Col><Col id=\"txt\">10%</Col></Row><Row><Col id=\"cd\">3620</Col><Col id=\"txt\">20%</Col></Row><Row><Col id=\"cd\">3630</Col><Col id=\"txt\">30%</Col></Row><Row><Col id=\"cd\">3640</Col><Col id=\"txt\">40%</Col></Row><Row><Col id=\"cd\">3650</Col><Col id=\"txt\">50%</Col></Row><Row><Col id=\"cd\">3660</Col><Col id=\"txt\">60%</Col></Row><Row><Col id=\"cd\">3670</Col><Col id=\"txt\">70%</Col></Row><Row><Col id=\"cd\">3680</Col><Col id=\"txt\">80%</Col></Row><Row><Col id=\"cd\">3690</Col><Col id=\"txt\">90%</Col></Row><Row><Col id=\"cd\">3699</Col><Col id=\"txt\">100%</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img_titlebg", "absolute", "14", "7", "494", "50", null, null, this);
+            obj.set_taborder("3");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_title", "absolute", "26", "18", "168", "29", null, null, this);
+            obj.set_taborder("4");
+            obj.set_text("성과평가");
+            obj.style.set_color("whitesmoke");
+            obj.style.set_align("left middle");
+            obj.style.set_font("굴림,12,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("reset", "absolute", "457", "184", "52", "23", null, null, this);
+            obj.set_taborder("43");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "283", "184", "55", "23", null, null, this);
+            obj.set_taborder("46");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_cursor("hand");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("insert00", "absolute", "341", "184", "55", "23", null, null, this);
+            obj.set_taborder("47");
+            obj.set_text("등록");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button02", "absolute", "399", "184", "55", "23", null, null, this);
+            obj.set_taborder("48");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("1 solid #999999ff");
+            obj.style.set_color("white");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,100 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "14", "80", "494", "92", null, null, this);
+            obj.set_taborder("117");
+            obj.set_binddataset("ds_R_standard");
+            obj.set_scrollbars("autovert");
+            obj.set_autofittype("col");
+            obj.set_nodatatext("데이터가 없습니다.");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/><Column size=\"80\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"급여대장번호\"/><Cell col=\"1\" text=\"성과코드\"/><Cell col=\"2\" text=\"성과점수\"/><Cell col=\"3\" text=\"성과금액\"/></Band><Band id=\"body\"><Cell text=\"bind:salary_book_no\"/><Cell col=\"1\" displaytype=\"combo\" edittype=\"combo\" text=\"bind:record_code\" combodataset=\"ds_combo_03\" combocodecol=\"cd\" combodatacol=\"txt\" combodisplay=\"display\"/><Cell col=\"2\" displaytype=\"text\" edittype=\"text\" text=\"bind:record_score\"/><Cell col=\"3\" text=\"bind:record_money\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img02", "absolute", "18", "240", "493", "63", null, null, this);
+            obj.set_taborder("118");
+            obj.style.set_background("lavenderblush");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_02", "absolute", "29", "246", "477", "26", null, null, this);
+            obj.set_taborder("119");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_00", "absolute", "19", "222", "90", "13", null, null, this);
+            obj.set_taborder("120");
+            obj.set_text("성과평가기준");
+            obj.style.set_color("#46463dff");
+            obj.style.set_align("left top");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_15", "absolute", "23", "246", "86", "26", null, null, this);
+            obj.set_taborder("122");
+            obj.set_text("급여대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_btrip_dno", "absolute", "111", "248", "156", "22", null, null, this);
+            obj.set_taborder("123");
+            obj.set_readonly("true");
+            obj.set_cssclass("edt_WF_Search");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_01", "absolute", "267", "246", "72", "26", null, null, this);
+            obj.set_taborder("124");
+            obj.set_text("성과코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo00", "absolute", "339", "247", "162", "23", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("125");
+            obj.set_innerdataset("@ds_combo_03");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+
+            obj = new ImageViewer("img_00", "absolute", "29", "272", "477", "26", null, null, this);
+            obj.set_taborder("126");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_02", "absolute", "23", "272", "86", "26", null, null, this);
+            obj.set_taborder("127");
+            obj.set_text("성과점수");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_03", "absolute", "267", "271", "72", "26", null, null, this);
+            obj.set_taborder("129");
+            obj.set_text("성과금액");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "110", "273", "156", "23", null, null, this);
+            obj.set_taborder("130");
+            this.addChild(obj.name, obj);
+
+            obj = new MaskEdit("MaskEdit00", "absolute", "340", "273", "162", "24", null, null, this);
+            obj.set_taborder("131");
+            obj.set_readonly("true");
+            obj.set_mask("###,###,###,#");
+            obj.style.set_align("left middle");
+            obj.set_clipmode("excludespace");
+            obj.set_value("0");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "269", "246", "9", "24", null, null, this);
+            obj.set_taborder("132");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "26", "272", "9", "24", null, null, this);
+            obj.set_taborder("133");
+            obj.set_text("*");
+            obj.style.set_color("red");
+            obj.style.set_font("arial,18");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 524, 332, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("Temp01_SingleDetail");
+            		p.set_titletext("New Form");
+            		p.set_enableevent("true");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item1","Grid00","binddataset","ds_R_standard","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Combo00","value","ds_R_standard","record_code");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","Edit00","value","ds_R_standard","record_score");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","MaskEdit00","value","ds_R_standard","record_money");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","edt_btrip_dno","value","ds_search","searchKeyword");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("PD_IN_COM_R_satandard.xfdl", "Lib::Comm.xjs");
+        this.registerScript("PD_IN_COM_R_satandard.xfdl", function() {
+        //include "Lib::Comm.xjs";
+
+        
+        this.form_onload = function(obj,e)
+        {
+        	//기본 공통  함수 초기화
+        	Iject.formOnload(obj);
+        		
+        		//파람넘길때보기
+         		var strParam1 = this.parent.param1;
+         		this.edt_btrip_dno.set_value(strParam1);
+         		this.Static00.set_enable("false");
+        		this.Static01.set_enable("false");
+        		this.fn_search_onclick();
+        		
+        		
+        		
+
+        } 
+        //조회처리
+        this.fn_search_onclick = function(obj,e)
+        {
+        	var searchCondition =  "NAME";
+            var searchKeyword = this.edt_btrip_dno.value;       
+        	this.ds_search.setColumn(0, "searchCondition", "NAME");
+        	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+        	
+           var oDatas =  {
+        			  svcid : "search",
+        			  sController : "rsSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_R_standard=output"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        	 
+        	 
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	      
+        	       var pThis = this.fobj;   //form object	      
+        	       trace(" ds_R_standard : " + this.ds_R_standard.saveXML());
+        	});
+        }
+
+        
+        //추가
+        this.Button01_onclick = function(obj,e)
+        {	
+        	this.Static00.set_enable("true");
+        	this.Static01.set_enable("true");
+        	var imsi = this.edt_btrip_dno.value;
+        	var nRow = this.ds_R_standard.addRow();
+        	this.edt_btrip_dno.set_value(imsi);
+        	
+        	
+        	
+        	
+        	
+
+        	
+        }
+
+        
+         //저장버튼 누를시
+         this.div_Detail_insert_onclick = function(obj,e)
+         {	
+        	var money = 50000;
+        	if(this.Edit00.value <= 60){
+        		money = 0;
+        	}else if(this.Edit00.value <=70){
+        		money = 10000;
+        	}else if(this.Edit00.value <=80){
+        		money = 20000;
+        	}else if(this.Edit00.value <=90){
+        		moeny = 30000;
+        	}else if(this.Edit00.value < 100){
+        		money = 40000;
+        	}else if(this.Edit00.value = 100){
+        		money = 50000;
+        	}
+        	alert("점수의돈은"+money);
+        	
+        	var total = 0;
+        	if(this.Combo00.value == 3600){
+        		total = money*1
+        	}else if(this.Combo00.value == 3610){
+        		total = money + 5000;
+        	}else if(this.Combo00.value == 3620){
+        		total = money + 6000;
+        	}else if(this.Combo00.value == 3630){
+        		total = money + 7000;
+        	}else if(this.Combo00.value == 3640){
+        		total = money + 8000;
+        	}else if(this.Combo00.value == 3650){
+        		total = money + 9000;
+        	}else if(this.Combo00.value == 3660){
+        		total = money + 10000;
+        	}else if(this.Combo00.value == 3670){
+        		total = money + 20000;
+        	}else if(this.Combo00.value == 3680){
+        		total = money + 30000;
+        	}else if(this.Combo00.value == 3690){
+        		total = money + 40000;
+        	}else if(this.Combo00.value == 3699){
+        		total = money + 50000;
+        	}
+
+        	alert("합친금액은"+total);
+        	this.ds_R_standard.setColumn(this.ds_R_standard.rowposition, "record_money",total);
+         	this.fn_save("save");
+         }
+
+        
+        //저장
+        this.fn_save = function(strid)
+        {
+        	
+        	
+        	
+        	this.ds_R_standard.setColumn(this.ds_R_standard.rowposition, "salary_book_no", this.edt_btrip_dno.value);
+           
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "rsModifyVO.do",			 
+        			  inds :["input=ds_R_standard:U"],
+        			  outds :[
+        				 "ds_R_standard=output"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg,"알림");			
+        		   return;
+        		}			
+        	      
+        	       var pThis = this.fobj;   //form object
+        	       
+        	       trace(this.svcid);
+        		    switch(this.svcid)
+        	      {
+        	         case "save" : 
+        				Iject.alert("저장완료");
+        				break;
+        				
+        	         case "delete" : 
+        	            Iject.alert("삭제완료");
+        				break; 
+        	      }
+        	      
+        	    
+        	});
+        }
+
+        
+
+        //삭제
+        this.Button02_onclick = function(obj,e)
+        {
+         
+        	var nRow = this.ds_R_standard.rowposition;
+        	this.ds_R_standard.deleteRow(nRow);
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	
+        // 	
+        // 	  var searchCondition =  "NAME";
+        //     var searchKeyword = this.edt_btrip_dno.value;       
+        // 	this.ds_search.setColumn(0, "searchCondition", "NAME");
+        // 	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+        //    
+          
+        	
+        	if(rtnValue){
+        		this.fn_save("delete");
+        	}else{
+        		this.fn_search();
+        	}
+        }
+
+         
+        //초기화
+        this.fn_reset = function(obj,e)
+        {
+        	this.ds_R_standard.reset();
+        }
+
+        
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.form_onload, this);
+            this.sta_title.addEventHandler("onclick", this.sta_title_onclick, this);
+            this.reset.addEventHandler("onclick", this.fn_reset, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+            this.insert00.addEventHandler("onclick", this.div_Detail_insert_onclick, this);
+            this.Button02.addEventHandler("onclick", this.Button02_onclick, this);
+            this.sta_15.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_01.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.Combo00.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.sta_02.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_03.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.Static00.addEventHandler("onclick", this.star_onclick, this);
+            this.Static01.addEventHandler("onclick", this.star_onclick, this);
+
+        };
+
+        this.loadIncludeScript("PD_IN_COM_R_satandard.xfdl");
+
+       
+    };
+}
+)();

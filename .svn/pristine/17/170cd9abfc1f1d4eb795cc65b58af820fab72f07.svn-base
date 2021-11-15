@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Vacation">
+
+    <typeAlias  alias="vacationCodeSearchVO" type="nexacro.sample.vo.vacation.vacationCodeSearchVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/> 
+     
+    <resultMap id="vacation" class="vacationCodeSearchVO">
+        <result property="vacation_code_id"      	column="VACATION_CODE_ID" />	                         
+        <result property="vacation_nm"           	column="VACATION_NM"/>	              
+        <result property="vacation_standard_code"  	column="VACATION_STANDARD_CODE"/>	      
+<!--    <result property="reg_date"              	column="REG_DATE"/>	          
+        <result property="reg_emp_id"            	column="REG_EMP_ID"/>	          
+        <result property="modify_date"           	column="MODIFY_DATE"/>	          
+        <result property="modify_emp_id"         	column="MODIFY_EMP_ID"/>	          
+        <result property="confirm_date"          	column="CONFIRM_DATE"/>	          
+        <result property="confirm_emp_id"        	column="CONFIRM_EMP_ID"/>	          
+        <result property="confirmyn"             	column="CONFIRMYN"/>	 -->                
+    </resultMap>
+    
+      <select id = "selectVacationSearchCodeVO" parameterClass="vacationCodeSearchVO" resultMap="vacation">
+      	SELECT 
+      		VACATION_CODE_ID,
+      		VACATION_NM,
+      		VACATION_STANDARD_CODE
+<!--       	REG_DATE,
+      		REG_EMP_ID,
+      		MODIFY_DATE,
+      		MODIFY_EMP_ID,
+      		CONFIRM_DATE,
+      		CONFIRM_EMP_ID,
+      		CONFIRMYN -->
+       FROM VACATION_CODE    
+       
+       <isNotEmpty property="searchCondition" >	 
+      	 WHERE VACATION_CODE_ID = #searchCondition#    	
+       </isNotEmpty>
+
+<!-- 		<isNotEqual property="searchCondition" compareValue="all">
+		    WHERE VACATION_NM = #searchCondition# 
+		   </isNotEqual>  -->
+		</select>
+
+<!--    	  <insert id="insertVacationCodeVO" parameterClass="vacationCodeVO">
+   	  	<![CDATA[
+   	  		INSERT INTO VACATION_CODE(
+   	  		VACATION_CODE_ID,
+   	  		VACATION_NM,
+   	  		VACATION_STANDARD_CODE,
+   	  		REG_DATE,
+   	  		REG_EMP_ID,
+   	  		MODIFY_DATE,
+   	  		MODIFY_EMP_ID,
+   	  		CONFIRM_DATE,
+   	  		CONFIRM_EMP_ID,
+   	  		CONFIRMYN
+   	  		) 
+   	  		VALUES (
+   	  		TO_CHAR(SYSDATE, 'yy') || LPAD(VACAITON_SEQ.NEXTVAL,2,0),
+   	  		#vacation_nm#,
+   	  		#vacation_standard_code#,
+   	  		#reg_date#,
+   	  		#reg_emp_id#,
+   	  		#modify_date#,
+   	  		#modify_emp_id#,
+   	  		#confirm_date#,
+   	  		#confirm_emp_id#,
+   	  		#confirmyn#
+   	  		)	 	  	
+   	  	]]>  	 
+   	  	</insert> -->
+   	  	
+<!--    	  <update id="updateVacationCodeVO" parameterClass="vacationCodeVO">
+   	  	<![CDATA[
+   	  		UPDATE VACATION_CODE
+   	  		SET
+   	  			VACATION_CODE_ID = #vacation_code_id#,
+   	  			VACATION_NM = #vacation_nm#,
+   	  			VACATION_STANDARD_CODE = #vacation_standard_code#,
+   	  			REG_DATE = #reg_date#,
+   	  			REG_EMP_ID = #reg_emp_id#,
+   	  			MODIFY_DATE = #modify_date#,
+   	  			MODIFY_EMP_ID = #modify_emp_id#,
+   	  			CONFIRM_DATE = #confirm_date#,
+   	  			CONFIRM_EMP_ID = #confirm_emp_id#,
+   	  			CONFIRMYN = #confirmyn#
+   	  			
+   	  		WHERE VACATION_CODE_ID = #vacation_code_id#
+   	  	]]>
+   	  	  	  
+   	  </update>
+   	  	
+   	  <delete id="deleteVacationCodeVO" parameterClass="vacationCodeVO">
+   	  	<![CDATA[
+   	  		DELETE VACATION_CODE
+   	  		WHERE VACATION_CODE_ID = #vacation_code_id#
+   	  	]]>   	  
+   	  </delete> -->
+   	 
+</sqlMap>

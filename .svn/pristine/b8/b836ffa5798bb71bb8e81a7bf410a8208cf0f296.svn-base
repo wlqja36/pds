@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Edulevel">
+
+    <typeAlias  alias="edulevelVO" type="nexacro.sample.vo.emp.EdulevelVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+
+   
+    <resultMap id="edulevel" class="edulevelVO">
+        <result property="EMP_NO"     		column="EMP_NO"/>	              
+        <result property="EDUCATION_NAME"   column="EDUCATION_NAME"/>	              
+        <result property="EDU_CATEGORY_CODE"      column="EDU_CATEGORY_CODE"/>	              
+        <result property="MAJOR_NAME"	  	column="MAJOR_NAME"/>	 
+        <result property="GRADUATE_CATEGORY"     	column="GRADUATE_CATEGORY"/>	          
+        <result property="START_DATE"    	column="START_DATE"/>	      
+        <result property="GRADUATE_DATE"    column="GRADUATE_DATE"/>	          
+        <result property="DAYYN"    		column="DAYYN"/>	          
+        <result property="EDU_NO"    		column="EDU_NO"/>	          
+    </resultMap>
+    
+    
+      <select id="selectEdulevelVOList" parameterClass="edulevelVO" resultMap="edulevel">
+            SELECT
+            	*
+            FROM EDUCATION_LEVEL
+            WHERE 
+            EMP_NO=#searchKeyword#
+        
+      </select> 
+      
+      
+    
+    <insert id="insertEdulevelVO" parameterClass="edulevelVO">
+        <![CDATA[
+            INSERT INTO EDUCATION_LEVEL (
+            	EMP_NO,
+            	EDUCATION_NAME,
+            	EDU_CATEGORY_CODE,
+            	MAJOR_NAME,
+            	GRADUATE_CATEGORY,
+            	START_DATE,
+            	GRADUATE_DATE,
+            	DAYYN,
+            	EDU_NO      
+            	
+            	 
+            ) VALUES (
+          	        #EMP_NO#,
+          	        #EDUCATION_NAME#,
+          	        #EDU_CATEGORY_CODE#,
+          	        #MAJOR_NAME#,
+          	        #GRADUATE_CATEGORY#,
+          	        #START_DATE#,
+          	        #GRADUATE_DATE#,
+          	        #DAYYN#,
+          	        EDU_NO_SEQ.nextval
+              )
+            
+        ]]>
+    </insert>
+ 
+    
+   <!-- 업데이트문 테이블1개  -->
+      <update id="updateEdulevelVO" parameterClass="edulevelVO">
+        <![CDATA[
+            UPDATE EDUCATION_LEVEL
+            SET     
+            	EDUCATION_NAME=#EDUCATION_NAME#,
+            	EDU_CATEGORY_CODE=#EDU_CATEGORY_CODE#,
+            	MAJOR_NAME=#MAJOR_NAME#,
+            	GRADUATE_CATEGORY=#GRADUATE_CATEGORY#,
+            	START_DATE=#START_DATE#,
+            	GRADUATE_DATE=#GRADUATE_DATE#,         
+                DAYYN=#DAYYN#    
+                WHERE 
+                EDU_NO=#EDU_NO#
+        ]]>
+    </update> 
+    
+   <delete id="deleteEdulevelVO" parameterClass="edulevelVO">
+        <![CDATA[
+            DELETE EDUCATION_LEVEL
+            where
+            EDU_NO=#EDU_NO#
+        ]]>
+    </delete>
+  
+    
+    
+   
+</sqlMap>

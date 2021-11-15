@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="empSearch" classname="member002" inheritanceid="" position="absolute" titletext="사원찾기" left="0" top="0" width="558" height="477" onload="empSearch_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg1" taborder="24" position="absolute" left="9" width="544" top="64" height="428" style="background:lavenderblush;"/>
+        <Button id="Button01" taborder="26" text="취소" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" position="absolute" left="307" width="55" top="450" height="23" onclick="Button01_onclick" titletext="회원가입창"/>
+        <Div id="joinTitle" taborder="27" text="  급여대장번호 검색" left="9" top="6" width="544" height="50" style="align:left;background:#3366ffff;color:#ffffffff;font:bold 12 Dotum;">
+          <Layouts>
+            <Layout width="544" height="50"/>
+          </Layouts>
+        </Div>
+        <ImageViewer id="img00" taborder="28" left="14" top="121" width="530" height="284" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Grid id="grd_plaintiff" taborder="29" binddataset="ds_emp" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="19" top="127" width="520" height="272">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="193"/>
+                <Column size="327"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font:bold 9 dotum;" text="급여대장번호"/>
+                <Cell col="1" style="font:bold 9 dotum;" text="급여대장명"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center;" text="bind:salary_book_no"/>
+                <Cell col="1" edittype="none" style="align:center;" text="bind:salary_book_nm" editlimit="30"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_09" taborder="30" left="14" top="73" width="530" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_01" taborder="31" left="60" top="78" width="480" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_no" taborder="32" text="검색어" left="219" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Button id="btn_sc" taborder="33" text="검색" onclick="btn_sc_onclick" left="416" top="79" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Button id="btn_reset" taborder="34" text="초기화" onclick="btn_reset_onclick" left="476" top="79" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;font:bold 9 Dotum;"/>
+        <Static id="sta_no00" taborder="35" text="검색종류" left="20" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Combo id="Combo00" taborder="36" codecolumn="codecolumn" datacolumn="datacolumn" left="18.83%" top="81" width="100" height="19" text="전체">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">salary_book_nm</Col>
+                <Col id="datacolumn">대장</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">salary_book_no</Col>
+                <Col id="datacolumn">대장번호</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="Edit05" taborder="37" maxlength="10" left="306" top="81" width="100" height="19"/>
+        <Button id="Button00" taborder="38" text="선택" onclick="Button00_onclick" left="203" top="450" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:0 none #808080ff ;color:#ffffffff;bordertype:normal 0 0 ;font:bold 9 Dotum;shadow:outer 0,0 0 gray;" titletext="회원가입창"/>
+        <Div id="div_page" taborder="39" text="Div00" left="-19" top="419" width="531" height="18" style="align:center middle;">
+          <Layouts>
+            <Layout>
+              <Static id="stc_Prev" taborder="37" text="이전" onclick="div_page_stc_Prev_onclick" visible="false" left="98" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_Next" taborder="38" text="다음" onclick="div_page_stc_Next_onclick" visible="false" left="468" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No0" taborder="39" text="1" onclick="div_page_stc_No_onclick" visible="false" left="138" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No1" taborder="40" text="2" onclick="div_page_stc_No_onclick" visible="false" left="170" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No2" taborder="41" text="3" onclick="div_page_stc_No_onclick" visible="false" left="202" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No3" taborder="42" text="4" onclick="div_page_stc_No_onclick" visible="false" left="234" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No4" taborder="43" text="5" onclick="div_page_stc_No_onclick" visible="false" left="266" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No5" taborder="44" text="6" onclick="div_page_stc_No_onclick" visible="false" left="298" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No6" taborder="45" text="7" onclick="div_page_stc_No_onclick" visible="false" left="330" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No7" taborder="46" text="8" onclick="div_page_stc_No_onclick" visible="false" left="362" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No8" taborder="47" text="9" onclick="div_page_stc_No_onclick" visible="false" left="394" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+              <Static id="stc_No9" taborder="48" text="10" onclick="div_page_stc_No_onclick" visible="false" left="426" top="-2" width="29" height="27" style="color:black;align:center;font:9 Dotum;cursor:hand;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_emp">
+        <ColumnInfo>
+          <Column id="emp_no" type="STRING" size="256"/>
+          <Column id="emp_name" type="STRING" size="256"/>
+          <Column id="grade" type="STRING" size="256"/>
+          <Column id="dept" type="STRING" size="256"/>
+          <Column id="birth" type="STRING" size="256"/>
+          <Column id="rownum" type="STRING" size="256"/>
+          <Column id="emp_user" type="STRING" size="256"/>
+          <Column id="salary_book_no" type="STRING" size="256"/>
+          <Column id="salary_book_nm" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="keyword" type="STRING" size="256"/>
+          <Column id="search_condition" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Edit7" propid="value" datasetid="ds_insa" columnid="address1"/>
+    </Bind>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+this.confirmStr = "";
+var pageNum = "";
+var rowNum = "";
+var strSwitch = "";
+
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+
+this.empSearch_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.btn_sc_onclick();
+}
+
+//btn_reset_onclick - 이거 두개 있고 안 닫혀 있어서 안 뜬거였음
+
+this.empSearch_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	
+	this.btn_sc_onclick();
+	
+}
+
+this.btn_reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.fv_iStartPageNo    = 0;   
+	this.fv_iUnitSelRowNo   = 100; 
+	this.fv_iStartSelRowNo  = 1;   
+	this.fv_iMaxPageNum     = 10;  
+	this.fv_iServerRowCount = 0;
+	
+	this.reload();
+}
+
+this.btn_sc_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.fv_iStartPageNo    = 0;   
+	this.fv_iUnitSelRowNo   = 100; 
+	this.fv_iStartSelRowNo  = 1;   
+	this.fv_iMaxPageNum     = 10;  
+	this.fv_iServerRowCount = 0; 
+	
+	this.ds_search.setColumn(0,"keyword",this.Edit05.value);
+	this.ds_search.setColumn(0,"search_condition",this.Combo00.value);
+	if(this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")==null ||
+		this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")=="")
+		{
+			this.ds_search.setColumn(0,"search_condition","total");
+		}
+
+	this.gfn_transaction(this,
+ 						"empSearch",
+ 						"selectSalEmpSearch.do",
+ 						"ds_search=ds_search",
+ 						"ds_emp=ds_output200",
+ 						"",
+ 						"transaction_callback"
+ 						);
+ 						
+ 	
+	
+}
+
+
+
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+	var iLastRow = this.fv_iStartPageNo * this.fv_iUnitSelRowNo;
+	this.ds_emp.filter("rownum >= "+(iLastRow + this.fv_iStartSelRowNo)+" && rownum <= "+(iLastRow + this.fv_iUnitSelRowNo));
+			
+		if (this.ds_emp.getRowCount() == 0)//0에서 수정함
+		{
+			this.ds_emp.filter("");
+			this.div_page.set_visible("false");
+			//this.alert("조회할 자료가 없습니다.");
+					
+			return;
+		}
+		else
+		{
+			this.div_page.set_visible("true");
+			this.fv_iServerRowCount = this.ds_emp.getRowCount();
+			this.fn_SetStyle();
+			this.fn_SetPageNo();
+			this.div_page.stc_No0.style.set_color("gray");
+		} 
+				
+	this.pageSelect(1);
+	
+}
+
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{		
+// 		여기서 넣어주는 거구나. 		
+		var salary_book_no = this.ds_emp.getColumn(this.ds_emp.rowposition, "salary_book_no");	
+		var strReturn = salary_book_no;
+		//var salary_book_nm = this.ds_emp.getColumn(this.ds_emp.rowposition, "salary_book_nm");	
+// 		application.gds_empno.addRow();
+// 		application.gds_empno.setColumn(application.gds_empno.rowposition, "salary_book_no", salary_book_no);
+		//
+// 		this.opener.부모폼컴포넌트ID
+// 		alert(this.opener.phoneEdit.value);
+		this.opener.Edit00.set_value(strReturn);
+		// 클로즈 전에 값이든 뭐든 넣어야하는 상황인거지
+		this.close(strReturn);
+		//전역변수라서 바로 받을 수 있는 거고
+		
+}
+
+this.fn_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "empSearch"){
+        this.alert("Return Value: " + strReturn);
+        this.Edit00.set_value(strReturn);
+    }
+};
+
+this.div_page_stc_No_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+	var iNo = new Number(obj.text);
+	
+	pageNum = iNo;
+	
+	this.pageSelect(iNo);
+	
+}
+
+
+this.pageSelect = function(page)
+{
+	var iFirstNum = (page-1) * this.fv_iMaxPageNum + 1;
+
+	var iLastNum = iFirstNum + this.fv_iMaxPageNum;
+
+	this.fn_SetStyle();
+	this.div_page.components["stc_No"+(page-1)].style.set_color("gray");
+	this.ds_emp.filter("");
+	
+	this.ds_emp.filter("rownum >= " + iFirstNum+" && rownum < " + iLastNum);
+}
+
+
+
+
+this.div_page_stc_Prev_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo - 1;
+	
+	this.transaction_callback("empSearch", 0, "succ");
+}
+
+
+
+
+this.div_page_stc_Next_onclick = function(obj:Static,  e:nexacro.ClickEventInfo)
+{
+
+	this.fv_iStartPageNo = this.fv_iStartPageNo + 1;
+	
+	this.transaction_callback("empSearch", 0, "succ");
+}
+
+
+this.fn_SetPageNo = function()
+{
+	var sPage = this.fv_iStartPageNo * this.fv_iMaxPageNum;
+	
+	// 이전버튼 처리
+	if (this.fv_iStartPageNo < 1)
+	{
+		this.div_page.stc_Prev.set_visible(false);
+	} 
+	else 
+	{
+		this.div_page.stc_Prev.set_visible(true);
+	}
+
+	// 마지막 버튼 처리
+	if (this.fv_iServerRowCount < this.fv_iUnitSelRowNo)
+	{
+		this.div_page.stc_Next.set_visible(false);
+	}
+	else
+	{
+		this.div_page.stc_Next.set_visible(true);
+	}
+
+	// 인덱스 번호 처리
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].set_visible(true);
+		this.div_page.components["stc_No"+i].set_text(sPage+i+1);
+
+		if (this.fv_iServerRowCount < (i * this.fv_iMaxPageNum))
+		{
+			this.div_page.components["stc_No"+i].set_visible(false);			
+		} 
+		else 
+		{
+			this.div_page.components["stc_No"+i].set_visible(true);			
+		}
+	}	
+}
+
+
+
+
+//-------------------------------------------------------------------------------------------------
+// Style조정
+//-------------------------------------------------------------------------------------------------
+this.fn_SetStyle = function()
+{
+	for (var i = 0; i < this.fv_iMaxPageNum; i++)
+	{
+		this.div_page.components["stc_No"+i].style.set_color("black");			
+	}	
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

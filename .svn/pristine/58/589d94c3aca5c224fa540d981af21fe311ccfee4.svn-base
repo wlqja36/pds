@@ -1,0 +1,223 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("pwUpdate");
+                this.set_titletext("비밀번호 변경");
+                this._setFormPosition(0,0,290,260);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_emp", this);
+            obj._setContents("<ColumnInfo><Column id=\"emp_no\" type=\"STRING\" size=\"256\"/><Column id=\"emp_pw\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Div("joinTitle", "absolute", "2", "3", "285", "50", null, null, this);
+            obj.set_taborder("0");
+            obj.set_text("  비밀번호 변경");
+            obj.style.set_align("left");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 12 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_titlebg1", "absolute", "2", "61", "285", "200", null, null, this);
+            obj.set_taborder("4");
+            obj.style.set_background("lavenderblush");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static29", "absolute", "7", "72", "270", "25", null, null, this);
+            obj.set_taborder("5");
+            obj.set_text("새로운 비밀번호를 입력해주세요.");
+            obj.style.set_font("bold 9 Dotum,굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "4", "109", "280", "25", null, null, this);
+            obj.set_taborder("6");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "4", "133", "280", "25", null, null, this);
+            obj.set_taborder("7");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "4", "109", "95", "25", null, null, this);
+            obj.set_taborder("9");
+            obj.set_text("비밀번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "4", "133", "95", "25", null, null, this);
+            obj.set_taborder("10");
+            obj.set_text("비밀번호 확인");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "76", "189", "55", "23", null, null, this);
+            obj.set_taborder("12");
+            obj.set_text("변경");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "161", "189", "55", "23", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("닫기");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            obj.getSetter("titletext").set("회원가입창");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "106", "113", "170", "19", null, null, this);
+            obj.set_taborder("1");
+            obj.set_enableevent("true");
+            obj.set_password("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "106", "137", "170", "19", null, null, this);
+            obj.set_taborder("14");
+            obj.set_password("true");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 290, 260, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("비밀번호 변경");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Edit01","value","ds_emp","emp_pw");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Edit00","value","ds_search","emp_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("pwUpdate.xfdl", "Lib::common.xjs");
+        this.registerScript("pwUpdate.xfdl", function() {
+
+        //include "Lib::common.xjs";
+
+        this.Button01_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+
+        this.Button00_onclick = function(obj,e)
+        {
+        	if(this.Edit01.value == null){
+        		this.alert("비밀번호를 입력해주세요");
+        		this.Edit01.setFocus();
+        		return;
+        	}else if(this.Edit00.value != this.Edit01.value){
+        		this.alert("비밀번호가 일치하지 않습니다.");
+        		this.Edit00.setFocus();
+        		return;
+        	}
+        	
+        	this.gfn_transaction(this,
+        					"updatePw",
+        					"administrator/updatePw.do",
+        					"ds_input=ds_emp",
+        					"",
+        					"",
+        					"transaction_callback"
+        					);
+        }
+
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		this.alert("오류입니다. 관리자에게 문의하십시오");
+        		return;
+        	}
+        	
+        	alert("비밀번호 변경이 완료되었습니다.");
+        	this.close();
+
+        }
+
+        
+        this.pwUpdate_onload = function(obj,e)
+        {
+
+        	this.ds_emp.setColumn(0,"emp_no",application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_no"));
+        	
+        	application.gds_empno.clearData();
+        	
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.pwUpdate_onload, this);
+            this.Button00.addEventHandler("onclick", this.Button00_onclick, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+
+        };
+
+        this.loadIncludeScript("pwUpdate.xfdl");
+
+       
+    };
+}
+)();

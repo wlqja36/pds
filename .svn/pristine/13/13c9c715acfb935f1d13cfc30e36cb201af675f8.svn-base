@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="empSearch" classname="member002" inheritanceid="" position="absolute" titletext="사원찾기" left="0" top="0" width="556" height="500" onload="empSearch_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg1" taborder="46" left="9" top="64" width="544" height="428" style="background:#d8dcedff;align:center middle;"/>
+        <Div id="joinTitle" taborder="27" text="근태대장번호검색" left="9" top="6" width="544" height="45" style="align:center;background:#165fa6ff;color:#ffffffff;font:bold 12 Dotum;"/>
+        <ImageViewer id="img00" taborder="28" left="14" top="121" width="530" height="284" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Grid id="grd_plaintiff" taborder="29" binddataset="ds_Attend" scrollbars="autovert" useinputpanel="false" autofittype="col" nodatatext="데이터가 없습니다." left="19" top="127" width="520" height="272">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="247"/>
+                <Column size="271"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font:bold 9 dotum;" text="대장번호"/>
+                <Cell col="1" style="font:bold 9 dotum;" text="대장명"/>
+              </Band>
+              <Band id="body">
+                <Cell style="align:center;" text="bind:attend_book_no"/>
+                <Cell col="1" edittype="none" style="align:center;" text="bind:attend_book_nm" editlimit="30"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Static id="sta_09" taborder="30" left="14" top="73" width="530" height="35" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_01" taborder="31" left="60" top="78" width="480" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;"/>
+        <Static id="sta_attend_searchword" taborder="32" text="검색어" left="219" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_attend_searchlist" taborder="35" text="검색종류" left="20" top="78" width="80" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Combo id="combo_attend_searchlist" taborder="36" codecolumn="codecolumn" datacolumn="datacolumn" left="18.83%" top="81" width="100" height="19">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn"/>
+                <Col id="datacolumn">전체</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">attend_book_id</Col>
+                <Col id="datacolumn">대장번호</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">attend_book_nm</Col>
+                <Col id="datacolumn">대장명</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Edit id="edt_attend_searchword" taborder="37" maxlength="10" left="306" top="81" width="100" height="19" oneditclick="edt_attend_searchword_oneditclick"/>
+        <Button id="btn_attend_search" taborder="39" text="검색" onclick="Button01_onclick" left="415" top="79" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_attend_reset" taborder="40" text="초기화" onclick="div_Detail_insert_onclick" left="473" top="79" width="55" height="23" style="background:URL('img::btn_imgs.png') stretch 0,0;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="btn_attend_cancel" taborder="44" text="취소" onclick="div_Detail_insert_onclick" left="289" top="440" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+        <Button id="btn_attend_select" taborder="45" text="선택" onclick="Button01_onclick" left="187" top="440" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_Attend">
+        <ColumnInfo>
+          <Column id="attend_book_no" type="STRING" size="256"/>
+          <Column id="attend_book_nm" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_Search">
+        <ColumnInfo>
+          <Column id="keyword" type="STRING" size="256"/>
+          <Column id="search_condition" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="Edit7" propid="value" datasetid="ds_insa" columnid="address1"/>
+    </Bind>
+    <InitValue/>
+    <Script type="xscript5.0"><![CDATA[
+include "Lib::common.xjs";
+
+
+//취소버튼
+this.Button01_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.close();
+}
+
+//폼온로드
+this.empSearch_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	this.btn_sc_onclick();
+}
+
+//리로드
+this.btn_reset_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+
+//트랜잭션
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+}
+
+//보낼부분
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{		
+		
+		var attitude_book_id = this.ds_emp.getColumn(this.ds_emp.rowposition, "attitude_book_id");	
+		
+			var strReturn = attitude_book_id
+			
+		this.opener.edt_btr_no03.set_value(strReturn);
+		this.close(strReturn);
+		
+}
+
+
+
+this.btn_sc_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.ds_search.setColumn(0,"keyword",this.Edit05.value);
+	this.ds_search.setColumn(0,"search_condition",this.Combo00.value);
+	
+		
+	this.gfn_transaction(this,
+ 						"attitude_id",
+ 						"s_bookSelectSearchVO.do",
+ 						"ds_search=ds_search",
+ 						"ds_emp=ds_output",
+ 						"",
+ 						"transaction_callback"
+ 						);
+ 						
+ 	
+ 	if(this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")==null ||
+		this.ds_search.getColumn(this.ds_search.rowposition, "search_condition")=="")
+		{
+			this.ds_search.setColumn(0,"search_condition","total");
+		}
+ 	
+	
+}
+
+
+
+
+
+
+
+
+
+this.fn_popupCallback = function(strPopupID, strRetukrn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "attitude_id"){
+        this.alert("Return Value: " + strReturn);
+        this.edt_btr_no03.set_value(strReturn);
+    }
+};
+this.edt_attend_searchword_oneditclick = function(obj:Edit, e:nexacro.EditClickEventInfo)
+{
+	
+}
+]]></Script>
+  </Form>
+</FDL>

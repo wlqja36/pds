@@ -1,0 +1,390 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_MM001" classname="PD_IN_COM_MM001" inheritanceid="" position="absolute" titletext="인사평가" onload="form_onload" left="0" top="0" width="757" height="270" tooltiptype="default">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="1" style="background:#3366ffff;color:#ffffffff;" position="absolute" left="0" top="6" height="50" width="757" onclick="img_titlebg_onclick"/>
+        <Static id="sta_title" text="인사평가" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29" onclick="sta_title_onclick"/>
+        <!--
+        <Button id="btn_mody00" taborder="9" text="수정활성화" top="112" right="224" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="true" onclick="btn_mody00_onclick"/>
+        <Button id="btn_mody01" taborder="9" text="수정비활성화" top="112" right="225" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="false" onclick="btn_mody01_onclick"/>
+        -->
+        <ImageViewer id="img02" taborder="5" left="72" top="80" width="604" height="142" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_02" taborder="6" left="82" top="138" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_01" taborder="48" left="82" top="185" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_00" taborder="7" left="82" top="114" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_17" taborder="8" text="인사평가대장번호" onclick="sta_17_onclick" left="82" top="114" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_05" taborder="9" left="82" top="90" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_19" taborder="47" left="82" top="161" width="584" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_03" taborder="11" text="인사평가점수합계" left="351" top="161" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_09" taborder="12" text="부서장평가점수합계" onclick="sta_09_onclick" left="351" top="138" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Edit id="EMP_EVAL1" taborder="13" maxlength="30" left="482" top="163" width="130" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" oneditclick="EMP_EVAL1_oneditclick" ontextchanged="EMP_EVAL1_ontextchanged"/>
+        <Static id="sta_04" taborder="14" text="사원번호" onclick="sta_17_onclick" left="351" top="114" width="121" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Static id="sta_22" taborder="16" text="사용여부" onclick="sta_19_onclick" left="82" top="90" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="EMP_EVAL2" taborder="18" maxlength="30" left="482" top="140" width="130" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}" ontextchanged="Edit02_ontextchanged" oneditclick="EMP_EVAL2_oneditclick"/>
+        <Radio id="Radio00" taborder="20" codecolumn="codecolumn" datacolumn="datacolumn" direction="vertical" left="195" top="95" right="61.56%" height="19" onitemchanged="Radio00_onitemchanged">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">Y</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">N</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Radio>
+        <Static id="sta_11" taborder="30" text="부서평가코드" onclick="sta_19_onclick" left="82" top="138" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="Combo00" taborder="40" displaynulltext="선택" innerdataset="@ds_eval_code" codecolumn="code" datacolumn="name" left="195" top="163" width="130" height="19" index="-1" style="color:black;"/>
+        <Static id="sta_18" taborder="41" text="인사평가코드" onclick="sta_19_onclick" left="82" top="161" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_06" taborder="49" text="총점" onclick="sta_19_onclick" left="82" top="185" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="btn_save00" taborder="52" text="저장" onclick="btn_save_onclick" left="563" top="229" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;"/>
+        <Static id="static_emp_eval_no" taborder="56" left="26.29%" top="118" right="56.54%" height="18" text="01"/>
+        <Static id="sta_emp_no" taborder="57" text="02" left="64.2%" top="118" right="18.63%" height="18" onclick="static_emp_eval_no00_onclick"/>
+        <Static id="static_emp_eval_sum" taborder="58" left="26.29%" top="188" right="56.54%" height="18" onclick="static_emp_eval_sum_onclick"/>
+        <Combo id="Combo01" taborder="59" displaynulltext="선택" innerdataset="@ds_eval_head_code" codecolumn="code" datacolumn="name" left="195" top="140" width="130" height="19" style="color:black;"/>
+        <Edit id="Edit00" taborder="60" left="0%" top="264" right="91.41%" height="22" visible="false"/>
+        <Button id="btn_save01" taborder="62" text="삭제" onclick="Button00_onclick" left="621" top="229" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;"/>
+        <Static id="static_emp_no_not" taborder="63" text="04" onclick="static_emp_eval_no00_onclick" left="64.2%" top="286" right="18.63%" height="18" visible="false"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item8" compid="EMP_EVAL_BOOK" propid="font" datasetid="ds_search" columnid=""/>
+      <BindItem id="item3" compid="Combo00" propid="value" datasetid="ds_emp_full" columnid="EVAL_STD_CODE"/>
+      <BindItem id="item4" compid="EMP_EVAL2" propid="value" datasetid="ds_emp_full" columnid="EVAL_HEAD_SCORE_SUM"/>
+      <BindItem id="item5" compid="EMP_EVAL1" propid="value" datasetid="ds_emp_full" columnid="EVAL_STD_SCORE_SUM"/>
+      <BindItem id="item0" compid="static_emp_eval_no" propid="text" datasetid="ds_emp_full" columnid="EMP_EVAL_BOOK_NO"/>
+      <BindItem id="item1" compid="Radio00" propid="value" datasetid="ds_emp_full" columnid="EMP_EVAL_YN"/>
+      <BindItem id="item9" compid="Combo01" propid="value" datasetid="ds_emp_full" columnid="EVAL_HEAD_CODE"/>
+      <BindItem id="item2" compid="static_emp_eval_sum" propid="text" datasetid="ds_emp_full" columnid="EMP_EVAL_SUM"/>
+      <BindItem id="item6" compid="Edit00" propid="value" datasetid="ds_emp_full" columnid="EMP_EVAL_SUM"/>
+      <BindItem id="item10" compid="static_emp_no_not" propid="text" datasetid="ds_emp_full" columnid="EMP_NO"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_emp_eval_book">
+        <ColumnInfo>
+          <Column id="EMP_EVAL_BOOK_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_BOOK_NM" type="STRING" size="256"/>
+          <Column id="EVAL_TERM_CLASS_CODE" type="STRING" size="4"/>
+          <Column id="EVAL_TERM_CODE" type="STRING" size="4"/>
+          <Column id="EMP_EVAL_STA_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_END_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_MOD_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_MOD_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_ACC_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_YN" type="STRING" size="1"/>
+          <Column id="EMP_EVAL_SUM" type="INT" size="3"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_eval_date_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4010</Col>
+            <Col id="name">년간</Col>
+          </Row>
+          <Row>
+            <Col id="code">4020</Col>
+            <Col id="name">반</Col>
+          </Row>
+          <Row>
+            <Col id="name">분기</Col>
+            <Col id="code">4030</Col>
+          </Row>
+          <Row>
+            <Col id="name">월간</Col>
+            <Col id="code">4040</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_eval_head_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4110</Col>
+            <Col id="name">4110/책임감</Col>
+          </Row>
+          <Row>
+            <Col id="code">4120</Col>
+            <Col id="name">4120/적극</Col>
+          </Row>
+          <Row>
+            <Col id="code">4130</Col>
+            <Col id="name">4130/수행능력</Col>
+          </Row>
+          <Row>
+            <Col id="code">4140</Col>
+            <Col id="name">4140/규정준수</Col>
+          </Row>
+          <Row>
+            <Col id="code">4150</Col>
+            <Col id="name">4150/영업실적</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_eval_code" enableevent="false">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4210</Col>
+            <Col id="name">4210/출결평가</Col>
+          </Row>
+          <Row>
+            <Col id="code">4220</Col>
+            <Col id="name">4220/근태평가</Col>
+          </Row>
+          <Row>
+            <Col id="code">4230</Col>
+            <Col id="name">4230/능력평가</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_emp_eval_head">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="emp_eval_book_no" type="STRING" size="256"/>
+          <Column id="eval_head_code" type="STRING" size="256"/>
+          <Column id="eval_head_score" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp_no">
+        <ColumnInfo>
+          <Column id="emp_no" type="STRING" size="256"/>
+          <Column id="emp_eval_book_no" type="STRING" size="256"/>
+          <Column id="emp_eval_yn" type="STRING" size="256"/>
+          <Column id="eval_std_score_sum" type="INT" size="256"/>
+          <Column id="eval_head_score_sum" type="INT" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_emp_full">
+        <ColumnInfo>
+          <Column id="EMP_NO" type="STRING" size="256"/>
+          <Column id="EMP_EVAL_BOOK_NO" type="STRING" size="256"/>
+          <Column id="EVAL_STD_CODE" type="STRING" size="256"/>
+          <Column id="EVAL_HEAD_CODE" type="STRING" size="256"/>
+          <Column id="EVAL_HEAD_SCORE_SUM" type="INT" size="256"/>
+          <Column id="EVAL_STD_SCORE_SUM" type="INT" size="256"/>
+          <Column id="EMP_EVAL_SUM" type="INT" size="256"/>
+          <Column id="EMP_EVAL_YN" type="STRING" size="1"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <ConstColumn id="PageIndex" type="INT" size="30" value="1"/>
+          <ConstColumn id="PageSize" type="INT" size="30" value="5"/>
+          <ConstColumn id="PageUnit" type="INT" size="30" value="5"/>
+          <Column id="searchCondition" type="STRING" size="100"/>
+          <Column id="searchKeyword" type="STRING" size="100"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+    //데이터는 하나 뿐이니까 전부 0행으로 잡을것
+    var strParam1 = this.parent.param1; //대장번호
+    var strParam2 = this.parent.param2; //사원번호
+    var strParam3 = this.parent.param3; //사원번호(보여주기용)
+    
+    this.sta_emp_no.set_text(strParam3);
+    //검색어 설정
+    var nRow = this.ds_search.addRow();
+	this.ds_search.setColumn(nRow,"searchKeyword", strParam1);
+	
+	var oDatas =  {
+			 svcid : "select",
+			 sController : "selectEmpEval_PopupVO.do",	
+			 bAsync : true,
+			 inds : [ "ds_search=ds_search"],
+			 outds : [
+						"ds_emp_full=ds_emp_full"
+						],
+			 nDataType : 0,   
+			 bCompress :false,	 		  
+	};
+	//실행시
+	Iject.transaction(this,oDatas,function(){
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	    var pThis = this.fobj;        
+	    
+	    trace(" ds_emp_full당 : " + pThis.ds_emp_full.saveXML());
+	    var sum = nexacro.toNumber(nexacro.toNumber(pThis.EMP_EVAL1.value) + nexacro.toNumber(pThis.EMP_EVAL2.value));
+	    pThis.ds_emp_full.setColumn(0,"EMP_EVAL_SUM", sum);
+		if(pThis.ds_emp_full.getColumn(nRow_full,"EMP_EVAL_BOOK_NO") != undefined){
+			if(pThis.ds_emp_full.getColumn(nRow_full,"EMP_EVAL_YN") == 'N'){
+				pThis.EMP_EVAL2.set_enable("false");
+				pThis.EMP_EVAL1.set_enable("false");
+				pThis.Combo01.set_enable("false");
+				pThis.Combo00.set_enable("false");
+			}
+
+		}else{
+			var nRow_full = pThis.ds_emp_full.addRow();
+
+			pThis.ds_emp_full.setColumn(nRow_full,"EMP_EVAL_YN", 'N');
+			pThis.ds_emp_full.setColumn(nRow_full,"EMP_EVAL_BOOK_NO", strParam1);
+			pThis.static_emp_eval_sum.set_text(0);
+			pThis.ds_emp_full.setColumn(nRow_full,"EMP_EVAL_SUM", pThis.static_emp_eval_sum.text);
+			pThis.ds_emp_full.setColumn(nRow_full,"EMP_NO", strParam2);
+			pThis.EMP_EVAL2.set_enable("false");
+			pThis.EMP_EVAL1.set_enable("false");
+			pThis.Combo01.set_enable("false");
+			pThis.Combo00.set_enable("false");
+		}
+		
+	});
+	
+}
+
+//저장
+this.fn_save = function(strid)
+{
+
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "ljhempEvalPopUpModifyVO.do",			 
+			  inds :["ds_input=ds_emp_full:U"],
+			  outds :[
+				 "ds_emp_full=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,   
+			  nDataType : 0,   
+			  bCompress :false,	 		  
+			}; 
+			
+	//실행부
+	Iject.transaction(this,oDatas,function(){   
+ 
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	    var pThis = this.fobj;   //form object
+	       
+	      switch(oDatas.svcid)
+	      {
+			 case "insert" :
+				Iject.alert("삽입완료");
+				break;
+	         case "save" : 
+				Iject.alert("저장완료");
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+				break; 
+	      }
+	});
+	
+}
+
+
+
+
+
+
+this.btn_save_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.fn_save("save");
+}
+
+this.btn_delete_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	var nRow = this.ds_emp_full.rowposition;
+	this.ds_emp_full.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+}
+
+
+
+this.EMP_EVAL1_ontextchanged = function(obj:Edit, e:nexacro.TextChangedEventInfo)
+{
+	var sum = nexacro.toNumber(nexacro.toNumber(this.EMP_EVAL1.value) + nexacro.toNumber(this.EMP_EVAL2.value));
+	this.ds_emp_full.setColumn(0,"EMP_EVAL_SUM", sum);
+}
+
+this.Edit02_ontextchanged = function(obj:Edit, e:nexacro.TextChangedEventInfo)
+{
+	var sum = nexacro.toNumber(nexacro.toNumber(this.EMP_EVAL1.value) + nexacro.toNumber(this.EMP_EVAL2.value));
+	this.ds_emp_full.setColumn(0,"EMP_EVAL_SUM", sum);
+}
+
+
+
+this.Radio00_onitemchanged = function(obj:Radio, e:nexacro.ItemChangeEventInfo)
+{
+	if(this.Radio00.value == 'Y'){
+		this.EMP_EVAL2.set_enable("true");
+		this.EMP_EVAL1.set_enable("true");
+		this.Combo01.set_enable("true");
+		this.Combo00.set_enable("true");
+	}else if(this.Radio00.value == 'N'){
+		this.EMP_EVAL2.set_enable("false");
+		this.EMP_EVAL1.set_enable("false");
+		this.Combo01.set_enable("false");
+		this.Combo00.set_enable("false");
+	}
+}
+
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nRow = this.ds_emp_full.rowposition;
+	this.ds_emp_full.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+	if(rtnValue)
+	{
+		this.fn_save("delete");
+	}
+	else
+	{
+		//this.fn_search();
+	}
+}
+
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var str = 'url("img::check.png")';
+	this.Button01.style.set_image(str);
+	this.ImageViewer00.set_image('url("img::one_two.jpg")');
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

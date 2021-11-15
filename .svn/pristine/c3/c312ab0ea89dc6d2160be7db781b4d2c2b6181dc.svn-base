@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC
+"-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="EmpEval">
+
+
+    <resultMap id="empEval" type="nexacro.sample.vo.Oct_eval.LJH_EmpEvalVO">
+        <result  property="EMP_EVAL_BOOK_NO"	  column="EMP_EVAL_BOOK_NO"/>
+        <result  property="EMP_EVAL_BOOK_NM"	  column="EMP_EVAL_BOOK_NM"/>
+        <result  property="EVAL_TERM_CODE"		  column="EVAL_TERM_CODE"/>
+        <result  property="EMP_EVAL_STA_DATE"	  column="EMP_EVAL_STA_DATE"/>
+        <result  property="EMP_EVAL_END_DATE"	  column="EMP_EVAL_END_DATE"/>
+        <result  property="EMP_EVAL_REG_DATE"	  column="EMP_EVAL_REG_DATE"/>
+        <result  property="EMP_EVAL_REG_USER_NO"  column="EMP_EVAL_REG_USER_NO"/>
+        <result  property="EMP_EVAL_MOD_DATE"	  column="EMP_EVAL_MOD_DATE"/>
+        <result  property="EMP_EVAL_MOD_USER_NO"  column="EMP_EVAL_MOD_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_DATE"	  column="EMP_EVAL_ACC_DATE"/>
+        <result  property="EMP_EVAL_ACC_USER_NO"  column="EMP_EVAL_ACC_USER_NO"/>
+        <result  property="EMP_EVAL_ACC_YN"		  column="EMP_EVAL_ACC_YN"/>
+        <result  property="EMP_EVAL_SUM"		  column="EMP_EVAL_SUM"/>      
+        <result  property="EMP_NAME"			  column="EMP_NAME"/>      
+    </resultMap>
+    
+ 
+    
+
+    <select id="LJH_selectEmpEvalVOList" resultMap="empEval">
+
+		SELECT 
+			emp.EMP_NAME,
+			eb.EMP_EVAL_BOOK_NO,
+			eb.EMP_EVAL_BOOK_NM,
+			eb.EVAL_TERM_CODE,
+			eb.EMP_EVAL_STA_DATE,
+			eb.EMP_EVAL_END_DATE,
+			eb.EMP_EVAL_REG_DATE, 
+			eb.EMP_EVAL_REG_USER_NO,
+			eb.EMP_EVAL_MOD_DATE,
+			eb.EMP_EVAL_MOD_USER_NO,
+			eb.EMP_EVAL_ACC_DATE,
+			eb.EMP_EVAL_ACC_USER_NO,
+			eb.EMP_EVAL_ACC_YN,
+			eb.EMP_EVAL_SUM
+		 FROM EMP_EVAL_BOOK eb, EMP emp
+		 WHERE emp.EMP_NO = eb.EMP_EVAL_REG_USER_NO
+
+
+        <!--    조건 : 전체가 아님(특정)/ 사원번호 : 있거나 없음 -->
+        <if test='searchCondition != "all"'>
+          <if test= '!searchKeyword.equals("not") '>
+		 AND eb.EVAL_TERM_CODE = #{searchCondition}
+		 AND eb.EMP_EVAL_REG_USER_NO = #{searchKeyword}
+		  </if>
+		  
+		  <if test= 'searchKeyword.equals("not") '>
+		 AND eb.EVAL_TERM_CODE = #{searchCondition}
+		   </if>
+		   
+		 </if>
+		 
+		
+		<!--    조건 : 전체/ 사원번호 :  있거나 없음 -->
+		 <if test='searchCondition == "all"'>
+		 
+		       
+		     <if test='!searchKeyword.equals("not")'> 
+		  AND eb.EMP_EVAL_REG_USER_NO = #{searchKeyword}
+		    </if >
+		    
+		     <if test='searchKeyword.equals("not")'> 
+		 
+		    </if >
+		 </if> 
+		 
+
+
+		 ORDER BY eb.EMP_EVAL_BOOK_NO ASC
+		 
+	
+
+    </select>
+    
+<select id="LJH_selectEmpEvalModName" resultMap="empEval">
+
+		SELECT 
+			emp.EMP_NAME,
+			eb.EMP_EVAL_BOOK_NO,
+			eb.EMP_EVAL_BOOK_NM,
+			eb.EVAL_TERM_CODE,
+			eb.EMP_EVAL_STA_DATE,
+			eb.EMP_EVAL_END_DATE,
+			eb.EMP_EVAL_REG_DATE,
+			eb.EMP_EVAL_REG_USER_NO,
+			eb.EMP_EVAL_MOD_DATE,
+			eb.EMP_EVAL_MOD_USER_NO,
+			eb.EMP_EVAL_ACC_DATE,
+			eb.EMP_EVAL_ACC_USER_NO,
+			eb.EMP_EVAL_ACC_YN,
+			eb.EMP_EVAL_SUM
+		 FROM EMP_EVAL_BOOK eb, EMP emp
+		 WHERE emp.EMP_NO = eb.EMP_EVAL_MOD_USER_NO
+		 
+
+		 
+		<if test='searchCondition != "all" and searchKeyword != "not"'>
+		 AND eb.EVAL_TERM_CODE = #{searchCondition},
+		 AND eb.EMP_EVAL_REG_USER_NO = #{searchKeyword}
+		 </if>	 
+
+		 ORDER BY eb.EMP_EVAL_BOOK_NO ASC
+		 
+
+		 
+    </select>
+    
+    <select id="LJH_selectEmpEvalAccName" resultMap="empEval">
+
+		SELECT 
+			emp.EMP_NAME,
+			eb.EMP_EVAL_BOOK_NO,
+			eb.EMP_EVAL_BOOK_NM,
+			eb.EVAL_TERM_CODE,
+			eb.EMP_EVAL_STA_DATE,
+			eb.EMP_EVAL_END_DATE,
+			eb.EMP_EVAL_REG_DATE,
+			eb.EMP_EVAL_REG_USER_NO,
+			eb.EMP_EVAL_MOD_DATE,
+			eb.EMP_EVAL_MOD_USER_NO,
+			eb.EMP_EVAL_ACC_DATE,
+			eb.EMP_EVAL_ACC_USER_NO,
+			eb.EMP_EVAL_ACC_YN,
+			eb.EMP_EVAL_SUM
+		 FROM EMP_EVAL_BOOK eb, EMP emp
+		 WHERE emp.EMP_NO = eb.EMP_EVAL_ACC_USER_NO
+
+		 
+		 <if test='searchCondition != "all" and searchKeyword != "not"'>
+		 AND eb.EVAL_TERM_CODE = #{searchCondition},
+		 AND eb.EMP_EVAL_REG_USER_NO = #{searchKeyword}
+		 </if>
+		 
+		 ORDER BY eb.EMP_EVAL_BOOK_NO ASC
+		 
+
+    </select>
+    
+    
+<insert id="LJH_insertEmpEval" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpEvalVO">
+
+		INSERT INTO EMP_EVAL_BOOK
+			(EMP_EVAL_BOOK_NO,
+			EMP_EVAL_BOOK_NM,
+			EVAL_TERM_CODE,
+			EMP_EVAL_STA_DATE,
+			EMP_EVAL_END_DATE,
+			EMP_EVAL_REG_DATE,
+			EMP_EVAL_REG_USER_NO,
+			EMP_EVAL_MOD_DATE,
+			EMP_EVAL_MOD_USER_NO,
+			EMP_EVAL_ACC_DATE,
+			EMP_EVAL_ACC_USER_NO,
+			EMP_EVAL_ACC_YN,
+			EMP_EVAL_SUM)
+		VALUES (
+			#{EMP_EVAL_BOOK_NO},	
+   	  		#{EMP_EVAL_BOOK_NM},
+   	  		#{EVAL_TERM_CODE},
+   	  		#{EMP_EVAL_STA_DATE},
+   	  		#{EMP_EVAL_END_DATE},
+   	  		#{EMP_EVAL_REG_DATE},
+   	  		#{EMP_EVAL_REG_USER_NO},
+   	  		#{EMP_EVAL_MOD_DATE},
+   	  		#{EMP_EVAL_MOD_USER_NO},
+   	  		#{EMP_EVAL_ACC_DATE},
+   	  		#{EMP_EVAL_ACC_USER_NO},
+   	  		#{EMP_EVAL_ACC_YN},
+   	  		#{EMP_EVAL_SUM}
+   	  	 )
+
+    </insert>
+    
+    
+    
+<update id="LJH_updateEmpEval" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpEvalVO">
+
+		UPDATE EMP_EVAL_BOOK SET
+			EMP_EVAL_BOOK_NM = #{EMP_EVAL_BOOK_NM},
+			EVAL_TERM_CODE = #{EVAL_TERM_CODE},
+			EMP_EVAL_STA_DATE = #{EMP_EVAL_STA_DATE},
+			EMP_EVAL_END_DATE = #{EMP_EVAL_END_DATE},
+			EMP_EVAL_REG_DATE = #{EMP_EVAL_REG_DATE},
+			EMP_EVAL_REG_USER_NO = #{EMP_EVAL_REG_USER_NO},
+			EMP_EVAL_MOD_DATE = #{EMP_EVAL_MOD_DATE},
+			EMP_EVAL_MOD_USER_NO = #{EMP_EVAL_MOD_USER_NO},
+			EMP_EVAL_ACC_DATE = #{EMP_EVAL_ACC_DATE},
+			EMP_EVAL_ACC_USER_NO = #{EMP_EVAL_ACC_USER_NO},
+			EMP_EVAL_ACC_YN = #{EMP_EVAL_ACC_YN},
+			EMP_EVAL_SUM = #{EMP_EVAL_SUM}
+		WHERE
+			EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO}
+
+    </update>
+    
+    <delete id="LJH_deleteEmpEval" parameterType="nexacro.sample.vo.Oct_eval.LJH_EmpEvalVO">
+
+			DELETE
+			FROM
+				EMP_EVAL_BOOK
+			WHERE
+				EMP_EVAL_BOOK_NO = #{EMP_EVAL_BOOK_NO}    	  	
+
+    </delete>
+    
+    <!-- resultType을 Integer이 되게 작성해주기 -->
+    <select id="LJH_selectEmpEvalBookNo" resultType="java.lang.Integer" >
+	                                    
+		SELECT 
+			EMP_EVAl_BOOK_SEQ.nextval
+		 FROM DUAL
+
+    </select> 
+    
+    
+
+</mapper>

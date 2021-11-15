@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ 
+<mapper namespace="yjb_btrip_detail">  	
+
+    <resultMap id="yjb_btrdetail" type="nexacro.sample.vo.Oct_btrip.YJB_Btrip_detailVO">
+        <result property="btrip_Dno" column="BTRIP_DNO" />
+        <result property="btrip_Dda" column="BTRIP_DDA" />
+        <result property="detail" column="DETAIL" />
+        <result property="ws_Date" column="WS_DATE" />
+        <result property="wf_Date" column="WF_DATE" />
+        <result property="hotel" column="HOTEL" />
+        <result property="trans" column="TRANS" />
+        <result property="visiter" column="VISITER" />
+        <result property="tex_Expenses" column="TEX_EXPENSES" />
+        <result property="remark" column="REMARK" />
+    </resultMap>
+    
+     <select id="yjb_selectbtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_detailVO" resultMap="yjb_btrdetail">
+
+      <!--   SELECT
+                BTRIP_DNO,
+                B2.BTRIP_NO,
+                B2.EMP_NO,
+				BTRIP_DDA,	
+				DETAIL,
+				WS_DATE,	
+				WF_DATE,
+				HOTEL,
+				TRANS,	
+				VISITER,	
+				TEX_EXPENSES,
+				REMARK
+            FROM BUSINESS_TRIP B1,
+                 BTRIP_MANAGEMENT B2
+            WHERE 
+                BTRIP_DNO = B2.BTRIP_NO AND B2.EMP_NO =#searchKeyword# -->
+            
+            
+            SELECT
+                BTRIP_DNO,
+				BTRIP_DDA,	
+				DETAIL,
+				WS_DATE,	
+				WF_DATE,
+				HOTEL,
+				TRANS,	
+				VISITER,	
+				TEX_EXPENSES,
+				REMARK
+            FROM BUSINESS_TRIP             	 
+            WHERE 
+                BTRIP_DNO =#{searchKeyword} 
+            
+    </select>
+   
+
+   
+    <insert id="yjb_insertbtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_detailVO">
+        <![CDATA[
+            INSERT INTO BUSINESS_TRIP (
+				BTRIP_DNO,
+				BTRIP_DDA,	
+				DETAIL,
+				WS_DATE,	
+				WF_DATE,
+				HOTEL,
+				TRANS,	
+				VISITER,	
+				TEX_EXPENSES,
+				REMARK
+            ) VALUES (
+            	#{btrip_Dno},
+                TO_CHAR(SYSDATE, 'yyyymmdd') || LPAD(BUSINESS_TRIP_SEQ.NEXTVAL,4,0),
+                #{detail},
+                #{ws_Date},
+                #{wf_Date},
+                #{hotel},
+                #{trans},
+                #{visiter},
+                #{tex_Expenses},
+                #{remark}
+            )
+        ]]>
+    </insert>
+    
+      <update id="yjb_updatebtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_detailVO">
+        <![CDATA[
+            UPDATE BUSINESS_TRIP 
+            SET 
+				DETAIL =#{detail},
+				WS_DATE =#{ws_Date},	
+				WF_DATE =#{wf_Date},
+				
+				HOTEL =#{hotel},       
+				TRANS =#{trans},  
+				VISITER =#{visiter},    
+				TEX_EXPENSES =#{tex_Expenses},
+				REMARK =#{remark}
+            WHERE BTRIP_DDA =#{btrip_Dda}
+        ]]>
+    </update>
+    
+    <delete id="yjb_deletebtrVOList" parameterType="nexacro.sample.vo.Oct_btrip.YJB_Btrip_detailVO">
+        <![CDATA[
+            DELETE FROM BUSINESS_TRIP 
+            WHERE BTRIP_DDA=#{btrip_Dda}
+        ]]>
+    </delete>
+     
+</mapper>

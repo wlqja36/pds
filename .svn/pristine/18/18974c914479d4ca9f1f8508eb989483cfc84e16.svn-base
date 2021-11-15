@@ -1,0 +1,1140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Business_Trip" classname="Temp01_SingleDetail" left="0" top="0" width="1026" height="762" titletext="New Form" onload="form_onload" enableevent="true">
+    <Layouts>
+      <Layout>
+        <!-- 검 색 -->
+        <!-- 디테일 -->
+        <ImageViewer id="img_titlebg" taborder="3" left="14" top="7" width="1001" height="50" style="background:#3366ffff;color:#ffffffff;"/>
+        <Static id="sta_title" taborder="4" text="근태" onclick="sta_title_onclick" left="26" top="18" width="168" height="29" style="color:whitesmoke;align:left middle;font:굴림,12,bold;"/>
+        <Static id="sta_33" taborder="8" text="근태상세관리" left="22" top="123" width="111" height="13" style="color:#46463dff;align:center top;font:bold 9 굴림;"/>
+        <!--<Edit id="edt_btrip_dno2" taborder="99" readonly="true" cssclass="edt_WF_Search" left="139" top="107" width="391" height="20"/>-->
+        <Button id="reset" taborder="43" text="취소" onclick="fn_reset" left="951" top="721" width="52" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;"/>
+        <Button id="Button01" taborder="46" text="추가" left="777" top="721" width="55" height="23" style="pusheddrawoffset:0 0;background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;cursor:hand;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button01_onclick"/>
+        <Button id="insert00" taborder="47" text="등록" left="835" top="721" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="div_Detail_insert_onclick"/>
+        <Button id="Button02" taborder="48" text="삭제" left="893" top="721" width="55" height="23" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;border:1 solid #999999ff ;color:white;bordertype:round 3 3 ;font:bold 9 Dotum;gradation:linear 0,0 #fefefeff 0,100 #ecece5ff;" onclick="Button02_onclick"/>
+        <ImageViewer id="img_05" taborder="75" left="16" top="70" width="998" height="35" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_00" taborder="76" text="사원검색" onclick="sta_15_onclick" left="22" top="75" width="116" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Button id="button04" taborder="77" onclick="button04_onclick" cssclass="btn_WF_SearchSmall" left="498" top="76" width="24" height="23"/>
+        <Edit id="searchEmpNo" taborder="82" left="143" top="76" height="23" width="356" readonly="true"/>
+        <ImageViewer id="img02" taborder="87" left="16" top="468" width="997" height="238" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_15" taborder="88" text="대장번호" onclick="sta_15_onclick" left="24" top="477" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="Static00" taborder="89" text="*" left="43" top="483" width="17" height="20" style="color:red;font:arial,18;"/>
+        <Static id="sta_02" taborder="92" text="사원명" onclick="sta_15_onclick" left="24" top="501" width="115" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="empNo" taborder="93" left="143" top="503" height="22" width="383" readonly="true"/>
+        <Static id="sta_01" taborder="94" text="관리일자" onclick="sta_15_onclick" left="536" top="501" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="Static02" taborder="95" text="*" left="555" top="507" width="17" height="18" style="color:red;font:arial,18;"/>
+        <Calendar id="attitudeMngDate" taborder="96" left="656" top="503" height="21" width="126" readonly="true"/>
+        <Static id="sta_03" taborder="97" onclick="sta_15_onclick" left="786" top="644" width="218" height="23" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_11" taborder="98" text="등록일시" onclick="sta_15_onclick" left="24" top="620" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Calendar id="regDate" taborder="99" dateformat="yyyy-MM-dd ddd" editformat="yyyy-MM-dd ddd" left="143" top="623" height="22" style="align:center middle;" value="null" width="146"/>
+        <Static id="sta_12" taborder="100" onclick="sta_15_onclick" left="537" top="620" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;" text="수정일시"/>
+        <Calendar id="modifyDate" taborder="101" dateformat="yyyy-MM-dd ddd" editformat="yyyy-MM-dd ddd" left="656" top="622" height="22" style="align:center middle;" value="null" width="124"/>
+        <Static id="sta_14" taborder="102" text="비상연락처" onclick="sta_15_onclick" left="537" top="668" width="115" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_17" taborder="104" text="근태코드" onclick="sta_15_onclick" left="786" top="501" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Combo id="attitudeId" taborder="105" codecolumn="ATTITUDE_ID" datacolumn="ATTITUDE_NM" index="-1" left="896" top="503" height="21" width="107" onitemchanged="attitudeId_onitemclick" innerdataset="@ds_atti_code"/>
+        <Static id="Static03" taborder="106" text="*" left="43" top="507" width="17" height="20" style="color:red;font:arial,18;"/>
+        <Static id="sta_04" taborder="107" text="근태사유" onclick="sta_15_onclick" left="24" top="526" width="115" height="96" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <TextArea id="attitudeReason" taborder="108" left="143" top="530" height="87" width="860"/>
+        <Static id="sta_05" taborder="109" text="등록사원" onclick="sta_15_onclick" left="297" top="620" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="reg_emp_id" taborder="110" left="418" top="623" width="108" height="20"/>
+        <Button id="search_reg_emp" taborder="111" onclick="search_reg_emp_onclick" cssclass="btn_WF_SearchSmall" left="505" top="623" width="22" height="20"/>
+        <Static id="sta_06" taborder="112" text="수정사원" onclick="sta_15_onclick" left="786" top="620" width="106" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="modify_emp_id" taborder="113" left="896" top="622" width="106" height="20"/>
+        <Button id="search_mod_emp" taborder="114" onclick="search_mod_emp_onclick" cssclass="btn_WF_SearchSmall" left="981" top="622" width="22" height="20"/>
+        <Static id="sta_07" taborder="115" text="승인일시" onclick="sta_15_onclick" left="24" top="644" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Calendar id="confirmDate" taborder="116" editformat="yyyy-MM-dd ddd" left="143" top="647" height="22" style="align:center middle;" width="146"/>
+        <Static id="sta_08" taborder="117" onclick="sta_15_onclick" left="297" top="668" width="232" height="26" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Static id="sta_09" taborder="118" text="승인여부" onclick="sta_15_onclick" left="297" top="644" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Radio id="confirmYn" taborder="119" innerdataset="@ds_yn" codecolumn="code" datacolumn="data" value="N" direction="vertical" left="428" top="647" height="19" style="align:center middle;" index="1" width="100"/>
+        <Static id="sta_10" taborder="120" text="승인사원" onclick="sta_15_onclick" left="537" top="644" width="115" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="fix_emp_id" taborder="121" left="656" top="647" width="108" height="20"/>
+        <Button id="search_fix_emp" taborder="122" onclick="search_fix_emp_onclick" cssclass="btn_WF_SearchSmall" left="761" top="647" width="20" height="20"/>
+        <Static id="sta_13" taborder="123" text="업무인수자" onclick="sta_15_onclick" left="24" top="667" width="115" height="27" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="takeover_emp_id" taborder="124" left="143" top="671" width="146" height="21"/>
+        <Button id="search_takeover_emp" taborder="125" cssclass="btn_WF_SearchSmall" left="268" top="671" width="21" height="21" onclick="search_takeover_emp_onclick"/>
+        <Edit id="emergencyContact" taborder="126" left="656" top="671" height="23" width="348" type="string" displaynulltext="숫자만 입력"/>
+        <Grid id="Grid00" taborder="127" useinputpanel="false" left="21" top="152" height="298" binddataset="ds_attitude_general" width="985">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+                <Column size="82"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell text="관리일자"/>
+                <Cell col="1" text="대장명"/>
+                <Cell col="2" text="사원명"/>
+                <Cell col="3" text="근태유형"/>
+                <Cell col="4" text="등록일시"/>
+                <Cell col="5" text="등록사원"/>
+                <Cell col="6" text="수정일시"/>
+                <Cell col="7" text="수정사원"/>
+                <Cell col="8" text="승인여부"/>
+                <Cell col="9" text="승인일시"/>
+                <Cell col="10" text="승인사원"/>
+                <Cell col="11" text="업무인수자"/>
+              </Band>
+              <Band id="body">
+                <Cell text="bind:attitudeMngDate"/>
+                <Cell col="1" text="bind:attitudeBookId"/>
+                <Cell col="2" text="bind:empNo"/>
+                <Cell col="3" displaytype="combo" edittype="combo" text="bind:attitudeId" combodataset="ds_attend_code" combocodecol="code" combodatacol="data"/>
+                <Cell col="4" text="bind:regDate"/>
+                <Cell col="5" text="bind:regEmpId"/>
+                <Cell col="6" text="bind:modifyDate"/>
+                <Cell col="7" text="bind:modifyEmpId"/>
+                <Cell col="8" text="bind:confirmYn"/>
+                <Cell col="9" text="bind:confirmDate"/>
+                <Cell col="10" text="bind:confirmEmpId"/>
+                <Cell col="11" text="bind:takeoverEmpId"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+        <Edit id="edt_att_book_no" taborder="128" oneditclick="edt_btr_no2_oneditclick" left="143" top="477" width="383" height="21" readonly="true"/>
+        <Button id="button00" taborder="129" onclick="button00_onclick" cssclass="btn_WF_SearchSmall" left="502" top="503" width="24" height="22" visible="false"/>
+        <Edit id="reg_emp_id_NOT" taborder="130" left="2.44%" top="720" right="93.47%" height="24" visible="false"/>
+        <Edit id="modify_emp_id_NOT" taborder="131" left="8.28%" top="721" right="87.43%" height="25" visible="false"/>
+        <Edit id="confirm_emp_id_NOT" taborder="132" left="14.33%" top="722" right="81.48%" height="25" visible="false"/>
+        <Edit id="takeover_emp_id_NOT" taborder="133" left="20.27%" top="722" right="75.73%" height="25" visible="false" oneditclick="takeover_emp_id_NOT_oneditclick"/>
+        <Edit id="empNo_NOT" taborder="134" left="25.54%" top="722" right="70.47%" height="22" visible="false"/>
+        <Edit id="strParam" taborder="135" left="31.87%" top="723" right="64.33%" height="24" visible="false"/>
+        <Edit id="searchEmpNo_NOT" taborder="136" visible="false" left="37.04%" top="725" right="59.45%" height="20"/>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_attitude_general" keystring="S:attitudeMngDate">
+        <ColumnInfo>
+          <Column id="attitudeMngDate" type="DATE" size="256"/>
+          <Column id="attitudeBookId" type="STRING" size="12"/>
+          <Column id="empNo" type="STRING" size="12"/>
+          <Column id="attitudeId" type="STRING" size="4"/>
+          <Column id="attitudeReason" type="STRING" size="256"/>
+          <Column id="regDate" type="DATE" size="256"/>
+          <Column id="regEmpId" type="STRING" size="12"/>
+          <Column id="modifyDate" type="DATE" size="256"/>
+          <Column id="modifyEmpId" type="STRING" size="12"/>
+          <Column id="confirmYn" type="STRING" size="1"/>
+          <Column id="confirmDate" type="DATE" size="256"/>
+          <Column id="confirmEmpId" type="STRING" size="12"/>
+          <Column id="takeoverEmpId" type="STRING" size="12"/>
+          <Column id="emergencyContact" type="STRING" size="20"/>
+          <Column id="REG_EMP_REAL" type="STRING" size="256"/>
+          <Column id="MODIFY_EMP_REAL" type="STRING" size="256"/>
+          <Column id="FIX_EMP_REAL" type="STRING" size="256"/>
+          <Column id="TAKEOVER_EMP_REAL" type="STRING" size="256"/>
+          <Column id="EMP_REAL" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_attend_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="4"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">2210</Col>
+            <Col id="data">연차휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2220</Col>
+            <Col id="data">경조휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2230</Col>
+            <Col id="data">병가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2240</Col>
+            <Col id="data">출산휴가</Col>
+          </Row>
+          <Row>
+            <Col id="code">2250</Col>
+            <Col id="data">생리휴가</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_atti_code">
+        <ColumnInfo>
+          <Column id="ATTITUDE_ID" type="STRING" size="4"/>
+          <Column id="ATTITUDE_NM" type="STRING" size="256"/>
+          <Column id="HOL_USEYN" type="STRING" size="1"/>
+          <Column id="VACATION_CODE_ID" type="STRING" size="4"/>
+          <Column id="BRIFE" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <!--<BindItem id="item16" compid="edt_btrip_dno" propid="value" datasetid="ds_user" columnid="btrip_Dno"/>-->
+      <BindItem id="item1" compid="reg_emp_id" propid="value" datasetid="ds_attitude_general" columnid="regEmpId"/>
+      <BindItem id="item19" compid="reg_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item2" compid="modify_emp_id" propid="value" datasetid="ds_attitude_general" columnid="modifyEmpId"/>
+      <BindItem id="item3" compid="modify_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item4" compid="fix_emp_id" propid="value" datasetid="ds_attitude_general" columnid="confirmEmpId"/>
+      <BindItem id="item5" compid="fix_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item6" compid="takeover_emp_id" propid="value" datasetid="ds_attitude_general" columnid="takeoverEmpId"/>
+      <BindItem id="item7" compid="takeover_emp_id" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item8" compid="edt_att_book_no" propid="value" datasetid="ds_attitude_general" columnid="attitudeBookId"/>
+      <BindItem id="item0" compid="empNo" propid="value" datasetid="ds_attitude_general" columnid="empNo"/>
+      <BindItem id="item9" compid="attitudeMngDate" propid="value" datasetid="ds_attitude_general" columnid="attitudeMngDate"/>
+      <BindItem id="item10" compid="attitudeId" propid="value" datasetid="ds_attitude_general" columnid="attitudeId"/>
+      <BindItem id="item11" compid="attitudeReason" propid="value" datasetid="ds_attitude_general" columnid="attitudeReason"/>
+      <BindItem id="item12" compid="regDate" propid="value" datasetid="ds_attitude_general" columnid="regDate"/>
+      <BindItem id="item13" compid="modifyDate" propid="value" datasetid="ds_attitude_general" columnid="modifyDate"/>
+      <BindItem id="item14" compid="emergencyContact" propid="value" datasetid="ds_attitude_general" columnid="emergencyContact"/>
+      <BindItem id="item15" compid="confirmYn" propid="value" datasetid="ds_attitude_general" columnid="confirmYn"/>
+      <BindItem id="item16" compid="confirmDate" propid="value" datasetid="ds_attitude_general" columnid="confirmDate"/>
+      <BindItem id="item17" compid="reg_emp_id_NOT" propid="displaynulltext" datasetid="ds_attitude_general" columnid="REG_EMP_REAL"/>
+      <BindItem id="item18" compid="reg_emp_id_NOT" propid="value" datasetid="ds_attitude_general" columnid="REG_EMP_REAL"/>
+      <BindItem id="item20" compid="modify_emp_id_NOT" propid="displaynulltext" datasetid="ds_attitude_general" columnid="MODIFY_EMP_REAL"/>
+      <BindItem id="item21" compid="modify_emp_id_NOT" propid="value" datasetid="ds_attitude_general" columnid="MODIFY_EMP_REAL"/>
+      <BindItem id="item22" compid="confirm_emp_id_NOT" propid="displaynulltext" datasetid="ds_attitude_general" columnid="FIX_EMP_REAL"/>
+      <BindItem id="item23" compid="confirm_emp_id_NOT" propid="value" datasetid="ds_attitude_general" columnid="FIX_EMP_REAL"/>
+      <BindItem id="item24" compid="takeover_emp_id_NOT" propid="value" datasetid="ds_attitude_general" columnid="TAKEOVER_EMP_REAL"/>
+      <BindItem id="item25" compid="takeover_emp_id_NOT" propid="displaynulltext" datasetid="ds_attitude_general" columnid="TAKEOVER_EMP_REAL"/>
+      <BindItem id="item26" compid="empNo_NOT" propid="displaynulltext" datasetid="ds_attitude_general" columnid="EMP_REAL"/>
+      <BindItem id="item27" compid="empNo_NOT" propid="value" datasetid="ds_attitude_general" columnid="EMP_REAL"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[include "Lib::Comm.xjs";
+
+
+//부모창 파라미터받기
+var strParam1 = this.parent.param1;
+
+this.vacationLeft="";
+
+this.vacationUseYn="";
+
+this.rowPosition="";
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);
+
+
+    this.ds_search.setColumn(0, "searchCondition",this.strParam1);
+    
+    this.strParam.set_value(strParam1);
+    
+
+    this.fn_onloadList();
+    
+    this.load_atticode();
+
+} 
+
+
+//페이지 onload시 대장으로 전체조회
+
+this. fn_onloadList=function(){
+
+    
+    var searchCondition = strParam1;    
+    //Iject.alert(searchCondition);
+  
+
+	this.ds_search.setColumn(0, "searchCondition",searchCondition);
+	
+	
+	 
+    
+   
+   var oDatas =  {
+			  svcid : "searchAttitudeList",
+			  sController : "attitudeSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attitude_general=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		}
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attitude_general : " + pThis.ds_attitude_general.saveXML());
+	        if(rowPosition!=0){
+	     pThis.ds_attitude_general.moveRow(rowPosition,rowPosition);
+	     pThis.Grid00.selectRow(rowPosition);
+	 }
+	 
+
+});
+
+}
+
+
+
+
+//대장+ 사번찾기 상단
+this.button04_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+		
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("attitudeGeneral"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::atEmpSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+
+	
+		var objParam = {param2:this.strParam1
+  					 	};
+	
+	/* empSearch.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");*/
+     var emp_NoName = system.showModalWindow(empSearch, "searchEmpNo", this.getOwnerFrame(),"", this);			  
+	
+
+	  var objArr = emp_NoName.split(/,/g, 2);      
+	  this.searchEmpNo.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.searchEmpNo_NOT.set_value(objArr[1]);
+      
+      this.searchEmpNo_onchanged();
+     			  
+	
+	
+}
+
+
+
+
+
+//모든종류의 사원찾기 콜백함수
+this.fn_popupCallback = function(strPopupID, strReturn)
+{
+    if(strReturn == undefined){
+        return;
+    }
+
+    if(strPopupID == "attitudeGeneral"){
+       // this.alert("Return Value:" + strReturn);
+       // this.searchEmpNo.set_value(strReturn);
+        //this.empNo.set_value(strReturn);
+       
+        
+        
+       
+        
+    }else if(strPopupID == "attendanceEmp1"){
+      //  this.alert("Return Value: " + strReturn);
+        this.empNo.set_value(strReturn);
+     }else if(strPopupID == "fixEmpSearch"){
+       // this.alert("Return Value: " + strReturn);
+        this.fix_emp_id.set_value(strReturn);
+     }
+
+}
+
+
+
+
+ //object 인자 생성함수
+ this.fn_parent = function(pObj)
+ {
+     this.ds_parent.copyData(pObj);
+};
+
+
+
+
+//모달에서 사번입력되면 바로 조회
+this.searchEmpNo_onchanged = function(obj:Edit, e:nexacro.ChangeEventInfo)
+{
+
+    
+    //Iject.alert(this.searchEmpNo.value);
+    //여기를 다른것으로 잡으면됨
+   var searchKeyword = this.searchEmpNo_NOT.value;  
+   // Iject.alert(searchKeyword);
+        
+        
+    var searchCondition=strParam1;
+  //  Iject.alert(searchCondition);
+    this.ds_search.setColumn(0, "searchCondition",searchCondition );
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	this.ds_search.setColumn(0, "searchCondition", strParam1);
+
+	
+  //rowPosition=this.Grid00.currentrow;
+   
+   var oDatas =  {
+			  svcid : "searchAttitude",
+			  sController : "attitudeSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_attitude_general=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호출   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		}
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_attitude_general : " + pThis.ds_attitude_general.saveXML());
+
+	       if(rowPosition!=0){
+	 pThis.ds_attitude_general.moveRow(rowPosition,rowPosition);
+	 pThis.Grid00.selectRow(rowPosition);
+	 }
+	       
+	       
+	       
+	});//트랜잭션함수끝
+
+}
+
+
+
+
+
+
+
+
+
+//새로 등록시 사원 조회
+
+this.button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("attendanceEmp1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::atEmpSearch1.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	
+	/*system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);*/
+	
+	
+	
+	
+	
+		var objParam = {
+  					 	};
+	
+/* empSearch.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");*/
+     		  	
+    var emp_NoName = system.showModalWindow(empSearch, 
+                      "attendanceEmp1",
+                      this.getOwnerFrame(),
+                      "",
+                      this);		
+	
+	 var objArr = emp_NoName.split(/,/g, 2);      
+	  this.empNo.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.empNo_NOT.set_value(objArr[1]);
+     // alert(this.empNo.value);
+      //alert(this.empNo_NOT.value);
+		  
+	
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+//등록사원 찾기
+this.search_reg_emp_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var  empSearch  = new ChildFrame();
+ 	
+ 	 empSearch.init("regEmpSearch"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 300
+ 					, 250
+ 					, null
+ 					, null
+ 					, "member::attitudeEmpSearch.xfdl");
+ 	
+ 	
+ 	
+ 	
+ 	empSearch.set_openalign("center middle");
+ 	empSearch.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {
+  					 	};
+						
+  	
+  var emp_NoName = system.showModalWindow(empSearch, 
+                      "fixEmpSearch",
+                      this.getOwnerFrame(),
+                      "",
+                      this);		
+	
+	 var objArr = emp_NoName.split(/,/g, 2);      
+	  this.reg_emp_id.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.reg_emp_id_NOT.set_value(objArr[1]);
+      //alert(this.reg_emp_id.value);
+      //alert(this.reg_emp_id_NOT.value);
+	
+	
+	
+}
+
+
+
+
+
+
+
+//수정사원 찾기
+this.search_mod_emp_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var  empSearch  = new ChildFrame();
+ 	
+ 	 empSearch.init("modEmpSearch"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 300
+ 					, 250
+ 					, null
+ 					, null
+ 					, "member::attitudeEmpSearch1.xfdl");
+ 	
+ 	
+ 	
+ 	empSearch.set_openalign("center middle");
+ 	empSearch.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {
+  					 	};
+						
+  	
+    //ChildFrame.showModal(strID, objParentFrame, [{objArgumentList}[, objOpener[,  callbackFunc]]]);
+          
+      var emp_NoName = system.showModalWindow(empSearch, 
+                      "modifyEmpSearch",
+                      this.getOwnerFrame(),
+                      "",
+                      this);		
+	
+	 var objArr = emp_NoName.split(/,/g, 2);      
+	  this.modify_emp_id.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.modify_emp_id_NOT.set_value(objArr[1]);
+     // alert(this.modify_emp_id.value);
+      //alert(this.modify_emp_id_NOT.value);
+	
+	
+	
+	
+}
+
+
+//확정 사원 찾기
+this.search_fix_emp_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var  empSearch  = new ChildFrame();
+ 	
+ 	 empSearch.init("fixEmpSearch"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 300
+ 					, 250
+ 					, null
+ 					, null
+ 					, "member::attitudeEmpSearch2.xfdl");
+ 	
+ 	
+ 	
+ 	empSearch.set_openalign("center middle");
+ 	empSearch.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {
+  					 	};
+						
+  	
+  var emp_NoName = system.showModalWindow(empSearch, 
+                      "fixEmpSearch",
+                      this.getOwnerFrame(),
+                      "",
+                      this);		
+	
+	 var objArr = emp_NoName.split(/,/g, 2);      
+	  this.fix_emp_id.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.confirm_emp_id_NOT.set_value(objArr[1]);
+      //alert(this.fix_emp_id.value);
+     // alert(this.confirm_emp_id_NOT.value);
+	
+
+	
+	
+}
+
+
+//업무인수자 찾기
+
+this.search_takeover_emp_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+
+	
+	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var  empSearch  = new ChildFrame();
+ 	
+ 	 empSearch.init("takeoverEmpSearch"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 300
+ 					, 250
+ 					, null
+ 					, null
+ 					, "member::attitudeEmpSearch3.xfdl");
+ 	
+ 	
+ 	
+ 	empSearch.set_openalign("center middle");
+ 	empSearch.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {
+  					 	};
+						
+  	
+    //ChildFrame.showModal(strID, objParentFrame, [{objArgumentList}[, objOpener[,  callbackFunc]]]);
+          
+          
+          /*
+    	  empSearch.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");*/
+     			  
+     			  
+     			    var emp_NoName = system.showModalWindow(empSearch, 
+                      "takeoverEmpSearch",
+                      this.getOwnerFrame(),
+                      "",
+                      this);		
+	
+	 var objArr = emp_NoName.split(/,/g, 2);      
+	  this.takeover_emp_id.set_value(objArr[0] + "(" + objArr[1] + ")");
+      this.takeover_emp_id_NOT.set_value(objArr[1]);
+      //alert(this.takeover_emp_id.value);
+      //alert(this.takeover_emp_id_NOT.value);
+	
+	
+}
+
+
+
+
+
+ //저장버튼 누를시
+ this.div_Detail_insert_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+ {
+ 	this.fn_save("save");
+ }
+
+
+//저장
+this.fn_save = function(strid)
+{
+
+ 
+   //Iject.alert(strParam1+"여기가 떠야함");
+
+	this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "empNo", this.empNo_NOT.value);
+	this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "regEmpId", this.reg_emp_id_NOT.value);
+    this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "modifyEmpId", this.modify_emp_id_NOT.value);
+    this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "confirmEmpId", this.confirm_emp_id_NOT.value);
+    this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "takeoverEmpId", this.takeover_emp_id_NOT.value);
+    this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "attitudeBookId", this.strParam.value);
+
+      rowPosition=this.Grid00.currentrow;
+   
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "attitudeModifyVO.do",			 
+			  inds :["input1=ds_attitude_general:U"],
+			  outds :[
+				 "ds_attitude_general=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호출   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+	       var pThis = this.fobj;   //form object
+	       
+	       
+	        
+	        pThis.fn_onloadList();
+	       
+	       
+	       
+	       trace(strid);
+		    switch(strid)
+	      {
+	         case "save" : 
+				Iject.alert("저장완료");
+				 pThis.fn_onloadList();
+				
+				
+				break;
+				
+	         case "delete" : 
+	            Iject.alert("삭제완료");
+	             pThis.fn_onloadList();
+	          
+				break; 
+	      }
+	      
+	    
+	});
+	
+	
+	
+	
+}
+
+
+
+//Date를 XDate로
+this.formatDate=function(date) {
+ 
+ 
+   var year = date.getFullYear().toString().padLeft(4, "0");
+    var month = (date.getMonth()+1).toString().padLeft(2, "0");
+    var day = date.getDate().toString().padLeft(2, "0");
+    
+   
+ return year+month+day;
+ 
+ 
+ 
+ 
+ 
+ /*var d = date, 
+   month = '' + (d.getMonth() + 1), 
+   day = '' + d.getDate(), 
+   year = d.getFullYear(); 
+   
+   
+   if (month.length < 2) 
+     month = '0' + month; 
+   if (day.length < 2)
+     day = '0' + day; 
+     
+     return [year, month, day].join('-'); */
+ 
+ }
+
+
+
+
+//행 추가
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	this.ds_attitude_general.clearData();
+	var nRow = this.ds_attitude_general.addRow();
+	this.edt_att_book_no.set_value(strParam1);
+	
+	//this.ds_attitude_general.setColumn(this.ds_attitude_general.rowposition, "attitudeBookId", this.strParam.value);
+	this.attitudeId.set_index("5");
+	this.confirmYn.set_index("1");
+	
+	this.attitudeMngDate.set_readonly("false");
+	this.button00.set_visible("true");
+	this.searchEmpNo.set_value("");
+	
+	//오늘날짜로 관리일자/등록일자 세팅
+     var today=new Date();
+    this.attitudeMngDate.set_value(this.formatDate(today));
+	
+	this.regDate.set_value(this.formatDate(today));
+	
+	
+}
+
+
+
+
+
+
+
+
+
+//삭제
+this.Button02_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+ 
+	var nRow = this.ds_attitude_general.rowposition;
+	this.ds_attitude_general.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+	
+ 
+  
+	
+	if(rtnValue){
+		this.fn_save("delete");
+	}else{
+		Iject.alert("삭제실패");
+	}
+}
+
+ 
+//리셋
+this.fn_reset = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	this.reload();
+}
+
+
+
+
+
+
+
+
+
+
+//콤보박스 변경시
+
+
+this.attitudeId_onitemclick = function(obj:Combo, e:nexacro.ListBoxClickEventInfo)
+{
+	
+		
+	 var searchKeyword = this.empNo_NOT.value;  
+     trace("empNo_NOT.value: ", searchKeyword); // <---- ar
+             
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	 
+   
+    var oDatas =  {
+			  svcid : "searchVacationYn",
+			  sController : "selectVacationLeft.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+			  
+			     ],			     
+			  args  : [			
+			  
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	
+	  
+    //공통 transaction 함수 호출   //function callback 
+    
+    
+    if(this.attitudeId.index<3){
+    
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		}
+	      var pThis = this.fobj; 
+	      
+	      
+	     // Iject.alert(pThis.vacationLeft);
+	      
+	      if(pThis.vacationLeft>0){
+	      
+	         
+             pThis.vacationUseYn = application.confirm( "사용가능한 연차가 " + pThis.vacationLeft + " 일 있습니다. \n \n" + "사용하시겠습니까?" , "vacation alert");
+             
+            // Iject.alert(pThis.vacationUseYn);
+             
+             //사용하겠다하면 연차정보 편집
+              if(pThis.vacationUseYn){
+                   var nLeft = system.clientToScreenX(pThis, 10);
+ 	               var nTop = system.clientToScreenY(pThis, 10);
+ 	
+ 	 
+ 	 
+ 	               var vacation_info= new ChildFrame();
+ 	
+ 	               vacation_info.init("vacation_info"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "VACATION::VACATION_INFO.xfdl");
+ 	
+ 	
+ 	
+ 	               vacation_info.set_openalign("center middle");
+ 	                vacation_info.set_dragmovetype("all");
+  	
+  	
+   		        var objParam = { param1: pThis.attitudeId.value, param2: pThis.empNo_NOT.value, param3:pThis.empNo.value};
+						
+  	
+   
+          
+    	  vacation_info.showModal(pThis.getOwnerFrame()
+     			  , objParam
+				      , pThis
+     			  , "fn_popupCallback");
+ 
+	
+
+	
+        }
+
+
+//팝업 콜백
+            this.fn_popupCallback = function(strPopupID, strReturn)
+            {
+          if(strReturn == undefined){
+             return;
+         }
+  
+      if(strPopupID == "vacation_info"){
+         // this.alert("Return Value: " + strReturn);
+           }
+         };
+	
+
+	 //object 인자 생성함수
+         this.fn_parent = function(pObj)
+         {
+           this.ds_parent.copyData(pObj);
+           ;
+	
+	
+	       }     
+                
+                 
+	     
+	      }else{
+	        
+	      
+	      }
+	      
+	         	      
+	      
+	       	       
+	       
+	       
+	});//트랜잭션함수끝
+	
+	}
+ 
+		
+}
+
+// this.search_attend_code00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+// {
+// 	//모달창 생성 
+// 	var objChildFrame = new ChildFrame();  
+// 	objChildFrame.init("AttendCode", "absolute", 30, 30, 424, 340, null, null, "Attitude::PD_IN_COM_ATTITUDE_CODE_copy.xfdl");
+// 	objChildFrame.set_dragmovetype("all");
+// 	
+// // 	var objParam = {param1: this.ds_attitude_book}
+// // 	trace("==메인 : ds_atti_code 데이터 넘기는중! ");
+// 	
+// 	objChildFrame.showModal(this.getOwnerFrame()
+//                           //, objParam
+//                           , this
+//                           , "fn_attendCode_popupCallback");
+// }
+// 
+// //모달 콜백함수 
+// this.fn_attendCode_popupCallback = function(strPopupID, strReturn)
+// {
+//     if(strReturn == undefined){
+//         trace("return 값 - undefined");
+//         return;
+//     }
+// 
+//     if(strPopupID == "AttendCode"){
+// 		trace("값 가져옴: ", strReturn);
+// 		this.attend_code00.set_value(strReturn);
+//     }
+// };
+
+
+//로드
+this.load_atticode = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	trace("로드함수 읽음!");
+	
+	//근태코드정보 
+	var oDatas =  {
+		svcid : "search",
+		sController : "loadAtticode.do",
+		inds :[], //입력ID=Dataset ID  (서비스 또는 파일에 지정된 데이터셋) = (앱에서 수정된 데이터셋)
+		outds :["ds_atti_code=attiCodeList"], //Dataset ID=출력ID		     
+		args  : [],
+		bAsync : true,    // 비동기여부 (true : async  false: sync)
+		nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+		bCompress :false,	 //			  
+	}; 
+	 //trace(" this.ds_atti_code : " + this.ds_atti_code.saveXML()); //해당데이터 보기
+    
+	Iject.transaction(this,oDatas,function(){  
+		if(this.errorcode < 0) //0:정상, this.errorcode<0:오류, this.errorcode>0:경고 
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+		
+		var pThis = this.fobj;   //form object	      
+		trace(" ds_atti_code : " + pThis.ds_atti_code.saveXML());
+		trace("==여기까지 로딩완료==");
+	});
+}
+]]></Script>
+  </Form>
+</FDL>

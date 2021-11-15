@@ -1,0 +1,1087 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("member002");
+                this.set_titletext("회원가입창");
+                this._setFormPosition(0,0,616,477);
+            }
+            this.getSetter("inheritanceid").set("");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_emp", this);
+            obj._setContents("<ColumnInfo><Column id=\"emp_id\" type=\"STRING\" size=\"256\"/><Column id=\"emp_name\" type=\"STRING\" size=\"256\"/><Column id=\"emp_pw\" type=\"STRING\" size=\"256\"/><Column id=\"emp_pw_check\" type=\"STRING\" size=\"256\"/><Column id=\"birth\" type=\"STRING\" size=\"256\"/><Column id=\"back_birth\" type=\"STRING\" size=\"256\"/><Column id=\"eng_name\" type=\"STRING\" size=\"256\"/><Column id=\"email\" type=\"STRING\" size=\"256\"/><Column id=\"cell_phone\" type=\"STRING\" size=\"256\"/><Column id=\"phone\" type=\"STRING\" size=\"256\"/><Column id=\"address\" type=\"STRING\" size=\"256\"/><Column id=\"address_detail\" type=\"STRING\" size=\"256\"/><Column id=\"registration_address\" type=\"STRING\" size=\"256\"/><Column id=\"registration_address_detail\" type=\"STRING\" size=\"256\"/><Column id=\"marriage\" type=\"STRING\" size=\"256\"/><Column id=\"marriage_date\" type=\"STRING\" size=\"256\"/><Column id=\"disability\" type=\"STRING\" size=\"256\"/><Column id=\"religion\" type=\"STRING\" size=\"256\"/><Column id=\"dept_code\" type=\"STRING\" size=\"256\"/><Column id=\"grade_code\" type=\"STRING\" size=\"256\"/><Column id=\"join_code\" type=\"STRING\" size=\"256\"/><Column id=\"householder\" type=\"STRING\" size=\"256\"/><Column id=\"householder_name\" type=\"STRING\" size=\"256\"/><Column id=\"householder_relation\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_check", this);
+            obj._setContents("<ColumnInfo><Column id=\"msg\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("img_titlebg1", "absolute", "9", "64", "600", "400", null, null, this);
+            obj.set_taborder("24");
+            obj.style.set_background("lavenderblush");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "70", "97", "530", "25", null, null, this);
+            obj.set_taborder("40");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "absolute", "70", "145", "530", "25", null, null, this);
+            obj.set_taborder("41");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "absolute", "70", "169", "530", "25", null, null, this);
+            obj.set_taborder("42");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "absolute", "70", "217", "530", "25", null, null, this);
+            obj.set_taborder("43");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "absolute", "70", "193", "530", "25", null, null, this);
+            obj.set_taborder("44");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "absolute", "70", "241", "530", "25", null, null, this);
+            obj.set_taborder("45");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static28", "absolute", "70", "121", "530", "25", null, null, this);
+            obj.set_taborder("30");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "251", "424", "55", "23", null, null, this);
+            obj.set_taborder("23");
+            obj.set_text("가입");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "315", "424", "55", "23", null, null, this);
+            obj.set_taborder("26");
+            obj.set_text("취소");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            obj.style.set_shadow("outer 0,0 0 gray");
+            obj.getSetter("titletext").set("회원가입창");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_execute", "absolute", "361", "218", "65", "23", null, null, this);
+            obj.set_taborder("11");
+            obj.set_text("주소 검색");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "114", "220", "241", "19", null, null, this);
+            obj.set_taborder("25");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit02", "absolute", "114", "172", "210", "19", null, null, this);
+            obj.set_taborder("7");
+            obj.set_inputtype("number,english,dot,symbol");
+            obj.set_displaynulltext("예) test@test.com");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit04", "absolute", "434", "100", "120", "19", null, null, this);
+            obj.set_taborder("1");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit05", "absolute", "114", "100", "120", "19", null, null, this);
+            obj.set_taborder("0");
+            obj.set_inputtype("number,english");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit06", "absolute", "114", "124", "120", "19", null, null, this);
+            obj.set_taborder("2");
+            obj.set_password("true");
+            obj.set_inputtype("numberandenglish");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit07", "absolute", "434", "148", "120", "19", null, null, this);
+            obj.set_taborder("6");
+            obj.set_inputtype("english,space");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit10", "absolute", "114", "244", "345", "19", null, null, this);
+            obj.set_taborder("12");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit09", "absolute", "434", "124", "120", "19", null, null, this);
+            obj.set_taborder("3");
+            obj.set_password("true");
+            obj.set_inputtype("numberandenglish");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit03", "absolute", "114", "148", "51", "19", null, null, this);
+            obj.set_taborder("4");
+            obj.set_password("false");
+            obj.set_maxlength("6");
+            obj.set_autoskip("true");
+            this.addChild(obj.name, obj);
+
+            obj = new MaskEdit("MaskEdit00", "absolute", "114", "196", "120", "19", null, null, this);
+            obj.set_taborder("9");
+            obj.set_displaynulltext("'-' 제외 숫자만 입력");
+            obj.set_mask("###-####-####");
+            obj.set_type("string");
+            obj.style.set_align("center middle");
+            obj.set_autoselect("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Div("joinTitle", "absolute", "9", "6", "600", "50", null, null, this);
+            obj.set_taborder("27");
+            obj.set_text("  회원가입");
+            obj.style.set_align("left");
+            obj.style.set_background("#3366ffff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 12 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static29", "absolute", "14", "67", "178", "25", null, null, this);
+            obj.set_taborder("28");
+            obj.set_text("개인 정보입력");
+            obj.style.set_font("bold 9 Dotum,굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static33", "absolute", "14", "97", "95", "25", null, null, this);
+            obj.set_taborder("29");
+            obj.set_text("아이디");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "334", "97", "95", "25", null, null, this);
+            obj.set_taborder("31");
+            obj.set_text("이름");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "14", "217", "95", "25", null, null, this);
+            obj.set_taborder("32");
+            obj.set_text("거주 주소");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "14", "193", "95", "25", null, null, this);
+            obj.set_taborder("33");
+            obj.set_text("휴대폰번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static14", "absolute", "14", "145", "95", "25", null, null, this);
+            obj.set_taborder("34");
+            obj.set_text("주민등록번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static15", "absolute", "14", "169", "95", "25", null, null, this);
+            obj.set_taborder("35");
+            obj.set_text("이메일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static17", "absolute", "334", "145", "95", "25", null, null, this);
+            obj.set_taborder("36");
+            obj.set_text("영문이름");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static18", "absolute", "334", "121", "95", "25", null, null, this);
+            obj.set_taborder("37");
+            obj.set_text("비밀번호확인");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static20", "absolute", "14", "121", "95", "25", null, null, this);
+            obj.set_taborder("38");
+            obj.set_text("비밀번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static21", "absolute", "14", "241", "95", "25", null, null, this);
+            obj.set_taborder("39");
+            obj.set_text("상세주소");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit14", "absolute", "170", "148", "64", "19", null, null, this);
+            obj.set_taborder("5");
+            obj.set_password("true");
+            obj.set_maxlength("7");
+            obj.set_autoskip("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static09", "absolute", "334", "193", "95", "25", null, null, this);
+            obj.set_taborder("46");
+            obj.set_text("전화번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new MaskEdit("MaskEdit01", "absolute", "434", "196", "120", "19", null, null, this);
+            obj.set_taborder("10");
+            obj.set_displaynulltext("'-' 제외 숫자만 입력");
+            obj.set_type("string");
+            obj.set_mask("###-###-####");
+            obj.set_autoselect("true");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static10", "absolute", "70", "265", "530", "25", null, null, this);
+            obj.set_taborder("47");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static11", "absolute", "14", "265", "95", "25", null, null, this);
+            obj.set_taborder("48");
+            obj.set_text("등록 주소");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "114", "268", "241", "19", null, null, this);
+            obj.set_taborder("50");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static13", "absolute", "70", "289", "530", "25", null, null, this);
+            obj.set_taborder("52");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit08", "absolute", "114", "292", "345", "19", null, null, this);
+            obj.set_taborder("51");
+            obj.set_enable("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static12", "absolute", "14", "289", "95", "25", null, null, this);
+            obj.set_taborder("49");
+            obj.set_text("상세주소");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_execute00", "absolute", "361", "266", "65", "23", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("주소 검색");
+            obj.style.set_background("URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top");
+            obj.style.set_border("0 none #808080ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new CheckBox("CheckBox00", "absolute", "70.62%", "268", null, "19", "6.49%", null, this);
+            obj.set_taborder("14");
+            obj.set_text("주소지와 동일");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static16", "absolute", "70", "313", "530", "25", null, null, this);
+            obj.set_taborder("53");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static19", "absolute", "14", "313", "95", "25", null, null, this);
+            obj.set_taborder("54");
+            obj.set_text("부서");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static22", "absolute", "208", "313", "95", "25", null, null, this);
+            obj.set_taborder("55");
+            obj.set_text("직급");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static23", "absolute", "404", "313", "95", "25", null, null, this);
+            obj.set_taborder("56");
+            obj.set_text("경력");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("Combo00", "absolute", "18.51%", "315", "85", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            var Combo00_innerdataset = new Dataset("Combo00_innerdataset", this.Combo00);
+            Combo00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1210</Col><Col id=\"datacolumn\">경영지원부</Col></Row><Row><Col id=\"codecolumn\">1220</Col><Col id=\"datacolumn\">영업부</Col></Row><Row><Col id=\"codecolumn\">1230</Col><Col id=\"datacolumn\">개발부</Col></Row></Rows>");
+            obj.set_innerdataset(Combo00_innerdataset);
+            obj.set_taborder("15");
+            obj.set_text("선택");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+
+            obj = new Combo("Combo01", "absolute", "50%", "315", "85", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            var Combo01_innerdataset = new Dataset("Combo01_innerdataset", this.Combo01);
+            Combo01_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1110</Col><Col id=\"datacolumn\">사원</Col></Row><Row><Col id=\"codecolumn\">1120</Col><Col id=\"datacolumn\">대리</Col></Row><Row><Col id=\"codecolumn\">1130</Col><Col id=\"datacolumn\">과장</Col></Row><Row><Col id=\"codecolumn\">1140</Col><Col id=\"datacolumn\">차장</Col></Row><Row><Col id=\"codecolumn\">1150</Col><Col id=\"datacolumn\">부장</Col></Row><Row><Col id=\"codecolumn\">1160</Col><Col id=\"datacolumn\">대표이사</Col></Row><Row><Col id=\"codecolumn\">1170</Col><Col id=\"datacolumn\">상무</Col></Row><Row><Col id=\"codecolumn\">1180</Col><Col id=\"datacolumn\">전무</Col></Row><Row><Col id=\"codecolumn\">1190</Col><Col id=\"datacolumn\">주임</Col></Row></Rows>");
+            obj.set_innerdataset(Combo01_innerdataset);
+            obj.set_taborder("16");
+            obj.set_text("선택");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+
+            obj = new Combo("Combo02", "absolute", "81.82%", "315", "85", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            var Combo02_innerdataset = new Dataset("Combo02_innerdataset", this.Combo02);
+            Combo02_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1310</Col><Col id=\"datacolumn\">신입</Col></Row><Row><Col id=\"codecolumn\">1320</Col><Col id=\"datacolumn\">경력</Col></Row><Row><Col id=\"codecolumn\">1330</Col><Col id=\"datacolumn\">임시</Col></Row></Rows>");
+            obj.set_innerdataset(Combo02_innerdataset);
+            obj.set_taborder("17");
+            obj.set_text("선택");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+
+            obj = new Static("Static24", "absolute", "70", "337", "530", "25", null, null, this);
+            obj.set_taborder("57");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static25", "absolute", "14", "337", "95", "25", null, null, this);
+            obj.set_taborder("58");
+            obj.set_text("세대주여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static26", "absolute", "208", "337", "95", "25", null, null, this);
+            obj.set_taborder("59");
+            obj.set_text("세대주명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit11", "absolute", "308", "340", "85", "19", null, null, this);
+            obj.set_taborder("18");
+            obj.set_password("false");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static27", "absolute", "404", "337", "95", "25", null, null, this);
+            obj.set_taborder("60");
+            obj.set_text("관계");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit12", "absolute", "504", "340", "85", "19", null, null, this);
+            obj.set_taborder("19");
+            obj.set_password("false");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static30", "absolute", "70", "361", "530", "25", null, null, this);
+            obj.set_taborder("61");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static31", "absolute", "208", "361", "95", "25", null, null, this);
+            obj.set_taborder("62");
+            obj.set_text("결혼여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new CheckBox("CheckBox02", "absolute", "52.27%", "363", null, "20", "44.81%", null, this);
+            obj.set_taborder("20");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static34", "absolute", "404", "361", "95", "25", null, null, this);
+            obj.set_taborder("64");
+            obj.set_text("결혼기념일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Calendar("Calendar00", "absolute", "81.82%", "364", null, "19", "4.71%", null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("21");
+            obj.set_dateformat("yyyy/MM/dd");
+            obj.set_value("null");
+
+            obj = new Static("Static35", "absolute", "14", "361", "95", "25", null, null, this);
+            obj.set_taborder("65");
+            obj.set_text("장애여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new CheckBox("CheckBox03", "absolute", "21.1%", "363", null, "20", "75.97%", null, this);
+            obj.set_taborder("22");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static38", "absolute", "334", "169", "95", "25", null, null, this);
+            obj.set_taborder("67");
+            obj.set_text("종교");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_bordertype("normal 0 0");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 9 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit13", "absolute", "434", "172", "120", "19", null, null, this);
+            obj.set_taborder("8");
+            obj.set_password("false");
+            obj.set_maxlength("10");
+            this.addChild(obj.name, obj);
+
+            obj = new CheckBox("CheckBox01", "absolute", "21.1%", "339", null, "20", "75.97%", null, this);
+            obj.set_taborder("68");
+            this.addChild(obj.name, obj);
+
+            obj = new Plugin("Plugin00", "absolute", "61.85%", "418", null, "35", "21.59%", null, this);
+            obj.setProperty("visible", "false");
+            obj.setProperty("classid", "{8856F961-340A-11D0-A96B-00C04FD705A2}");
+            obj.setProperty("popupstyle", "true");
+            obj.setProperty("windowed", "true");
+            obj.setProperty("taborder", "69");
+            this.addChild(obj.name, obj);
+
+            obj = new Plugin("Plugin01", "absolute", "80.03%", "418", null, "35", "3.41%", null, this);
+            obj.setProperty("visible", "false");
+            obj.setProperty("classid", "{8856F961-340A-11D0-A96B-00C04FD705A2}");
+            obj.setProperty("popupstyle", "true");
+            obj.setProperty("windowed", "true");
+            obj.setProperty("taborder", "70");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static36", "absolute", "358", "98", "37", "23", null, null, this);
+            obj.set_taborder("72");
+            obj.set_text("*");
+            obj.style.set_color("#ff0000ff");
+            obj.style.set_font("bold 14 dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static40", "absolute", "345", "146", "37", "23", null, null, this);
+            obj.set_taborder("75");
+            obj.set_text("*");
+            obj.style.set_color("#ff0000ff");
+            obj.style.set_font("bold 14 dotum");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 616, 477, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_classname("member002");
+            		p.getSetter("inheritanceid").set("");
+            		p.set_titletext("회원가입창");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Edit7","value","ds_insa","address1");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","Edit05","value","ds_emp","emp_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Edit04","value","ds_emp","emp_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","Edit02","value","ds_emp","email");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","Edit01","value","ds_emp","address");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","Edit06","value","ds_emp","emp_pw");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","Edit07","value","ds_emp","eng_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","Edit10","value","ds_emp","address_detail");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","Edit03","value","ds_emp","birth");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item13","MaskEdit00","value","ds_emp","cell_phone");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item16","Edit14","value","ds_emp","back_birth");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","MaskEdit01","value","ds_emp","phone");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","Edit00","value","ds_emp","registration_address");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","Edit08","value","ds_emp","registration_address_detail");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","Edit11","value","ds_emp","householder_name");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","Edit12","value","ds_emp","householder_relation");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item15","Edit13","value","ds_emp","religion");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item17","Edit09","value","ds_emp","emp_pw_check");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item18","CheckBox01","value","checkHoseholder","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item19","Calendar00","value","ds_emp","marriage_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("member.xfdl", "Lib::common.xjs");
+        this.registerScript("member.xfdl", function() {
+
+        //include "Lib::common.xjs";
+
+        this.member002_onload = function(obj,e)
+        {
+        	this.setInitial();
+        }
+
+        
+        this.setInitial = function()
+        {
+        	this.ds_emp.setColumn(0,"householder","N");
+        	this.ds_emp.setColumn(0,"disability","N");
+        	this.ds_emp.setColumn(0,"marriage","N");
+        	this.Calendar00.set_enable("false");
+        }
+
+        // 아이디 검사
+        this.Edit05_canchange = function(obj,e)
+        {
+        	var idValue = this.Edit05.value;
+        	
+        	var strParam = "emp_id=" + idValue;
+        	
+        	this.gfn_transaction(this,
+        						"idChecker",
+        						"administrator/selectId.do",
+        						"",
+        						"ds_check=ds_output",
+        						strParam,
+        						"transaction_callback"
+        						);
+        }
+
+        
+        // 우편 번호 검색하기
+        this.btn_execute_onclick = function(obj,e)
+        {
+        	this.Plugin00.callMethod("Navigate2", "http://localhost:8080/pd_insa/jsp/zipcodeSearch.jsp"); 
+        }
+
+        // 우편 번호 검색 후 값 받기
+        this.Plugin00_TitleChange = function()
+        {
+        	
+        	if(arguments[0] != "TITLE"){
+        		var postArr = arguments[0].split("_");
+        	
+        		this.Edit01.set_value(postArr[1]);
+        		
+        		this.Edit10.set_enable(true);
+        	}
+        	
+        }
+
+        this.btn_execute00_onclick = function(obj,e)
+        {
+        	
+        	this.Plugin01.callMethod("Navigate2", "http://localhost:8080/pd_insa/jsp/zipcodeSearch.jsp"); 
+        }
+
+        // 우편 번호 검색 후 값 받기
+        this.Plugin01_TitleChange = function()
+        {
+        	
+        	if(arguments[0] != "TITLE"){
+        		var postArr = arguments[0].split("_");
+        	
+        		this.Edit00.set_value(postArr[1]);
+        		
+        		this.Edit08.set_enable(true);
+        	}
+        	
+        }
+
+        this.Button01_onclick = function(obj,e)
+        {
+        	this.close();
+        }
+
+        this.Button00_onclick = function(obj,e)
+        {
+
+        	if(this.Edit05.value == null){
+        		this.alert("아이디를 입력해주세요");
+        		this.Edit05.setFocus();
+        		return;
+        	}else if(this.Edit04.value == null){
+        		this.alert("이름을 입력해주세요");
+        		this.Edit04.setFocus();
+        		return;
+        	}else if(this.Edit06.value == null){
+        		this.alert("비밀번호를 입력해주세요");
+        		this.Edit06.setFocus();
+        		return;
+        	}else if(this.Edit09.value == null){
+        		this.alert("비밀번호를 확인해주세요");
+        		this.Edit09.setFocus();
+        		return;
+        	}else if(this.Edit03.value == null){
+        		this.alert("생년월일을 입력해주세요");
+        		this.Edit03.setFocus();
+        		return;
+        	}else if(this.Edit14.value == null){
+        		this.alert("주민번호 뒷자리를 입력해주세요");
+        		this.Edit14.setFocus();
+        		return;
+        	}else if(this.Edit03.getLength() < 6){
+        		this.alert("생년월일을 확인해주세요");
+        		this.Edit03.setFocus();
+        		return;
+        	}else if(this.Edit14.getLength() < 7 ){
+        		this.alert("주민번호 뒷자리를 확인해주세요");
+        		this.Edit11.setFocus();
+        		return;
+        	}else if(this.Edit07.value == null){
+        		this.alert("영문이름을 입력해주세요");
+        		this.Edit07.setFocus();
+        		return;
+        	}else if(this.Edit02.value == null){
+        		this.alert("이메일을 입력해주세요");
+        		this.Edit02.setFocus();
+        		return;
+        	}else if(this.MaskEdit00.value == null){
+        		this.alert("핸드폰번호를 입력하세요");
+        		this.MaskEdit00.setFocus();
+        		return;
+        	}else if(this.Edit00.value == null){
+        		this.alert("거주 주소를 입력하세요");
+        		this.btn_execute_onclick();
+        		return;
+        	}else if(this.Edit10.value == null){
+        		this.alert("상세 거주 주소를 입력하세요");
+        		this.Edit10.setFocus();
+        		return;
+        	}else if(this.Edit00.value == null){
+        		this.alert("등록된 주소를 입력하세요");
+        		this.btn_execute00_onclick();
+        		return;
+        	}else if(this.Edit08.value == null){
+        		this.alert("상세 등록 주소를 입력하세요");
+        		this.Edit08.setFocus();
+        		return;
+        	}else if(this.Combo00.value == null){
+        		this.alert("부서를 선택하세요");
+        		this.Combo00.setFocus();
+        		return;
+        	}else if(this.Combo01.value == null){
+        		this.alert("직급을 선택하세요");
+        		this.Combo01.setFocus();
+        		return;
+        	}else if(this.Combo02.value == null){
+        		this.alert("경력을 선택하세요");
+        		this.Combo02.setFocus();
+        		return;
+        	}else if(this.Edit11.value == null){
+        		this.alert("세대주 성명을 입력하세요");
+        		this.Edit11.setFocus();
+        		return;
+        	}else if(this.Edit12.value == null){
+        		this.alert("세대주와의 관계를 입력하세요");
+        		this.Edit12.setFocus();
+        		return;
+        	}
+        	
+
+        	
+        	this.gfn_transaction(this,
+        						"insertAdm",
+        						"administrator/insertAdm.do",
+        						"ds_input=ds_emp",
+        						"ds_check=ds_output",
+        						"",
+        						"transaction_callback"
+        						);
+        	
+        }
+
+        // 비밀번호 확인
+        this.Edit09_onchanged = function(obj,e)
+        {
+        	if(this.Edit06.value != this.Edit09.value){
+        		this.alert("비밀번호가 일치하지 않습니다.");
+        		this.Edit09.set_value("");
+        	}
+        }
+
+        
+        // 트랜잭션 콜백
+        this.transaction_callback = function(sSvcId,nErrorCode,sErrorMsg)
+        {
+        	if(nErrorCode < 0)
+        	{
+        		this.alert(sSvcId + " : " + sErrorMsg);
+        		this.alert("회원가입 오류입니다. 관리자에게 문의하십시오");
+        		return;
+        	}
+        	
+        	switch(sSvcId){
+        		case "idChecker": 
+        		var check = this.ds_check.getColumn(this.ds_check.rowposition, "msg");
+        		if(check == "none"){
+        			this.alert("사용이 가능한 아이디입니다.");
+        		}else{
+        			this.alert("이미 사용중인 아이디입니다.");
+        			this.Edit05.set_value(null);
+        			this.Edit05.set_text("");
+        			this.Edit05.setFocus();
+        		}
+        		break;
+        		
+        		case "insertAdm":
+        			this.alert("회원가입이 완료되었습니다.");
+        			this.close();
+        		break;
+        	
+        	}
+        }
+
+        // 이메일 정규식확인
+        this.Edit02_canchange = function(obj,e)
+        {
+        	var strEmail = obj.value;
+        	var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+        	
+        	if(strEmail.match(regExp) != null){
+        		var isGood = true;
+        	}else{
+        		var isGood = false;
+        	}
+        	
+        	if(isGood){
+        		
+        	}else{
+        		this.alert("이메일 형식을 맞춰주세요");
+        		this.Edit02.set_text("");
+        		this.Edit02.setFocus();
+        	}
+        }
+
+        
+
+        
+
+        
+
+        this.CheckBox01_onclick = function(obj,e)
+        {
+        	if(this.CheckBox01.value)
+        	{
+        		this.Edit11.set_value(this.Edit04.value);
+        		this.Edit12.set_value("본인");
+        		this.ds_emp.setColumn(0,"householder","Y");
+        		this.Edit11.set_enable("false");
+        		this.Edit12.set_enable("false");
+        	}
+        	else
+        	{
+        		this.Edit11.set_value("");
+        		this.Edit12.set_value("");
+        		this.ds_emp.setColumn(0,"householder","N");
+        		this.Edit11.set_enable("true");
+        		this.Edit12.set_enable("true");
+        	}
+        }
+
+        this.CheckBox03_onclick = function(obj,e)
+        {
+        	if(this.CheckBox01.value)
+        	{
+        		this.ds_emp.setColumn(0,"disability","Y");
+        	}
+        	else
+        	{
+        		this.ds_emp.setColumn(0,"disability","N");
+        	}
+        }
+
+        this.CheckBox02_onclick = function(obj,e)
+        {
+        	if(this.CheckBox02.value)
+        	{
+        		this.ds_emp.setColumn(0,"marriage","Y");
+        		this.Calendar00.set_enable("true");
+        	}
+        	else
+        	{
+        		this.ds_emp.setColumn(0,"marriage","N");
+        		this.Calendar00.set_value("");
+        		this.Calendar00.set_enable("false");
+        	}
+        }
+
+        this.Combo02_onitemchanged = function(obj,e)
+        {
+        	this.ds_emp.setColumn(0,"join_code",this.Combo02.value);
+        }
+
+        this.Combo01_onitemchanged = function(obj,e)
+        {
+        	this.ds_emp.setColumn(0,"grade_code",this.Combo01.value);
+        }
+
+        this.Combo00_onitemchanged = function(obj,e)
+        {
+        	this.ds_emp.setColumn(0,"dept_code",this.Combo00.value);
+        }
+
+        this.CheckBox00_onclick = function(obj,e)
+        {
+        	if(this.CheckBox00.value)
+        	{
+        		this.Edit00.set_value(this.Edit01.value);
+        		this.Edit08.set_value(this.Edit10.value);
+        		this.btn_execute00.set_enable("false");
+        	}
+        	else
+        	{
+        		this.Edit00.set_value("");
+        		this.Edit08.set_value("");
+        		this.btn_execute00.set_enable("true");
+        	}
+        }
+
+        
+
+        
+
+        
+
+        
+
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.member002_onload, this);
+            this.Button00.addEventHandler("onclick", this.Button00_onclick, this);
+            this.Button01.addEventHandler("onclick", this.Button01_onclick, this);
+            this.btn_execute.addEventHandler("onclick", this.btn_execute_onclick, this);
+            this.Edit01.addEventHandler("ontextchange", this.Edit01_ontextchange, this);
+            this.Edit01.addEventHandler("ontextchanged", this.Edit01_ontextchanged, this);
+            this.Edit02.addEventHandler("canchange", this.Edit02_canchange, this);
+            this.Edit05.addEventHandler("canchange", this.Edit05_canchange, this);
+            this.Edit06.addEventHandler("onsize", this.Edit06_onsize, this);
+            this.Edit10.addEventHandler("ontextchange", this.Edit01_ontextchange, this);
+            this.Edit10.addEventHandler("ontextchanged", this.Edit01_ontextchanged, this);
+            this.Edit09.addEventHandler("onchanged", this.Edit09_onchanged, this);
+            this.Edit00.addEventHandler("ontextchange", this.Edit01_ontextchange, this);
+            this.Edit00.addEventHandler("ontextchanged", this.Edit01_ontextchanged, this);
+            this.Edit08.addEventHandler("ontextchange", this.Edit01_ontextchange, this);
+            this.Edit08.addEventHandler("ontextchanged", this.Edit01_ontextchanged, this);
+            this.btn_execute00.addEventHandler("onclick", this.btn_execute00_onclick, this);
+            this.CheckBox00.addEventHandler("onclick", this.CheckBox00_onclick, this);
+            this.Combo00.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.Combo01.addEventHandler("onitemchanged", this.Combo01_onitemchanged, this);
+            this.Combo02.addEventHandler("onitemchanged", this.Combo02_onitemchanged, this);
+            this.Edit11.addEventHandler("onsize", this.Edit06_onsize, this);
+            this.Edit12.addEventHandler("onsize", this.Edit06_onsize, this);
+            this.CheckBox02.addEventHandler("onclick", this.CheckBox02_onclick, this);
+            this.CheckBox03.addEventHandler("onclick", this.CheckBox03_onclick, this);
+            this.Edit13.addEventHandler("onsize", this.Edit06_onsize, this);
+            this.CheckBox01.addEventHandler("onclick", this.CheckBox01_onclick, this);
+            this.Plugin00.addEventHandler("TitleChange", this.Plugin00_TitleChange, this);
+            this.Plugin01.addEventHandler("TitleChange", this.Plugin01_TitleChange, this);
+
+        };
+
+        this.loadIncludeScript("member.xfdl");
+
+       
+    };
+}
+)();

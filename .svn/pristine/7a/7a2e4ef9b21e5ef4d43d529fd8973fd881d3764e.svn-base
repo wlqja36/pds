@@ -1,0 +1,883 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("Oct_Salaray_Book");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,1280,1024);
+            }
+            this.style.set_color("#46463dff");
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_month", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">01</Col><Col id=\"txt\">01월</Col></Row><Row><Col id=\"cd\">02</Col><Col id=\"txt\">02월</Col></Row><Row><Col id=\"cd\">03</Col><Col id=\"txt\">03월</Col></Row><Row><Col id=\"cd\">04</Col><Col id=\"txt\">04월</Col></Row><Row><Col id=\"cd\">05</Col><Col id=\"txt\">05월</Col></Row><Row><Col id=\"cd\">06</Col><Col id=\"txt\">06월</Col></Row><Row><Col id=\"cd\">07</Col><Col id=\"txt\">07월</Col></Row><Row><Col id=\"cd\">08</Col><Col id=\"txt\">08월</Col></Row><Row><Col id=\"cd\">09</Col><Col id=\"txt\">09월</Col></Row><Row><Col id=\"cd\">10</Col><Col id=\"txt\">10월</Col></Row><Row><Col id=\"cd\">11</Col><Col id=\"txt\">11월</Col></Row><Row><Col id=\"cd\">12</Col><Col id=\"txt\">12월</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_salaryconfirm", this);
+            obj.set_useclientlayout("true");
+            obj._setContents("<ColumnInfo><Column id=\"salary_book_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_book_code\" type=\"STRING\" size=\"256\"/><Column id=\"salary_book_nm\" type=\"STRING\" size=\"256\"/><Column id=\"salary_book_reg_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_send_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_reg_user_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_mod_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_mod_user_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_acc_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_acc_user_no\" type=\"STRING\" size=\"256\"/><Column id=\"salary_acc_yn\" type=\"STRING\" size=\"256\"/><Column id=\"salary_cal_sta_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_cal_end_date\" type=\"DATE\" size=\"256\"/><Column id=\"salary_total\" type=\"STRING\" size=\"256\"/><Column id=\"attitude_book_id\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_salarykind", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"text\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">3010</Col><Col id=\"text\">정기급여</Col></Row><Row><Col id=\"cd\">3020</Col><Col id=\"text\">특별성과금</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_departcode", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">1210</Col><Col id=\"txt\">경영지원부</Col></Row><Row><Col id=\"cd\">1220</Col><Col id=\"txt\">영업부</Col></Row><Row><Col id=\"cd\">1230</Col><Col id=\"txt\">개발부</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_salary", this);
+            obj._setContents("<ColumnInfo><Column id=\"salaryBookNo\" type=\"STRING\" size=\"12\"/><Column id=\"empNo\" type=\"STRING\" size=\"12\"/><Column id=\"basicMoney\" type=\"INT\" size=\"10\"/><Column id=\"bonusSum\" type=\"INT\" size=\"10\"/><Column id=\"costSum\" type=\"INT\" size=\"10\"/><Column id=\"taxSum\" type=\"INT\" size=\"10\"/><Column id=\"minusTax\" type=\"INT\" size=\"10\"/></ColumnInfo><Rows><Row/></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_search", this);
+            obj._setContents("<ColumnInfo><Column id=\"searchCondition\" type=\"STRING\" size=\"256\"/><Column id=\"searchKeyword\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"searchCondition\"/><Col id=\"searchKeyword\"/></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_confrimyn", this);
+            obj._setContents("<ColumnInfo><Column id=\"cd\" type=\"STRING\" size=\"256\"/><Column id=\"txt\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"cd\">0</Col><Col id=\"txt\">N</Col></Row><Row><Col id=\"cd\">1</Col><Col id=\"txt\">Y</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("ImageViewer04", "absolute", "23", "70", "1235", "44", null, null, this);
+            obj.set_taborder("298");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_titlebg", "absolute", "7", "8", "1265", "45", null, null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("#165fa6ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("grd_payroll_list", "absolute", "23", "123", "1228", "314", null, null, this);
+            obj.set_taborder("6");
+            obj.style.set_background("#4ea084ff");
+            obj.style.set_color("white");
+            obj.set_binddataset("ds_salaryconfirm");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"160\"/><Column size=\"189\"/><Column size=\"144\"/><Column size=\"172\"/><Column size=\"134\"/><Column size=\"138\"/><Column size=\"158\"/><Column size=\"114\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"급여대장번호\"/><Cell col=\"1\" text=\"대장명\"/><Cell col=\"2\" text=\"급여지급일\"/><Cell col=\"3\" text=\"등록자\"/><Cell col=\"4\" text=\"확정일자\"/><Cell col=\"5\" text=\"확정자\"/><Cell col=\"6\" text=\"지급총액\"/><Cell col=\"7\" text=\"성과평가\"/></Band><Band id=\"body\"><Cell text=\"bind:salary_book_no\"/><Cell col=\"1\" text=\"bind:salary_book_nm\"/><Cell col=\"2\" text=\"bind:salary_send_date\"/><Cell col=\"3\" text=\"bind:salary_reg_user_no\"/><Cell col=\"4\" text=\"bind:salary_acc_date\"/><Cell col=\"5\" text=\"bind:salary_acc_user_no\"/><Cell col=\"6\" text=\"bind:salary_total\"/><Cell col=\"7\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "1.56%", "478", null, "28", "91.09%", null, this);
+            obj.set_taborder("7");
+            obj.set_text("급여대장");
+            obj.style.set_font("bold 14 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static00", "absolute", "1.56%", "11", null, "36", "85.94%", null, this);
+            obj.set_taborder("200");
+            obj.set_text("급여대장");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "absolute", "27", "74", "1228", "36", null, null, this);
+            obj.set_taborder("227");
+            obj.set_wordwrap("char");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_title", "absolute", "30", "80", "165", "26", null, null, this);
+            obj.set_taborder("224");
+            obj.set_text("대장명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("middle");
+            obj.style.set_font("bold 9 굴림");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_payroll_month", "absolute", "192", "80", "193", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("225");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+            obj.set_innerdataset("@ds_month");
+            obj.set_displaynulltext("월선택");
+
+            obj = new Button("btn_payroll_listsearch", "absolute", "664", "79", "76", "27", null, null, this);
+            obj.set_taborder("226");
+            obj.set_text("조회");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img02", "absolute", "14", "512", "1243", "171", null, null, this);
+            obj.set_taborder("229");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_align("left middle");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_02", "absolute", "21", "518", "1227", "33", null, null, this);
+            obj.set_taborder("230");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_title2", "absolute", "20", "519", "143", "33", null, null, this);
+            obj.set_taborder("232");
+            obj.set_text("대장명");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_08", "absolute", "20", "614", "1228", "33", null, null, this);
+            obj.set_taborder("233");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_04", "absolute", "20", "582", "1228", "33", null, null, this);
+            obj.set_taborder("234");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_modifydate", "absolute", "20", "583", "143", "33", null, null, this);
+            obj.set_taborder("235");
+            obj.set_text("수정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_confirmdate", "absolute", "573", "582", "143", "33", null, null, this);
+            obj.set_taborder("236");
+            obj.set_text("확정일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_03", "absolute", "20", "646", "1228", "33", null, null, this);
+            obj.set_taborder("237");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_confirmyn", "absolute", "573", "615", "143", "33", null, null, this);
+            obj.set_taborder("238");
+            obj.set_text("확정여부");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_modifynm", "absolute", "295", "582", "125", "33", null, null, this);
+            obj.set_taborder("239");
+            obj.set_text("수정자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("img_00", "absolute", "20", "550", "1228", "33", null, null, this);
+            obj.set_taborder("240");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #a8a8a8ff");
+            obj.style.set_color("black");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_no", "absolute", "20", "550", "143", "33", null, null, this);
+            obj.set_taborder("241");
+            obj.set_text("급여대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_regdate", "absolute", "573", "550", "143", "33", null, null, this);
+            obj.set_taborder("242");
+            obj.set_text("등록일시");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_regnm", "absolute", "916", "550", "143", "33", null, null, this);
+            obj.set_taborder("243");
+            obj.set_text("등록자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_salarycd", "absolute", "573", "518", "143", "33", null, null, this);
+            obj.set_taborder("250");
+            obj.set_text("급여코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_confirmrnm", "absolute", "916", "582", "143", "33", null, null, this);
+            obj.set_taborder("255");
+            obj.set_text("확정자");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_salstartdate", "absolute", "20", "615", "143", "33", null, null, this);
+            obj.set_taborder("262");
+            obj.set_text("급여계산시작일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_salenddate", "absolute", "296", "615", "124", "33", null, null, this);
+            obj.set_taborder("264");
+            obj.set_text("급여계산종료일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_totalpay", "absolute", "20", "645", "143", "33", null, null, this);
+            obj.set_taborder("270");
+            obj.set_text("지급총액");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_payroll_paydate", "absolute", "916", "518", "143", "33", null, null, this);
+            obj.set_taborder("273");
+            obj.set_text("급여지급일");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #c8c8c8ff");
+            obj.style.set_color("#133678ff");
+            obj.style.set_align("center middle");
+            obj.style.set_font("굴림,9,bold");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_payroll_title1", "absolute", "168", "524", "390", "21", null, null, this);
+            obj.set_taborder("274");
+            obj.set_readonly("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_payroll_no", "absolute", "168", "555", "390", "21", null, null, this);
+            obj.set_taborder("275");
+            obj.set_readonly("false");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_payroll_salarycd", "absolute", "727", "528", "175", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("276");
+            obj.set_innerdataset("@ds_salarykind");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("text");
+
+            obj = new Calendar("cal_payroll_regdate", "absolute", "727", "559", "175", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("277");
+
+            obj = new Calendar("cal_payroll_paydate", "absolute", "1068", "525", "174", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("278");
+
+            obj = new Calendar("cal_payroll_confirmdate", "absolute", "727", "589", "175", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("279");
+
+            obj = new Edit("edt_payroll_regnm", "absolute", "1068", "558", "174", "21", null, null, this);
+            obj.set_taborder("280");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_payroll_confirmnm", "absolute", "1068", "589", "174", "21", null, null, this);
+            obj.set_taborder("281");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_regnm", "absolute", "1211", "559", "31", "21", null, null, this);
+            obj.set_taborder("282");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            obj.style.set_color("white");
+            obj.set_enable("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_confirmnm", "absolute", "1211", "590", "31", "21", null, null, this);
+            obj.set_taborder("283");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            obj.style.set_color("white");
+            this.addChild(obj.name, obj);
+
+            obj = new Radio("rd_payroll_confirmyn", "absolute", "727", "621", "227", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("284");
+            obj.set_codecolumn("txt");
+            obj.set_datacolumn("txt");
+            obj.set_direction("vertical");
+            obj.set_innerdataset("@ds_confrimyn");
+            obj.set_index("-1");
+
+            obj = new Calendar("cal_payroll_modifydate", "absolute", "168", "588", "112", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("285");
+
+            obj = new Calendar("cal_payroll_salstartdate", "absolute", "168", "621", "113", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("286");
+
+            obj = new Calendar("cal_payroll_salenddate", "absolute", "432", "621", "128", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("287");
+
+            obj = new Edit("edt_payroll_totalpay", "absolute", "168", "652", "400", "21", null, null, this);
+            obj.set_taborder("290");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_insert", "absolute", "1019", "476", "76", "27", null, null, this);
+            obj.set_taborder("291");
+            obj.set_text("추가");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_save", "absolute", "1102", "476", "77", "27", null, null, this);
+            obj.set_taborder("292");
+            obj.set_text("등록");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_delete", "absolute", "1186", "476", "68", "27", null, null, this);
+            obj.set_taborder("293");
+            obj.set_text("삭제");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_reset", "absolute", "935", "476", "76", "27", null, null, this);
+            obj.set_taborder("294");
+            obj.set_text("초기화");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_border("0 solid #999999ff");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("combo_payroll_depart", "absolute", "390", "81", "264", "21", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("295");
+            obj.set_codecolumn("cd");
+            obj.set_datacolumn("txt");
+            obj.set_innerdataset("@ds_departcode");
+            obj.set_displaynulltext("부서선택");
+            obj.set_index("-1");
+
+            obj = new Edit("edt_payroll_modifynm", "absolute", "432", "587", "128", "21", null, null, this);
+            obj.set_taborder("296");
+            obj.set_readonly("true");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("btn_payroll_modifynm", "absolute", "529", "587", "31", "21", null, null, this);
+            obj.set_taborder("297");
+            obj.style.set_image("URL('img::btn_WF_SearchSmall.png')");
+            obj.style.set_color("white");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 1280, 1024, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+            		p.style.set_color("#46463dff");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","edt_payroll_title1","value","ds_salaryconfirm","salary_book_nm");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","combo_payroll_salarycd","value","ds_salaryconfirm","salary_book_code");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","cal_payroll_paydate","value","ds_salaryconfirm","salary_send_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","edt_payroll_no","value","ds_salaryconfirm","salary_book_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","cal_payroll_regdate","value","ds_salaryconfirm","salary_book_reg_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item5","edt_payroll_regnm","value","ds_salaryconfirm","salary_reg_user_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item6","cal_payroll_modifydate","value","ds_salaryconfirm","salary_mod_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item7","edt_payroll_modifynm","value","ds_salaryconfirm","salary_mod_user_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item8","cal_payroll_confirmdate","value","ds_salaryconfirm","salary_acc_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item9","edt_payroll_confirmnm","value","ds_salaryconfirm","salary_acc_user_no");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item10","cal_payroll_salstartdate","value","ds_salaryconfirm","salary_cal_sta_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item11","cal_payroll_salenddate","value","ds_salaryconfirm","salary_cal_end_date");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item14","edt_payroll_totalpay","value","ds_salaryconfirm","salary_total");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item12","rd_payroll_confirmyn","value","ds_salaryconfirm","salary_acc_yn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("OCT_Salaray_Book.xfdl", "Lib::Comm.xjs");
+        this.registerScript("OCT_Salaray_Book.xfdl", function() {
+        //include "Lib::Comm.xjs";
+
+        this.Oct_SalaryBook_onload = function(obj,e)
+        {
+
+        	Iject.formOnload(obj);
+        	var nRow = this.ds_search.addRow();
+
+        	this.fn_search();
+        } 
+
+        //조회(검색)버튼
+        this.fn_search = function(obj,e)
+        {
+        	if(this.combo_payroll_month.value != null || this.combo_payroll_depart.value != null){
+        		 
+        		 var nRow2 = this.ds_search.addRow();
+        		 var searchKeyword = this.combo_payroll_month.text+" "+this.combo_payroll_depart.text;
+        		 this.ds_search.setColumn(nRow2,"searchKeyword", searchKeyword);
+        	}else if(this.combo_payroll_month.value == null || this.combo_payroll_depart.value == null){
+        		var nRow2 = this.ds_search.addRow();
+        		 this.ds_search.setColumn(nRow2,"searchKeyword","");
+        	}
+        		
+        	
+        	 var oDatas =  {
+        			  svcid : "search",
+        			  sController : "Oct_SalaryBookSelectVO.do",			 
+        			  inds :["ds_search=ds_search"],
+        			  outds :[
+        				 "ds_salaryconfirm=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    
+        			  nDataType : 0,   
+        			  bCompress :false		  
+        			}; 
+        	 trace(" this.ds_search : " + this.ds_search.saveXML());
+        		
+        	
+        	 Iject.transaction(this,oDatas,function(){   
+        		
+        		//alert(" this.errorcode : " + this.errorcode);
+        		
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid      : 서비스 ID
+        		*   @param : {object}    this.fobj       : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/   
+        		
+        		if(this.errorcode < 0)
+        		{
+        		   Iject.alert(this.errorMsg);			
+        		   return;
+        		} 
+        	       var pThis = this.fobj;   //form object	      
+        	       trace(" ds_salaryconfirm : " + pThis.ds_salaryconfirm.saveXML()); //결과정보 save?
+        	});
+        	
+        	 this.ds_search.clearData();
+        	
+
+        }
+
+        //급여대장 그리드 더블클릭시
+        this.btrgrid_oncelldblclick = function(obj,e)
+        {
+        		
+         	var nLeft = system.clientToScreenX(this, 10);
+         	var nTop = system.clientToScreenY(this, 10);
+         	
+         	 
+         	var Salary_Book = new ChildFrame();
+         	
+         	Salary_Book.init("Oct_Salary_Book"
+         					, "absolute"
+         					, nLeft
+         					, nTop
+         					, 524
+         					, 332
+         					, null
+         					, null
+         					, "SALARY::OCT_Salary_Test.xfdl");
+         	
+         	
+         	
+         	Salary_Book.set_openalign("center middle");
+         	Salary_Book.set_dragmovetype("all");
+          	
+          	
+           //DB 연결시 잠금
+        //   	system.showModalWindow(Salary_Book, 
+        // 							"empModal",
+        // 							this.getOwnerFrame(),
+        // 							"",
+        // 							this);
+        							
+        //	DB 연결시 해제
+        	
+        	var objParam = {param1:this.edt_payroll_no.value};
+        						
+                  
+            Salary_Book.showModal(this.getOwnerFrame()
+             			  , objParam
+        				      , this
+             			  , "fn_popupCallback");
+           			  
+        		
+        }
+
+        //추가
+        this.btn_payroll_insert_onclick = function(obj,e)
+        {
+
+        	var nRow = this.ds_salaryconfirm.addRow();
+        }
+
+        //등록
+        this.btn_payroll_save_onclick = function(obj,e)
+        {
+        	this.fn_save("save");
+        }
+
+        this.fn_save = function(strid)
+        {
+           
+        	var oDatas =  {
+        			  svcid : strid,
+        			  sController : "Oct_SalaryBookModifyVO.do",			 
+        			  inds :["input1=ds_salaryconfirm:U"],
+        			  outds :[
+        				 "ds_salaryconfirm=output1"
+        			     ],			     
+        			  args  : [				
+        			  ],
+        			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+        			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+        			  bCompress :false,	 //			  
+        			}; 
+        			
+            //공통 transaction 함수 호츨   //function callback 
+        	Iject.transaction(this,oDatas,function(){   
+        		/*  
+        		*   callback argument
+        		*   @param : {string}    this.svcid       서비스 ID
+        		*   @param : {object}    this.fobj        : 현재 form object
+        		*   @param : {number}    this.errorcode  : 서비스 에러 코드
+        		*   @param : {string}    this.errormsg   : 서비스 에러 메세지
+        		*/    
+        		
+        		if(this.errorcode < 0)
+        		{		
+        		   Iject.alert("입력정보를 다시확인해 주세요","알림");			
+        		   return;
+        		}			
+        	      
+        	      var pThis = this.fobj;   //form object
+        	      switch(strid)
+        	      {
+        	         case "save" : 
+        				Iject.alert("등록완료");
+        				break;
+        				
+        	         case "delete" : 
+        	            Iject.alert("삭제완료");
+        				break; 
+        			
+        	      }
+        	      
+        	     // pThis.div_search.edt_searchKeyword.set_value(pThis.edt_fullName.value);
+        		  pThis.fn_search();
+        	});
+        }
+
+        //삭제
+        this.btn_payroll_delete_onclick = function(obj,e)
+        {
+        	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+        	var nRow = this.ds_salaryconfirm.rowposition;
+        	this.ds_salaryconfirm.deleteRow(nRow);
+        	if(rtnValue)
+        	{
+        		this.fn_save("delete");	
+        	}
+        	else
+        	{
+        		this.fn_search();
+        	}
+        }
+
+        //등록자검색
+        this.btn_payroll_regnm_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+        	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+        	var empPlus = emp_no + "(" + emp_name +")";
+        	//VO에 같은 이름의 변수가 존재하거나, 
+        	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+        	this.edt_payroll_regnm.set_value(emp_no);
+
+        	//this.Edit01.set_value(empPlus);
+        }
+
+        //수정자 검색
+        this.btn_payroll_modifynm_onclick = function(obj,e)
+        {
+        	
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+        	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+        	var empPlus = emp_no + "(" + emp_name +")";
+        	//VO에 같은 이름의 변수가 존재하거나, 
+        	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+        	this.edt_payroll_modifynm.set_value(emp_no);
+
+        	//this.Edit01.set_value(empPlus);
+        }
+
+        //확정자 검색
+        this.btn_payroll_confirmnm_onclick = function(obj,e)
+        {
+        	var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var empSearch = new ChildFrame;
+        		empSearch.init("emp"
+        					, "absolute", nLeft, nTop, 300, 250, null, null
+        					, "member::YJB_empSearch.xfdl");
+        					
+        	empSearch.set_openalign("center middle");
+        	empSearch.set_dragmovetype("all");
+        	
+        	system.showModalWindow(empSearch, 
+        							"empModal",
+        							this.getOwnerFrame(),
+        							"",
+        							this);
+        	
+        	var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_no");
+        	var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition,"emp_name");
+        	var empPlus = emp_no + "(" + emp_name +")";
+        	//VO에 같은 이름의 변수가 존재하거나, 
+        	//dataset에 번호로 컬럼 이름이 아니라 컬럼 인덱스로 접근 (ex: getColumn(0,"emp_name") x , getColumn(0,10) 10:emp_name 컬럼의 인덱스   
+        	this.edt_payroll_confirmnm.set_value(emp_no);
+
+        }
+
+        
+
+        this.btn_payroll_attendno_onclick = function(obj,e)
+        {
+        		
+        	
+        	 var nLeft = system.clientToScreenX(this, 10);
+        	var nTop = system.clientToScreenY(this, 10);
+        	 
+        	var attitude_id = new ChildFrame;
+        		attitude_id.init("attitude_id"
+        					, "absolute"
+        					, nLeft
+        					, nTop
+        					, 300
+        					, 250
+        					, null
+        					, null
+        					, "S_book::S_bookSearch.xfdl");
+        					
+        	attitude_id.set_openalign("center middle");
+        	attitude_id.set_dragmovetype("all");
+        	
+        	var objParam = {
+        					};
+        	
+        	attitude_id.showModal(this.getOwnerFrame(),
+        							objParam
+        							,this
+        							,"fn_popupCallback");
+         	this.edt_payroll_attendno.set_value(attitude_book_id);
+        }
+
+        
+
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.addEventHandler("onload", this.Oct_SalaryBook_onload, this);
+            this.grd_payroll_list.addEventHandler("oncelldblclick", this.btrgrid_oncelldblclick, this);
+            this.grd_payroll_list.addEventHandler("oncellclick", this.btrgrid_oncellclick, this);
+            this.Static00.addEventHandler("onclick", this.Static00_onclick, this);
+            this.combo_payroll_month.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.btn_payroll_listsearch.addEventHandler("onclick", this.fn_search, this);
+            this.sta_payroll_title2.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_modifydate.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_confirmdate.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_confirmyn.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_modifynm.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_no.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_regdate.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_regnm.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_salarycd.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_confirmrnm.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_salstartdate.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_salenddate.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_totalpay.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.sta_payroll_paydate.addEventHandler("onclick", this.sta_15_onclick, this);
+            this.edt_payroll_regnm.addEventHandler("oneditclick", this.edt_payroll_regnm_oneditclick, this);
+            this.btn_payroll_regnm.addEventHandler("onclick", this.btn_payroll_regnm_onclick, this);
+            this.btn_payroll_confirmnm.addEventHandler("onclick", this.btn_payroll_confirmnm_onclick, this);
+            this.rd_payroll_confirmyn.addEventHandler("onitemclick", this.rd_payroll_confirmyn_onitemclick, this);
+            this.btn_payroll_insert.addEventHandler("onclick", this.btn_payroll_insert_onclick, this);
+            this.btn_payroll_save.addEventHandler("onclick", this.btn_payroll_save_onclick, this);
+            this.btn_payroll_delete.addEventHandler("onclick", this.btn_payroll_delete_onclick, this);
+            this.btn_payroll_reset.addEventHandler("onclick", this.fn_search, this);
+            this.combo_payroll_depart.addEventHandler("onitemchanged", this.Combo00_onitemchanged, this);
+            this.btn_payroll_modifynm.addEventHandler("onclick", this.btn_payroll_modifynm_onclick, this);
+
+        };
+
+        this.loadIncludeScript("OCT_Salaray_Book.xfdl");
+
+       
+    };
+}
+)();

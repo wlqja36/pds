@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="PD_IN_COM_MM001" classname="PD_IN_COM_MM001" inheritanceid="" position="absolute" titletext="부서장인사평가" onload="form_onload" left="0" top="0" width="771" height="230">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="img_titlebg" taborder="1" style="background:#3366ffff;color:#ffffffff;" position="absolute" left="0" top="7" height="50" width="768" onclick="img_titlebg_onclick"/>
+        <Static id="sta_title" text="부서장평가기준" style="color:whitesmoke;align:left middle;font:굴림,12,bold;" position="absolute" left="26" width="168" top="18" height="29" onclick="sta_title_onclick"/>
+        <!--
+        <Button id="btn_mody00" taborder="9" text="수정활성화" top="112" right="224" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="true" onclick="btn_mody00_onclick"/>
+        <Button id="btn_mody01" taborder="9" text="수정비활성화" top="112" right="225" width="98" height="24" style="background:@gradation;border:1 solid #999999ff ;color:#46463dff;font:9 굴림체;cursor:hand;" class="btn_WFSA_Search" visible="false" onclick="btn_mody01_onclick"/>
+        -->
+        <ImageViewer id="img02" taborder="5" left="134" top="89" width="524" height="69" style="background:lavenderblush;border:1 solid #a8a8a8ff ;align:left middle;"/>
+        <Static id="sta_02" taborder="6" left="144" top="122" width="504" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_00" taborder="7" left="144" top="97" width="504" height="25" style="background:#f0f0f0ff;border:1 solid #a8a8a8ff ;color:black;"/>
+        <Static id="sta_17" taborder="8" text="인사평가대장번호" onclick="sta_17_onclick" left="144" top="98" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Edit id="Edit01" taborder="10" maxlength="30" left="256" top="101" width="130" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_03" taborder="11" text="부서장평가점수" left="393" top="98" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Edit id="Edit00" taborder="13" maxlength="30" left="505" top="100" width="130" height="20" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Static id="sta_04" taborder="14" text="사원번호" onclick="sta_17_onclick" left="144" top="123" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:bold 9 dotum;"/>
+        <Combo id="Combo02" taborder="15" displaynulltext="선택" innerdataset="@ds_eval_head_code" codecolumn="code" datacolumn="name" left="505" top="125" width="130" height="19" index="-1"/>
+        <Static id="sta_22" taborder="16" text="부서평가코드" onclick="sta_19_onclick" left="393" top="122" width="105" height="25" style="background:#f4edfaff;border:1 solid #c8c8c8ff ;color:#133678ff;align:center middle;font:굴림,9,bold;"/>
+        <Edit id="Edit09" taborder="17" maxlength="10" enable="true" left="256" top="125" width="130" height="19" style=":disabled {border:1 solid #a8a8a8ff ;color:#505050ff;}"/>
+        <Button id="Button00" taborder="19" text="뒤로가기" left="1.3%" top="193" right="85.73%" height="30" onclick="Button00_onclick"/>
+      </Layout>
+    </Layouts>
+    <Bind>
+      <BindItem id="item8" compid="EMP_EVAL_BOOK" propid="font" datasetid="ds_search" columnid=""/>
+      <BindItem id="item10" compid="Edit01" propid="value" datasetid="ds_masterCodeList" columnid="className"/>
+      <BindItem id="item4" compid="Edit01" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_BOOK_NM"/>
+      <BindItem id="item0" compid="Edit00" propid="value" datasetid="ds_masterCodeList" columnid="mainColumn"/>
+      <BindItem id="item11" compid="Edit09" propid="value" datasetid="ds_detailCodeList" columnid="codeName"/>
+      <BindItem id="item5" compid="Edit09" propid="" datasetid="ds_emp_eval_book" columnid="EMP_EVAL_SUM"/>
+    </Bind>
+    <Objects>
+      <Dataset id="ds_emp_eval_book">
+        <ColumnInfo>
+          <Column id="EMP_EVAL_BOOK_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_BOOK_NM" type="STRING" size="256"/>
+          <Column id="EVAL_TERM_CLASS_CODE" type="STRING" size="4"/>
+          <Column id="EVAL_TERM_CODE" type="STRING" size="4"/>
+          <Column id="EMP_EVAL_STA_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_END_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_REG_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_MOD_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_MOD_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_DATE" type="DATE" size="256"/>
+          <Column id="EMP_EVAL_ACC_USER_NO" type="STRING" size="12"/>
+          <Column id="EMP_EVAL_ACC_YN" type="STRING" size="1"/>
+          <Column id="EMP_EVAL_SUM" type="INT" size="3"/>
+        </ColumnInfo>
+      </Dataset>
+      <Dataset id="ds_eval_head_code">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="name" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">4110</Col>
+            <Col id="name">4110/책임감</Col>
+          </Row>
+          <Row>
+            <Col id="code">4120</Col>
+            <Col id="name">4120/적극</Col>
+          </Row>
+          <Row>
+            <Col id="code">4130</Col>
+            <Col id="name">4130/수행능력</Col>
+          </Row>
+          <Row>
+            <Col id="code">4140</Col>
+            <Col id="name">4140/규정준수</Col>
+          </Row>
+          <Row>
+            <Col id="code">4150</Col>
+            <Col id="name">4150/영업실적</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[include "Lib::common.xjs";
+
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo){
+	alert("EMP_EVAL_BOOK");
+}
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{	
+	this.go("EMP_EVAL::EMP_EVAL.xfdl");
+}
+]]></Script>
+  </Form>
+</FDL>

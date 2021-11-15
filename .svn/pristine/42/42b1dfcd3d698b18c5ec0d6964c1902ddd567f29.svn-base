@@ -1,0 +1,192 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("ATTITUDE_CODE");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,800,768);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_attitude_code", this);
+            obj._setContents("<ColumnInfo><Column id=\"attitude_id\" type=\"STRING\" size=\"256\"/><Column id=\"attitude_nm\" type=\"STRING\" size=\"256\"/><Column id=\"useyn\" type=\"STRING\" size=\"256\"/><Column id=\"brife\" type=\"STRING\" size=\"256\"/><Column id=\"vacation_code_id\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new Static("Static00", "absolute", "2%", "19", null, "21", "88%", null, this);
+            obj.set_taborder("0");
+            obj.set_text("근태코드");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static01", "absolute", "1.88%", "40", null, "49", "10.13%", null, this);
+            obj.set_taborder("1");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button00", "absolute", "66.88%", "51", null, "29", "23%", null, this);
+            obj.set_taborder("7");
+            obj.set_text("초기화");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button01", "absolute", "78.88%", "51", null, "29", "11%", null, this);
+            obj.set_taborder("8");
+            obj.set_text("저장");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static02", "absolute", "1.88%", "97", null, "339", "10.13%", null, this);
+            obj.set_taborder("9");
+            obj.style.set_border("1 solid #808080ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static03", "fixed", "4%", "127", null, "28", "80.13%", null, this);
+            obj.set_taborder("10");
+            obj.set_text("근태코드 LIST");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Grid("Grid00", "absolute", "4.38%", "163", null, "242", "56.13%", null, this);
+            obj.set_taborder("11");
+            obj.set_binddataset("ds_attitude_code");
+            obj._setContents("<Formats><Format id=\"default\"><Columns><Column size=\"80\"/><Column size=\"150\"/><Column size=\"86\"/></Columns><Rows><Row size=\"24\" band=\"head\"/><Row size=\"24\"/></Rows><Band id=\"head\"><Cell text=\"근태명\"/><Cell col=\"1\" text=\"연차코드연결\"/><Cell col=\"2\" text=\"사용\"/></Band><Band id=\"body\"><Cell text=\"bind:attitude_nm\"/><Cell col=\"1\" text=\"bind:attitude_nm\"/><Cell col=\"2\" text=\"bind:useyn\"/></Band></Format></Formats>");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static04", "fixed", "47%", "165", null, "28", "37.13%", null, this);
+            obj.set_taborder("12");
+            obj.set_text("근태명");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static05", "fixed", "47%", "127", null, "28", "37.13%", null, this);
+            obj.set_taborder("13");
+            obj.set_text("근태번호");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static06", "fixed", "47%", "203", null, "28", "37.13%", null, this);
+            obj.set_taborder("14");
+            obj.set_text("연차코드번호");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static07", "fixed", "47%", "241", null, "28", "37.13%", null, this);
+            obj.set_taborder("15");
+            obj.set_text("사용여부");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("Static08", "fixed", "47%", "279", null, "28", "37.13%", null, this);
+            obj.set_taborder("16");
+            obj.set_text("적요");
+            obj.style.set_background("azure");
+            obj.style.set_border("1 solid #808080ff");
+            obj.style.set_align("center middle");
+            this.addChild(obj.name, obj);
+
+            obj = new Button("Button02", "absolute", "47.13%", "328", null, "77", "37%", null, this);
+            obj.set_taborder("17");
+            obj.set_text("사용하기");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit00", "absolute", "65.13%", "127", null, "28", "15%", null, this);
+            obj.set_taborder("18");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit01", "absolute", "65.13%", "165", null, "28", "15%", null, this);
+            obj.set_taborder("19");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("Edit02", "absolute", "65.13%", "203", null, "28", "15%", null, this);
+            obj.set_taborder("20");
+            this.addChild(obj.name, obj);
+
+            obj = new TextArea("TextArea00", "absolute", "65.13%", "279", null, "123", "15%", null, this);
+            obj.set_taborder("21");
+            this.addChild(obj.name, obj);
+
+            obj = new Radio("Radio00", "absolute", "65.13%", "241", null, "28", "15%", null, this);
+            this.addChild(obj.name, obj);
+            var Radio00_innerdataset = new Dataset("Radio00_innerdataset", this.Radio00);
+            Radio00_innerdataset._setContents("<ColumnInfo><Column id=\"codecolumn\" size=\"256\"/><Column id=\"datacolumn\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"codecolumn\">1</Col><Col id=\"datacolumn\">사용</Col></Row><Row><Col id=\"codecolumn\">2</Col><Col id=\"datacolumn\">비사용</Col></Row></Rows>");
+            obj.set_innerdataset(Radio00_innerdataset);
+            obj.set_taborder("22");
+            obj.set_codecolumn("codecolumn");
+            obj.set_datacolumn("datacolumn");
+            obj.set_columncount("2");
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 800, 768, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item0","Edit00","value","ds_attitude_code","attitude_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","Edit01","value","ds_attitude_code","attitude_nm");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","Edit02","value","ds_attitude_code","vacation_code_id");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","Radio00","value","ds_attitude_code","useyn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","TextArea00","value","ds_attitude_code","brife");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.Radio00.addEventHandler("onitemclick", this.Radio00_onitemclick, this);
+
+        };
+
+        this.loadIncludeScript("ATTITUDE_CODE.xfdl");
+
+       
+    };
+}
+)();

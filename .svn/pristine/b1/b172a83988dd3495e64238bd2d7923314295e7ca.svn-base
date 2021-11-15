@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="attitude">
+
+	<typeAlias alias="searchVO" type="nexacro.sample.vo.DefaultVO" />
+	<typeAlias alias="attitudeVO"
+		type="nexacro.sample.vo.attitudeVO.AttitudeVO" />
+
+	<!-- Sample resultObject -->
+	<resultMap id="attitude" class="attitudeVO">
+		<result property="attitudeMngDate" column="ATTITUDE_MANAGE_DATE" />
+		<result property="attitudeBookId" column="ATTITUDE_BOOK_ID" />
+		<result property="empNo" column="EMP_NO" />
+		<result property="attitudeId" column="ATTITUDE_ID" />
+		<result property="attitudeReason" column="ATTITUDE_REASON" />
+		<result property="regDate" column="REG_DATE"/>
+		<result property="regEmpId" column="REG_EMP_ID" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+		<result property="modifyEmpId" column="MODIFY_EMP_ID" />
+		<result property="confirmYn" column="CONFIRMYN" />
+		<result property="confirmDate" column="CONFIRM_DATE" />
+		<result property="confirmEmpId" column="CONFIRM_EMP_ID" />
+		<result property="takeoverEmpId" column="TAKEOVER_EMP_ID" />
+		<result property="emergencyContact" column="EMERGENCY_CONTACT" />
+		
+		<result property="REG_EMP_REAL" column="REG_EMP_REAL" />  
+        <result property="MODIFY_EMP_REAL" column="MODIFY_EMP_REAL" />
+   	   <result property="FIX_EMP_REAL" column="FIX_EMP_REAL" />
+   	   <result property="TAKEOVER_EMP_REAL" column="TAKEOVER_EMP_REAL" />
+   	   <result property="EMP_REAL" column="EMP_REAL" />
+	</resultMap>
+
+
+  
+     <select id="attitude.selectAttitudeVOList" parameterClass="attitudeVO" resultMap="attitude">
+      		
+      		<![CDATA[
+      		   SELECT 
+             distinct ATTITUDE_MANAGE_DATE,	
+                   (select distinct attitude_book_nm
+                     from attitude t, attitude_book b
+                     where b.attitude_book_id = t.attitude_book_id
+                     and t.attitude_book_id=#searchCondition#) as  ATTITUDE_BOOK_ID,
+               c.emp_name||'('||c.emp_no||')' as EMP_NO,	
+               ATTITUDE_ID,	
+               ATTITUDE_REASON,	
+               REG_DATE,	
+               r.emp_name||'('||r.emp_no||')' as REG_EMP_ID,	
+               MODIFY_DATE,	
+               m.emp_name||'('||m.emp_no||')' as MODIFY_EMP_ID,	
+               CONFIRMYN,	
+               CONFIRM_DATE,	
+               f.emp_name||'('||f.emp_no||')' as CONFIRM_EMP_ID,	
+               v.emp_name||'('||v.emp_no||')' as TAKEOVER_EMP_ID,	
+               EMERGENCY_CONTACT,
+               r.emp_no as REG_EMP_REAL,
+                m.emp_no as MODIFY_EMP_REAL,
+                f.emp_no as FIX_EMP_REAL ,
+                v.emp_no as TAKEOVER_EMP_REAL, 
+                c.emp_no as EMP_REAL 	
+      		   
+            FROM ATTITUDE ,
+              
+               (select  e.emp_name, a.emp_no, a.attitude_book_id
+                  from emp e, attitude a
+                   where e.emp_no=a.emp_no
+                    ) c ,
+                   
+                   
+                   (select  e.emp_name, a.attitude_book_id,e.emp_no
+                    from attitude a,  emp e
+                    where e.emp_no=a.reg_emp_id 
+                       ) r,
+                       
+                         (select  e.emp_name, a.attitude_book_id,e.emp_no
+                    from attitude a,  emp e
+                    where e.emp_no=a.modify_emp_id 
+                       ) m, 
+                    
+                    
+                         (select  e.emp_name, a.attitude_book_id,e.emp_no
+                    from attitude a,  emp e
+                    where e.emp_no=a.confirm_emp_id 
+                       ) f,
+                   
+                        (select  e.emp_name, a.attitude_book_id,e.emp_no
+                    from attitude a,  emp e
+                    where e.emp_no=a.takeover_emp_id 
+                       ) v
+                   
+                   
+            WHERE  attitude.emp_no=c.emp_no
+             and attitude.reg_emp_id=r.emp_no
+             
+             and attitude.modify_emp_id=m.emp_no
+             and attitude.confirm_emp_id=f.emp_no
+             and attitude.takeover_emp_id=v.emp_no
+            
+             
+                 
+             and attitude.ATTITUDE_BOOK_ID=#searchCondition#
+      		
+      		
+            ]]>			
+			 
+             <dynamic>
+				<isNotEqual prepend=" AND " property="searchKeyword" compareValue="" >
+						 attitude.EMP_NO = #searchKeyword#
+				</isNotEqual>
+			</dynamic>
+	
+	     </select>
+            
+            
+            
+      <!-- 콤보선택시 연차정보 계산 -->      
+            
+       <select id="attitude.selectVacationLeft" parameterClass="attitudeVO" resultClass="java.lang.Integer">
+      		
+      		<![CDATA[
+      		      		  
+              SELECT (VACATION_DAYS-USE_DAYS)
+                 FROM (
+                      SELECT * FROM VACATION_INFO
+                       WHERE EMP_NO=#searchKeyword#
+                        ORDER BY USE_START DESC
+                      )
+                 WHERE ROWNUM=1 		
+      		
+            ]]>			
+			 
+  	
+	     </select>      
+            
+            
+            
+            
+            
+            
+            
+            
+   
+   
+	<insert id="attitude.insertAttitude" parameterClass="attitudeVO">
+        <![CDATA[
+        INSERT INTO ATTITUDE
+             ( ATTITUDE_MANAGE_DATE,	
+               ATTITUDE_BOOK_ID,
+               EMP_NO,	
+               ATTITUDE_ID,	
+               ATTITUDE_REASON,	
+               REG_DATE,	
+               REG_EMP_ID,	
+               MODIFY_DATE,	
+               MODIFY_EMP_ID,	
+               CONFIRMYN,	
+               CONFIRM_DATE,	
+               CONFIRM_EMP_ID,	
+               TAKEOVER_EMP_ID,	
+               EMERGENCY_CONTACT
+             )values(
+               #attitudeMngDate#,
+               #attitudeBookId#,
+               #empNo#,
+               #attitudeId#,
+               #attitudeReason#,
+               #regDate#,
+               #regEmpId#,
+               #modifyDate#,
+               #modifyEmpId#,
+               #confirmYn#,
+               #confirmDate#,
+               #confirmEmpId#,
+               #takeoverEmpId#,
+               #emergencyContact#
+             )             
+           ]]>
+	</insert>
+    
+    
+    
+   <update id="attitude.updateAttitude" parameterClass="attitudeVO"> 
+		 <![CDATA[
+            UPDATE ATTITUDE 
+            SET 
+				ATTITUDE_MANAGE_DATE = #attitudeMngDate#,	
+				ATTITUDE_BOOK_ID =#attitudeBookId#,
+				EMP_NO =#empNo#,
+				ATTITUDE_ID =#attitudeId#,	
+				ATTITUDE_REASON=#attitudeReason#,
+				REG_DATE=#regDate#,       
+				REG_EMP_ID =#regEmpId#,
+				MODIFY_DATE =#modifyDate#,
+				MODIFY_EMP_ID =#modifyEmpId#,
+			    CONFIRMYN=#confirmYn#,	
+				CONFIRM_DATE=#confirmDate#,
+				CONFIRM_EMP_ID=#confirmEmpId#,       
+				TAKEOVER_EMP_ID	=#takeoverEmpId#,
+				EMERGENCY_CONTACT=#emergencyContact#			
+				
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#
+		       AND EMP_NO = #empNo#
+		        AND ATTITUDE_MANAGE_DATE = #attitudeMngDate#
+        ]]>
+		</update> 
+		
+		
+		<delete id="attitude.deleteAttitude" parameterClass="attitudeVO"> 
+		   <![CDATA[ 
+		    DELETE FROM ATTITUDE
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#
+		      AND EMP_NO = #empNo#
+		        AND ATTITUDE_MANAGE_DATE = #attitudeMngDate#  
+		   ]]>
+	    </delete> 
+   
+   
+   
+   
+            
+    
+            
+   
+            
+    
+<!--  
+
+
+	<insert id="attitude.insertAttitudeVOList" parameterClass="attitudeVO">
+        <![CDATA[
+            INSERT INTO ATTITUDE_BOOK(
+                ATTITUDE_BOOK_ID,
+                ATTITUDE_BOOK_NM,
+                START_DATE,
+                END_DATE,
+                REG_DATE,
+                REG_EMP_ID,
+                MODIFY_DATE,
+                MODIFY_EMP_ID,
+                FIX_DATE,
+                FIX_EMP_ID,
+                FIXYN
+            )VALUES(
+            
+                #attitudeBookId#|| LPAD(ATTITUDE_BOOK_SEQ.NEXTVAL,4,0),
+                #attitudeBookName#,
+                #startDate#,
+                #endDate#,
+                #regDate#,
+                #regEmpId#,
+                #modifyDate#,
+                #modifyEmpId#,
+                #fixDate#,
+                #fixEmpId#,
+                #fixYn#     
+            )
+        ]]>
+	</insert>
+
+	  <update id="attitude.updateAttitudeVOList" parameterClass="attitudeVO"> 
+		 <![CDATA[
+            UPDATE ATTITUDE_BOOK 
+            SET 
+				ATTITUDE_BOOK_NM =#attitudeBookName#,	
+				START_DATE =#startDate#,
+				END_DATE =#endDate#,
+				REG_DATE =#regDate#,	
+				REG_EMP_ID =#regEmpId#,
+				MODIFY_DATE =#modifyDate#,       
+				MODIFY_EMP_ID =#modifyEmpId#,  
+				FIX_DATE =#fixDate#,    
+				FIX_EMP_ID =#fixEmpId#,      
+				FIXYN =#fixYn#    
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#
+        ]]>
+		</update> 
+		
+		
+		<delete id="attitude.deleteAttitudeVOList" parameterClass="attitudeVO"> 
+		   <![CDATA[ 
+		    DELETE FROM ATTITUDE_BOOK 
+		    WHERE ATTITUDE_BOOK_ID=#attitudeBookId#   
+		   ]]>
+	    </delete> 
+
+
+-->
+
+</sqlMap>

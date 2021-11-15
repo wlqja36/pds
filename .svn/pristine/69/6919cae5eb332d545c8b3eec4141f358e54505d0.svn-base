@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="Language_ability">
+
+    <typeAlias  alias="language_abilityVO" type="nexacro.sample.vo.emp.Language_abilityVO"/>
+    <typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    
+
+   
+    <resultMap id="language_ability" class="language_abilityVO">
+        <result property="CONTURY"     				column="CONTURY"/>	              
+        <result property="EMP_NO"    				column="EMP_NO"/>	              
+        <result property="LANG_CERTIFICATION"       column="LANG_CERTIFICATION"/>	              
+        <result property="LANG_CERTIFICATION_NO"	column="LANG_CERTIFICATION_NO"/>	 
+        <result property="LANG_CERTIFICATION_RATE"  column="LANG_CERTIFICATION_RATE"/>	          
+        <result property="LANG_ISSUE_DATE"    		column="LANG_ISSUE_DATE"/>	      
+        <result property="LANG_EFFECTIVE_DATE"  	column="LANG_EFFECTIVE_DATE"/>	          
+        <result property="LANG_NO"  				column="LANG_NO"/>	          
+    </resultMap>
+    
+      <select id="selectLanguage_abilityVOList" parameterClass="language_abilityVO" resultMap="language_ability">
+             SELECT
+             CONTURY,
+             e.EMP_NO, 
+             LANG_CERTIFICATION,
+             LANG_CERTIFICATION_NO,
+             LANG_CERTIFICATION_RATE,
+             LANG_ISSUE_DATE,
+             LANG_EFFECTIVE_DATE,
+             LANG_NO	      	
+               
+            FROM emp e, language_ability la 
+            WHERE 
+            e.EMP_NO=la.EMP_NO AND
+            e.EMP_NO=#searchKeyword#
+        
+    </select> 
+    <insert id="insertLanguage_abilityVO" parameterClass="language_abilityVO">
+        <![CDATA[
+            INSERT INTO LANGUAGE_ABILITY (
+            CONTURY,
+             EMP_NO, 
+             LANG_CERTIFICATION,
+             LANG_CERTIFICATION_NO,
+             LANG_CERTIFICATION_RATE,
+             LANG_ISSUE_DATE,
+             LANG_EFFECTIVE_DATE,	
+             LANG_NO 
+            ) VALUES (
+            		#CONTURY#,
+          	        #EMP_NO#,
+          	        #LANG_CERTIFICATION#,
+          	        #LANG_CERTIFICATION_NO#,
+          	        #LANG_CERTIFICATION_RATE#,
+          	        #LANG_ISSUE_DATE#,
+          	        #LANG_EFFECTIVE_DATE#,
+          	        LANG_NO_SEQ.nextval
+              )
+            
+        ]]>
+    </insert>
+    
+     
+    
+    
+      <update id="updateLanguage_abilityVO" parameterClass="language_abilityVO">
+        <![CDATA[
+            UPDATE LANGUAGE_ABILITY
+            SET     
+            	CONTURY=#CONTURY#,
+            	LANG_CERTIFICATION=#LANG_CERTIFICATION#,
+            	LANG_CERTIFICATION_NO=#LANG_CERTIFICATION_NO#,
+            	LANG_CERTIFICATION_RATE=#LANG_CERTIFICATION_RATE#,
+            	LANG_ISSUE_DATE=#LANG_ISSUE_DATE#,
+            	LANG_EFFECTIVE_DATE=#LANG_EFFECTIVE_DATE#         
+                WHERE 
+                LANG_NO=#LANG_NO#
+        ]]>
+    </update> 
+   
+   <delete id="deleteLanguage_abilityVO" parameterClass="language_abilityVO">
+        <![CDATA[
+            DELETE LANGUAGE_ABILITY
+            where
+            LANG_NO=#LANG_NO#
+        ]]>
+    </delete>
+    
+    
+   
+</sqlMap>

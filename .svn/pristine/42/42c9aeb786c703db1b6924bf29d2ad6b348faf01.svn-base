@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="Login" classname="Login" left="0" top="0" width="596" height="408" onload="form_onload" style="background:transparent;" onsize="Login_onsize" titletext="Login" scrollbars="none">
+    <Layouts>
+      <Layout>
+        <Div id="div_login" taborder="0" left="0" top="0" width="470" height="360" style="background:transparent URL('img::login_insa.png');" scrollbars="none">
+          <Layouts>
+            <Layout width="553" height="321">
+              <Edit id="txt_userId" taborder="27" displaynulltext="User ID" oneditclick="div_login_txt_userId_oneditclick" left="152" top="167" width="150" height="25"/>
+              <Edit id="txt_userPwd" taborder="28" password="true" displaynulltext="Password" onkeydown="login_onkeydown" left="152" top="196" width="150" height="25"/>
+              <Button id="btn_close" taborder="30" text="X" onclick="fn_close" visible="true" top="45" right="33" width="29" height="19" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+              <Div id="Div00" taborder="33" text="아이디 찾기" left="30.86%" top="248" height="21" style="color:midnightblue;font:bold 12 Dotum;cursor:hand;" width="100" onclick="div_login.Div00_onclick">
+                <Layouts>
+                  <Layout width="65" height="12"/>
+                </Layouts>
+              </Div>
+              <Div id="Div01" taborder="34" text="비밀번호 찾기" left="54.46%" top="248" height="21" width="115" style="color:midnightblue;font:bold 12 Dotum;cursor:hand;" onclick="div_login.Div01_onclick">
+                <Layouts>
+                  <Layout width="75" height="12"/>
+                </Layouts>
+              </Div>
+              <Button id="btn_login" taborder="36" text="로그인" wordwrap="char" onclick="btn_login_onclick" onkeyup="div_login_btn_login_onkeyup" top="167" right="66" width="60" height="50" style="background:URL('img::btn_WFSA_Search_N.png') stretch 9,9 left top;color:#ffffffff;font:bold 9 Dotum;"/>
+            </Layout>
+          </Layouts>
+        </Div>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_idpw">
+        <ColumnInfo>
+          <Column id="msg" type="STRING" size="256"/>
+          <Column id="emp_id" type="STRING" size="256"/>
+          <Column id="emp_no" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Script type="xscript5.0"><![CDATA[/***********************************************************************************
+* SYSTEM      : 넥사크로플랫폼 PackageB
+* BUSINESS    : 넥사크로플랫폼 PackageB
+* FILE NAME   : Login.xfdl
+* PROGRAMMER  : 
+* DATE        : 
+* DESCRIPTION : 로그인 화면
+*------------------------------------------------------------------
+* MODIFY DATE   PROGRAMMER			DESCRIPTION
+*------------------------------------------------------------------
+* 
+*------------------------------------------------------------------
+***********************************************************************************/
+
+/***********************************************************************************
+* Common Library
+***********************************************************************************/
+include "Lib::common.xjs";
+
+
+/***********************************************************************************
+* Global/Local Variable
+***********************************************************************************/
+
+
+/***********************************************************************************
+* Form Event
+***********************************************************************************/
+/**
+ * form onload 함수
+ * @return 
+ * @example
+ *
+ * @memberOf this
+ */
+this.form_onload = function (obj:Form, e:LoadEventInfo)
+{
+	if(nexacro.Browser == "Runtime") this.div_login.btn_close.set_visible(true);
+
+	Iject.formOnload(obj);
+	this.form_onsize();
+}
+
+ 
+/***********************************************************************************
+* User Function
+***********************************************************************************/
+
+/**
+* form onsize
+* @return 
+* @example
+* @memberOf public
+*/ 
+this.form_onsize = function()
+{
+  	if(nexacro.Browser == "Runtime") return;
+
+  	var nLeft = (application.mainframe.width / 2) - Math.round((this.div_login.getOffsetWidth()) / 2);
+  	var nTop = (application.mainframe.height / 2) - Math.round((this.div_login.getOffsetHeight()) / 2);
+
+	if(nLeft <= 0)
+	{
+		this.div_login.setOffsetLeft(0);
+	}
+	else
+	{
+    	this.div_login.setOffsetLeft(nLeft);
+		this.div_login.setOffsetTop(nTop);
+	}
+}
+
+
+/***********************************************************************************
+* Component Event
+***********************************************************************************/
+this.btn_login_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+
+		this.fn_login();
+   
+}
+
+
+
+//일반 login function
+this.fn_login = function()
+{
+	this.ds_idpw.clearData();
+	application.gds_User.clearData();
+	
+	// id 입력 안했을때
+	if(this.gfn_IsNull(this.div_login.txt_userId.value)){
+		this.alert("ID를 입력해주시기 바랍니다.");
+		return;
+	}
+	// pw 입력 안했을때
+	if(this.gfn_IsNull(this.div_login.txt_userPwd.value)){
+		this.alert("비밀번호를 입력해주시기 바랍니다.");
+		return;
+	}
+	
+	var idValue = this.gfn_Trim(this.div_login.txt_userId.value);
+	var pwdValue = this.gfn_Trim(this.div_login.txt_userPwd.value);
+	
+	var strParam = "emp_id=" + idValue + " emp_pw=" + pwdValue;
+	
+	this.transaction(
+						"loginCheck",
+						"http://localhost:8080/nexacro-egov/administrator/login.do",
+						"",
+						"ds_idpw=ds_output",
+						strParam,
+						"transaction_callback"
+						);
+	
+}
+
+// 트랜잭션 콜백
+this.transaction_callback = function(sSvcId, nErrorCode, sErrorMsg)
+{
+	if(nErrorCode < 0)
+	{
+		this.alert(sSvcId + " : " + sErrorMsg);
+		return;
+	}
+	
+	if(sSvcId == "loginCheck"){
+		
+		var msg = this.ds_idpw.getColumn(this.ds_idpw.rowposition, "msg");
+	
+		if(msg == "ok"){
+
+			var emp_id = this.ds_idpw.getColumn(this.ds_idpw.rowposition, "emp_id");
+			var emp_no = this.ds_idpw.getColumn(this.ds_idpw.rowposition, "emp_no");
+			
+			application.gds_User.addRow();
+			application.gds_User.setColumn(application.gds_User.rowposition, "name", emp_id);
+			application.gds_User.setColumn(application.gds_User.rowposition, "id", emp_no);
+			application.gds_User.setColumn(application.gds_User.rowposition, "sabun", emp_no);
+								
+					
+			trace("gds_User : "+application.gds_User.getColumn(application.gds_User.rowposition, "name"));
+
+			var oArgs = "close";
+			trace("확인 :: "+ typeof Iject.popClose);
+			Iject.popClose(this,oArgs);		
+
+
+				
+
+		}else if(msg == "password"){
+			this.null_text("아이디나 암호를 확인해주세요");
+		}else if(msg == "none"){
+			this.null_text("아이디가 존재하지 않습니다.");
+		}
+	}//end login_callback
+	
+
+}//end callback 함수	
+
+// 경고창 및 edit component set null
+this.null_text = function(msg)
+{
+	this.alert(msg);
+	this.div_login.txt_userId.set_value(null);
+	this.div_login.txt_userPwd.set_value(null);
+	this.div_login.txt_userId.setFocus();
+}
+
+
+/**
+* 프레임 open
+* @return 
+* @example
+* @memberOf public
+*/ 
+
+this.fn_menuOpen = function()
+{
+    gv_vFrameSet.set_separatesize("0,*,42");
+    gv_workFrame.frames["MainForm"].setFocus();
+}
+
+
+this.Login_onsize = function(obj:Form, e:nexacro.SizeEventInfo)
+{
+     this.form_onsize(e.cx, e.cy);
+}
+
+this.fn_close = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	application.exit();
+}
+
+this.login_onkeydown = function(obj:Button, e:nexacro.KeyEventInfo)
+{
+	if(e.keycode == 13)
+	{
+		this.btn_login_onclick();
+	}
+}
+
+this.div_login.Div00_onclick = function(obj:Div, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("idSearch"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::idSearch.xfdl");
+					
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	
+	system.showModalWindow(newChild, 
+							"idSearchModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+}
+
+
+this.div_login.Div01_onclick = function(obj:Div, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	 var newChild = new ChildFrame;
+	 newChild.init("pwSearch"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::pwSearch.xfdl");
+					
+	newChild.set_openalign("center middle");
+	newChild.set_dragmovetype("all");
+	
+	system.showModalWindow(newChild, 
+							"pwSearchModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+}
+
+]]></Script>
+  </Form>
+</FDL>

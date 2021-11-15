@@ -1,0 +1,212 @@
+﻿(function()
+{
+    return function()
+    {
+        if (!this._is_form)
+            return;
+        
+        this.on_create = function()
+        {
+            // Declare Reference
+            var obj = null;
+            
+            if (Form == this.constructor) {
+                this.set_name("LJH_EMP_EVAL_STD");
+                this.set_titletext("New Form");
+                this._setFormPosition(0,0,700,300);
+            }
+
+            
+            // Object(Dataset, ExcelExportObject) Initialize
+            obj = new Dataset("ds_emp_eval_book", this);
+            obj._setContents("<ColumnInfo><Column id=\"EMP_EVAL_BOOK_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_BOOK_NM\" type=\"STRING\" size=\"256\"/><Column id=\"EVAL_TERM_CLASS_CODE\" type=\"STRING\" size=\"4\"/><Column id=\"EVAL_TERM_CODE\" type=\"STRING\" size=\"4\"/><Column id=\"EMP_EVAL_STA_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_END_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_REG_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_REG_USER_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_MOD_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_MOD_USER_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_ACC_DATE\" type=\"DATE\" size=\"256\"/><Column id=\"EMP_EVAL_ACC_USER_NO\" type=\"STRING\" size=\"12\"/><Column id=\"EMP_EVAL_ACC_YN\" type=\"STRING\" size=\"1\"/><Column id=\"EMP_EVAL_SUM\" type=\"INT\" size=\"3\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_eval_code00", this);
+            obj.set_enableevent("false");
+            obj._setContents("<ColumnInfo><Column id=\"code\" type=\"STRING\" size=\"256\"/><Column id=\"name\" type=\"STRING\" size=\"256\"/></ColumnInfo><Rows><Row><Col id=\"code\">4210</Col><Col id=\"name\">4210/출결평가</Col></Row><Row><Col id=\"code\">4220</Col><Col id=\"name\">4220/근태평가</Col></Row><Row><Col id=\"code\">4230</Col><Col id=\"name\">4230/능력평가</Col></Row></Rows>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_masterCodeList", this);
+            obj._setContents("<ColumnInfo><Column id=\"rownum\" type=\"STRING\" size=\"256\"/><Column id=\"classCode\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"useYn\" type=\"STRING\" size=\"256\"/><Column id=\"mainTable\" type=\"STRING\" size=\"256\"/><Column id=\"mainColumn\" type=\"STRING\" size=\"256\"/><Column id=\"classDesc\" type=\"STRING\" size=\"256\"/><Column id=\"registTime\" type=\"STRING\" size=\"256\"/><Column id=\"registId\" type=\"STRING\" size=\"256\"/><Column id=\"modifyTime\" type=\"STRING\" size=\"256\"/><Column id=\"modifyId\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+            obj = new Dataset("ds_detailCodeList", this);
+            obj._setContents("<ColumnInfo><Column id=\"rownum\" type=\"INT\" size=\"256\"/><Column id=\"classCode\" type=\"STRING\" size=\"256\"/><Column id=\"className\" type=\"STRING\" size=\"256\"/><Column id=\"codeNo\" type=\"STRING\" size=\"256\"/><Column id=\"codeName\" type=\"STRING\" size=\"256\"/><Column id=\"codeName2\" type=\"STRING\" size=\"256\"/><Column id=\"codeEngName\" type=\"STRING\" size=\"256\"/><Column id=\"etcCode1\" type=\"STRING\" size=\"256\"/><Column id=\"etcCode2\" type=\"STRING\" size=\"256\"/><Column id=\"codeDesc\" type=\"STRING\" size=\"256\"/><Column id=\"useYn\" type=\"STRING\" size=\"256\"/><Column id=\"sort\" type=\"STRING\" size=\"256\"/><Column id=\"registTime\" type=\"STRING\" size=\"256\"/><Column id=\"registId\" type=\"STRING\" size=\"256\"/><Column id=\"modifyTime\" type=\"STRING\" size=\"256\"/><Column id=\"modifyId\" type=\"STRING\" size=\"256\"/><Column id=\"lastModyDate\" type=\"STRING\" size=\"256\"/><Column id=\"higherClassCode\" type=\"STRING\" size=\"256\"/><Column id=\"higherCodeNo\" type=\"STRING\" size=\"256\"/><Column id=\"rnum\" type=\"STRING\" size=\"256\"/></ColumnInfo>");
+            this.addChild(obj.name, obj);
+
+
+            
+            // UI Components Initialize
+            obj = new ImageViewer("ImageViewer00", "absolute", "0", "0", "700", "45", null, null, this);
+            obj.set_taborder("0");
+            obj.style.set_background("#165fa6ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_title", "absolute", "10", "2", "352", "40", null, null, this);
+            obj.set_taborder("1");
+            obj.set_text("인사평가기준");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_font("bold 16 Arial Black");
+            this.addChild(obj.name, obj);
+
+            obj = new ImageViewer("ImageViewer01", "absolute", "14", "68", "672", "133", null, null, this);
+            obj.set_taborder("2");
+            obj.style.set_background("#d8dcedff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_01", "absolute", "25", "81", "648", "48", null, null, this);
+            obj.set_taborder("3");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_02", "absolute", "25", "136", "648", "51", null, null, this);
+            obj.set_taborder("4");
+            obj.style.set_background("#f0f0f0ff");
+            obj.style.set_border("1 solid #969696ff");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_03", "absolute", "25", "81", "126", "48", null, null, this);
+            obj.set_taborder("5");
+            obj.set_text("인사평가대장번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_04", "absolute", "25", "136", "126", "51", null, null, this);
+            obj.set_taborder("6");
+            obj.set_text("사원번호");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_05", "absolute", "335", "81", "132", "48", null, null, this);
+            obj.set_taborder("7");
+            obj.set_text("인사평가점수");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Static("sta_eval_06", "absolute", "334", "136", "132", "51", null, null, this);
+            obj.set_taborder("8");
+            obj.set_text("인사평가코드");
+            obj.style.set_background("#f4edfaff");
+            obj.style.set_border("1 solid #969696ff");
+            obj.style.set_color("#000080ff");
+            obj.style.set_align("center");
+            obj.style.set_font("bold 9 Dotum");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edit_emp_eval_book_nm", "absolute", "157", "88", "173", "32", null, null, this);
+            obj.set_taborder("9");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edit_eval_emp_no", "absolute", "156", "144", "173", "34", null, null, this);
+            obj.set_taborder("10");
+            this.addChild(obj.name, obj);
+
+            obj = new Edit("edt_eval_score", "absolute", "471", "89", "197", "32", null, null, this);
+            obj.set_taborder("11");
+            this.addChild(obj.name, obj);
+
+            obj = new Combo("ds_eval_code", "absolute", "471", "147", "197", "30", null, null, this);
+            this.addChild(obj.name, obj);
+            obj.set_taborder("12");
+            obj.set_text("선택");
+            obj.set_innerdataset("@ds_eval_code00");
+            obj.set_codecolumn("code");
+            obj.set_datacolumn("name");
+            obj.set_displaynulltext("선택");
+
+            obj = new Button("btn_back", "absolute", "10", "242", "118", "30", null, null, this);
+            obj.set_taborder("13");
+            obj.set_text("뒤로가기");
+            obj.style.set_background("URL('img::btn_imgs.png') stretch 0,0");
+            obj.style.set_color("#ffffffff");
+            obj.style.set_bordertype("round 3 3");
+            obj.style.set_align("center middle");
+            obj.style.set_font("bold 15 Stencil");
+            obj.style.set_gradation("linear 0,0 #fefefeff 0,0 #ecece5ff");
+            this.addChild(obj.name, obj);
+
+
+            
+            // Layout Functions
+            //-- Default Layout
+            obj = new Layout("default", "", 700, 300, this,
+            	//-- Layout function
+            	function(p) {
+            		p.set_titletext("New Form");
+
+            	}
+            );
+            this.addLayout(obj.name, obj);
+
+
+            
+            // BindItem Information
+            obj = new BindItem("item8","LJH_EMP_EVAL_BOOK","font","ds_search","");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item0","edit_emp_eval_book_nm","value","ds_masterCodeList","className");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item1","edit_emp_eval_book_nm","","ds_emp_eval_book","EMP_EVAL_BOOK_NM");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item2","edt_eval_score","value","ds_masterCodeList","mainColumn");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item3","edit_eval_emp_no","value","ds_detailCodeList","codeName");
+            this.addChild(obj.name, obj);
+            obj.bind();
+            obj = new BindItem("item4","edit_eval_emp_no","","ds_emp_eval_book","EMP_EVAL_SUM");
+            this.addChild(obj.name, obj);
+            obj.bind();
+
+            
+            // Remove Reference
+            obj = null;
+        };
+        
+
+        
+        // User Script
+        this.addIncludeScript("LJH_EMP_EVAL_STD.xfdl", "Lib::common.xjs");
+        this.registerScript("LJH_EMP_EVAL_STD.xfdl", function() {
+        //include "Lib::common.xjs";
+
+        
+        this.Button00_onclick = function(obj,e)
+        {
+        	this.go("EMP_EVAL::LJH_EMP_EVAL.xfdl");
+        }
+        
+        });
+
+
+        
+        // Regist UI Components Event
+        this.on_initEvent = function()
+        {
+            this.btn_back.addEventHandler("onclick", this.Button00_onclick, this);
+
+        };
+
+        this.loadIncludeScript("LJH_EMP_EVAL_STD.xfdl");
+
+       
+    };
+}
+)();

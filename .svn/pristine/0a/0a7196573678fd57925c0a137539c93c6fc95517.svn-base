@@ -1,0 +1,543 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<FDL version="1.5">
+  <TypeDefinition url="..\default_typedef.xml"/>
+  <Form id="YJB_BTRIPMANAGER" left="0" top="0" width="1280" height="677" titletext="New Form" onload="form_onload">
+    <Layouts>
+      <Layout>
+        <ImageViewer id="ImageViewer03" taborder="84" left="20" top="427" width="1235" height="237" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="ImageViewer01" taborder="83" left="20" top="136" width="1235" height="246" style="background:#d8dcedff;border:1 solid #969696ff ;"/>
+        <ImageViewer id="ImageViewer00" taborder="0" left="7" top="8" width="1265" height="45" style="background:#165fa6ff;"/>
+        <Static id="sta_btrm" taborder="1" text="출장관리" onclick="Static00_onclick" left="16" top="11" width="352" height="40" style="color:#ffffffff;font:bold 16 Arial Black;"/>
+        <Static id="Static21" taborder="3" wordwrap="char" left="24" top="64" width="276" height="36" style="background:#f0f0f0ff;border:1 solid #969696ff ;"/>
+        <Static id="sta_btrm_Ename" taborder="4" text="사원이름" left="27" top="66" width="90" height="33" style="background:#f4edfaff;color:#000080ff;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_Ename" taborder="5" left="90" top="72" width="124" height="21" style="font:9 Dotum;" enable="true" readonly="true"/>
+        <Button id="btn_btrm_Enamed" taborder="6" text="검색" left="219" top="69" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" visible="true" onclick="btn_btrm_Enamed_onclick"/>
+        <Static id="Static23" taborder="8" onclick="Static05_onclick" left="23" top="595" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #969696ff ;bordertype:normal 0 0 ;align:center middle;font:bold 20 Dotum;"/>
+        <Static id="Static19" taborder="9" onclick="Static05_onclick" left="23" top="496" width="1228" height="100" style="background:#f0f0f0ff;border:1 solid #969696ff ;bordertype:normal 0 0 ;align:center middle;font:bold 20 Dotum;"/>
+        <Static id="Static10" taborder="10" onclick="Static05_onclick" left="23" top="464" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #969696ff ;bordertype:normal 0 0 ;align:center middle;font:bold 20 Dotum;"/>
+        <Static id="Static07" taborder="11" onclick="Static05_onclick" left="23" top="432" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #969696ff ;bordertype:normal 0 0 ;align:center middle;font:bold 20 Dotum;"/>
+        <Static id="sta_btrm_num" taborder="13" text="출장관리번호" onclick="Static06_onclick" left="23" top="432" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_btrName" taborder="19" text="출장명" onclick="Static06_onclick" left="23" top="464" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_btrcontry" taborder="20" text="출장국가" left="333" top="464" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_btrcontry" taborder="21" left="478" top="470" width="151" height="21" style="font:9 Dotum;"/>
+        <Static id="sta_btrm_btrArea" taborder="22" text="출장지역" left="640" top="464" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_btrArea" taborder="23" left="785" top="470" width="151" height="21" style="font:9 Dotum;"/>
+        <Static id="str_btrm_Enum" taborder="24" text="사원번호" left="945" top="464" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_btrName" taborder="25" left="173" top="470" width="151" height="21" style="font:9 Dotum;"/>
+        <Static id="Static08" taborder="26" text="*" left="43" top="425" width="16" height="47" style="color:red;font:15 arial;"/>
+        <Static id="sta_btrm_mainSc" taborder="31" text="주요일정내용" onclick="Static06_onclick" left="23" top="496" width="139" height="100" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_startDate" taborder="34" text="출장시작일" onclick="Static06_onclick" left="23" top="595" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_endDate" taborder="35" text="출장종료일" left="333" top="595" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_alterEname" taborder="37" text="대체업무사원" left="640" top="595" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_alterEname" taborder="38" left="785" top="601" width="151" height="21" style="font:9 Dotum;"/>
+        <Static id="sta_btrm_expenseAll" taborder="39" text="총예상경비" left="945" top="595" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_expenseAll" taborder="40" left="1093" top="601" width="151" height="21" style="font:9 Dotum;"/>
+        <Static id="sta_btrm_list" taborder="44" text="출장관리내역" onclick="Static02_onclick" left="25" top="103" width="255" height="38" style="font:bold 14 Dotum;"/>
+        <Edit id="edt_btrm_num" taborder="46" enable="true" left="176" top="438" width="418" height="21" style="font:9 Dotum;" readonly="true"/>
+        <Button id="btn_btrm_num" taborder="48" onclick="fn_search_onclick" cssclass="btn_WF_SearchSmall" left="567" top="436" width="26" height="25"/>
+        <Edit id="edt_btrm_Enum" taborder="49" enable="true" left="1093" top="470" width="149" height="21" style="font:9 Dotum;" readonly="true"/>
+        <Static id="Static01" taborder="50" onclick="Static05_onclick" left="23" top="627" width="1228" height="33" style="background:#f0f0f0ff;border:1 solid #969696ff ;bordertype:normal 0 0 ;align:center middle;font:bold 20 Dotum;"/>
+        <Static id="sta_btrm_permitDate" taborder="51" text="승인일시" onclick="Static06_onclick" left="23" top="627" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_permit" taborder="52" text="승인여부" left="333" top="627" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Static id="sta_btrm_permitEname" taborder="54" text="승인자" left="640" top="627" width="139" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Edit id="edt_btrm_permitEname" taborder="55" left="785" top="633" width="151" height="21" style="font:9 Dotum;"/>
+        <TextArea id="textArea_btrm_mainSc" taborder="59" left="173" top="500" width="1070" height="93"/>
+        <Static id="Static09" taborder="61" left="945" top="627" width="306" height="33" style="background:#f4edfaff;border:1 solid #969696ff ;color:#000080ff;bordertype:normal 0 0 ;align:center middle;font:bold 9 Dotum;"/>
+        <Calendar id="cal_btrm_startDate" taborder="62" left="173" top="601" width="150" height="21" displaynulltext="2021-00-00"/>
+        <Calendar id="cal_btrm_permitDate" taborder="63" left="173" top="633" width="150" height="21" displaynulltext="2021-00-00" readonly="true"/>
+        <Calendar id="cal_btrm_endDate" taborder="64" left="481" top="601" width="150" height="21" displaynulltext="2021-00-00"/>
+        <Button id="btn_btrm_alterEname" taborder="65" onclick="btn_btrm_alterEname_onclick" cssclass="btn_WF_SearchSmall" left="906" top="601" width="31" height="21"/>
+        <Button id="btn_btrm_permitEname" taborder="66" onclick="btn_btrm_permitEname_onclick" cssclass="btn_WF_SearchSmall" left="906" top="633" width="31" height="21"/>
+        <Combo id="combo_btrm_permit" taborder="67" value="Y" text="Y" codecolumn="code" datacolumn="data" index="0" onitemchanged="Combo00_onitemchanged" left="481" top="633" width="150" height="21" style="font:9 Dotum;" innerdataset="@ds_yn">
+          <Dataset id="innerdataset">
+            <ColumnInfo>
+              <Column id="codecolumn" size="256"/>
+              <Column id="datacolumn" size="256"/>
+            </ColumnInfo>
+            <Rows>
+              <Row>
+                <Col id="codecolumn">Y</Col>
+                <Col id="datacolumn">Y</Col>
+              </Row>
+              <Row>
+                <Col id="codecolumn">N</Col>
+                <Col id="datacolumn">N</Col>
+              </Row>
+            </Rows>
+          </Dataset>
+        </Combo>
+        <Button id="Button01" taborder="70" text="등록" left="1097" top="392" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="Button01_onclick"/>
+        <Button id="Button03" taborder="72" text="삭제" left="1181" top="392" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="Button03_onclick"/>
+        <Button id="Button00" taborder="73" text="추가" left="1011" top="392" width="76" height="27" style="background:URL('img::btn_imgs.png') stretch 0,0;border:0 solid #999999ff ;color:#ffffffff;bordertype:round 3 3 ;align:center middle;font:bold 15 Stencil;gradation:linear 0,0 #fefefeff 0,0 #ecece5ff;" onclick="Button00_onclick"/>
+        <Grid id="Grid01" taborder="74" nodatatext="데이터가 없습니다." left="24" top="140" width="1228" height="238" style="font:bold 10 Dotum;" binddataset="ds_user" oncelldblclick="btrgrid_oncelldblclick" oncellclick="btrgrid_oncellclick">
+          <Formats>
+            <Format id="default">
+              <Columns>
+                <Column size="122"/>
+                <Column size="130"/>
+                <Column size="276"/>
+                <Column size="137"/>
+                <Column size="137"/>
+                <Column size="91"/>
+                <Column size="105"/>
+                <Column size="229"/>
+              </Columns>
+              <Rows>
+                <Row size="24" band="head"/>
+                <Row size="24"/>
+              </Rows>
+              <Band id="head">
+                <Cell style="font:bold 10 dotum;" text="출장관리번호"/>
+                <Cell col="1" style="font:bold 10 dotum;" text="출장명"/>
+                <Cell col="2" style="font:bold 10 dotum;" text="출장국가"/>
+                <Cell col="3" style="font:bold 10 dotum;" text="출장시작일"/>
+                <Cell col="4" style="font:bold 10 dotum;" text="출장종료일"/>
+                <Cell col="5" style="font:bold 10 dotum;" text="승인자"/>
+                <Cell col="6" style="font:bold 10 dotum;" text="승인여부"/>
+                <Cell col="7" style="font:bold 10 dotum;" text="출장관리내역보기"/>
+              </Band>
+              <Band id="body">
+                <Cell expr="bind:btrip_No"/>
+                <Cell col="1" expr="bind:btrip_Name"/>
+                <Cell col="2" expr="bind:country"/>
+                <Cell col="3" expr="bind:s_Date"/>
+                <Cell col="4" expr="bind:f_Date"/>
+                <Cell col="5" expr="bind:ok_Emp_No"/>
+                <Cell col="6" expr="bind:ok_Ascertain"/>
+                <Cell col="7" expandshow="show" expandimage="URL('img::btn_WF_SearchSmall.png')" tooltiptext="일정내용"/>
+              </Band>
+            </Format>
+          </Formats>
+        </Grid>
+      </Layout>
+    </Layouts>
+    <Objects>
+      <Dataset id="ds_search">
+        <ColumnInfo>
+          <Column id="searchCondition" type="STRING" size="256"/>
+          <Column id="searchKeyword" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="searchKeyword"/>
+            <Col id="searchCondition"/>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_yn">
+        <ColumnInfo>
+          <Column id="code" type="STRING" size="256"/>
+          <Column id="data" type="STRING" size="256"/>
+        </ColumnInfo>
+        <Rows>
+          <Row>
+            <Col id="code">Y</Col>
+            <Col id="data">Y</Col>
+          </Row>
+          <Row>
+            <Col id="code">N</Col>
+            <Col id="data">N</Col>
+          </Row>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_user" firefirstcount="0" firenextcount="0" useclientlayout="false" updatecontrol="true" enableevent="true" loadkeymode="keep" loadfiltermode="keep" reversesubsum="false">
+        <ColumnInfo>
+          <Column id="btrip_No" type="STRING" size="12"/>
+          <Column id="btrip_Name" type="STRING" size="20"/>
+          <Column id="country" type="STRING" size="50"/>
+          <Column id="area" type="STRING" size="50"/>
+          <Column id="purpose" type="STRING" size="256"/>
+          <Column id="s_Date" type="DATE" size="256"/>
+          <Column id="f_Date" type="DATE" size="256"/>
+          <Column id="ex_Expenses" type="INT" size="10"/>
+          <Column id="re_Emp_No" type="STRING" size="12"/>
+          <Column id="ok_Date" type="DATE" size="256"/>
+          <Column id="ok_Emp_No" type="STRING" size="12"/>
+          <Column id="ok_Ascertain" type="STRING" size="1"/>
+          <Column id="emp_No" type="STRING" size="12"/>
+        </ColumnInfo>
+        <Rows>
+          <Row/>
+        </Rows>
+      </Dataset>
+      <Dataset id="ds_confirm">
+        <ColumnInfo>
+          <Column id="btrip_Dno" type="STRING" size="256"/>
+          <Column id="btrip_Dda" type="STRING" size="256"/>
+          <Column id="detail" type="STRING" size="256"/>
+          <Column id="ws_Date" type="DATE" size="256"/>
+          <Column id="wf_Date" type="DATE" size="256"/>
+          <Column id="hotel" type="STRING" size="256"/>
+          <Column id="trans" type="STRING" size="256"/>
+          <Column id="visiter" type="STRING" size="256"/>
+          <Column id="tex_Expenses" type="INT" size="256"/>
+          <Column id="remark" type="STRING" size="256"/>
+        </ColumnInfo>
+      </Dataset>
+    </Objects>
+    <Bind>
+      <BindItem id="item0" compid="edt_btrm_Ename" propid="value" datasetid="ds_search" columnid="searchKeyword"/>
+      <BindItem id="item1" compid="edt_btrm_Ename" propid="value" datasetid="gds_empno" columnid="emp_no"/>
+      <BindItem id="item2" compid="edt_btrm_num" propid="value" datasetid="ds_user" columnid="btrip_No"/>
+      <BindItem id="item3" compid="edt_btrm_btrName" propid="value" datasetid="ds_user" columnid="btrip_Name"/>
+      <BindItem id="item4" compid="edt_btrm_btrcontry" propid="value" datasetid="ds_user" columnid="country"/>
+      <BindItem id="item5" compid="edt_btrm_btrArea" propid="value" datasetid="ds_user" columnid="area"/>
+      <BindItem id="item6" compid="edt_btrm_Enum" propid="value" datasetid="ds_user" columnid="emp_No"/>
+      <BindItem id="item7" compid="textArea_btrm_mainSc" propid="value" datasetid="ds_user" columnid="purpose"/>
+      <BindItem id="item8" compid="cal_btrm_startDate" propid="value" datasetid="ds_user" columnid="s_Date"/>
+      <BindItem id="item9" compid="cal_btrm_endDate" propid="value" datasetid="ds_user" columnid="f_Date"/>
+      <BindItem id="item10" compid="edt_btrm_alterEname" propid="value" datasetid="ds_user" columnid="re_Emp_No"/>
+      <BindItem id="item11" compid="edt_btrm_expenseAll" propid="value" datasetid="ds_user" columnid="ex_Expenses"/>
+      <BindItem id="item12" compid="edt_btrm_permitEname" propid="value" datasetid="ds_user" columnid="ok_Emp_No"/>
+      <BindItem id="item13" compid="combo_btrm_permit" propid="value" datasetid="ds_user" columnid="ok_Ascertain"/>
+      <BindItem id="item14" compid="edt_btrm_alterEname" propid="value" datasetid="gds_reempno" columnid="re_empno"/>
+      <BindItem id="item15" compid="edt_btrm_permitEname" propid="value" datasetid="gds_okempno" columnid="ok_empno"/>
+      <BindItem id="item16" compid="cal_btrm_permitDate" propid="value" datasetid="ds_user" columnid="ok_Date"/>
+    </Bind>
+    <Script type="xscript5.0"><![CDATA[
+this.form_onload = function(obj:Form, e:nexacro.LoadEventInfo)
+{
+	//기본 공통  함수 초기화
+	Iject.formOnload(obj);	
+
+} 
+
+this.btn_btrm_Enamed_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("emp"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::YJB_empSearch.xfdl");
+					
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+   // var objArr = emp_noName.split(/,/g, 2);
+   var emp_name = application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_name"); 
+   var emp_no = application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_no"); 
+   this.edt_btrm_Ename.set_value(emp_no);
+   this.edt_btrm_Enum.set_value(emp_no);
+   this.fn_search_onclick();
+}
+
+
+
+//조회
+this.fn_search_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+  
+   var searchCondition =  "NAME";
+   var searchKeyword = this.edt_btrm_Ename.value;       
+ 	this.ds_search.setColumn(0, "searchCondition", "NAME");
+	this.ds_search.setColumn(0, "searchKeyword", searchKeyword);
+	
+ /*  this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.ok_emp_no.value);*/
+   
+   var oDatas =  {
+			  svcid : "search",
+			  sController : "YJB_btrSelectVO.do",			 
+			  inds :["ds_search=ds_search"],
+			  outds :[
+				 "ds_user=output1"
+				 
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+	 trace(" this.ds_search : " + this.ds_search.saveXML());
+	  
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+	
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg);			
+		   return;
+		} 
+	      
+	       var pThis = this.fobj;   //form object	      
+	       trace(" ds_user : " + pThis.ds_user.saveXML());
+	});
+	
+	//	var imsi = this.edt_btrm_Ename.value;
+	  // this.edt_btrip_dno.set_value(imsi);
+	
+	
+	
+	 
+}
+
+
+this.Button00_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	//var imsi1 = this.edt_btrm_Ename.value;
+	var nRow = this.ds_user.addRow();
+	this.edt_btrm_Enum.set_value(application.gds_empno.getColumn(application.gds_empno.rowposition, "emp_no"));
+// 	this.ok_date.readonly("false");
+// 	this.ok_emp_no.readonly(true);
+/*	this.ok_date.visible(false);*/
+	/*this.ok_Ascertain.readonly(true);*/
+	
+}
+
+
+//삭제
+this.Button03_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+ 	
+	var nRow = this.ds_user.rowposition;
+	this.ds_user.deleteRow(nRow);
+	var rtnValue = Iject.confirm("삭제 하시겠습니까?");
+
+	if(rtnValue){  
+		this.fn_save("delete");
+	}else{
+		this.fn_search();
+	}
+}
+
+//리셋
+this.fn_reset_onclick = function(obj:Button,  e:nexacro.ClickEventInfo)
+{
+	this.ds_user.reset();
+}
+
+
+//저장
+this.fn_save = function(strid)
+{
+	this.ds_user.setColumn(this.ds_user.rowposition, "ok_Emp_No", this.edt_btrm_permitEname.value);
+	this.ds_user.setColumn(this.ds_user.rowposition, "re_Emp_No", this.edt_btrm_alterEname.value);
+
+	
+	var oDatas =  {
+			  svcid : strid,
+			  sController : "YJB_btrModifyVO.do",			 
+			  inds :["input1=ds_user:U"],
+			  outds :[
+				 "ds_user=output1"
+			     ],			     
+			  args  : [				
+			  ],
+			  bAsync : true,    // 비동기여부 (true : async  false: sync)
+			  nDataType : 0,   // (0: XML타입, 1: 이진 타입, 2: SSV 타입)
+			  bCompress :false,	 //			  
+			}; 
+			
+    //공통 transaction 함수 호츨   //function callback 
+	Iject.transaction(this,oDatas,function(){   
+		
+		if(this.errorcode < 0)
+		{
+		   Iject.alert(this.errorMsg,"알림");			
+		   return;
+		}			
+	      
+// 	       var pThis = this.fobj;   //form object
+// 		  pThis.fn_search();
+	});
+/*	this.fn_search();*/
+	var imsi3 = this.edt_btrm_Ename.value;
+	this.edt_btrm_Ename.set_value(imsi3);
+	
+}
+
+
+//저장버튼 클릭시 
+this.Button01_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var imsi4 = this.edt_btrm_Ename.value;
+
+	this.fn_save("save");
+		this.edt_btrm_Ename.set_value(imsi4);
+}
+
+// 승인자 사번 찾기 
+this.btn_btrm_permitEname_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::ok_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+	
+	var ok_empno = application.gds_okempno.getColumn(application.gds_okempno.rowposition, "ok_empno");
+	//this.ds_user.setColumn();
+	this.edt_btrm_permitEname.set_value(ok_empno);
+}
+
+
+
+///////////////////////////////////////출장관리내역 처리////////////////////////////////////////////
+this.btrgrid_oncelldblclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+{
+	
+ 	
+ 	//var btrip_no= this.edt_btr_no2.value;
+// 		
+ 	var nLeft = system.clientToScreenX(this, 10);
+ 	var nTop = system.clientToScreenY(this, 10);
+ 	
+ 	 
+ 	 
+ 	var Business_Trip = new ChildFrame();
+ 	
+ 	Business_Trip.init("Business_Trip"
+ 					, "absolute"
+ 					, nLeft
+ 					, nTop
+ 					, 1000
+ 					, 800
+ 					, null
+ 					, null
+ 					, "Btrip::YJB_BTRIPDETAIL.xfdl");
+ 	
+ 	
+ 	
+ 	Business_Trip.set_openalign("center middle");
+ 	Business_Trip.set_dragmovetype("all");
+  	
+  	
+   		var objParam = {param1:this.edt_btrm_num.value
+						,param2:this.edt_btrm_btrName.value
+  					 	};
+						
+  	
+    //ChildFrame.showModal(strID, objParentFrame, [{objArgumentList}[, objOpener[,  callbackFunc]]]);
+          
+    	  Business_Trip.showModal(this.getOwnerFrame()
+     			  , objParam
+				      , this
+     			  , "fn_popupCallback");
+   			  
+   
+/*	  trace("param value" + this.objParam);*/
+			  
+// 					
+//  	var btrip_no = this.ds_user.getColumn(this.ds_user.rowposition, "btrip_No");	
+//  	application.gds_btripno.addRow();
+//  	application.gds_btripno.setColumn(application.gds_btripno.rowposition, "btrip_no", btrip_No)	
+	//test
+// 	var btrip_no = this.edt_btr_no2.value;
+// 	 var oData ={
+//          sId  : "btrip",             //callback id
+//          sUrl : "Btrip::PD_IN_COM_BTRDETAIL.xfdl",   //url
+//          bshowtitlebar : true,     //title bar
+//          bAutoSize  : true,       //autosize
+//          bResize    : false,       //resize
+//          bShowtatusbar : false,     //statusbar
+//          sOpenalign    : "center middle",  //align
+//         oArgs :  {arg1: this.btrip_no,
+//                   arg2:'2222222222222222222222222'         
+//                }    
+//      };
+//      
+//      
+//       Iject.showModal(this,oData,function(){
+//    
+//               /* 
+//               * popup calllback
+//               *@param {object}this.fobj
+//               *@param {string} this.svcid 
+//               *@param {string} this.variant
+//               */             
+//              var pThis= this.fobj;             
+//              trace(" pThis.name : " + pThis.name);
+//              trace(" pThis.svcid : " + this.svcid);
+//              trace(" pThis.variant : " + this.variant);
+//              
+//              var sPerson = JSON.stringify(this.variant);
+          //  var oPerson = JSON.parse(sPerson);
+
+      
+      //});
+		
+}
+
+// 
+ //출장내역관리 콜백함수
+  this.fn_popupCallback = function(strPopupID, strReturn)
+  {
+      if(strReturn == undefined){
+          return;
+      }
+  
+      if(strPopupID == "Business_Trip"){
+          this.alert("Return Value: " + strReturn);
+      }
+ };
+
+// object 인자 생성함수
+// this.fn_parent = function(pObj)
+// {
+//     this.ds_parent.copyData(pObj);
+// };
+
+// //조회시 승인자사번 노출
+// this.btrgrid_oncellclick = function(obj:Grid, e:nexacro.GridClickEventInfo)
+// {
+// 	this.ok_emp_no.value(this.btrgrid.se);
+// }
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//대체업무사원
+this.btn_btrm_alterEname_onclick = function(obj:Button, e:nexacro.ClickEventInfo)
+{
+	var nLeft = system.clientToScreenX(this, 10);
+	var nTop = system.clientToScreenY(this, 10);
+	 
+	var empSearch = new ChildFrame;
+	empSearch.init("btrip1"
+					, "absolute", nLeft, nTop, 300, 250, null, null
+					, "member::re_empSearch.xfdl");
+	
+	
+	
+	empSearch.set_openalign("center middle");
+	empSearch.set_dragmovetype("all");
+	
+	system.showModalWindow(empSearch, 
+							"empModal",
+							this.getOwnerFrame(),
+							"",
+							this);
+							
+	var re_empname = application.gds_reempno.getColumn(application.gds_reempno.rowposition, "re_empname");
+	var re_empno = application.gds_reempno.getColumn(application.gds_reempno.rowposition, "re_empno");
+	edt_btrm_alterEname.set_value(re_empno);
+}
+
+
+]]></Script>
+  </Form>
+</FDL>

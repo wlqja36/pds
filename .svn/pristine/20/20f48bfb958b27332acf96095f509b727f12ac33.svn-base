@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="r_standard">
+
+   	<typeAlias  alias="searchVO" type="nexacro.sample.vo.DefaultVO"/>
+    <typeAlias  alias="rsVO" type="nexacro.sample.vo.r_standardVO.R_standardVO"/>
+
+    <resultMap id="rs" class="rsVO">
+        <result property="salary_book_no" column="SALARY_BOOK_NO" />
+        <result property="record_code" column="RECORD_CODE" />
+        <result property="record_score" column="RECORD_SCORE" />
+        <result property="record_money" column="RECORD_MONEY" />
+    </resultMap>
+    
+     <select id="r_standard.selectbtrVOList" parameterClass="rsVO" resultMap="rs">
+         
+            SELECT
+                SALARY_BOOK_NO,
+				RECORD_CODE,	
+				RECORD_SCORE,
+				RECORD_MONEY
+            FROM RECORD_STANDARD  
+		 	WHERE 
+                SALARY_BOOK_NO =#searchKeyword# 
+		         	 
+             
+            
+    </select>
+   
+
+   
+    <insert id="r_standard.insertbtrVOList" parameterClass="rsVO">
+        <![CDATA[
+            INSERT INTO RECORD_STANDARD (
+				SALARY_BOOK_NO,
+				RECORD_CODE,	
+				RECORD_SCORE,
+				RECORD_MONEY
+            ) VALUES (
+            	#salary_book_no#,
+                #record_code#,
+                #record_score#,
+                #record_money#
+                
+            )
+        ]]>
+    </insert>
+    
+      <update id="r_standard.updatebtrVOList" parameterClass="rsVO">
+        <![CDATA[
+            UPDATE RECORD_STANDARD 
+            SET 
+				RECORD_CODE =#record_code#,
+				RECORD_SCORE =#record_score#,	
+				RECORD_MONEY =#record_money#
+            WHERE SALARY_BOOK_NO =#salary_book_no#
+        ]]>
+    </update>
+    
+    <delete id="r_standard.deletebtrVOList" parameterClass="rsVO">
+        <![CDATA[
+            DELETE FROM RECORD_STANDARD 
+            WHERE SALARY_BOOK_NO=#salary_book_no#
+        ]]>
+    </delete>
+     
+</sqlMap>
